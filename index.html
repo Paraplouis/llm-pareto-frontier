@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LLM Arena Pareto Frontier</title>
+        <style>
+            body {
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background-color: #f8f9fa;
+            }
+            .chart-container {
+                width: 100%;
+                height: 600px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+                padding: 20px;
+                box-sizing: border-box;
+                margin-bottom: 20px;
+            }
+            h2 {
+                margin-top: 0;
+                color: #333;
+            }
+            .legend {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                gap: 15px;
+                justify-content: center;
+            }
+            .legend-item {
+                display: flex;
+                align-items: center;
+            }
+            .legend-color {
+                width: 12px;
+                height: 12px;
+                margin-right: 5px;
+                border-radius: 2px;
+            }
+            .tooltip {
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 12px;
+                pointer-events: none;
+                transform: translate(-50%, -100%);
+                z-index: 100;
+                white-space: nowrap;
+            }
+            .chart-notes {
+                font-size: 12px;
+                color: #666;
+                margin-top: 10px;
+                text-align: center;
+            }
+            .pareto-note {
+                margin-top: 20px;
+                padding: 15px;
+                background-color: #e9f5e9;
+                border-radius: 5px;
+                border-left: 4px solid #4caf50;
+            }
+            .pareto-note h3 {
+                margin-top: 0;
+                color: #2e7d32;
+            }
+            .pareto-models {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .pareto-model {
+                padding: 4px 8px;
+                background-color: #f1f8e9;
+                border-radius: 4px;
+                display: inline-block;
+            }
+            #chart svg {
+                width: 100%;
+                height: 100%;
+            }
+            .model-label {
+                pointer-events: none;
+                font-size: 8px;
+            }
+            .datapoint.pareto {
+                stroke: #ff4444;
+                stroke-width: 2px;
+            }
+            #modelCount {
+                text-align: center;
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>LLM Arena Pareto Frontier: Performance vs Cost (April 2025)</h2>
+        <div id="modelCount"></div>
+        <div class="chart-container" id="chart"></div>
+        <div id="legend" class="legend"></div>
+        <div class="chart-notes">
+            * Price shown is per million tokens (input), assuming a 3:1 input-output tokens ratio.
+        </div>
+        <div class="pareto-note">
+            <h3>Pareto Frontier Models</h3>
+            <p>
+                These models offer the best performance for their price point (no model offers better
+                performance at a lower price):
+            </p>
+            <div id="pareto-models" class="pareto-models"></div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+        <script>
+            // LLM model data - Top 50 from Arena with pricing data
+            const data = [
+                // #1-10
+                { model: "Gemini 2.5 Pro", elo: 1439, price: 1.25, provider: "Google" },
+                { model: "o3", elo: 1418, price: 10.0, provider: "OpenAI" },
+                { model: "GPT-4o", elo: 1408, price: 2.5, provider: "OpenAI" },
+                { model: "Grok-3-Preview", elo: 1402, price: 3.0, provider: "xAI" },
+                { model: "Gemini 2.5 Flash", elo: 1393, price: 0.15, provider: "Google" },
+                { model: "GPT-4.5-Preview", elo: 1398, price: 75.0, provider: "OpenAI" },
+                { model: "Gemini 2.0 Flash Thinking", elo: 1380, price: 0.15, provider: "Google" },
+                { model: "Gemini 2.0 Pro", elo: 1380, price: 1.25, provider: "Google" },
+                { model: "DeepSeek V3 0324", elo: 1373, price: 0.27, provider: "DeepSeek" },
+                { model: "GPT-4.1", elo: 1363, price: 2.0, provider: "OpenAI" },
+
+                // #11-20
+                { model: "DeepSeek R1", elo: 1358, price: 0.55, provider: "DeepSeek" },
+                { model: "Gemini 2.0 Flash 001", elo: 1354, price: 0.1, provider: "Google" },
+                { model: "o4-mini", elo: 1351, price: 1.1, provider: "OpenAI" },
+                { model: "o1 (2024-12)", elo: 1350, price: 15.0, provider: "OpenAI" },
+                { model: "Gemma 3 27B", elo: 1342, price: 0.25, provider: "Google" },
+                { model: "Qwen2.5-Max", elo: 1340, price: 0.9, provider: "Alibaba" },
+                { model: "o1-preview", elo: 1335, price: 15.0, provider: "OpenAI" },
+                { model: "o3-mini-high", elo: 1325, price: 1.1, provider: "OpenAI" },
+                { model: "GPT-4.1-mini", elo: 1322, price: 0.4, provider: "OpenAI" },
+                { model: "DeepSeek V3", elo: 1318, price: 0.27, provider: "DeepSeek" },
+
+                // #21-30
+                { model: "QwQ-32B", elo: 1314, price: 0.2, provider: "Alibaba" },
+                { model: "Gemini 2.0 Flash Lite", elo: 1311, price: 0.07, provider: "Google" },
+                { model: "GLM-4-Plus-0111", elo: 1311, price: 1.5, provider: "Zhipu" },
+                { model: "Qwen Plus 0125", elo: 1310, price: 1.5, provider: "Alibaba" },
+                { model: "o3-mini", elo: 1305, price: 1.1, provider: "OpenAI" },
+                { model: "Command A (03-2025)", elo: 1305, price: 2.5, provider: "Cohere" },
+                { model: "Step-2-16K-Exp", elo: 1305, price: 2.0, provider: "StepFun" },
+                { model: "Hunyuan TurboS", elo: 1302, price: 3.0, provider: "Tencent" },
+                { model: "Claude 3.7 Sonnet (thinking)", elo: 1301, price: 3.0, provider: "Anthropic" },
+                { model: "o1-mini", elo: 1304, price: 1.1, provider: "OpenAI" },
+
+                // #31-40
+                { model: "Llama 3.3 Nemotron Super 49B", elo: 1296, price: 0.8, provider: "Nvidia" },
+                { model: "Gemini 1.5 Pro", elo: 1302, price: 1.25, provider: "Google" },
+                { model: "Hunyuan Turbo", elo: 1295, price: 1.5, provider: "Tencent" },
+                { model: "Claude 3.7 Sonnet", elo: 1292, price: 3.0, provider: "Anthropic" },
+                { model: "Grok-2", elo: 1288, price: 2.0, provider: "xAI" },
+                { model: "Yi-Lightning", elo: 1287, price: 0.19, provider: "01 AI" },
+                { model: "Qwen2.5-plus", elo: 1282, price: 0.9, provider: "Alibaba" },
+                { model: "GPT-4o (2024-05)", elo: 1285, price: 2.5, provider: "OpenAI" },
+                { model: "Claude 3.5 Sonnet", elo: 1283, price: 3.0, provider: "Anthropic" },
+                { model: "Deepseek v2.5", elo: 1279, price: 0.15, provider: "DeepSeek" },
+
+                // #41-50
+                { model: "GPT-4.1-nano", elo: 1271, price: 0.1, provider: "OpenAI" },
+                { model: "Athene v2 Chat 72B", elo: 1275, price: 1.0, provider: "NexusFlow" },
+                { model: "Hunyuan Large", elo: 1272, price: 2.0, provider: "Tencent" },
+                { model: "Llama 4 Maverick 17B", elo: 1271, price: 0.22, provider: "Meta" },
+                { model: "GLM-4-Plus", elo: 1274, price: 1.5, provider: "Zhipu AI" },
+                { model: "GPT-4o-mini", elo: 1272, price: 0.15, provider: "OpenAI" },
+                { model: "Gemini 1.5 Flash", elo: 1271, price: 0.07, provider: "Google" },
+                { model: "Llama 3.1 Nemotron 70B", elo: 1269, price: 0.2, provider: "Nvidia" },
+                { model: "Llama 3.1 405B (bf16)", elo: 1269, price: 3.0, provider: "Meta" },
+                { model: "Claude 3.5 Sonnet (06-2024)", elo: 1268, price: 3.0, provider: "Anthropic" },
+
+                // Additional models not in top 50 but relevant for pricing comparison
+                { model: "Claude 3 Opus", elo: 1247, price: 15.0, provider: "Anthropic" },
+                { model: "Amazon Nova Pro", elo: 1244, price: 0.8, provider: "Amazon" },
+                { model: "Claude 3.5 Haiku", elo: 1237, price: 0.8, provider: "Anthropic" },
+                { model: "Command R+ (08-2024)", elo: 1215, price: 2.5, provider: "Cohere" },
+                { model: "Command R (08-2024)", elo: 1179, price: 0.15, provider: "Cohere" },
+                { model: "Claude 3 Haiku", elo: 1179, price: 0.25, provider: "Anthropic" },
+                { model: "Amazon Nova Lite", elo: 1217, price: 0.06, provider: "Amazon" },
+                { model: "Amazon Nova Micro", elo: 1198, price: 0.04, provider: "Amazon" },
+                { model: "Phi-4", elo: 1205, price: 0.07, provider: "Microsoft" },
+                { model: "GPT-3.5-turbo", elo: 1150, price: 0.5, provider: "OpenAI" },
+                { model: "Mistral Large", elo: 1251, price: 2.0, provider: "Mistral" },
+                { model: "Mistral Nemo", elo: 1182, price: 0.15, provider: "Mistral" },
+                { model: "Qwen2.5-72B", elo: 1257, price: 0.9, provider: "Alibaba" },
+                { model: "Llama 3.1 70B", elo: 1248, price: 0.9, provider: "Meta" },
+            ];
+
+            // Calculate the Pareto frontier
+            function calculateParetoFrontier(data) {
+                // Sort by price (ascending)
+                const sortedData = [...data].sort((a, b) => a.price - b.price);
+
+                let maxElo = 0;
+                const paretoPoints = [];
+
+                for (const point of sortedData) {
+                    if (point.elo > maxElo) {
+                        maxElo = point.elo;
+                        paretoPoints.push(point);
+                    }
+                }
+
+                return paretoPoints;
+            }
+
+            const paretoFrontier = calculateParetoFrontier(data);
+
+            // Set up color scale for providers
+            const providers = [...new Set(data.map((d) => d.provider))].sort();
+            const colorScale = d3.scaleOrdinal().domain(providers).range(d3.schemeCategory10);
+
+            // Get chart container dimensions
+            const chartContainer = document.getElementById("chart");
+
+            // Update model count
+            document.getElementById("modelCount").innerText =
+                `Showing ${data.length} models, including the top 50 from LLM Arena`;
+
+            // Create chart
+            function createChart() {
+                // Clear any existing chart
+                d3.select("#chart").select("svg").remove();
+
+                // Dynamic dimensions based on container size
+                const containerWidth = chartContainer.clientWidth;
+                const containerHeight = chartContainer.clientHeight;
+
+                // Set up margins with more space for labels
+                const margin = { top: 40, right: 100, bottom: 60, left: 60 };
+                const width = containerWidth - margin.left - margin.right;
+                const height = containerHeight - margin.top - margin.bottom;
+
+                // Create SVG with proper sizing
+                const svg = d3
+                    .select("#chart")
+                    .append("svg")
+                    .attr("viewBox", `0 0 ${containerWidth} ${containerHeight}`)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                // Set up scales
+                const xScale = d3.scaleLog().domain([0.03, 100]).range([0, width]);
+
+                const yScale = d3.scaleLinear().domain([1140, 1450]).range([height, 0]);
+
+                // Create axes
+                const xAxis = d3
+                    .axisBottom(xScale)
+                    .ticks(8)
+                    .tickFormat((d) => `$${d < 1 ? d.toFixed(2) : d}`);
+
+                const yAxis = d3.axisLeft(yScale).ticks(8);
+
+                // Add X-axis
+                svg.append("g")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(xAxis)
+                    .append("text")
+                    .attr("x", width / 2)
+                    .attr("y", 40)
+                    .attr("fill", "#000")
+                    .attr("text-anchor", "middle")
+                    .attr("font-weight", "bold")
+                    .text("Price per million tokens ($)");
+
+                // Add Y-axis
+                svg.append("g")
+                    .call(yAxis)
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", -45)
+                    .attr("x", -height / 2)
+                    .attr("fill", "#000")
+                    .attr("text-anchor", "middle")
+                    .attr("font-weight", "bold")
+                    .text("LLM Arena ELO Rating");
+
+                // Add grid lines
+                svg.append("g")
+                    .attr("class", "grid")
+                    .attr("opacity", 0.1)
+                    .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""));
+
+                svg.append("g")
+                    .attr("class", "grid")
+                    .attr("opacity", 0.1)
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""));
+
+                // Create tooltip
+                const tooltip = d3
+                    .select("body")
+                    .append("div")
+                    .attr("class", "tooltip")
+                    .style("opacity", 0)
+                    .style("pointer-events", "none");
+
+                // Draw data points
+                svg.selectAll(".datapoint")
+                    .data(data)
+                    .enter()
+                    .append("circle")
+                    .attr("class", (d) => {
+                        // Add pareto class for frontier models
+                        return paretoFrontier.some((p) => p.model === d.model)
+                            ? "datapoint pareto"
+                            : "datapoint";
+                    })
+                    .attr("cx", (d) => xScale(d.price))
+                    .attr("cy", (d) => yScale(d.elo))
+                    .attr("r", (d) => {
+                        // Slightly larger points for Pareto frontier models
+                        return paretoFrontier.some((p) => p.model === d.model) ? 7 : 6;
+                    })
+                    .attr("fill", (d) => colorScale(d.provider))
+                    .attr("stroke", (d) => {
+                        // Red stroke for pareto frontier models
+                        return paretoFrontier.some((p) => p.model === d.model) ? "#ff4444" : "#fff";
+                    })
+                    .attr("stroke-width", (d) => {
+                        // Thicker stroke for pareto frontier models
+                        return paretoFrontier.some((p) => p.model === d.model) ? 2 : 1;
+                    })
+                    .attr("opacity", 0.8)
+                    .on("mouseover", function (event, d) {
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .attr("r", (d) => {
+                                return paretoFrontier.some((p) => p.model === d.model) ? 9 : 8;
+                            })
+                            .attr("opacity", 1);
+
+                        tooltip.transition().duration(200).style("opacity", 1);
+
+                        tooltip
+                            .html(
+                                `<strong>${d.model}</strong><br>
+                          Provider: ${d.provider}<br>
+                          ELO: ${d.elo}<br>
+                          Price: $${d.price.toFixed(2)}/M tokens${paretoFrontier.some((p) => p.model === d.model) ? '<br><strong style="color:#ff4444">Pareto optimal</strong>' : ""}`,
+                            )
+                            .style("left", event.pageX + "px")
+                            .style("top", event.pageY - 10 + "px");
+                    })
+                    .on("mouseout", function (event, d) {
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .attr("r", (d) => {
+                                return paretoFrontier.some((p) => p.model === d.model) ? 7 : 6;
+                            })
+                            .attr("opacity", 0.8);
+
+                        tooltip.transition().duration(200).style("opacity", 0);
+                    });
+
+                // Add labels for all models
+                svg.selectAll(".model-label")
+                    .data(data)
+                    .enter()
+                    .append("text")
+                    .attr("class", "model-label")
+                    .attr("x", (d) => xScale(d.price) + 8)
+                    .attr("y", (d) => yScale(d.elo) + 4)
+                    .text((d) => d.model)
+                    .attr("fill", (d) => {
+                        // Use black for Pareto frontier models, light grey for others
+                        return paretoFrontier.some((p) => p.model === d.model) ? "#000" : "#aaa";
+                    });
+
+                // Draw Pareto frontier line
+                const lineGenerator = d3
+                    .line()
+                    .x((d) => xScale(d.price))
+                    .y((d) => yScale(d.elo));
+
+                svg.append("path")
+                    .datum(paretoFrontier.sort((a, b) => a.price - b.price))
+                    .attr("fill", "none")
+                    .attr("stroke", "red")
+                    .attr("stroke-width", 2)
+                    .attr("stroke-dasharray", "4")
+                    .attr("d", lineGenerator);
+            }
+
+            // Create legend
+            const legend = d3.select("#legend");
+
+            providers.forEach((provider) => {
+                const legendItem = legend.append("div").attr("class", "legend-item");
+
+                legendItem
+                    .append("div")
+                    .attr("class", "legend-color")
+                    .style("background-color", colorScale(provider));
+
+                legendItem.append("span").text(provider);
+            });
+
+            // Add Pareto frontier models to the note section
+            const paretoContainer = d3.select("#pareto-models");
+
+            paretoFrontier.forEach((model) => {
+                paretoContainer
+                    .append("div")
+                    .attr("class", "pareto-model")
+                    .html(
+                        `<strong>${model.model}</strong> (${model.provider}): ELO ${model.elo}, $${model.price.toFixed(2)}/M tokens`,
+                    );
+            });
+
+            // Create initial chart
+            createChart();
+
+            // Handle resize events
+            window.addEventListener("resize", function () {
+                createChart();
+            });
+        </script>
+    </body>
+</html>
