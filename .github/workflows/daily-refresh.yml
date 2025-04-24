@@ -1,0 +1,21 @@
+name: Run Refresh Script
+run-name: ${{ github.actor }} is refreshing data 🔄
+on:
+  schedule:
+    - cron: "0 0 * * *" # Everyday at midnight UTC (UK time)
+jobs:
+  Run-Refresh-Script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Run refresh script
+        run: |
+          chmod +x ./refresh.sh
+          ./refresh.sh
+      - name: Push changes to main if no errors
+        if: success()
+        run: |
+          git add .
+          git commit -m "Automatic data refresh" || echo "No changes to commit"
+          git push origin main
