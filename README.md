@@ -1,6 +1,6 @@
 # llm-pareto-frontier
 
-![llm-pareto-frontier](/screnshot.png)
+![llm-pareto-frontier](/screenshot.png)
 
 Thanks to...
 [LLM Arena](https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard) and team
