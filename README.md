@@ -1,6 +1,6 @@
 # llm-pareto-frontier
 
-![llm-pareto-frontier](https://github.com/winston-bosan/llm-pareto-frontier/screnshot.png)
+![llm-pareto-frontier](https://github.com/winston-bosan/llm-pareto-frontier/blob/main/screnshot.png)
 
 Thanks to...
 [LLM Arena](https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard) and team
