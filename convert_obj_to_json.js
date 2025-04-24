@@ -1,0 +1,1670 @@
+let mockData = [
+  {
+    provider: "OpenAI",
+    uri: "https://openai.com/api/pricing/",
+    models: [
+      {
+        name: "o3",
+        inputPrice: 10.0,
+        outputPrice: 40.0,
+      },
+      {
+        name: "o4-mini",
+        inputPrice: 1.1,
+        outputPrice: 4.4,
+      },
+      {
+        name: "gpt-4.1",
+        inputPrice: 2.0,
+        outputPrice: 8.0,
+      },
+      {
+        name: "gpt-4.1-mini",
+        inputPrice: 0.4,
+        outputPrice: 1.6,
+      },
+      {
+        name: "gpt-4.1-nano",
+        inputPrice: 0.1,
+        outputPrice: 0.4,
+      },
+      {
+        name: "gpt-4.5-preview",
+        inputPrice: 75.0,
+        outputPrice: 150.0,
+      },
+      {
+        name: "gpt-4o",
+        inputPrice: 2.5,
+        outputPrice: 10.0,
+      },
+      {
+        name: "gpt-4o-audio-preview",
+        inputPrice: 40.0,
+        outputPrice: 80.0,
+      },
+      {
+        name: "gpt-4o-realtime-preview",
+        inputPrice: 40.0,
+        outputPrice: 80.0,
+      },
+      {
+        name: "gpt-4o-mini",
+        inputPrice: 0.15,
+        outputPrice: 0.6,
+      },
+      {
+        name: "gpt-4o-mini-audio-preview",
+        inputPrice: 10.0,
+        outputPrice: 20.0,
+      },
+      {
+        name: "gpt-4o-mini-realtime-preview",
+        inputPrice: 10.0,
+        outputPrice: 20.0,
+      },
+      {
+        name: "o1",
+        inputPrice: 15.0,
+        outputPrice: 60.0,
+      },
+      {
+        name: "o1-pro",
+        inputPrice: 150.0,
+        outputPrice: 600.0,
+      },
+      {
+        name: "o3-mini",
+        inputPrice: 1.1,
+        outputPrice: 4.4,
+      },
+      {
+        name: "o1-mini",
+        inputPrice: 1.1,
+        outputPrice: 4.4,
+      },
+      {
+        name: "gpt-4o-mini-search-preview",
+        inputPrice: 0.15,
+        outputPrice: 0.6,
+      },
+      {
+        name: "gpt-4o-search-preview",
+        inputPrice: 2.5,
+        outputPrice: 10.0,
+      },
+      {
+        name: "computer-use-preview",
+        inputPrice: 3.0,
+        outputPrice: 12.0,
+      },
+      {
+        name: "GPT-4 Turbo",
+        inputPrice: 10.0,
+        outputPrice: 30.0,
+      },
+      {
+        name: "GPT-4 Turbo Batch",
+        inputPrice: 5.0,
+        outputPrice: 15.0,
+      },
+      {
+        name: "GPT-4o Batch",
+        inputPrice: 2.5,
+        outputPrice: 7.5,
+      },
+      {
+        name: "gpt-4o-2024-08-06 Batch",
+        inputPrice: 1.25,
+        outputPrice: 5.0,
+      },
+      {
+        name: "GPT-3.5 Turbo",
+        inputPrice: 0.5,
+        outputPrice: 1.5,
+      },
+      {
+        name: "GPT-3.5 Turbo Batch",
+        inputPrice: 0.25,
+        outputPrice: 0.75,
+      },
+      {
+        name: "GPT-4o Mini Batch",
+        inputPrice: 0.075,
+        outputPrice: 0.3,
+      },
+    ],
+  },
+  {
+    provider: "Anthropic",
+    uri: "https://www.anthropic.com/pricing",
+    models: [
+      { name: "Claude 3 Opus", inputPrice: 15.0, outputPrice: 75.0 },
+      { name: "Claude 3.5 Sonnet", inputPrice: 3.0, outputPrice: 15.0 },
+      { name: "Claude 3.7 Sonnet", inputPrice: 3.0, outputPrice: 15.0 },
+      { name: "Claude 3 Haiku", inputPrice: 0.25, outputPrice: 1.25 },
+      { name: "Claude 3.5 Haiku", inputPrice: 0.8, outputPrice: 4.0 },
+    ],
+  },
+  {
+    provider: "Amazon",
+    uri: "https://aws.amazon.com/bedrock/pricing/",
+    models: [
+      { name: "Amazon Nova Micro", inputPrice: 0.035, outputPrice: 0.14 },
+      { name: "Amazon Nova Lite	", inputPrice: 0.06, outputPrice: 0.24 },
+      { name: "Amazon Nova Pro", inputPrice: 0.8, outputPrice: 3.2 },
+      {
+        name: "Amazon Nova Micro Batch",
+        inputPrice: 0.0175,
+        outputPrice: 0.07,
+      },
+      { name: "Amazon Nova Lite Batch	", inputPrice: 0.03, outputPrice: 0.12 },
+      { name: "Amazon Nova Pro Batch", inputPrice: 0.4, outputPrice: 1.6 },
+    ],
+  },
+  {
+    provider: "Arcee",
+    uri: "https://models.arcee.ai",
+    models: [
+      { name: "Virtuoso Large", inputPrice: 1.27, outputPrice: 1.5 },
+      { name: "Virtuoso Medium", inputPrice: 0.67, outputPrice: 0.82 },
+      { name: "Virtuoso Small", inputPrice: 0.4, outputPrice: 0.52 },
+      { name: "Coder Large", inputPrice: 0.67, outputPrice: 0.82 },
+      { name: "Coder Small", inputPrice: 0.4, outputPrice: 0.52 },
+      { name: "Caller Large", inputPrice: 0.67, outputPrice: 0.82 },
+    ],
+  },
+  {
+    provider: "AI21 Labs",
+    uri: "https://www.ai21.com/pricing",
+    models: [
+      { name: "Jamba 1.5 Mini", inputPrice: 0.2, outputPrice: 0.4 },
+      { name: "Jamba 1.5 Large", inputPrice: 2.0, outputPrice: 8.0 },
+    ],
+  },
+  {
+    provider: "Liquid",
+    uri: "https://www.liquid.ai/liquid-foundation-models",
+    models: [{ name: "lfm-40b", inputPrice: 1.0, outputPrice: 2.0 }],
+  },
+  {
+    provider: "Lambda Labs",
+    uri: "https://lambdalabs.com/inference",
+    models: [
+      {
+        name: "Llama-3.1-8B-Instruct",
+        inputPrice: 0.03,
+        outputPrice: 0.03,
+      },
+      {
+        name: "Llama-3.1-70B-Instruct (FP8)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama-3.1-405B-Instruct (FP8)",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Llama-3.2-3B-Instruct",
+        inputPrice: 0.02,
+        outputPrice: 0.02,
+      },
+      {
+        name: "Hermes-3-Llama-3.1-8B",
+        inputPrice: 0.03,
+        outputPrice: 0.03,
+      },
+      {
+        name: "Hermes-3-Llama-3.1-70B (FP8)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Hermes-3-Llama-3.1-405B (FP8)",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "LFM-40b",
+        inputPrice: 0.15,
+        outputPrice: 0.15,
+      },
+      {
+        name: "Llama3.1-nemotron-70b-instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Qwen2.5-Coder-32B",
+        inputPrice: 0.09,
+        outputPrice: 0.09,
+      },
+    ],
+  },
+  {
+    provider: "Google",
+    uri: "https://ai.google.dev/pricing?hl=en",
+    models: [
+      {
+        name: "Gemini 2.5 Flash Preview 04-17 Thinking",
+        inputPrice: 0.15,
+        outputPrice: 3.5,
+      },
+      {
+        name: "Gemini 2.5 Flash Preview 04-17 Non Thinking",
+        inputPrice: 0.15,
+        outputPrice: 0.6,
+      },
+      { name: "Gemini 2.0 Flash", inputPrice: 0.1, outputPrice: 0.4 },
+      {
+        name: "Gemini 2.0 Flash Lite",
+        inputPrice: 0.075,
+        outputPrice: 0.3,
+      },
+      { name: "Gemini 2.5 Pro 200K", inputPrice: 1.25, outputPrice: 10.0 },
+      { name: "Gemini 2.5 Pro 2M", inputPrice: 2.5, outputPrice: 15.0 },
+      { name: "Gemini 1.5 Pro 128K", inputPrice: 1.25, outputPrice: 5.0 },
+      { name: "Gemini 1.5 Pro 2M", inputPrice: 2.5, outputPrice: 10.0 },
+      { name: "Gemini 1.5 Flash 128K", inputPrice: 0.075, outputPrice: 0.3 },
+      { name: "Gemini 1.5 Flash 1M", inputPrice: 0.15, outputPrice: 0.6 },
+      {
+        name: "Gemini 1.5 Flash 8B 128K",
+        inputPrice: 0.0375,
+        outputPrice: 0.15,
+      },
+      { name: "Gemini 1.5 Flash 8B 1M", inputPrice: 0.075, outputPrice: 0.3 },
+    ],
+  },
+  {
+    provider: "Cohere",
+    uri: "https://cohere.com/pricing",
+    models: [
+      { name: "command-a", inputPrice: 2.5, outputPrice: 10.0 },
+      { name: "command-r7b", inputPrice: 0.0375, outputPrice: 0.15 },
+      { name: "command-r-plus", inputPrice: 3.0, outputPrice: 15.0 },
+      { name: "command-r", inputPrice: 0.5, outputPrice: 1.5 },
+      { name: "command-r-plus-08-2024", inputPrice: 2.5, outputPrice: 10.0 },
+      { name: "command-r-08-2024", inputPrice: 0.15, outputPrice: 0.6 },
+    ],
+  },
+  {
+    provider: "Mistral",
+    uri: "https://docs.mistral.ai/platform/pricing",
+    models: [
+      { name: "Mistral Small 3.1", inputPrice: 0.1, outputPrice: 0.3 },
+      { name: "Mistral Small 2501", inputPrice: 0.1, outputPrice: 0.3 },
+      { name: "Mistral Large 2411", inputPrice: 2.0, outputPrice: 6.0 },
+      { name: "Pixtral Large 2411", inputPrice: 2.0, outputPrice: 6.0 },
+      { name: "Mistral Large 2407", inputPrice: 2.0, outputPrice: 6.0 },
+      { name: "Mistral Small 2409", inputPrice: 0.2, outputPrice: 0.6 },
+      { name: "Mistral Nemo 2407", inputPrice: 0.15, outputPrice: 0.15 },
+      { name: "Mistral Codestral", inputPrice: 0.2, outputPrice: 0.6 },
+      { name: "Mistral Pixtral 12B 2409", inputPrice: 0.15, outputPrice: 0.15 },
+      { name: "Mistral Embed", inputPrice: 0.1, outputPrice: 0.1 },
+      {
+        name: "Mistral Ministral 3B",
+        inputPrice: 0.04,
+        outputPrice: 0.04,
+      },
+      { name: "Mistral Ministral 8B", inputPrice: 0.1, outputPrice: 0.1 },
+    ],
+  },
+  {
+    provider: "Chutes",
+    uri: "https://chutes.ai/app",
+    models: [
+      {
+        name: "Llama 4 Scout Instruct (17Bx16E)",
+        inputPrice: 0,
+        outputPrice: 0,
+      },
+      {
+        name: "Llama 4 Maverick Instruct (17Bx128E)",
+        inputPrice: 0,
+        outputPrice: 0,
+      },
+      { name: "deepseek-ai/DeepSeek-R1", inputPrice: 2.19, outputPrice: 2.19 },
+      { name: "deepseek-ai/DeepSeek-V3", inputPrice: 2.19, outputPrice: 2.19 },
+      { name: "Qwen/QwQ-32B", inputPrice: 0.23, outputPrice: 0.23 },
+      {
+        name: "hugging-quants/Meta-Llama-3.1-70B-Instruct-AWQ-INT4",
+        inputPrice: 0.1136,
+        outputPrice: 0.1136,
+      },
+      {
+        name: "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        inputPrice: 0.048,
+        outputPrice: 0.048,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+        inputPrice: 1.14,
+        outputPrice: 1.14,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-R1-Zero",
+        inputPrice: 4.38,
+        outputPrice: 4.38,
+      },
+      { name: "unsloth/gemma-3-27b-it", inputPrice: 2.28, outputPrice: 2.28 },
+      {
+        name: "chutesai/Mistral-Small-3.1-24B-Instruct-2503",
+        inputPrice: 0.0,
+        outputPrice: 0.0,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-V3-0324",
+        inputPrice: 0.0,
+        outputPrice: 0.0,
+      },
+      {
+        name: "unsloth/Llama-3.2-1B-Instruct",
+        inputPrice: 0.048,
+        outputPrice: 0.048,
+      },
+      {
+        name: "Qwen/Qwen2.5-Coder-32B-Instruct",
+        inputPrice: 0.058,
+        outputPrice: 0.058,
+      },
+      {
+        name: "unsloth/Llama-3.3-70B-Instruct",
+        inputPrice: 2.28,
+        outputPrice: 2.28,
+      },
+      { name: "unsloth/gemma-3-12b-it", inputPrice: 0.0, outputPrice: 0.0 },
+      { name: "unsloth/gemma-3-1b-it", inputPrice: 0.0, outputPrice: 0.0 },
+      {
+        name: "unsloth/Mistral-Nemo-Instruct-2407",
+        inputPrice: 0.216,
+        outputPrice: 0.216,
+      },
+      { name: "unsloth/gemma-3-4b-it", inputPrice: 0.0, outputPrice: 0.0 },
+      {
+        name: "Qwen/Qwen2.5-72B-Instruct",
+        inputPrice: 1.62,
+        outputPrice: 1.62,
+      },
+      {
+        name: "unsloth/gemma-2-9b-it",
+        inputPrice: 0.0585,
+        outputPrice: 0.0585,
+      },
+      {
+        name: "cognitivecomputations/Dolphin3.0-Mistral-24B",
+        inputPrice: 0.0,
+        outputPrice: 0.0,
+      },
+      {
+        name: "NousResearch/DeepHermes-3-Llama-3-8B-Preview",
+        inputPrice: 0.0,
+        outputPrice: 0.0,
+      },
+      {
+        name: "unsloth/Llama-3.2-3B-Instruct",
+        inputPrice: 0.054,
+        outputPrice: 0.054,
+      },
+      {
+        name: "unsloth/Mistral-Small-24B-Instruct-2501",
+        inputPrice: 0.432,
+        outputPrice: 0.432,
+      },
+      { name: "open-r1/OlympicCoder-32B", inputPrice: 0.0, outputPrice: 0.0 },
+      { name: "RekaAl/reka-flash-3", inputPrice: 0.0, outputPrice: 0.0 },
+      {
+        name: "cognitivecomputations/Dolphin3.0-R1-Mistral-24B",
+        inputPrice: 0.0,
+        outputPrice: 0.0,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+        inputPrice: 0.216,
+        outputPrice: 0.216,
+      },
+      { name: "open-r1/OlympicCoder-7B", inputPrice: 0.0, outputPrice: 0.0 },
+      {
+        name: "moonshotai/Moonlight-16B-A3B-Instruct",
+        inputPrice: 0.216,
+        outputPrice: 0.216,
+      },
+      { name: "Qwen/QwQ-32B-Preview", inputPrice: 0.117, outputPrice: 0.117 },
+      {
+        name: "unsloth/Meta-Llama-3.1-8B-Instruct",
+        inputPrice: 0.216,
+        outputPrice: 0.216,
+      },
+      {
+        name: "allenai/Molmo-7B-D-0924",
+        inputPrice: 0.108,
+        outputPrice: 0.108,
+      },
+      {
+        name: "Qwen/Qwen2.5-VL-7B-Instruct",
+        inputPrice: 0.108,
+        outputPrice: 0.108,
+      },
+      {
+        name: "Qwen/Qwen2.5-VL-3B-Instruct",
+        inputPrice: 0.027,
+        outputPrice: 0.027,
+      },
+      {
+        name: "bytedance-research/UI-TARS-72B-DPO",
+        inputPrice: 0.234,
+        outputPrice: 0.234,
+      },
+    ],
+  },
+  {
+    provider: "Reka",
+    uri: "https://www.reka.ai/reka-deploy",
+    models: [
+      { name: "Reka Core", inputPrice: 2.0, outputPrice: 2.0 },
+      { name: "Reka Flash", inputPrice: 0.2, outputPrice: 0.8 },
+      { name: "Reka Edge", inputPrice: 0.1, outputPrice: 0.1 },
+      { name: "Reka Spark", inputPrice: 0.05, outputPrice: 0.05 },
+    ],
+  },
+  {
+    provider: "XAI",
+    uri: "https://x.ai/api",
+    models: [
+      {
+        name: "grok-3-beta",
+        inputPrice: 3.0,
+        outputPrice: 15.0,
+      },
+      {
+        name: "grok-3-mini-beta",
+        inputPrice: 0.3,
+        outputPrice: 0.5,
+      },
+      {
+        name: "grok-2-1212",
+        inputPrice: 2.0,
+        outputPrice: 10.0,
+      },
+    ],
+  },
+
+  {
+    provider: "DeepSpeek",
+    uri: "https://platform.deepseek.com/api-docs/pricing/",
+    models: [
+      { name: "DeepSeek V2", inputPrice: 0.14, outputPrice: 0.28 },
+
+      { name: "DeepSeek V3", inputPrice: 0.27, outputPrice: 1.1 },
+      { name: "DeepSeek R1", inputPrice: 0.55, outputPrice: 2.19 },
+    ],
+  },
+  {
+    provider: "01.ai",
+    uri: "https://platform.01.ai/docs#models-and-pricing",
+    models: [
+      { name: "Yi Large", inputPrice: 3.0, outputPrice: 3.0 },
+      { name: "Yi Large Function Caliing", inputPrice: 3.0, outputPrice: 3.0 },
+      { name: "Yi Large Turbo", inputPrice: 0.19, outputPrice: 0.19 },
+      { name: "Yi Vision", inputPrice: 0.19, outputPrice: 0.19 },
+    ],
+  },
+  {
+    provider: "Hyperbolic",
+    uri: "https://hyperbolic.xyz/pricing",
+    models: [
+      { name: "QwQ-32B", inputPrice: 0.2, outputPrice: 0.2 },
+      {
+        name: "deepseek-ai/DeepSeek-V3-0324",
+        inputPrice: 4.0,
+        outputPrice: 4.0,
+      },
+      { name: "DeepSeek R1", inputPrice: 2.0, outputPrice: 2.0 },
+      { name: "DeepSeek R1 Zero", inputPrice: 2.0, outputPrice: 2.0 },
+      { name: "Qwen 2.5-Coder 32B (BF16)", inputPrice: 0.2, outputPrice: 0.2 },
+      { name: "QwQ-32B-Preview", inputPrice: 0.2, outputPrice: 0.2 },
+      { name: "Llama 3.1 8B (BF16)", inputPrice: 0.1, outputPrice: 0.1 },
+      { name: "Llama 3.2 3B (BF16)", inputPrice: 0.1, outputPrice: 0.1 },
+      { name: "Llama 3.1 70B (BF16)", inputPrice: 0.4, outputPrice: 0.4 },
+      { name: "Llama 3 70B (BF16)", inputPrice: 0.4, outputPrice: 0.4 },
+      { name: "Hermes 3 70B (BF16)", inputPrice: 0.4, outputPrice: 0.4 },
+      { name: "Llama 3.1 405B (BF16)", inputPrice: 4.0, outputPrice: 4.0 },
+      { name: "DeepSeek V2.5 (BF16)", inputPrice: 2.0, outputPrice: 2.0 },
+      { name: "DeepSeek V3", inputPrice: 0.25, outputPrice: 0.25 },
+      { name: "Qwen 2.5 72B (BF16)", inputPrice: 0.4, outputPrice: 0.4 },
+      { name: "Llama 3.1 405B Base (FP8)", inputPrice: 2.0, outputPrice: 2.0 },
+      { name: "Pixtral 12B (BF16)", inputPrice: 0.1, outputPrice: 0.1 },
+      {
+        name: "Qwen2-VL-7B-Instruct (BF16)",
+        inputPrice: 0.1,
+        outputPrice: 0.1,
+      },
+      {
+        name: "Qwen2-VL-72B-Instruct (BF16)",
+        inputPrice: 0.4,
+        outputPrice: 0.4,
+      },
+    ],
+  },
+
+  {
+    provider: "Together.AI",
+    uri: "https://www.together.ai/pricing",
+    models: [
+      {
+        name: "Llama 4 Maverick Instruct (17Bx128E)",
+        inputPrice: 0.55,
+        outputPrice: 2.19,
+      },
+      {
+        name: "Llama 4 Scout Instruct (17Bx16E)",
+        inputPrice: 0.48,
+        outputPrice: 1.92,
+      },
+      {
+        name: "Mistral Small 2501",
+        inputPrice: 0.8,
+        outputPrice: 0.8,
+      },
+      {
+        name: "DeepSeek R1",
+        inputPrice: 7.0,
+        outputPrice: 7.0,
+      },
+      {
+        name: "DeepSeek V3",
+        inputPrice: 1.25,
+        outputPrice: 1.25,
+      },
+      {
+        name: "Meta Llama 3.3 70B Instruct Turbo",
+        inputPrice: 0.88,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Qwen QwQ-32B-Preview",
+
+        inputPrice: 1.2,
+        outputPrice: 1.2,
+      },
+      {
+        name: "Meta Llama 3.1 70B Instruct Turbo",
+        inputPrice: 0.88,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Meta Llama 3.1 405B Instruct Turbo",
+        inputPrice: 3.5,
+        outputPrice: 3.5,
+      },
+      {
+        name: "Typhoon 1.5 8B Instruct",
+
+        inputPrice: 0.18,
+        outputPrice: 0.18,
+      },
+      {
+        name: "Meta Llama 3.1 8B Instruct Turbo",
+        inputPrice: 0.18,
+        outputPrice: 0.18,
+      },
+      {
+        name: "Typhoon 1.5X 70B-awq",
+
+        inputPrice: 0.88,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Meta Llama 3.2 90B Vision Instruct Turbo",
+        inputPrice: 1.2,
+        outputPrice: 1.2,
+      },
+      {
+        name: "Qwen 2.5 Coder 32B Instruct",
+
+        inputPrice: 0.8,
+        outputPrice: 0.8,
+      },
+      {
+        name: "Qwen2.5 72B Instruct Turbo",
+
+        inputPrice: 1.2,
+        outputPrice: 1.2,
+      },
+      {
+        name: "Llama 3.1 Nemotron 70B Instruct HF",
+
+        inputPrice: 0.88,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Meta Llama 3.2 11B Vision Instruct Turbo",
+        inputPrice: 0.18,
+        outputPrice: 0.18,
+      },
+      {
+        name: "Qwen2.5 7B Instruct Turbo",
+
+        inputPrice: 0.3,
+        outputPrice: 0.3,
+      },
+      {
+        name: "Meta Llama 3.2 3B Instruct Turbo",
+        inputPrice: 0.06,
+        outputPrice: 0.06,
+      },
+      {
+        name: "Meta Llama Vision Free",
+        inputPrice: 0.0,
+        outputPrice: 0.0,
+      },
+      {
+        name: "Meta Llama Guard 3 11B Vision Turbo",
+        inputPrice: 0.18,
+        outputPrice: 0.18,
+      },
+      {
+        name: "Mixtral-8x22B Instruct v0.1",
+        inputPrice: 1.2,
+        outputPrice: 1.2,
+      },
+      {
+        name: "Gryphe MythoMax L2 Lite (13B)",
+        inputPrice: 0.1,
+        outputPrice: 0.1,
+      },
+      {
+        name: "Meta Llama Guard 3 8B",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Meta Llama 3 70B Instruct Turbo",
+        inputPrice: 0.88,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Meta Llama 3 70B Instruct Lite",
+        inputPrice: 0.54,
+        outputPrice: 0.54,
+      },
+      {
+        name: "Meta Llama 3 8B Instruct Lite",
+        inputPrice: 0.1,
+        outputPrice: 0.1,
+      },
+      {
+        name: "Meta Llama 3 70B Instruct Reference",
+        inputPrice: 0.88,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Meta Llama 3 8B Instruct Reference",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Qwen 2 Instruct (72B)",
+
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Gemma-2 Instruct (27B)",
+        inputPrice: 0.8,
+        outputPrice: 0.8,
+      },
+      {
+        name: "Gemma-2 Instruct (9B)",
+        inputPrice: 0.3,
+        outputPrice: 0.3,
+      },
+      {
+        name: "Mistral (7B) Instruct v0.3",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Meta Llama Guard 2 8B",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "WizardLM-2 (8x22B)",
+        inputPrice: 1.2,
+        outputPrice: 1.2,
+      },
+      {
+        name: "DBRX Instruct",
+        inputPrice: 1.2,
+        outputPrice: 1.2,
+      },
+      {
+        name: "DeepSeek LLM Chat (67B)",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Gemma Instruct (2B)",
+        inputPrice: 0.1,
+        outputPrice: 0.1,
+      },
+      {
+        name: "Mistral (7B) Instruct v0.2",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Mixtral-8x7B Instruct v0.1",
+        inputPrice: 0.6,
+        outputPrice: 0.6,
+      },
+      {
+        name: "Mixtral-8x7B v0.1",
+        inputPrice: 0.6,
+        outputPrice: 0.6,
+      },
+      {
+        name: "Llama Guard (7B)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Nous Hermes 2 - Mixtral 8x7B-DPO",
+        inputPrice: 0.6,
+        outputPrice: 0.6,
+      },
+      {
+        name: "Mistral (7B) Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Mistral (7B)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "LLaMA-2 Chat (13B)",
+        inputPrice: 0.22,
+        outputPrice: 0.22,
+      },
+      {
+        name: "LLaMA-2 Chat (7B)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "LLaMA-2 (70B)",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Code Llama Instruct (34B)",
+        inputPrice: 0.78,
+        outputPrice: 0.78,
+      },
+      {
+        name: "Upstage SOLAR Instruct v1 (11B)",
+        inputPrice: 0.3,
+        outputPrice: 0.3,
+      },
+      {
+        name: "MythoMax-L2 (13B)",
+        inputPrice: 0.3,
+        outputPrice: 0.3,
+      },
+      {
+        name: "Meta Llama 3.2 3B Instruct",
+        inputPrice: 0.06,
+        outputPrice: 0.06,
+      },
+    ],
+  },
+  {
+    provider: "Fireworks",
+    uri: "https://fireworks.ai/pricing",
+    models: [
+      {
+        name: "Llama 4 Scout Instruct (17Bx16E)",
+        inputPrice: 0.15,
+        outputPrice: 0.6,
+      },
+      {
+        name: "Llama 4 Maverick Instruct (17Bx128E)",
+        inputPrice: 0.22,
+        outputPrice: 0.88,
+      },
+      {
+        name: "Mistral Small 2501",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-V3-0324",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "DeepSeek V3",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+
+      {
+        name: "DeepSeek R1",
+        inputPrice: 8.0,
+        outputPrice: 8.0,
+      },
+      {
+        name: "Llama 3.2 1B Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3 8B Instruct (HF version)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3 8B Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3.2 3B Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3.1 8B Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3.2 11B Vision Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "StarCoder 15.5B",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "StarCoder 7B",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Gemma 2 9B Instruct",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Mixtral 8x7B Instruct",
+        inputPrice: 0.5,
+        outputPrice: 0.5,
+      },
+      {
+        name: "Mixtral 8x7B Instruct (HF version)",
+        inputPrice: 0.5,
+        outputPrice: 0.5,
+      },
+      {
+        name: "Llama 3 70B Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Llama 3.1 70B Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Llama 3.3 70B Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Llama 3 70B Instruct (HF version)",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Qwen2.5 72B Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Qwen2 VL 72B Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Qwen2.5-Coder-32B-Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Qwen Qwq 32b Preview",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Mixtral 8x22B Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Llama 3.2 90B Vision Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Yi-Large",
+        inputPrice: 3.0,
+        outputPrice: 3.0,
+      },
+      {
+        name: "Llama 3.1 405B Instruct",
+        inputPrice: 3.0,
+        outputPrice: 3.0,
+      },
+    ],
+  },
+  {
+    provider: "Nebius AI Studio",
+    uri: "https://nebius.com/prices-ai-studio",
+    models: [
+      {
+        name: "deepseek-ai/DeepSeek-V3",
+        inputPrice: 0.5,
+        outputPrice: 1.5,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-V3-0324",
+        inputPrice: 0.5,
+        outputPrice: 1.5,
+      },
+      {
+        name: "deepseek-ai/DeepSeek-R1",
+        inputPrice: 0.8,
+        outputPrice: 2.4,
+      },
+      {
+        name: "Qwen/QwQ-32B-Preview",
+        inputPrice: 0.09,
+        outputPrice: 0.27,
+      },
+      {
+        name: "microsoft/phi-4",
+        inputPrice: 0.1,
+        outputPrice: 0.3,
+      },
+      {
+        name: "Meta/Llama-3.1-8B-Instruct (fast)",
+        inputPrice: 0.03,
+        outputPrice: 0.09,
+      },
+      {
+        name: "Meta/Llama-3.1-8B-Instruct (base)",
+        inputPrice: 0.02,
+        outputPrice: 0.06,
+      },
+      {
+        name: "Meta/Llama-3.1-70B-Instruct (fast)",
+        inputPrice: 0.25,
+        outputPrice: 0.75,
+      },
+      {
+        name: "Meta/Llama-3.1-70B-Instruct (base)",
+        inputPrice: 0.13,
+        outputPrice: 0.4,
+      },
+      {
+        name: "Meta/Llama-3.1-405B-Instruct (base)",
+        inputPrice: 1.0,
+        outputPrice: 3.0,
+      },
+      {
+        name: "MistralAI/Mistral-Nemo-Instruct-2407 (fast)",
+        inputPrice: 0.08,
+        outputPrice: 0.24,
+      },
+      {
+        name: "MistralAI/Mistral-Nemo-Instruct-2407 (base)",
+        inputPrice: 0.04,
+        outputPrice: 0.12,
+      },
+      {
+        name: "MistralAI/Mixtral-8x22B-Instruct-v0.1 (fast)",
+        inputPrice: 0.7,
+        outputPrice: 2.1,
+      },
+      {
+        name: "MistralAI/Mixtral-8x22B-Instruct-v0.1 (base)",
+        inputPrice: 0.4,
+        outputPrice: 1.2,
+      },
+      {
+        name: "DeepSeekAI/DeepSeek-Coder-V2-Lite-Instruct-FP8 (fast)",
+        inputPrice: 0.08,
+        outputPrice: 0.24,
+      },
+      {
+        name: "DeepSeekAI/DeepSeek-Coder-V2-Lite-Instruct-FP8 (base)",
+        inputPrice: 0.04,
+        outputPrice: 0.12,
+      },
+      { name: "Qwen2.5-Coder-7B (fast)", inputPrice: 0.03, outputPrice: 0.09 },
+      { name: "Qwen2.5-Coder-7B (base)", inputPrice: 0.01, outputPrice: 0.03 },
+      {
+        name: "Microsoft/Phi-3-mini-4k-instruct (fast)",
+        inputPrice: 0.13,
+        outputPrice: 0.4,
+      },
+      {
+        name: "Microsoft/Phi-3-mini-4k-instruct (base)",
+        inputPrice: 0.04,
+        outputPrice: 0.13,
+      },
+      {
+        name: "NVIDIA/Llama-3.1-Nemotron-70B-Instruct-HF (fast)",
+        inputPrice: 0.25,
+        outputPrice: 0.75,
+      },
+      {
+        name: "NVIDIA/Llama-3.1-Nemotron-70B-Instruct-HF (base)",
+        inputPrice: 0.13,
+        outputPrice: 0.4,
+      },
+    ],
+  },
+  {
+    provider: "DeepInfra",
+    uri: "https://deepinfra.com/models/text-generation/",
+    models: [
+      {
+        name: "Llama 4 Scout Instruct (17Bx16E)",
+        inputPrice: 0.1,
+        outputPrice: 0.3,
+      },
+      {
+        name: "Llama 4 Maverick Instruct (17Bx128E)",
+        inputPrice: 0.2,
+        outputPrice: 0.6,
+      },
+      {
+        name: "DeepSeek R1",
+        inputPrice: 0.85,
+        outputPrice: 2.5,
+      },
+      {
+        name: "DeepSeek V3",
+        inputPrice: 0.85,
+        outputPrice: 0.9,
+      },
+      {
+        name: "Phi 4",
+        inputPrice: 0.07,
+        outputPrice: 0.14,
+      },
+      {
+        name: "meta-llama/Llama-3.2-1B-Instruct",
+        inputPrice: 0.01,
+        outputPrice: 0.02,
+      },
+      {
+        name: "meta-llama/Llama-3.2-3B-Instruct",
+        inputPrice: 0.018,
+        outputPrice: 0.03,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        inputPrice: 0.02,
+        outputPrice: 0.05,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+        inputPrice: 0.03,
+        outputPrice: 0.05,
+      },
+      {
+        name: "Sao10K/L3-8B-Lunaris-v1",
+        inputPrice: 0.03,
+        outputPrice: 0.06,
+      },
+      {
+        name: "google/gemma-2-9b-it",
+        inputPrice: 0.03,
+        outputPrice: 0.06,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3-8B-Instruct",
+        inputPrice: 0.03,
+        outputPrice: 0.06,
+      },
+      {
+        name: "mistralai/Mistral-7B-Instruct-v0.3",
+        inputPrice: 0.03,
+        outputPrice: 0.055,
+      },
+      {
+        name: "Qwen/Qwen2.5-Coder-32B-Instruct",
+        inputPrice: 0.08,
+        outputPrice: 0.18,
+      },
+      {
+        name: "mistralai/Mistral-Nemo-Instruct-2407",
+        inputPrice: 0.04,
+        outputPrice: 0.1,
+      },
+      {
+        name: "meta-llama/Llama-3.2-11B-Vision-Instruct",
+        inputPrice: 0.055,
+        outputPrice: 0.055,
+      },
+      {
+        name: "microsoft/WizardLM-2-7B",
+        inputPrice: 0.055,
+        outputPrice: 0.055,
+      },
+      {
+        name: "openchat/openchat_3.5",
+        inputPrice: 0.055,
+        outputPrice: 0.055,
+      },
+      {
+        name: "Qwen/QwQ-32B-Preview",
+        inputPrice: 0.15,
+        outputPrice: 0.6,
+      },
+      {
+        name: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+        inputPrice: 0.13,
+        outputPrice: 0.4,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+        inputPrice: 0.13,
+        outputPrice: 0.4,
+      },
+      {
+        name: "mistralai/Mixtral-8x7B-Instruct-v0.1",
+        inputPrice: 0.24,
+        outputPrice: 0.24,
+      },
+      {
+        name: "google/gemma-2-27b-it",
+        inputPrice: 0.27,
+        outputPrice: 0.27,
+      },
+      {
+        name: "meta-llama/Llama-3.3-70B-Instruct",
+        inputPrice: 0.23,
+        outputPrice: 0.4,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3.1-70B-Instruct",
+        inputPrice: 0.23,
+        outputPrice: 0.4,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3-70B-Instruct",
+        inputPrice: 0.23,
+        outputPrice: 0.4,
+      },
+      {
+        name: "nvidia/Llama-3.1-Nemotron-70B-Instruct",
+        inputPrice: 0.23,
+        outputPrice: 0.4,
+      },
+      {
+        name: "Qwen/Qwen2.5-72B-Instruct",
+        inputPrice: 0.23,
+        outputPrice: 0.4,
+      },
+      {
+        name: "meta-llama/Llama-3.2-90B-Vision-Instruct",
+        inputPrice: 0.35,
+        outputPrice: 0.4,
+      },
+      {
+        name: "lizpreciatior/lzlv_70b_fp16_hf",
+        inputPrice: 0.35,
+        outputPrice: 0.4,
+      },
+      {
+        name: "Sao10K/L3-70B-Euryale-v2.1",
+        inputPrice: 0.35,
+        outputPrice: 0.4,
+      },
+      {
+        name: "Sao10K/L3.1-70B-Euryale-v2.2",
+        inputPrice: 0.35,
+        outputPrice: 0.4,
+      },
+      {
+        name: "microsoft/WizardLM-2-8x22B",
+        inputPrice: 0.5,
+        outputPrice: 0.5,
+      },
+      {
+        name: "meta-llama/Meta-Llama-3.1-405B-Instruct",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      {
+        name: "NousResearch/Hermes-3-Llama-3.1-405B",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+    ],
+  },
+  {
+    provider: "Groq",
+    uri: "https://groq.com/pricing/",
+    models: [
+      {
+        name: "Llama 4 Scout Instruct (17Bx16E)",
+        inputPrice: 0.11,
+        outputPrice: 0.34,
+      },
+      {
+        name: "Llama 4 Maverick Instruct (17Bx128E)",
+        inputPrice: 0.5,
+        outputPrice: 0.77,
+      },
+      {
+        name: "Qwen QwQ 32B",
+        inputPrice: 0.29,
+        outputPrice: 0.39,
+      },
+      {
+        name: "Mistral Saba 24B",
+        inputPrice: 0.79,
+        outputPrice: 0.79,
+      },
+      {
+        name: "Llama 3.2 1B (Preview) 8k",
+        inputPrice: 0.04,
+        outputPrice: 0.04,
+      },
+      {
+        name: "Llama 3.2 3B (Preview) 8k",
+        inputPrice: 0.06,
+        outputPrice: 0.06,
+      },
+      {
+        name: "Llama 3.3 70B Versatile 128k",
+        inputPrice: 0.59,
+        outputPrice: 0.79,
+      },
+      {
+        name: "Llama 3.1 8B Instant 128k",
+        inputPrice: 0.05,
+        outputPrice: 0.08,
+      },
+      {
+        name: "Llama 3 70B 8k",
+        inputPrice: 0.59,
+        outputPrice: 0.79,
+      },
+      {
+        name: "Llama 3 8B 8k",
+        inputPrice: 0.05,
+        outputPrice: 0.08,
+      },
+      {
+        name: "Mixtral 8x7B Instruct 32k",
+        inputPrice: 0.24,
+        outputPrice: 0.24,
+      },
+      {
+        name: "Gemma 7B 8k Instruct",
+        inputPrice: 0.07,
+        outputPrice: 0.07,
+      },
+      {
+        name: "Gemma 2 9B 8k",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3 Groq 70B Tool Use Preview 8k",
+        inputPrice: 0.89,
+        outputPrice: 0.89,
+      },
+      {
+        name: "Llama 3 Groq 8B Tool Use Preview 8k",
+        inputPrice: 0.19,
+        outputPrice: 0.19,
+      },
+      {
+        name: "Llama Guard 3 8B 8k",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3.3 70B SpecDec 8k",
+        inputPrice: 0.59,
+        outputPrice: 0.99,
+      },
+      {
+        name: "Llama 3.2 11B Vision 8k (Preview)",
+        inputPrice: 0.18,
+        outputPrice: 0.18,
+      },
+      {
+        name: "Llama 3.2 90B Vision 8k (Preview)",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+    ],
+  },
+  {
+    provider: "SambaNova Cloud",
+    uri: "https://cloud.sambanova.ai/pricing",
+    models: [
+      { name: "Qwen/QwQ-32B-Preview", inputPrice: 0.1, outputPrice: 0.2 },
+      {
+        name: "Qwen/Qwen2.5-Coder-32B-Instruct",
+        inputPrice: 1.5,
+        outputPrice: 3.0,
+      },
+      { name: "Llama 3.2 90B Vision", inputPrice: 0.8, outputPrice: 1.6 },
+      { name: "Llama 3.3 70B", inputPrice: 0.6, outputPrice: 1.2 },
+      { name: "Llama 3.1 8B", inputPrice: 0.1, outputPrice: 0.2 },
+      { name: "Llama 3.1 70B", inputPrice: 0.6, outputPrice: 1.2 },
+      { name: "Qwen/Qwen2.5-72B-Instruct", inputPrice: 2.0, outputPrice: 4.0 },
+      { name: "Llama-Guard-3-8B", inputPrice: 0.3, outputPrice: 0.3 },
+      { name: "Llama 3.1 405B", inputPrice: 5.0, outputPrice: 10.0 },
+      { name: "Llama 3.2 1B", inputPrice: 0.04, outputPrice: 0.08 },
+      { name: "Llama 3.2 3B", inputPrice: 0.08, outputPrice: 0.16 },
+      { name: "Llama 3.2 11B Vision", inputPrice: 0.15, outputPrice: 0.3 },
+    ],
+  },
+  {
+    provider: "Cerebras",
+    uri: "https://cerebras.ai/blog/introducing-cerebras-inference-ai-at-instant-speed",
+    models: [{ name: "Llama 3 70b", inputPrice: 0.6, outputPrice: 0.6 }],
+  },
+  {
+    provider: "Replicate",
+    uri: "https://replicate.com/pricing",
+    models: [
+      { name: "Llama 3 70B", inputPrice: 0.65, outputPrice: 2.75 },
+      { name: "Mixtral 8x7B", inputPrice: 0.3, outputPrice: 1.0 },
+      { name: "Llama 3.1 405B", inputPrice: 9.5, outputPrice: 9.5 },
+    ],
+  },
+  {
+    provider: "Perplexity",
+    uri: "https://docs.perplexity.ai/docs/pricing",
+    models: [
+      {
+        name: "sonar-pro",
+        inputPrice: 3.0,
+        outputPrice: 15.0,
+      },
+      {
+        name: "sonar",
+        inputPrice: 1.0,
+        outputPrice: 1.0,
+      },
+      {
+        name: "Llama 3.1 Sonar Small Online (Legacy)",
+        inputPrice: 0.2,
+        outputPrice: 0.2,
+      },
+      {
+        name: "Llama 3.1 Sonar Large Online (Legacy)",
+        inputPrice: 1.0,
+        outputPrice: 1.0,
+      },
+      {
+        name: "Llama 3.1 Sonar Huge Online (Legacy)",
+        inputPrice: 5.0,
+        outputPrice: 5.0,
+      },
+    ],
+  },
+  {
+    provider: "Anyscale",
+    uri: "https://www.anyscale.com/pricing-detail",
+    models: [
+      { name: "Mixtral 8x7B", inputPrice: 0.5, outputPrice: 0.5 },
+      { name: "Llama 3 70B", inputPrice: 1.0, outputPrice: 1.0 },
+    ],
+  },
+  {
+    provider: "IBM Watsonx",
+    uri: "https://www.ibm.com/products/watsonx-ai/pricing",
+    models: [
+      { name: "granite-3-1-8b-instruct", inputPrice: 0.2, outputPrice: 0.2 },
+      { name: "granite-3-1-2b-instruct", inputPrice: 0.1, outputPrice: 0.1 },
+      { name: "granite-guardian-3-8b", inputPrice: 0.2, outputPrice: 0.2 },
+      { name: "granite-guardian-3-2b", inputPrice: 0.1, outputPrice: 0.1 },
+      { name: "granite-20b-multilingual", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-13b-chat", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-13b-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-34b-code-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-20b-code-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-8b-code-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-3b-code-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-8b-japanese", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "granite-7b-lab", inputPrice: 0.6, outputPrice: 0.6 },
+    ],
+  },
+  {
+    provider: "IBM Watsonx 3rd Party",
+    uri: "https://www.ibm.com/products/watsonx-ai/pricing",
+    models: [
+      { name: "llama-3-3-70b-instruct", inputPrice: 1.8, outputPrice: 1.8 },
+      {
+        name: "llama-3-2-90b-vision-instruct",
+        inputPrice: 2.0,
+        outputPrice: 2.0,
+      },
+      {
+        name: "llama-3-2-11b-vision-instruct",
+        inputPrice: 0.35,
+        outputPrice: 0.35,
+      },
+      { name: "llama-guard-3-11b-vision", inputPrice: 0.35, outputPrice: 0.35 },
+      { name: "llama-3-2-1b-instruct", inputPrice: 0.1, outputPrice: 0.1 },
+      { name: "llama-3-2-3b-instruct", inputPrice: 0.15, outputPrice: 0.15 },
+      { name: "llama-3-405b-instruct", inputPrice: 5.0, outputPrice: 16.0 },
+      { name: "llama-3-1-70b-instruct", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "llama-3-1-8b-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "llama3-llava-next-8b-hf", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "llama-3-8b-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "llama-3-70b-instruct", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "llama2-13b-dpo-v7 (Korean)", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "allam-1-13b-instruct", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "codellama-34b-instruct", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "pixtral-12b", inputPrice: 0.35, outputPrice: 0.35 },
+      { name: "mistral-large-2", inputPrice: 3.0, outputPrice: 10.0 },
+      { name: "mixtral-8x7b-instruct", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "jais-13b-chat (Arabic)", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "flan-t5-xl-3b", inputPrice: 0.6, outputPrice: 0.6 },
+      { name: "flan-t5-xxl-11b", inputPrice: 1.8, outputPrice: 1.8 },
+      { name: "flan-ul2-20b", inputPrice: 5.0, outputPrice: 5.0 },
+      {
+        name: "elyza-japanese-llama-2-7b-instruct",
+        inputPrice: 1.8,
+        outputPrice: 1.8,
+      },
+      { name: "mt0-xxl-13b", inputPrice: 1.8, outputPrice: 1.8 },
+    ],
+  },
+  {
+    provider: "Novita AI",
+    uri: "https://novita.ai/model-api/pricing",
+    models: [
+      { name: "deepseek/deepseek-v3-0324", inputPrice: 0.4, outputPrice: 1.3 },
+      { name: "deepseek/deepseek-r1-turbo", inputPrice: 0.7, outputPrice: 2.5 },
+      { name: "deepseek/deepseek-v3-turbo", inputPrice: 0.4, outputPrice: 1.3 },
+      { name: "qwen/qwq-32b", inputPrice: 0.18, outputPrice: 0.2 },
+      {
+        name: "meta-llama/llama-3.1-8b-instruct",
+        inputPrice: 0.05,
+        outputPrice: 0.05,
+      },
+      { name: "deepseek/deepseek-r1", inputPrice: 4.0, outputPrice: 4.0 },
+      { name: "deepseek/deepseek_v3", inputPrice: 0.89, outputPrice: 0.89 },
+      {
+        name: "meta-llama/llama-3.1-70b-instruct",
+        inputPrice: 0.34,
+        outputPrice: 0.39,
+      },
+      {
+        name: "meta-llama/llama-3.3-70b-instruct",
+        inputPrice: 0.39,
+        outputPrice: 0.39,
+      },
+      { name: "mistralai/mistral-nemo", inputPrice: 0.17, outputPrice: 0.17 },
+      {
+        name: "deepseek/deepseek-r1-distill-qwen-14b",
+        inputPrice: 0.15,
+        outputPrice: 0.15,
+      },
+      {
+        name: "deepseek/deepseek-r1-distill-qwen-32b",
+        inputPrice: 0.3,
+        outputPrice: 0.3,
+      },
+      {
+        name: "deepseek/deepseek-r1-distill-llama-70b",
+        inputPrice: 0.8,
+        outputPrice: 0.8,
+      },
+      { name: "Sao10K/L3-8B-Stheno-v3.2", inputPrice: 0.05, outputPrice: 0.05 },
+      { name: "gryphe/mythomax-l2-13b", inputPrice: 0.09, outputPrice: 0.09 },
+      {
+        name: "deepseek/deepseek-r1-distill-llama-8b",
+        inputPrice: 0.04,
+        outputPrice: 0.04,
+      },
+      {
+        name: "qwen/qwen-2.5-72b-instruct",
+        inputPrice: 0.38,
+        outputPrice: 0.4,
+      },
+      {
+        name: "meta-llama/llama-3-8b-instruct",
+        inputPrice: 0.04,
+        outputPrice: 0.04,
+      },
+      {
+        name: "microsoft/wizardlm-2-8x22b",
+        inputPrice: 0.62,
+        outputPrice: 0.62,
+      },
+      { name: "google/gemma-2-9b-it", inputPrice: 0.08, outputPrice: 0.08 },
+      {
+        name: "mistralai/mistral-7b-instruct",
+        inputPrice: 0.059,
+        outputPrice: 0.059,
+      },
+      {
+        name: "meta-llama/llama-3-70b-instruct",
+        inputPrice: 0.51,
+        outputPrice: 0.74,
+      },
+      { name: "openchat/openchat-7b", inputPrice: 0.06, outputPrice: 0.06 },
+      {
+        name: "nousresearch/hermes-2-pro-llama-3-8b",
+        inputPrice: 0.14,
+        outputPrice: 0.14,
+      },
+      {
+        name: "sao10k/l3-70b-euryale-v2.1",
+        inputPrice: 1.48,
+        outputPrice: 1.48,
+      },
+      {
+        name: "cognitivecomputations/dolphin-mixtral-8x22b",
+        inputPrice: 0.9,
+        outputPrice: 0.9,
+      },
+      { name: "jondurbin/airoboros-l2-70b", inputPrice: 0.5, outputPrice: 0.5 },
+      {
+        name: "nousresearch/nous-hermes-llama2-13b",
+        inputPrice: 0.17,
+        outputPrice: 0.17,
+      },
+      {
+        name: "teknium/openhermes-2.5-mistral-7b",
+        inputPrice: 0.17,
+        outputPrice: 0.17,
+      },
+      {
+        name: "sophosympatheia/midnight-rose-70b",
+        inputPrice: 0.8,
+        outputPrice: 0.8,
+      },
+      { name: "sao10k/l3-8b-lunaris", inputPrice: 0.05, outputPrice: 0.05 },
+      { name: "google/gemma-3-27b-it", inputPrice: 0.2, outputPrice: 0.2 },
+      {
+        name: "qwen/qwen2.5-vl-72b-instruct",
+        inputPrice: 0.8,
+        outputPrice: 0.8,
+      },
+      {
+        name: "qwen/qwen-2-vl-72b-instruct",
+        inputPrice: 0.45,
+        outputPrice: 0.45,
+      },
+      {
+        name: "meta-llama/llama-3.2-1b-instruct",
+        inputPrice: 0.02,
+        outputPrice: 0.02,
+      },
+      {
+        name: "meta-llama/llama-3.2-11b-vision-instruct",
+        inputPrice: 0.06,
+        outputPrice: 0.06,
+      },
+      {
+        name: "meta-llama/llama-3.2-3b-instruct",
+        inputPrice: 0.03,
+        outputPrice: 0.05,
+      },
+      {
+        name: "meta-llama/llama-3.1-8b-instruct-bf16",
+        inputPrice: 0.06,
+        outputPrice: 0.06,
+      },
+      {
+        name: "sao10k/l31-70b-euryale-v2.2",
+        inputPrice: 1.48,
+        outputPrice: 1.48,
+      },
+      {
+        name: "qwen/qwen-2-7b-instruct",
+        inputPrice: 0.054,
+        outputPrice: 0.054,
+      },
+    ],
+  },
+  {
+    provider: "Writer",
+    uri: "https://dev.writer.com/home/pricing",
+    models: [
+      { name: "Palmyra X 004", inputPrice: 5.0, outputPrice: 12.0 },
+      { name: "Palmyra X 003 Instruct", inputPrice: 7.5, outputPrice: 22.5 },
+      { name: "Palmyra Creative", inputPrice: 5.0, outputPrice: 12.0 },
+      { name: "Palmyra Med 32K", inputPrice: 5.0, outputPrice: 12.0 },
+      { name: "Palmyra Med", inputPrice: 4.0, outputPrice: 10.0 },
+      { name: "Palmyra Fin 32K", inputPrice: 5.0, outputPrice: 12.0 },
+      { name: "Palmyra X 32K Instruct", inputPrice: 1.0, outputPrice: 2.0 },
+      { name: "Palmyra X 002 Instruct", inputPrice: 1.0, outputPrice: 2.0 },
+      { name: "Palmyra X 002 32K", inputPrice: 1.0, outputPrice: 2.0 },
+    ],
+  },
+];
+
+console.log(JSON.stringify(mockData));
