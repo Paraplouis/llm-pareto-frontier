@@ -1,6 +1,6 @@
 // LLM model data - Updated from LLM Arena leaderboard
-// Last updated: 2025-05-27 15:10:47
-const dataLastUpdated = "2025-05-27 15:10:47";
+// Last updated: 2025-05-27 15:48:24
+const dataLastUpdated = "2025-05-27 15:48:24";
 const data = [
   { model: "Gemini-2.5-Pro-Preview-05-06", elo: 1446, price: 1.25, provider: "Google" },
   { model: "Gemini-2.5-Flash-Preview-05-20", elo: 1418, price: 0.15, provider: "Google" },
