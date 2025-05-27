@@ -2,17 +2,27 @@ name: Run Refresh Script
 run-name: ${{ github.actor }} is refreshing data 🔄
 on:
   schedule:
-    - cron: "0 0 * * *" # Everyday at midnight UTC (UK time)
+    - cron: "0 14 * * *" # Everyday at 2 PM UTC (after daily data release at ~11:20 AM UTC)
+permissions:
+  contents: write # allows the job's GITHUB_TOKEN to push commits
 jobs:
   Run-Refresh-Script:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
       - name: Run refresh script
         run: |
           chmod +x ./refresh.sh
           ./refresh.sh
+      - name: Configure git for GitHub Actions bot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Push changes to main if no errors
         if: success()
         run: |

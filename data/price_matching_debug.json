@@ -1,0 +1,404 @@
+[
+  {
+    "rank_model": "Gemini-2.5-Pro-Preview-05-06",
+    "matched_price_model": "Gemini 2.5 Pro 200K",
+    "price": 1.25,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Gemini-2.5-Flash-Preview-05-20",
+    "matched_price_model": "Gemini 2.5 Flash Preview 04-17 Thinking",
+    "price": 0.15,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "o3-2025-04-16",
+    "matched_price_model": "o3",
+    "price": 10,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "ChatGPT-4o-latest (2025-03-26)",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 2.5,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Grok-3-Preview-02-24",
+    "matched_price_model": "grok-3-beta",
+    "price": 3,
+    "provider": "XAI"
+  },
+  {
+    "rank_model": "GPT-4.5-Preview",
+    "matched_price_model": "gpt-4.5-preview",
+    "price": 75,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Gemini-2.5-Flash-Preview-04-17",
+    "matched_price_model": "Gemini 2.5 Flash Preview 04-17 Thinking",
+    "price": 0.15,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "DeepSeek-V3-0324",
+    "matched_price_model": "deepseek/deepseek-v3-0324",
+    "price": 0.4,
+    "provider": "Novita AI"
+  },
+  {
+    "rank_model": "GPT-4.1-2025-04-14",
+    "matched_price_model": "gpt-4.1",
+    "price": 2,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Hunyuan-Turbos-20250416",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "Tencent"
+  },
+  {
+    "rank_model": "DeepSeek-R1",
+    "matched_price_model": "DeepSeek R1",
+    "price": 0.85,
+    "provider": "DeepInfra"
+  },
+  {
+    "rank_model": "Gemini-2.0-Flash-001",
+    "matched_price_model": "Gemini 2.0 Flash",
+    "price": 0.1,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Mistral Medium 3",
+    "matched_price_model": "Mistral Medium 3",
+    "price": 0.4,
+    "provider": "Mistral"
+  },
+  {
+    "rank_model": "o4-mini-2025-04-16",
+    "matched_price_model": "o4-mini",
+    "price": 1.1,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "o1-2024-12-17",
+    "matched_price_model": "o1",
+    "price": 15,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Gemma-3-27B-it",
+    "matched_price_model": "unsloth/gemma-3-27b-it",
+    "price": 2.28,
+    "provider": "Chutes"
+  },
+  {
+    "rank_model": "Qwen3-235B-A22B",
+    "matched_price_model": "Qwen 3 A22B 235B",
+    "price": 0.2,
+    "provider": "Novita AI"
+  },
+  {
+    "rank_model": "Qwen2.5-Max",
+    "matched_price_model": "Qwen2.5-Coder-32B",
+    "price": 0.09,
+    "provider": "Lambda Labs"
+  },
+  {
+    "rank_model": "o1-preview",
+    "matched_price_model": "o1",
+    "price": 15,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Qwen3-32B",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 0.9,
+    "provider": "Alibaba"
+  },
+  {
+    "rank_model": "o3-mini-high",
+    "matched_price_model": "o3-mini",
+    "price": 1.1,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "GPT-4.1-mini-2025-04-14",
+    "matched_price_model": "gpt-4.1-mini",
+    "price": 0.4,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "DeepSeek-V3",
+    "matched_price_model": "DeepSeek V3",
+    "price": 0.85,
+    "provider": "DeepInfra"
+  },
+  {
+    "rank_model": "QwQ-32B",
+    "matched_price_model": "QwQ-32B",
+    "price": 0.2,
+    "provider": "Hyperbolic"
+  },
+  {
+    "rank_model": "GLM-4-Plus-0111",
+    "matched_price_model": "Phi 4 Reasoning Plus",
+    "price": 0.06,
+    "provider": "Chutes"
+  },
+  {
+    "rank_model": "Qwen-Plus-0125",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 0.9,
+    "provider": "Alibaba"
+  },
+  {
+    "rank_model": "Gemini-2.0-Flash-Lite",
+    "matched_price_model": "Gemini 2.0 Flash Lite",
+    "price": 0.075,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Llama-3.1-Nemotron-Ultra-253B-v1",
+    "matched_price_model": "Llama 3.1 Nemotron 70B Instruct HF",
+    "price": 0.88,
+    "provider": "Together.AI"
+  },
+  {
+    "rank_model": "Hunyuan-TurboS-20250226",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "Tencent"
+  },
+  {
+    "rank_model": "Command A (03-2025)",
+    "matched_price_model": "command-a",
+    "price": 2.5,
+    "provider": "Cohere"
+  },
+  {
+    "rank_model": "Step-2-16K-Exp",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "StepFun"
+  },
+  {
+    "rank_model": "o3-mini",
+    "matched_price_model": "o3-mini",
+    "price": 1.1,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "o1-mini",
+    "matched_price_model": "o1-mini",
+    "price": 1.1,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Gemini-1.5-Pro-002",
+    "matched_price_model": "Gemini 1.5 Pro 128K",
+    "price": 1.25,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Claude 3.7 Sonnet (thinking-32k)",
+    "matched_price_model": "Claude Sonnet 3.7",
+    "price": 3,
+    "provider": "Anthropic"
+  },
+  {
+    "rank_model": "Llama-3.3-Nemotron-Super-49B-v1",
+    "matched_price_model": "Llama 3.1 Nemotron 70B Instruct HF",
+    "price": 0.88,
+    "provider": "Together.AI"
+  },
+  {
+    "rank_model": "Hunyuan-Turbo-0110",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "Tencent"
+  },
+  {
+    "rank_model": "Gemma-3n-e4b-it",
+    "matched_price_model": "unsloth/gemma-3-27b-it",
+    "price": 2.28,
+    "provider": "Chutes"
+  },
+  {
+    "rank_model": "Claude 3.7 Sonnet",
+    "matched_price_model": "Claude Sonnet 3.7",
+    "price": 3,
+    "provider": "Anthropic"
+  },
+  {
+    "rank_model": "Qwen3-30B-A3B",
+    "matched_price_model": "Qwen 3 A3B 30B",
+    "price": 1.06,
+    "provider": "Chutes"
+  },
+  {
+    "rank_model": "Grok-2-08-13",
+    "matched_price_model": "grok-2-1212",
+    "price": 2,
+    "provider": "XAI"
+  },
+  {
+    "rank_model": "Yi-Lightning",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "01 AI"
+  },
+  {
+    "rank_model": "Qwen2.5-plus-1127",
+    "matched_price_model": "Qwen2.5-Coder-32B",
+    "price": 0.09,
+    "provider": "Lambda Labs"
+  },
+  {
+    "rank_model": "GPT-4o-2024-05-13",
+    "matched_price_model": "gpt-4o",
+    "price": 2.5,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Claude 3.5 Sonnet (20241022)",
+    "matched_price_model": "Claude Sonnet 3.5",
+    "price": 3,
+    "provider": "Anthropic"
+  },
+  {
+    "rank_model": "Deepseek-v2.5-1210",
+    "matched_price_model": "DeepSeek V2.5 (BF16)",
+    "price": 2,
+    "provider": "Hyperbolic"
+  },
+  {
+    "rank_model": "Hunyuan-Large-2025-02-10",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "Tencent"
+  },
+  {
+    "rank_model": "Athene-v2-Chat-72B",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "NexusFlow"
+  },
+  {
+    "rank_model": "GPT-4.1-nano-2025-04-14",
+    "matched_price_model": "gpt-4.1-nano",
+    "price": 0.1,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "GLM-4-Plus",
+    "matched_price_model": "Phi 4 Reasoning Plus",
+    "price": 0.06,
+    "provider": "Chutes"
+  },
+  {
+    "rank_model": "GPT-4o-mini-2024-07-18",
+    "matched_price_model": "gpt-4o-mini",
+    "price": 0.15,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Gemini-1.5-Flash-002",
+    "matched_price_model": "Gemini 1.5 Flash 128K",
+    "price": 0.075,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Llama-4-Maverick-17B-128E-Instruct",
+    "matched_price_model": "Llama 4 Maverick Instruct (17Bx128E)",
+    "price": 0.5,
+    "provider": "Groq"
+  },
+  {
+    "rank_model": "Llama-3.1-Nemotron-70B-Instruct",
+    "matched_price_model": "Llama 3.1 Nemotron 70B Instruct HF",
+    "price": 0.88,
+    "provider": "Together.AI"
+  },
+  {
+    "rank_model": "Meta-Llama-3.1-405B-Instruct-bf16",
+    "matched_price_model": "meta-llama/Meta-Llama-3.1-405B-Instruct",
+    "price": 0.9,
+    "provider": "DeepInfra"
+  },
+  {
+    "rank_model": "Claude 3.5 Sonnet (20240620)",
+    "matched_price_model": "Claude Sonnet 3.5",
+    "price": 3,
+    "provider": "Anthropic"
+  },
+  {
+    "rank_model": "Hunyuan-Standard-2025-02-10",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "Tencent"
+  },
+  {
+    "rank_model": "Meta-Llama-3.1-405B-Instruct-fp8",
+    "matched_price_model": "Llama-3.1-405B-Instruct (FP8)",
+    "price": 0.9,
+    "provider": "Lambda Labs"
+  },
+  {
+    "rank_model": "Gemini Advanced App (2024-05-14)",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 1.0,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Grok-2-Mini-08-13",
+    "matched_price_model": "grok-2-1212",
+    "price": 2,
+    "provider": "XAI"
+  },
+  {
+    "rank_model": "GPT-4o-2024-08-06",
+    "matched_price_model": "gpt-4o",
+    "price": 2.5,
+    "provider": "OpenAI"
+  },
+  {
+    "rank_model": "Qwen-Max-0919",
+    "matched_price_model": "DEFAULT_ESTIMATE",
+    "price": 0.9,
+    "provider": "Alibaba"
+  },
+  {
+    "rank_model": "Gemini-1.5-Pro-001",
+    "matched_price_model": "Gemini 1.5 Pro 128K",
+    "price": 1.25,
+    "provider": "Google"
+  },
+  {
+    "rank_model": "Deepseek-v2.5",
+    "matched_price_model": "DeepSeek V2.5 (BF16)",
+    "price": 2,
+    "provider": "Hyperbolic"
+  },
+  {
+    "rank_model": "Qwen2.5-72B-Instruct",
+    "matched_price_model": "Qwen2.5 72B Instruct",
+    "price": 0.9,
+    "provider": "Fireworks"
+  },
+  {
+    "rank_model": "Llama-3.3-70B-Instruct",
+    "matched_price_model": "Llama 3.3 70B Instruct",
+    "price": 0.9,
+    "provider": "Fireworks"
+  },
+  {
+    "rank_model": "GPT-4-Turbo-2024-04-09",
+    "matched_price_model": "GPT-4 Turbo",
+    "price": 10,
+    "provider": "OpenAI"
+  }
+]

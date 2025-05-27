@@ -142,7 +142,7 @@
         </style>
     </head>
     <body>
-        <h2>LLM Arena Pareto Frontier: Performance vs Cost (April 2025)</h2>
+        <h2 id="main-title">LLM Arena Pareto Frontier: Performance vs API Cost</h2>
         <div id="modelCount"></div>
         <div class="chart-container" id="chart"></div>
         <div id="legend" class="legend"></div>
@@ -159,8 +159,35 @@
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-        <script src="./synthesized_data.js"></script>
+        <script src="./data/synthesized_data.js"></script>
         <script>
+            // Set dynamic date in title based on actual data fetch date
+            function updateTitle() {
+                if (typeof dataLastUpdated !== 'undefined') {
+                    const updateDate = new Date(dataLastUpdated);
+                    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+                    const month = monthNames[updateDate.getMonth()];
+                    const year = updateDate.getFullYear();
+                    const day = updateDate.getDate();
+                    
+                    document.getElementById("main-title").textContent = 
+                        `LLM Arena Pareto Frontier: Performance vs API Cost (Updated ${month} ${day}, ${year})`;
+                } else {
+                    // Fallback to current date if dataLastUpdated mai 2025not available
+                    const now = new Date();
+                    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+                    const month = monthNames[now.getMonth()];
+                    const year = now.getFullYear();
+                    
+                    document.getElementById("main-title").textContent = 
+                        `LLM Arena Pareto Frontier: Performance vs API Cost (Updated ${month} ${year})`;
+                }
+            }
+            
+            // Update title on page load
+            updateTitle();
             // Calculate the Pareto frontier
             function calculateParetoFrontier(data) {
                 // Sort by price (ascending)
@@ -190,7 +217,7 @@
 
             // Update model count
             document.getElementById("modelCount").innerText =
-                `Showing ${data.length} models, including the top 50 from LLM Arena`;
+                `Showing ${data.length} models with ELO ≥ 1250 from LLM Arena (free models excluded)`;
 
             // Create chart
             function createChart() {
@@ -224,9 +251,9 @@
                     .attr("transform", `translate(${margin.left},${margin.top})`);
 
                 // Set up scales with explicit range
-                const xScale = d3.scaleLog().domain([0.03, 100]).range([0, width]).clamp(true); // Prevent values outside domain from causing issues
+                const xScale = d3.scaleLog().domain([0.05, 100]).range([0, width]).clamp(true); // Prevent values outside domain from causing issues
 
-                const yScale = d3.scaleLinear().domain([1140, 1450]).range([height, 0]).clamp(true); // Prevent values outside domain from causing issues
+                const yScale = d3.scaleLinear().domain([1230, 1450]).range([height, 0]).clamp(true); // Extended range to show more models
 
                 // Create axes with more ticks and explicit formatting
                 const xAxis = d3
