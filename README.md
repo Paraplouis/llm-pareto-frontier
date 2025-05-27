@@ -1,8 +1,7 @@
 # LLM Arena Pareto Frontier
 
 ![llm-pareto-frontier](/screenshot.png)
-
-A live visualization of the Pareto frontier for Large Language Models, showing the optimal performance-to-cost ratio based on LLM Arena rankings and current API pricing data.
+> Screenshot of the Pareto frontier visualization on 27/05/2025
 
 ## 📊 What is the Pareto Frontier?
 
@@ -20,7 +19,7 @@ The Pareto frontier shows models that are "Pareto optimal" - meaning no other mo
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/llm-pareto-frontier.git
+   git clone https://github.com/Paraplouis/llm-pareto-frontier.git
    cd llm-pareto-frontier
    ```
 
@@ -34,7 +33,7 @@ The Pareto frontier shows models that are "Pareto optimal" - meaning no other mo
    ./refresh.sh
    ```
 
-4. **Open `indew.html` in a browser**
+4. **Open `index.html` in a browser**
 
 ## 🔄 Automated Updates
 
@@ -47,32 +46,18 @@ The project automatically updates daily via GitHub Actions:
 
 This project combines data from multiple sources:
 
-- **LLM Rankings**: [LLM Arena Leaderboard](https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard) via [fboulnois/llm-leaderboard-csv](https://github.com/fboulnois/llm-leaderboard-csv)
-- **Pricing Data**: [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) by Presidentlin & PhilSchmid
+- **LLM Rankings**: [LLM Arena Leaderboard](https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard) via [fboulnois/llm-leaderboard-csv](https://github.com/fboulnois/llm-leaderboard-csv) by [fboulnois](https://github.com/fboulnois)
+- **Pricing Data**: [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) by [Lincoln Gachagua](https://huggingface.co/Presidentlin) based on [PhilSchmid/llm-pricing-calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) by [Philipp Schmid](https://huggingface.co/philschmid)
 
 ## 🤝 Contributing
 
-Contributions are welcome! Areas where contributions would be particularly helpful:
+Contributions are welcome! I'm interested in evolving this project in these directions:
 
-- Adding more pricing data sources
-- Improving the model name matching algorithm
-- Enhancing the visualization with additional features
-- Adding new filtering or analysis options
+- **Enforce data reliability**: more pricing data sources and better model name matching
+- **Real price estimation**: implement formulas to estimate actual costs beyond static input pricing
+- **Historical animations** of frontier evolution over time
+- **Filtering** by parameter count (total/active), open-source status, ...
+- **Multi-dimensional frontiers** across different performance metrics
+- **Extended data integration** from all Chatbot Arena tabs to enable domain-specific frontiers and richer analysis
 
-## 📝 License
-
-This project is open source on MIT. 
-
-Please check the individual data sources for their respective licenses:
-- LLM Arena data: Check [LMSYS](https://lmsys.org/) licensing
-- Pricing data: Check individual provider terms
-
-## 🙏 Acknowledgments
-
-Special thanks to:
-- [LMSYS](https://lmsys.org/) and the LLM Arena team for comprehensive model rankings
-- [Presidentlin](https://huggingface.co/Presidentlin) and [PhilSchmid](https://huggingface.co/philschmid) for the LLM pricing calculator
-- [fboulnois](https://github.com/fboulnois) for maintaining CSV exports of LLM Arena data
-- The open source community for tools and libraries
-
-*Data automatically updated daily at 2 PM UTC*
+*Thanks to [Winston Bosan](https://github.com/winston-bosan) for it's original implementation !*
