@@ -43,9 +43,9 @@
   },
   {
     "rank_model": "DeepSeek-V3-0324",
-    "matched_price_model": "deepseek/deepseek-v3-0324",
-    "price": 0.4,
-    "provider": "Novita AI"
+    "matched_price_model": "DeepSeek-V3-0324",
+    "price": 0.9,
+    "provider": "Fireworks"
   },
   {
     "rank_model": "GPT-4.1-2025-04-14",
@@ -61,9 +61,9 @@
   },
   {
     "rank_model": "DeepSeek-R1",
-    "matched_price_model": "DeepSeek R1",
-    "price": 0.85,
-    "provider": "DeepInfra"
+    "matched_price_model": "DeepSeek-R1",
+    "price": 2.19,
+    "provider": "Chutes"
   },
   {
     "rank_model": "Gemini-2.0-Flash-001",
@@ -133,15 +133,15 @@
   },
   {
     "rank_model": "DeepSeek-V3",
-    "matched_price_model": "DeepSeek V3",
-    "price": 0.85,
-    "provider": "DeepInfra"
+    "matched_price_model": "DeepSeek-V3",
+    "price": 2.19,
+    "provider": "Chutes"
   },
   {
     "rank_model": "QwQ-32B",
-    "matched_price_model": "QwQ-32B",
-    "price": 0.2,
-    "provider": "Hyperbolic"
+    "matched_price_model": "qwq-32b",
+    "price": 0.18,
+    "provider": "Novita AI"
   },
   {
     "rank_model": "GLM-4-Plus-0111",
@@ -385,9 +385,9 @@
   },
   {
     "rank_model": "Qwen2.5-72B-Instruct",
-    "matched_price_model": "Qwen2.5 72B Instruct",
-    "price": 0.9,
-    "provider": "Fireworks"
+    "matched_price_model": "Qwen2.5-72B-Instruct",
+    "price": 2,
+    "provider": "SambaNova Cloud"
   },
   {
     "rank_model": "Llama-3.3-70B-Instruct",

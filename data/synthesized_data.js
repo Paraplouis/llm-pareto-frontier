@@ -1,6 +1,6 @@
 // LLM model data - Updated from LLM Arena leaderboard
-// Last updated: 2025-05-28 14:15:01
-const dataLastUpdated = "2025-05-28 14:15:01";
+// Last updated: 2025-05-29 14:13:52
+const dataLastUpdated = "2025-05-29 14:13:52";
 const data = [
   { model: "Gemini-2.5-Pro-Preview-05-06", elo: 1446, price: 1.25, provider: "Google" },
   { model: "Gemini-2.5-Flash-Preview-05-20", elo: 1418, price: 0.15, provider: "Google" },
@@ -9,10 +9,10 @@ const data = [
   { model: "Grok-3-Preview-02-24", elo: 1399, price: 3, provider: "XAI" },
   { model: "GPT-4.5-Preview", elo: 1394, price: 75, provider: "OpenAI" },
   { model: "Gemini-2.5-Flash-Preview-04-17", elo: 1387, price: 0.15, provider: "Google" },
-  { model: "DeepSeek-V3-0324", elo: 1368, price: 0.4, provider: "Novita AI" },
+  { model: "DeepSeek-V3-0324", elo: 1368, price: 0.9, provider: "Fireworks" },
   { model: "GPT-4.1-2025-04-14", elo: 1365, price: 2, provider: "OpenAI" },
   { model: "Hunyuan-Turbos-20250416", elo: 1356, price: 1.0, provider: "Tencent" },
-  { model: "DeepSeek-R1", elo: 1354, price: 0.85, provider: "DeepInfra" },
+  { model: "DeepSeek-R1", elo: 1354, price: 2.19, provider: "Chutes" },
   { model: "Gemini-2.0-Flash-001", elo: 1351, price: 0.1, provider: "Google" },
   { model: "Mistral Medium 3", elo: 1343, price: 0.4, provider: "Mistral" },
   { model: "o4-mini-2025-04-16", elo: 1343, price: 1.1, provider: "OpenAI" },
@@ -24,8 +24,8 @@ const data = [
   { model: "Qwen3-32B", elo: 1324, price: 0.9, provider: "Alibaba" },
   { model: "o3-mini-high", elo: 1321, price: 1.1, provider: "OpenAI" },
   { model: "GPT-4.1-mini-2025-04-14", elo: 1319, price: 0.4, provider: "OpenAI" },
-  { model: "DeepSeek-V3", elo: 1315, price: 0.85, provider: "DeepInfra" },
-  { model: "QwQ-32B", elo: 1310, price: 0.2, provider: "Hyperbolic" },
+  { model: "DeepSeek-V3", elo: 1315, price: 2.19, provider: "Chutes" },
+  { model: "QwQ-32B", elo: 1310, price: 0.18, provider: "Novita AI" },
   { model: "GLM-4-Plus-0111", elo: 1307, price: 0.06, provider: "Chutes" },
   { model: "Qwen-Plus-0125", elo: 1307, price: 0.9, provider: "Alibaba" },
   { model: "Gemini-2.0-Flash-Lite", elo: 1309, price: 0.075, provider: "Google" },
@@ -66,7 +66,7 @@ const data = [
   { model: "Qwen-Max-0919", elo: 1260, price: 0.9, provider: "Alibaba" },
   { model: "Gemini-1.5-Pro-001", elo: 1256, price: 1.25, provider: "Google" },
   { model: "Deepseek-v2.5", elo: 1255, price: 2, provider: "Hyperbolic" },
-  { model: "Qwen2.5-72B-Instruct", elo: 1254, price: 0.9, provider: "Fireworks" },
+  { model: "Qwen2.5-72B-Instruct", elo: 1254, price: 2, provider: "SambaNova Cloud" },
   { model: "Llama-3.3-70B-Instruct", elo: 1253, price: 0.9, provider: "Fireworks" },
   { model: "GPT-4-Turbo-2024-04-09", elo: 1253, price: 10, provider: "OpenAI" },
 ];
