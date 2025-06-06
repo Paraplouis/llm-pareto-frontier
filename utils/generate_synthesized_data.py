@@ -17,7 +17,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, asdict
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -34,6 +33,7 @@ class ModelData:
     price: float
     provider: str
     votes: int
+    matched_price_model: str
 
 
 @dataclass
@@ -275,7 +275,7 @@ class DataSynthesizer:
         """Generate synthesized data from rank and price data"""
         try:
             # Load data
-            rank_data = self._load_rank_data()
+            rank_data, last_updated = self._load_rank_data()
             price_lookup = self._load_price_data()
 
             # Initialize components
@@ -296,7 +296,7 @@ class DataSynthesizer:
                     matching_debug.append(debug_info)
 
             # Save results
-            self._save_results(synthesized_data, matching_debug)
+            self._save_results(synthesized_data, matching_debug, last_updated)
 
             logger.info(
                 f"✅ Generated synthesized_data.js with {len(synthesized_data)} models"
@@ -307,14 +307,18 @@ class DataSynthesizer:
             logger.error(f"❌ Failed to generate synthesized data: {e}")
             raise
 
-    def _load_rank_data(self) -> List[Dict[str, Any]]:
+    def _load_rank_data(self) -> Tuple[List[Dict[str, Any]], str]:
         """Load ranking data from JSON file"""
         rank_file = self.data_dir / "rank_data.json"
         try:
             with open(rank_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            logger.info(f"📊 Loaded {len(data)} models from ranking data")
-            return data
+            
+            last_updated = data.get("last_updated")
+            models = data.get("models", [])
+            
+            logger.info(f"📊 Loaded {len(models)} models from ranking data (updated: {last_updated})")
+            return models, last_updated
         except FileNotFoundError:
             raise FileNotFoundError(f"Ranking data file not found: {rank_file}")
         except json.JSONDecodeError as e:
@@ -349,26 +353,26 @@ class DataSynthesizer:
     def _process_model(
         self, model: Dict[str, Any], price_matcher: PriceMatcher
     ) -> Optional[Tuple[ModelData, MatchingDebugInfo]]:
-        """Process a single model and return model data with debug info"""
-        model_name = model["Model"]
-        elo_score = model["Score"]
-        votes = model["Votes"]
+        """Process a single model to find its price and create data objects"""
+        model_name = model.get("Model", "").strip()
+        elo_score = model.get("Score")
+        votes = model.get("Votes")
+        organization = model.get("Organization", "")
 
-        # Find pricing information
+        if not all([model_name, elo_score, votes]):
+            return None
+
         price_info = price_matcher.find_match(model_name)
 
         if price_info:
-            if self.exclude_free and price_info.price <= 0:
-                return None
-
             model_data = ModelData(
                 model=model_name,
                 elo=int(round(elo_score)),
                 price=price_info.price,
                 provider=price_info.provider,
-                votes=votes
+                votes=votes,
+                matched_price_model=price_info.original_name
             )
-
             debug_info = MatchingDebugInfo(
                 rank_model=model_name,
                 matched_price_model=price_info.original_name,
@@ -376,8 +380,6 @@ class DataSynthesizer:
                 provider=price_info.provider,
             )
         else:
-            # Use default pricing estimation
-            organization = model.get("Organization", "Unknown")
             default_price, provider = DefaultPricingEstimator.estimate_pricing(
                 model_name, organization
             )
@@ -386,7 +388,12 @@ class DataSynthesizer:
                 return None
 
             model_data = ModelData(
-                model=model_name, elo=int(round(elo_score)), price=default_price, provider=provider, votes=votes
+                model=model_name,
+                elo=int(round(elo_score)),
+                price=default_price,
+                provider=provider,
+                votes=votes,
+                matched_price_model=model_name
             )
 
             debug_info = MatchingDebugInfo(
@@ -396,16 +403,22 @@ class DataSynthesizer:
                 provider=provider,
             )
 
+        if (
+            debug_info.matched_price_model == "DEFAULT_ESTIMATE"
+            or debug_info.provider == "Unknown"
+        ):
+            return None
+
         return model_data, debug_info
 
     def _save_results(
-        self, synthesized_data: List[ModelData], matching_debug: List[MatchingDebugInfo]
+        self, synthesized_data: List[ModelData], matching_debug: List[MatchingDebugInfo], timestamp: str
     ):
         """Save synthesized data and debug information"""
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
         # Generate JavaScript file
-        js_content = self._generate_js_content(synthesized_data, timestamp)
+        js_content = self._generate_js_content(
+            synthesized_data, timestamp, self.min_elo, self.exclude_free
+        )
 
         # Save files
         with open(self.data_dir / "synthesized_data.js", "w", encoding="utf-8") as f:
@@ -428,18 +441,54 @@ class DataSynthesizer:
         logger.info("💾 Saved synthesized data and debug information")
 
     def _generate_js_content(
-        self, synthesized_data: List[ModelData], timestamp: str
+        self, synthesized_data: List[ModelData], timestamp: str, min_elo: int, exclude_free: bool
     ) -> str:
-        """Generate JavaScript content for the data file"""
-        model_json_strings = [json.dumps(asdict(d), ensure_ascii=False) for d in synthesized_data]
+        """Generate JavaScript file content"""
+        from collections import Counter
+        
+        matched_model_counts = Counter(item.matched_price_model for item in synthesized_data)
 
-        js_array = "[\n  " + ",\n  ".join(model_json_strings) + "\n]"
+        records = []
+        for item in synthesized_data:
+            item_dict = asdict(item)
+            display_name = item.matched_price_model
+            
+            if matched_model_counts[item.matched_price_model] > 1:
+                # If the matched name is not unique, create a more descriptive name
+                date_match = re.search(r"(\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{2}-\d{2})", item.model)
+                version_match = re.search(r"([vV]\d+(\.\d+)*)", item.model)
+                
+                suffix = None
+                if date_match:
+                    suffix = date_match.group(1)
+                elif version_match:
+                    suffix = version_match.group(1)
 
-        js_content = f"export const data = {js_array};\n\n"
+                if suffix:
+                    # To avoid redundancy, remove any similar pattern from the matched_price_model
+                    base_name = re.sub(r"(\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{2}-\d{2}|[vV]\d+(\.\d+)*)", "", item.matched_price_model).strip()
+                    base_name = re.sub(r'\s\s+', ' ', base_name)
+                    display_name = f"{base_name} ({suffix})"
+                else:
+                    # Fallback to rank model if no version/date found
+                    display_name = item.model
+            
+            # Remove provider prefixes like "nvidia/"
+            if "/" in display_name:
+                display_name = display_name.split("/")[-1]
 
-        js_content += f'export const dataLastUpdated = "{timestamp}";\n'
+            item_dict['model'] = display_name
+            del item_dict['matched_price_model'] # Not needed in the final JS
+            records.append(item_dict)
 
-        return js_content
+        data_json = json.dumps(records, indent=2)
+
+        return (
+            f"export const data = {data_json};\n\n"
+            f'export const dataLastUpdated = "{timestamp}";\n'
+            f"export const minElo = {min_elo};\n"
+            f"export const excludeFree = {str(exclude_free).lower()};\n"
+        )
 
 
 def main():

@@ -18,12 +18,12 @@ export class ChartRenderer {
             CHART: {
                 MARGIN: {
                     top: 20,
-                    right: 20,
+                    right: 80,
                     bottom: 60,
-                    left: 50,
+                    left: 60,
                     mobile: {
-                        right: 15,
-                        left: 40,
+                        right: 40,
+                        left: 50,
                     },
                 },
                 SCALES: {
@@ -38,8 +38,8 @@ export class ChartRenderer {
                     },
                 },
                 COLORS: {
-                    PARETO_STROKE: "#e6550d",
-                    PARETO_LINE: "#fdae6b",
+                    PARETO_STROKE: "#d62728",
+                    PARETO_LINE: "#d62728",
                 },
             },
             ANIMATION: {
@@ -102,11 +102,8 @@ export class ChartRenderer {
         let yDomain = this.config.CHART.SCALES.Y_DOMAIN;
         
         if (data && data.length > 0) {
-            const prices = data.map(d => d.price);
-            const elos = data.map(d => d.elo);
-            
-            xDomain = [Math.min(...prices) * 0.8, Math.max(...prices) * 1.2];
-            yDomain = [Math.min(...elos) - 50, Math.max(...elos) + 50];
+            xDomain = [0.03, 100];
+            yDomain = [1240, 1500];
         }
         
         const xScale = d3.scaleLog()
@@ -181,7 +178,7 @@ export class ChartRenderer {
         this.svg.append("text")
             .attr("class", "y-axis-title axis-label")
             .attr("transform", "rotate(-90)")
-            .attr("y", -35)
+            .attr("y", -45)
             .attr("x", -height / 2)
             .attr("fill", "#000")
             .attr("text-anchor", "middle")
@@ -199,12 +196,10 @@ export class ChartRenderer {
 
         this.svg.append("g")
             .attr("class", "grid")
-            .attr("opacity", 0.1)
             .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""));
 
         this.svg.append("g")
             .attr("class", "grid")
-            .attr("opacity", 0.1)
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""));
     }
@@ -274,11 +269,14 @@ export class ChartRenderer {
             .attr("r", this.getPointRadius(d, 'hover'))
             .attr("opacity", 1);
 
+        const isPareto = this.isParetoOptimal(d.model);
+
         document.dispatchEvent(new CustomEvent('modelHover', {
             detail: {
                 model: d,
                 x: event.pageX,
-                y: event.pageY
+                y: event.pageY,
+                isPareto: isPareto
             }
         }));
     }
@@ -327,10 +325,9 @@ export class ChartRenderer {
                 }
                 return d.model;
             })
-            .attr("fill", d => {
-                const isPareto = this.isParetoOptimal(d.model);
-                return isPareto ? "#000" : "#aaa";
-            });
+            .attr("fill", "#000")
+            .style("font-weight", d => this.isParetoOptimal(d.model) ? "bold" : "normal")
+            .style("opacity", d => this.isParetoOptimal(d.model) ? 1 : 0.7);
     }
 
     /**
@@ -353,7 +350,7 @@ export class ChartRenderer {
             .attr("fill", "none")
             .attr("stroke", this.config.CHART.COLORS.PARETO_LINE)
             .attr("stroke-width", 2)
-            .attr("stroke-dasharray", "4")
+            .attr("stroke-dasharray", "5,5")
             .attr("d", lineGenerator);
     }
 
@@ -366,7 +363,9 @@ export class ChartRenderer {
         this.currentData = data;
         this.currentParetoFrontier = paretoFrontier;
         
-        this.container.selectAll("*").remove();
+        this.container.select("svg").remove();
+        this.container.select(".loading").remove();
+        this.container.select(".error").remove();
         d3.selectAll(".tooltip").remove();
 
         if (data.length > 0) {

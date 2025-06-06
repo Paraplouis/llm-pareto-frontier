@@ -5,7 +5,7 @@
 import { DataProcessor } from './modules/dataProcessor.js';
 import { ChartRenderer } from './modules/chartRenderer.js';
 import { UIController } from './modules/uiController.js';
-import { data as modelData, dataLastUpdated } from '../data/synthesized_data.js';
+import { data as modelData, dataLastUpdated, minElo, excludeFree } from '../data/synthesized_data.js';
 
 export class LLMApp {
     constructor() {
@@ -14,6 +14,8 @@ export class LLMApp {
         this.uiController = new UIController();
         this.modelData = modelData;
         this.modelDataLastUpdated = dataLastUpdated;
+        this.minElo = minElo;
+        this.excludeFree = excludeFree;
         
         // Bind event handlers
         this.handleResize = this.handleResize.bind(this);
@@ -58,8 +60,8 @@ export class LLMApp {
         
         // Tooltip event handlers
         document.addEventListener('modelHover', (event) => {
-            const { model, x, y } = event.detail;
-            this.uiController.showTooltip(model, x, y);
+            const { model, x, y, isPareto } = event.detail;
+            this.uiController.showTooltip(model, x, y, isPareto);
         });
         
         document.addEventListener('modelUnhover', () => {
@@ -119,7 +121,13 @@ export class LLMApp {
         }
         
         // Update chart info display
-        this.uiController.updateChartInfo(data.length, paretoData.length, this.modelDataLastUpdated);
+        this.uiController.updateChartInfo(
+            data.length,
+            paretoData.length,
+            this.modelDataLastUpdated,
+            this.minElo,
+            this.excludeFree
+        );
         
         // Update legend
         this.uiController.updateLegend(providers);

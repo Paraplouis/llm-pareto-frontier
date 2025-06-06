@@ -18,7 +18,7 @@ export class UIController {
     /**
      * Show tooltip with model information
      */
-    showTooltip(model, x, y) {
+    showTooltip(model, x, y, isPareto = false) {
         d3.selectAll('.tooltip').remove();
         
         const tooltip = d3.select('body')
@@ -27,13 +27,19 @@ export class UIController {
             .style('left', (x + 10) + 'px')
             .style('top', (y - 10) + 'px');
             
-        tooltip.html(`
+        let tooltipHTML = `
             <strong>${model.model}</strong><br/>
             Provider: ${model.provider}<br/>
             ELO: ${model.elo}<br/>
             Price: $${model.price}/M tokens<br/>
             Votes: ${model.votes || 'N/A'}
-        `);
+        `;
+
+        if (isPareto) {
+            tooltipHTML += `<br/><span style="color: #d62728; font-weight: bold;">Pareto Optimal</span>`;
+        }
+
+        tooltip.html(tooltipHTML);
     }
 
     /**
@@ -158,18 +164,37 @@ export class UIController {
     /**
      * Update chart information display
      */
-    updateChartInfo(modelCount, paretoCount, lastUpdated) {
+    updateChartInfo(modelCount, paretoCount, lastUpdated, minElo, excludeFree) {
         const chartInfoElement = document.getElementById("chart-info");
         if (chartInfoElement) {
-            let infoText = `Showing ${modelCount} models with ${paretoCount} Pareto optimal models`;
+            const mainText = `Showing ${modelCount} models with ${paretoCount} Pareto optimal models`;
             
+            const details = [];
             if (lastUpdated) {
                 const updateDate = new Date(lastUpdated);
                 const isoDate = updateDate.toISOString().split('T')[0];
-                infoText += ` (data updated ${isoDate})`;
+                details.push(`updated ${isoDate}`);
+            }
+
+            if (minElo) {
+                details.push(`min ELO: ${minElo}`);
+            }
+
+            if (excludeFree) {
+                details.push(`excluding free models`);
             }
             
-            chartInfoElement.textContent = infoText;
+            let detailsText = '';
+            if (details.length > 0) {
+                detailsText = `(${details.join(', ')})`;
+            }
+
+            let innerHTML = mainText;
+            if (detailsText) {
+                innerHTML += `<br><span class="chart-info-details">${detailsText}</span>`;
+            }
+            
+            chartInfoElement.innerHTML = innerHTML;
         }
     }
 } 

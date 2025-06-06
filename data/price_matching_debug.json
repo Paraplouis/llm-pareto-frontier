@@ -24,19 +24,7 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "chatgpt-4o-latest-20250326",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 2.5,
-    "provider": "OpenAI"
-  },
-  {
     "rank_model": "grok-3-preview-02-24",
-    "matched_price_model": "grok-3-beta",
-    "price": 3,
-    "provider": "XAI"
-  },
-  {
-    "rank_model": "early-grok-3",
     "matched_price_model": "grok-3-beta",
     "price": 3,
     "provider": "XAI"
@@ -48,39 +36,9 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "llama-4-maverick-03-26-experimental",
-    "matched_price_model": "Llama 4 Maverick Instruct (17Bx128E)",
-    "price": 0.5,
-    "provider": "Groq"
-  },
-  {
     "rank_model": "gemini-2.5-flash-preview-04-17",
     "matched_price_model": "Gemini 2.5 Flash Preview 04-17 Thinking",
     "price": 0.15,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "gemini-2.0-flash-thinking-exp-01-21",
-    "matched_price_model": "Gemini 2.0 Flash",
-    "price": 0.1,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "gemini-2.0-pro-exp-02-05",
-    "matched_price_model": "Gemini 2.0 Flash",
-    "price": 0.1,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "chatgpt-4o-latest-20250129",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 2.5,
-    "provider": "OpenAI"
-  },
-  {
-    "rank_model": "gemini-exp-1206",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
     "provider": "Google"
   },
   {
@@ -96,24 +54,6 @@
     "provider": "Fireworks"
   },
   {
-    "rank_model": "chatgpt-4o-latest-20241120",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 2.5,
-    "provider": "OpenAI"
-  },
-  {
-    "rank_model": "gemini-exp-1121",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "gemini-2.0-flash-thinking-exp-1219",
-    "matched_price_model": "Gemini 2.0 Flash",
-    "price": 0.1,
-    "provider": "Google"
-  },
-  {
     "rank_model": "claude-opus-4-20250514",
     "matched_price_model": "Claude Opus 4",
     "price": 15,
@@ -124,18 +64,6 @@
     "matched_price_model": "DeepSeek-R1",
     "price": 2.19,
     "provider": "Chutes"
-  },
-  {
-    "rank_model": "hunyuan-turbos-20250416",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "gemini-2.0-flash-exp",
-    "matched_price_model": "Gemini 2.0 Flash",
-    "price": 0.1,
-    "provider": "Google"
   },
   {
     "rank_model": "o1-2024-12-17",
@@ -174,12 +102,6 @@
     "provider": "Mistral"
   },
   {
-    "rank_model": "gemini-exp-1114",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Google"
-  },
-  {
     "rank_model": "qwen2.5-max",
     "matched_price_model": "Qwen2.5-72B-Instruct",
     "price": 2,
@@ -190,12 +112,6 @@
     "matched_price_model": "unsloth/gemma-3-27b-it",
     "price": 2.28,
     "provider": "Chutes"
-  },
-  {
-    "rank_model": "chatgpt-4o-latest-20240903",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 2.5,
-    "provider": "OpenAI"
   },
   {
     "rank_model": "o1-preview",
@@ -222,16 +138,16 @@
     "provider": "OpenAI"
   },
   {
+    "rank_model": "gemma-3-12b-it",
+    "matched_price_model": "unsloth/gemma-3-12b-it",
+    "price": 0,
+    "provider": "Chutes"
+  },
+  {
     "rank_model": "deepseek-v3",
     "matched_price_model": "DeepSeek-V3",
     "price": 2.19,
     "provider": "Chutes"
-  },
-  {
-    "rank_model": "chatgpt-4o-latest-20240808",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 2.5,
-    "provider": "OpenAI"
   },
   {
     "rank_model": "qwq-32b",
@@ -246,18 +162,6 @@
     "provider": "Google"
   },
   {
-    "rank_model": "glm-4-plus-0111",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "qwen-plus-0125",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 0.9,
-    "provider": "Alibaba"
-  },
-  {
     "rank_model": "command-a-03-2025",
     "matched_price_model": "command-a",
     "price": 2.5,
@@ -270,31 +174,13 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "step-2-16k-exp-202412",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
     "rank_model": "o1-mini",
     "matched_price_model": "o1-mini",
     "price": 1.1,
     "provider": "OpenAI"
   },
   {
-    "rank_model": "hunyuan-turbos-20250226",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
     "rank_model": "gemini-1.5-pro-002",
-    "matched_price_model": "Gemini 1.5 Pro 128K",
-    "price": 1.25,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "gemini-1.5-pro-exp-0827",
     "matched_price_model": "Gemini 1.5 Pro 128K",
     "price": 1.25,
     "provider": "Google"
@@ -306,46 +192,16 @@
     "provider": "Anthropic"
   },
   {
-    "rank_model": "gemini-1.5-pro-exp-0801",
-    "matched_price_model": "Gemini 1.5 Pro 128K",
-    "price": 1.25,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "llama-3.3-nemotron-49b-super-v1",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "hunyuan-turbo-0110",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
     "rank_model": "claude-3-7-sonnet-20250219",
     "matched_price_model": "Claude Sonnet 3.7",
     "price": 3,
     "provider": "Anthropic"
   },
   {
-    "rank_model": "gemma-3n-e4b-it",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
     "rank_model": "grok-2-2024-08-13",
     "matched_price_model": "grok-2-1212",
     "price": 2,
     "provider": "XAI"
-  },
-  {
-    "rank_model": "yi-lightning",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
   },
   {
     "rank_model": "gpt-4o-2024-05-13",
@@ -372,28 +228,10 @@
     "provider": "DeepSpeek"
   },
   {
-    "rank_model": "athene-v2-chat",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "glm-4-plus",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "llama-4-maverick-17b-128e-instruct",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "hunyuan-large-2025-02-10",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
+    "rank_model": "gemma-3-4b-it",
+    "matched_price_model": "unsloth/gemma-3-4b-it",
+    "price": 0,
+    "provider": "Chutes"
   },
   {
     "rank_model": "gpt-4o-mini-2024-07-18",
@@ -412,12 +250,6 @@
     "matched_price_model": "gpt-4.1-nano",
     "price": 0.1,
     "provider": "OpenAI"
-  },
-  {
-    "rank_model": "gemini-1.5-flash-exp-0827",
-    "matched_price_model": "Gemini 1.5 Flash 128K",
-    "price": 0.075,
-    "provider": "Google"
   },
   {
     "rank_model": "llama-3.1-405b-instruct-bf16",
@@ -444,12 +276,6 @@
     "provider": "Replicate"
   },
   {
-    "rank_model": "gemini-advanced-0514",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Google"
-  },
-  {
     "rank_model": "grok-2-mini-2024-08-13",
     "matched_price_model": "grok-2-1212",
     "price": 2,
@@ -462,24 +288,6 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "yi-lightning-lite",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
-    "rank_model": "qwen-max-0919",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 0.9,
-    "provider": "Alibaba"
-  },
-  {
-    "rank_model": "hunyuan-standard-2025-02-10",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
-  },
-  {
     "rank_model": "gemini-1.5-pro-001",
     "matched_price_model": "Gemini 1.5 Pro 128K",
     "price": 1.25,
@@ -490,12 +298,6 @@
     "matched_price_model": "DeepSeek V2",
     "price": 0.14,
     "provider": "DeepSpeek"
-  },
-  {
-    "rank_model": "gemini-1.5-pro-api-0409-preview",
-    "matched_price_model": "Gemini 1.5 Pro 128K",
-    "price": 1.25,
-    "provider": "Google"
   },
   {
     "rank_model": "qwen2.5-72b-instruct",
@@ -522,10 +324,10 @@
     "provider": "Mistral"
   },
   {
-    "rank_model": "athene-70b-0725",
-    "matched_price_model": "DEFAULT_ESTIMATE",
-    "price": 1.0,
-    "provider": "Unknown"
+    "rank_model": "mistral-small-3.1-24b-instruct-2503",
+    "matched_price_model": "chutesai/Mistral-Small-3.1-24B-Instruct-2503",
+    "price": 0,
+    "provider": "Chutes"
   },
   {
     "rank_model": "gpt-4-1106-preview",

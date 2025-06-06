@@ -152,11 +152,15 @@ h2 {
 }
 
 .chart-notes {
+    position: absolute;
+    bottom: 25px; /* Positioned above the x-axis labels */
+    left: 0;
+    right: 0;
     font-size: 12px;
-    color: #666;
-    margin-top: 10px;
+    color: #777;
     text-align: center;
     font-style: italic;
+    pointer-events: none; /* Make sure it doesn't interfere with chart interactions */
 }
 
 .pareto-note {
@@ -307,12 +311,18 @@ h2 {
 /* Add styles for main-title */
 #main-title {
     text-align: center;
+    margin-bottom: 10px;
 }
 
-/* Add styles for chart-info */
 #chart-info {
     text-align: center;
     margin-bottom: 15px;
     color: #666;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+.chart-info-details {
+    font-size: 12px;
+    font-style: italic;
+    color: #888;
 } 
