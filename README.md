@@ -13,19 +13,18 @@ Available at https://paraplouis.github.io/llm-pareto-frontier/
 
 The project automatically updates data daily via GitHub Actions at 2 PM UTC.
 
-## 📈 Data Sources
-
-This project combines data from multiple sources:
-
-- **LLM Rankings**: [LLM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall)
-- **Pricing Data**: [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) by [Lincoln Gachagua](https://huggingface.co/Presidentlin) based on [PhilSchmid/llm-pricing-calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) by [Philipp Schmid](https://huggingface.co/philschmid)
-
-### 🛠️ Dependencies
+### 🛠️ Usage
 
 Python dependencies for data processing and scraping:
 ```bash
 pip install -r requirements.txt
 ```
+
+To run the project locally, run:
+```bash
+python -m http.server
+```
+and open http://localhost:8000 in your browser.
 
 ## 🏗️ Code structure
 
@@ -42,9 +41,9 @@ pip install -r requirements.txt
 ├── data/
 │   ├── synthesized_data.js         # Final LLM model data (auto-updated)
 │   ├── rank_data.json              # Raw ranking data from LLM Arena
-│   └── price_data.json             # Raw pricing data from various sources
+│   └── price_data.json             # Raw pricing data
 ├── utils/
-│   ├── extract_leaderboard.py      # Web scraper for LLM Arena rankings (Selenium-based)
+│   ├── extract_leaderboard.py      # Web scraper for LLM Arena rankings (using Hugging Face API)
 │   └── generate_synthesized_data.py # Main data processing & synthesis utility
 └── js/
     ├── loader.js                   # Dynamic module loader with global namespace
@@ -66,4 +65,10 @@ Contributions are welcome! I'm interested in evolving this project in these dire
 - **Historical animations** of frontier evolution over time
 - **Extended data integration** from all Chatbot Arena tabs to enable domain-specific frontiers and richer analysis
 
-*Thanks to [Winston Bosan](https://github.com/winston-bosan) for it's original implementation !*
+## 🙏 Acknowledgements
+
+This project builds upon the work of several open-source projects and individuals. Special thanks to:
+
+- The **LMSYS team** for creating and maintaining the [LLM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall).
+- **Lincoln Gachagua** for his work on the [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator), and to **Philipp Schmid** for the [original version](https://huggingface.co/spaces/philschmid/llm-pricing-calculator).
+- **Winston Bosan** for the [original implementation](https://github.com/winston-bosan/llm-pareto-frontier) that inspired me to continue the project.
