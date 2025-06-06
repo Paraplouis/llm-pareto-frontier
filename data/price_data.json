@@ -438,6 +438,11 @@
     "uri": "https://docs.mistral.ai/platform/pricing",
     "models": [
       {
+        "name": "Mistral Devstral",
+        "inputPrice": 0.1,
+        "outputPrice": 0.3
+      },
+      {
         "name": "Mistral Medium 3",
         "inputPrice": 0.4,
         "outputPrice": 2
@@ -659,6 +664,11 @@
     "uri": "https://chutes.ai/app",
     "models": [
       {
+        "name": "DeepSeek R1 0528",
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      {
         "name": "Phi 4 Reasoning Plus",
         "inputPrice": 0.06,
         "outputPrice": 0.06
@@ -709,17 +719,17 @@
         "outputPrice": 0
       },
       {
-        "name": "deepseek-ai/DeepSeek-R1",
+        "name": "DeepSeek-R1",
         "inputPrice": 2.19,
         "outputPrice": 2.19
       },
       {
-        "name": "deepseek-ai/DeepSeek-V3",
+        "name": "DeepSeek-V3",
         "inputPrice": 2.19,
         "outputPrice": 2.19
       },
       {
-        "name": "Qwen/QwQ-32B",
+        "name": "QwQ-32B",
         "inputPrice": 0.23,
         "outputPrice": 0.23
       },
@@ -734,12 +744,12 @@
         "outputPrice": 0.048
       },
       {
-        "name": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+        "name": "DeepSeek-R1-Distill-Llama-70B",
         "inputPrice": 1.14,
         "outputPrice": 1.14
       },
       {
-        "name": "deepseek-ai/DeepSeek-R1-Zero",
+        "name": "DeepSeek-R1-Zero",
         "inputPrice": 4.38,
         "outputPrice": 4.38
       },
@@ -754,7 +764,7 @@
         "outputPrice": 0
       },
       {
-        "name": "deepseek-ai/DeepSeek-V3-0324",
+        "name": "DeepSeek-V3-0324",
         "inputPrice": 0,
         "outputPrice": 0
       },
@@ -764,7 +774,7 @@
         "outputPrice": 0.048
       },
       {
-        "name": "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen2.5-Coder-32B-Instruct",
         "inputPrice": 0.058,
         "outputPrice": 0.058
       },
@@ -794,7 +804,7 @@
         "outputPrice": 0
       },
       {
-        "name": "Qwen/Qwen2.5-72B-Instruct",
+        "name": "Qwen2.5-72B-Instruct",
         "inputPrice": 1.62,
         "outputPrice": 1.62
       },
@@ -839,7 +849,7 @@
         "outputPrice": 0
       },
       {
-        "name": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+        "name": "DeepSeek-R1-Distill-Qwen-14B",
         "inputPrice": 0.216,
         "outputPrice": 0.216
       },
@@ -854,7 +864,7 @@
         "outputPrice": 0.216
       },
       {
-        "name": "Qwen/QwQ-32B-Preview",
+        "name": "QwQ-32B-Preview",
         "inputPrice": 0.117,
         "outputPrice": 0.117
       },
@@ -869,12 +879,12 @@
         "outputPrice": 0.108
       },
       {
-        "name": "Qwen/Qwen2.5-VL-7B-Instruct",
+        "name": "Qwen2.5-VL-7B-Instruct",
         "inputPrice": 0.108,
         "outputPrice": 0.108
       },
       {
-        "name": "Qwen/Qwen2.5-VL-3B-Instruct",
+        "name": "Qwen2.5-VL-3B-Instruct",
         "inputPrice": 0.027,
         "outputPrice": 0.027
       },
@@ -890,6 +900,11 @@
     "uri": "https://hyperbolic.xyz/pricing",
     "models": [
       {
+        "name": "DeepSeek R1 0528",
+        "inputPrice": 3,
+        "outputPrice": 1
+      },
+      {
         "name": "Qwen 3 A22B 235B",
         "inputPrice": 0.4,
         "outputPrice": 0.4
@@ -900,7 +915,7 @@
         "outputPrice": 0.2
       },
       {
-        "name": "deepseek-ai/DeepSeek-V3-0324",
+        "name": "DeepSeek-V3-0324",
         "inputPrice": 4,
         "outputPrice": 4
       },
@@ -1267,6 +1282,11 @@
     "uri": "https://fireworks.ai/pricing",
     "models": [
       {
+        "name": "DeepSeek R1 0528 (Fast)",
+        "inputPrice": 3,
+        "outputPrice": 8
+      },
+      {
         "name": "Llama 4 Scout Instruct (17Bx16E)",
         "inputPrice": 0.15,
         "outputPrice": 0.6
@@ -1282,7 +1302,7 @@
         "outputPrice": 0.9
       },
       {
-        "name": "deepseek-ai/DeepSeek-V3-0324",
+        "name": "DeepSeek-V3-0324",
         "inputPrice": 0.9,
         "outputPrice": 0.9
       },
@@ -1448,112 +1468,117 @@
         "outputPrice": 0.24
       },
       {
-        "name": "deepseek-ai/DeepSeek-V3",
+        "name": "DeepSeek V3",
         "inputPrice": 0.5,
         "outputPrice": 1.5
       },
       {
-        "name": "deepseek-ai/DeepSeek-V3-0324",
+        "name": "DeepSeek V3 0324",
         "inputPrice": 0.5,
         "outputPrice": 1.5
       },
       {
-        "name": "deepseek-ai/DeepSeek-R1",
+        "name": "DeepSeek R1 0528",
         "inputPrice": 0.8,
         "outputPrice": 2.4
       },
       {
-        "name": "Qwen/QwQ-32B-Preview",
+        "name": "DeepSeek R1",
+        "inputPrice": 0.8,
+        "outputPrice": 2.4
+      },
+      {
+        "name": "QwQ 32B Preview",
         "inputPrice": 0.09,
         "outputPrice": 0.27
       },
       {
-        "name": "microsoft/phi-4",
+        "name": "microsoft/phi 4",
         "inputPrice": 0.1,
         "outputPrice": 0.3
       },
       {
-        "name": "Meta/Llama-3.1-8B-Instruct (fast)",
+        "name": "Meta/Llama 3.1 8B Instruct (fast)",
         "inputPrice": 0.03,
         "outputPrice": 0.09
       },
       {
-        "name": "Meta/Llama-3.1-8B-Instruct (base)",
+        "name": "Meta/Llama 3.1 8B Instruct (base)",
         "inputPrice": 0.02,
         "outputPrice": 0.06
       },
       {
-        "name": "Meta/Llama-3.1-70B-Instruct (fast)",
+        "name": "Meta/Llama 3.1 70B Instruct (fast)",
         "inputPrice": 0.25,
         "outputPrice": 0.75
       },
       {
-        "name": "Meta/Llama-3.1-70B-Instruct (base)",
+        "name": "Meta/Llama 3.1 70B Instruct (base)",
         "inputPrice": 0.13,
         "outputPrice": 0.4
       },
       {
-        "name": "Meta/Llama-3.1-405B-Instruct (base)",
+        "name": "Meta/Llama 3.1 405B Instruct (base)",
         "inputPrice": 1,
         "outputPrice": 3
       },
       {
-        "name": "MistralAI/Mistral-Nemo-Instruct-2407 (fast)",
+        "name": "Mistral Nemo Instruct 2407 (fast)",
         "inputPrice": 0.08,
         "outputPrice": 0.24
       },
       {
-        "name": "MistralAI/Mistral-Nemo-Instruct-2407 (base)",
+        "name": "Mistral Nemo Instruct 2407 (base)",
         "inputPrice": 0.04,
         "outputPrice": 0.12
       },
       {
-        "name": "MistralAI/Mixtral-8x22B-Instruct-v0.1 (fast)",
+        "name": "Mixtral 8x22B Instruct v0.1 (fast)",
         "inputPrice": 0.7,
         "outputPrice": 2.1
       },
       {
-        "name": "MistralAI/Mixtral-8x22B-Instruct-v0.1 (base)",
+        "name": "Mixtral 8x22B Instruct v0.1 (base)",
         "inputPrice": 0.4,
         "outputPrice": 1.2
       },
       {
-        "name": "DeepSeekAI/DeepSeek-Coder-V2-Lite-Instruct-FP8 (fast)",
+        "name": "DeepSeek Coder V2 Lite Instruct FP8 (fast)",
         "inputPrice": 0.08,
         "outputPrice": 0.24
       },
       {
-        "name": "DeepSeekAI/DeepSeek-Coder-V2-Lite-Instruct-FP8 (base)",
+        "name": "DeepSeek Coder V2 Lite Instruct FP8 (base)",
         "inputPrice": 0.04,
         "outputPrice": 0.12
       },
       {
-        "name": "Qwen2.5-Coder-7B (fast)",
+        "name": "Qwen2.5 Coder 7B (fast)",
         "inputPrice": 0.03,
         "outputPrice": 0.09
       },
       {
-        "name": "Qwen2.5-Coder-7B (base)",
+        "name": "Qwen2.5 Coder 7B (base)",
         "inputPrice": 0.01,
         "outputPrice": 0.03
       },
       {
-        "name": "Microsoft/Phi-3-mini-4k-instruct (fast)",
+        "name": "Microsoft/Phi 3 mini 4k instruct (fast)",
         "inputPrice": 0.13,
         "outputPrice": 0.4
       },
       {
-        "name": "Microsoft/Phi-3-mini-4k-instruct (base)",
+        "name": "Microsoft/Phi 3 mini 4k instruct (base)",
         "inputPrice": 0.04,
         "outputPrice": 0.13
       },
       {
-        "name": "NVIDIA/Llama-3.1-Nemotron-70B-Instruct-HF (fast)",
+        "name": "NVIDIA/Llama 3.1 Nemotron 70B Instruct HF (fast)",
         "inputPrice": 0.25,
         "outputPrice": 0.75
       },
       {
-        "name": "NVIDIA/Llama-3.1-Nemotron-70B-Instruct-HF (base)",
+        "name": "NVIDIA/Llama 3.1 Nemotron 70B Instruct HF (base)",
         "inputPrice": 0.13,
         "outputPrice": 0.4
       }
@@ -1563,6 +1588,11 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "DeepSeek R1 0528",
+        "inputPrice": 0.5,
+        "outputPrice": 2.18
+      },
       {
         "name": "Qwen 3 A22B 235B",
         "inputPrice": 0.2,
@@ -1595,8 +1625,8 @@
       },
       {
         "name": "DeepSeek R1",
-        "inputPrice": 0.85,
-        "outputPrice": 2.5
+        "inputPrice": 0.45,
+        "outputPrice": 2.18
       },
       {
         "name": "DeepSeek V3",
@@ -1644,17 +1674,17 @@
         "outputPrice": 0.06
       },
       {
-        "name": "mistralai/Mistral-7B-Instruct-v0.3",
+        "name": "Mistral-7B-Instruct-v0.3",
         "inputPrice": 0.03,
         "outputPrice": 0.055
       },
       {
-        "name": "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen2.5-Coder-32B-Instruct",
         "inputPrice": 0.08,
         "outputPrice": 0.18
       },
       {
-        "name": "mistralai/Mistral-Nemo-Instruct-2407",
+        "name": "Mistral-Nemo-Instruct-2407",
         "inputPrice": 0.04,
         "outputPrice": 0.1
       },
@@ -1674,7 +1704,7 @@
         "outputPrice": 0.055
       },
       {
-        "name": "Qwen/QwQ-32B-Preview",
+        "name": "QwQ-32B-Preview",
         "inputPrice": 0.15,
         "outputPrice": 0.6
       },
@@ -1689,7 +1719,7 @@
         "outputPrice": 0.4
       },
       {
-        "name": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+        "name": "Mixtral-8x7B-Instruct-v0.1",
         "inputPrice": 0.24,
         "outputPrice": 0.24
       },
@@ -1719,7 +1749,7 @@
         "outputPrice": 0.4
       },
       {
-        "name": "Qwen/Qwen2.5-72B-Instruct",
+        "name": "Qwen2.5-72B-Instruct",
         "inputPrice": 0.23,
         "outputPrice": 0.4
       },
@@ -1866,12 +1896,12 @@
     "uri": "https://cloud.sambanova.ai/pricing",
     "models": [
       {
-        "name": "Qwen/QwQ-32B-Preview",
+        "name": "QwQ-32B-Preview",
         "inputPrice": 0.1,
         "outputPrice": 0.2
       },
       {
-        "name": "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen2.5-Coder-32B-Instruct",
         "inputPrice": 1.5,
         "outputPrice": 3
       },
@@ -1896,7 +1926,7 @@
         "outputPrice": 1.2
       },
       {
-        "name": "Qwen/Qwen2.5-72B-Instruct",
+        "name": "Qwen2.5-72B-Instruct",
         "inputPrice": 2,
         "outputPrice": 4
       },
@@ -2208,6 +2238,11 @@
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
       {
+        "name": "DeepSeek R1 0528",
+        "inputPrice": 0.7,
+        "outputPrice": 2.5
+      },
+      {
         "name": "Deepseek Prover V2 671B",
         "inputPrice": 0.7,
         "outputPrice": 2.5
@@ -2243,7 +2278,7 @@
         "outputPrice": 1.3
       },
       {
-        "name": "qwen/qwq-32b",
+        "name": "qwq-32b",
         "inputPrice": 0.18,
         "outputPrice": 0.2
       },
@@ -2273,7 +2308,7 @@
         "outputPrice": 0.39
       },
       {
-        "name": "mistralai/mistral-nemo",
+        "name": "mistral-nemo",
         "inputPrice": 0.17,
         "outputPrice": 0.17
       },
@@ -2308,7 +2343,7 @@
         "outputPrice": 0.04
       },
       {
-        "name": "qwen/qwen-2.5-72b-instruct",
+        "name": "qwen-2.5-72b-instruct",
         "inputPrice": 0.38,
         "outputPrice": 0.4
       },
@@ -2328,7 +2363,7 @@
         "outputPrice": 0.08
       },
       {
-        "name": "mistralai/mistral-7b-instruct",
+        "name": "mistral-7b-instruct",
         "inputPrice": 0.059,
         "outputPrice": 0.059
       },
@@ -2388,12 +2423,12 @@
         "outputPrice": 0.2
       },
       {
-        "name": "qwen/qwen2.5-vl-72b-instruct",
+        "name": "qwen2.5-vl-72b-instruct",
         "inputPrice": 0.8,
         "outputPrice": 0.8
       },
       {
-        "name": "qwen/qwen-2-vl-72b-instruct",
+        "name": "qwen-2-vl-72b-instruct",
         "inputPrice": 0.45,
         "outputPrice": 0.45
       },
@@ -2423,7 +2458,7 @@
         "outputPrice": 1.48
       },
       {
-        "name": "qwen/qwen-2-7b-instruct",
+        "name": "qwen-2-7b-instruct",
         "inputPrice": 0.054,
         "outputPrice": 0.054
       }

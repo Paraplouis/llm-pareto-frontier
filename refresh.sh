@@ -13,53 +13,33 @@ echo "console.log(JSON.stringify(mockData));" >> ./data.js
 node ./data.js | jq '.' > data/price_data.json
 rm -f ./data.js
 
-# Step 2: Fetch latest LLM Arena ranking data
-echo "🏆 Fetching latest LLM Arena rankings..."
-# Try today's data first (since we run after 2 PM UTC, daily release should be available)
-TODAY=$(date +%Y.%m.%d)
-echo "Trying to fetch data for date: $TODAY"
-
-# Try to download today's CSV from fboulnois/llm-leaderboard-csv
-wget --no-check-certificate -O lmsys_latest.csv "https://github.com/fboulnois/llm-leaderboard-csv/releases/download/$TODAY/lmsys.csv" 2>/dev/null
-
-# If today's data isn't available yet, try previous days
-if [ ! -s lmsys_latest.csv ]; then
-    echo "⚠️  Data for $TODAY not found, trying previous days..."
-    for i in {1..7}; do
-        DATE=$(date -d "$i days ago" +%Y.%m.%d)
-        echo "Trying date: $DATE"
-        wget --no-check-certificate -O lmsys_latest.csv "https://github.com/fboulnois/llm-leaderboard-csv/releases/download/$DATE/lmsys.csv" 2>/dev/null
-        if [ -s lmsys_latest.csv ]; then
-            echo "✅ Found data for $DATE"
-            break
-        fi
-    done
-fi
-
-# Check if we got the data
-if [ ! -s lmsys_latest.csv ]; then
-    echo "❌ Failed to fetch LLM Arena data. Please check the repository manually."
+# Step 2: Scrape latest LLM Arena ranking data from the new interface
+echo "🏆 Scraping latest LLM Arena rankings from lmarena.ai..."
+python3 utils/extract_leaderboard.py
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to scrape LLM Arena data. Please check the scraper script."
     exit 1
 fi
 
-echo "✅ Successfully downloaded LLM Arena data ($(wc -l < lmsys_latest.csv) lines)"
+# Verify the scraped data was created
+if [ -f "data/rank_data.json" ]; then
+    echo "✅ Successfully scraped and processed LLM Arena data"
+else
+    echo "❌ rank_data.json not found after scraping. Please check the scraper output."
+    exit 1
+fi
 
-# Step 3: Convert CSV to JSON format
-echo "🔄 Converting CSV to JSON format..."
-python3 scripts/convert_csv_to_json.py
-
-# Step 4: Generate the synthesized_data.js file
+# Step 3: Generate the synthesized_data.js file
 echo "🔧 Generating synthesized_data.js..."
-python3 scripts/generate_synthesized_data.py
+python3 utils/generate_synthesized_data.py
 
-# Step 5: Update the HTML title with current date
+# Step 4: Update the HTML title with current date
 echo "📝 Updating HTML title..."
 CURRENT_DATE=$(date +"%B %Y")
 sed -i "s/Updated [A-Za-z]* [0-9]*/Updated $CURRENT_DATE/g" index.html
 
-# Step 6: Clean up temporary files
+# Step 5: Clean up temporary files
 echo "🧹 Cleaning up temporary files..."
-rm -f lmsys_latest.csv
+# No temporary files to clean up with the new scraper
 
 echo "✅ Data refresh complete!"
-echo "📊 Website is ready at http://localhost:8000"

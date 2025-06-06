@@ -12,10 +12,17 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Install dependencies
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
       - name: Run refresh script
         run: |
           chmod +x ./refresh.sh
