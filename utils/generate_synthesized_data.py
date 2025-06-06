@@ -481,7 +481,12 @@ class DataSynthesizer:
             del item_dict['matched_price_model'] # Not needed in the final JS
             records.append(item_dict)
 
-        data_json = json.dumps(records, indent=2)
+        # Format each record as a single-line JSON object for better readability
+        if records:
+            json_records = [json.dumps(r, ensure_ascii=False) for r in records]
+            data_json = "[\n  " + ",\n  ".join(json_records) + "\n]"
+        else:
+            data_json = "[]"
 
         return (
             f"export const data = {data_json};\n\n"
@@ -494,7 +499,7 @@ class DataSynthesizer:
 def main():
     """Main function to run the data synthesis"""
     try:
-        synthesizer = DataSynthesizer(min_elo=1250, exclude_free=True)
+        synthesizer = DataSynthesizer(min_elo=0, exclude_free=False)
         data = synthesizer.generate()
 
         print(f"\n✅ Successfully generated data for {len(data)} models")

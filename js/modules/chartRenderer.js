@@ -102,8 +102,8 @@ export class ChartRenderer {
         let yDomain = this.config.CHART.SCALES.Y_DOMAIN;
         
         if (data && data.length > 0) {
-            xDomain = [0.03, 100];
-            yDomain = [1240, 1500];
+            xDomain = [0.02, 100];
+            yDomain = [1000, 1500];
         }
         
         const xScale = d3.scaleLog()
