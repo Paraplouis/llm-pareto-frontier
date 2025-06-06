@@ -96,4 +96,4 @@ export const data = [
   {"model": "llama-3.1-tulu-3-70b", "elo": 1252, "price": 0.6, "provider": "SambaNova Cloud", "votes": 3010}
 ];
 
-export const dataLastUpdated = "2025-06-06 11:26:37";
+export const dataLastUpdated = "2025-06-06 09:39:53";
