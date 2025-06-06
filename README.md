@@ -67,8 +67,8 @@ Contributions are welcome! I'm interested in evolving this project in these dire
 
 ## 🙏 Acknowledgements
 
-This project builds upon the work of several open-source projects and individuals. Special thanks to:
+This project builds upon the work of several projects. Special thanks to:
 
 - The **LMSYS team** for creating and maintaining the [LLM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall).
-- **Lincoln Gachagua** for his work on the [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator), and to **Philipp Schmid** for the [original version](https://huggingface.co/spaces/philschmid/llm-pricing-calculator).
+- **Lincoln Gachagua** for his work on the [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) based on **Philipp Schmid**'s [original version](https://huggingface.co/spaces/philschmid/llm-pricing-calculator).
 - **Winston Bosan** for the [original implementation](https://github.com/winston-bosan/llm-pareto-frontier) that inspired me to continue the project.

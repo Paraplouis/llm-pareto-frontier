@@ -50,13 +50,6 @@ export class UIController {
     }
 
     /**
-     * Show model details (for future implementation)
-     */
-    showModelDetails(model) {
-        console.log('Model details:', model);
-    }
-
-    /**
      * Update provider legend
      */
     updateLegend(providers) {
@@ -152,13 +145,6 @@ export class UIController {
         if (chartContainer) {
             chartContainer.innerHTML = `<div class="error">Error: ${message}</div>`;
         }
-    }
-
-    /**
-     * Initialize UI controller
-     */
-    init() {
-        // Any initialization logic can go here
     }
 
     /**

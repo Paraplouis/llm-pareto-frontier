@@ -1,8 +1,8 @@
-import pandas as pd
+import polars as pl
 import json
 from pathlib import Path
 import pickle
-from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download, list_repo_files
 from huggingface_hub.utils import HfHubHTTPError
 import re
 import requests
@@ -18,7 +18,7 @@ def fetch_latest_leaderboard_df():
     identify and filter out inactive/deprecated models.
 
     Returns:
-        (pd.DataFrame, str): A tuple containing the leaderboard DataFrame and the file date.
+        (pl.DataFrame, str): A tuple containing the leaderboard polars DataFrame and the file date.
     """
     try:
         # Fetch and parse monitor_md.py to find deprecated models
@@ -38,8 +38,7 @@ def fetch_latest_leaderboard_df():
             print(f"Could not fetch or parse monitor_md.py to find deprecated models: {e}")
 
         repo_id = "lmarena-ai/chatbot-arena-leaderboard"
-        from huggingface_hub import list_repo_files
-
+        
         all_files = list_repo_files(repo_id, repo_type="space")
         
         elo_files = [f for f in all_files if f.startswith("elo_results_") and f.endswith(".pkl")]
@@ -68,32 +67,38 @@ def fetch_latest_leaderboard_df():
             data = pickle.load(f)
         
         # The data structure can vary. Let's find the correct key for the leaderboard.
-        df = None
+        df_pd = None
         if "full" in data and "leaderboard_table_df" in data["full"]:
-            df = data["full"]["leaderboard_table_df"]
+            df_pd = data["full"]["leaderboard_table_df"]
         elif "text" in data and "full" in data["text"] and "leaderboard_table_df" in data["text"]["full"]:
-            df = data["text"]["full"]["leaderboard_table_df"]
+            df_pd = data["text"]["full"]["leaderboard_table_df"]
         elif "text" in data and "leaderboard_table_df" in data["text"]:
-            df = data["text"]["leaderboard_table_df"]
+            df_pd = data["text"]["leaderboard_table_df"]
         
-        if df is not None:
-            # The model name is in the index of the DataFrame
-            df['Model'] = df.index
+        if df_pd is not None:
+            # The model name is in the index of the pandas DataFrame
+            df_pd['Model'] = df_pd.index
+            
+            # Convert pandas DataFrame to polars DataFrame
+            df = pl.from_pandas(df_pd)
 
             # Filter out inactive models
             if inactive_models:
                 initial_count = len(df)
-                df = df[~df['Model'].isin(inactive_models)]
+                df = df.filter(~pl.col('Model').is_in(inactive_models))
                 print(f"Filtered out {initial_count - len(df)} inactive models.")
 
-            df = df.rename(columns={
+            df = df.rename({
                 "rating": "Score",
                 "num_battles": "Votes",
                 "final_ranking": "Rank (UB)",
             })
-            df['95% CI'] = df.apply(lambda row: [row['rating_q025'], row['rating_q975']], axis=1)
-            df['Score'] = pd.to_numeric(df['Score'], errors='coerce')
-            df['Votes'] = pd.to_numeric(df['Votes'], errors='coerce')
+
+            df = df.with_columns([
+                pl.struct([pl.col('rating_q025'), pl.col('rating_q975')]).alias('95% CI'),
+                pl.col('Score').cast(pl.Float64, strict=False),
+                pl.col('Votes').cast(pl.Int64, strict=False)
+            ])
 
             print("Data fetched and processed successfully.")
             return df, file_date
@@ -119,7 +124,7 @@ if __name__ == '__main__':
     if leaderboard_df is not None:
         output_path = Path(__file__).parent.parent / "data" / "rank_data.json"
         
-        records = leaderboard_df.to_dict(orient='records')
+        records = leaderboard_df.to_dicts()
         
         output_data = {"last_updated": file_date, "models": records}
         

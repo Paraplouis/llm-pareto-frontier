@@ -27,8 +27,8 @@ export class ChartRenderer {
                     },
                 },
                 SCALES: {
-                    X_DOMAIN: [0.01, 100],
-                    Y_DOMAIN: [1100, 1500],
+                    X_DOMAIN: [0.02, 100],
+                    Y_DOMAIN: [1000, 1500],
                 },
                 POINTS: {
                     RADIUS: {
@@ -95,16 +95,11 @@ export class ChartRenderer {
     /**
      * Create scales for x (price) and y (ELO) axes
      */
-    createScales(data) {
+    createScales() {
         const { width, height } = this.dimensions;
         
-        let xDomain = this.config.CHART.SCALES.X_DOMAIN;
-        let yDomain = this.config.CHART.SCALES.Y_DOMAIN;
-        
-        if (data && data.length > 0) {
-            xDomain = [0.02, 100];
-            yDomain = [1000, 1500];
-        }
+        const xDomain = this.config.CHART.SCALES.X_DOMAIN;
+        const yDomain = this.config.CHART.SCALES.Y_DOMAIN;
         
         const xScale = d3.scaleLog()
             .domain(xDomain)
@@ -383,8 +378,7 @@ export class ChartRenderer {
             .append("g")
             .attr("transform", `translate(${this.dimensions.margin.left},${this.dimensions.margin.top})`);
 
-        const allData = [...data, ...paretoFrontier];
-        const scales = this.createScales(allData);
+        const scales = this.createScales();
         this.createAxes(scales);
         
         if (data.length > 0) {

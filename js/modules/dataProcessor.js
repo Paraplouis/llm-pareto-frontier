@@ -3,28 +3,6 @@
  * Handles data filtering and Pareto frontier calculations
  */
 export class DataProcessor {
-    constructor() {
-        // No longer needs to manage data state
-    }
-
-    /**
-     * Wait for data to be available from the global synthesized_data.js
-     * @returns {Promise<Array>} Resolves when data is available
-     */
-    // async waitForData() { ... } // Removed entirely
-
-    /**
-     * Get the raw data array
-     * @returns {Array} The model data
-     */
-    // getData() { ... } // Removed
-
-    /**
-     * Get the last updated timestamp
-     * @returns {string|null} The last updated timestamp
-     */
-    // getLastUpdated() { ... } // Removed
-
     /**
      * Filter data based on price range
      * @param {Array} data - Array of model objects

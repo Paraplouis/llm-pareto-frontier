@@ -325,4 +325,24 @@ h2 {
     font-size: 12px;
     font-style: italic;
     color: #888;
+}
+
+.container {
+    width: 80%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.github-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    color: #333;
+    transition: color 0.2s ease-in-out;
+}
+
+.github-icon:hover {
+    color: #000;
 } 

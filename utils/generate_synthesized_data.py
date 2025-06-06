@@ -1,22 +1,10 @@
-#!/usr/bin/env python3
-"""
-LLM Pareto Frontier Data Generator
-
-This script processes LLM Arena ranking data and pricing information to generate
-a synthesized dataset for visualization. It includes intelligent model name matching,
-fallback pricing estimation, and comprehensive error handling.
-
-Author: LLM Pareto Frontier Project
-Last Modified: 2024
-"""
-
 import json
 import re
 import logging
-from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, asdict
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
