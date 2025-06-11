@@ -180,17 +180,21 @@ h2 {
 .pareto-models {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
 .pareto-model {
-    padding: 6px 10px;
+    padding: 5px 8px;
     background-color: #f1f8e9;
     border-radius: 4px;
     display: inline-block;
     border: 1px solid #c8e6c9;
     transition: all 0.2s ease;
     cursor: default;
+}
+
+.pareto-model span {
+    line-height: 1.5;
 }
 
 .pareto-model:hover {
@@ -311,7 +315,14 @@ h2 {
 /* Add styles for main-title */
 #main-title {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+}
+
+#main-subtitle {
+    text-align: center;
+    font-size: 1.5em;
+    color: #555;
+    font-weight: 400;
 }
 
 #chart-info {
@@ -345,4 +356,140 @@ h2 {
 
 .github-icon:hover {
     color: #000;
+}
+
+/* Explanation section styles */
+.explanation {
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #fffff0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+}
+
+.explanation-toggle {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -25px -25px 25px -25px;
+    padding: 20px 25px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    transition: background-color 0.2s ease;
+}
+
+.explanation-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    animation: bouncing-ball 1s ease;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.explanation-toggle.expanded .toggle-icon {
+    transform: rotate(90deg);
+}
+
+.explanation-toggle:hover .toggle-icon {
+    animation: blink 1s infinite;
+}
+
+@keyframes bouncing-ball {
+    0%, 60%, 85%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    75% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+
+.explanation-content.collapsed {
+    display: none;
+}
+
+.explanation-content:not(.collapsed) {
+    border-bottom: 2px solid #e9ecef;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding: 0 25px 25px 25px;
+}
+
+.pareto-explanation-detail {
+    display: none;
+}
+
+.explanation-toggle.expanded ~ #pareto-frontier-content .pareto-explanation-detail {
+    display: block;
+}
+
+#pareto-frontier-content {
+    margin-top: 25px;
+}
+
+.explanation h2 {
+    font-size: 1.6em;
+    color: #212529;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+#pareto-frontier-content h2 {
+    border-bottom: 2px solid #e9ecef;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.explanation h3 {
+    font-size: 1.25em;
+    color: #343a40;
+    margin-top: 25px;
+    margin-bottom: 12px;
+}
+
+.explanation p {
+    color: #495057;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.explanation a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.explanation a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.explanation h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.explanation h3 a:hover {
+    text-decoration: underline;
 } 

@@ -130,6 +130,6 @@ if __name__ == '__main__':
         
         with open(output_path, "w") as f:
             json.dump(output_data, f, indent=2)
-        print(f"✅ Successfully scraped and processed LLM Arena data")
+        print(f"✅ Successfully scraped and processed LM Arena data")
     else:
         print("Failed to extract data.") 

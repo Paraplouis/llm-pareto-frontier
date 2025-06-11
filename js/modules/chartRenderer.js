@@ -179,7 +179,7 @@ export class ChartRenderer {
             .attr("text-anchor", "middle")
             .attr("font-weight", "bold")
             .attr("font-size", isMobile ? "10px" : "12px")
-            .text("LLM Arena ELO Rating");
+            .text("LM Arena ELO score");
     }
 
     /**

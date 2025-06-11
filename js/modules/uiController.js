@@ -78,42 +78,46 @@ export class UIController {
      * Update Pareto frontier information
      */
     updateParetoInfo(paretoData) {
-        // Remove existing Pareto info
-        d3.select("#pareto-info").remove();
+        const explanationContainer = d3.select(".explanation");
         
-        if (!paretoData || paretoData.length === 0) return;
+        // Clear previous Pareto content to prevent duplication. (DEPRECATED: Remove old separate pareto-info container if it exists.)
+        explanationContainer.select("#pareto-frontier-content").remove();
 
-        // Create Pareto info container after legend
-        const container = d3.select("#legend").node().parentNode;
-        const paretoContainer = d3.select(container)
-            .append("div")
-            .attr("id", "pareto-info")
-            .attr("class", "pareto-note");
+        if (!paretoData || paretoData.length === 0) {
+            return;
+        }
+        
+        // Append Pareto content into the main explanation container.
+        const paretoContent = explanationContainer.append("div").attr("id", "pareto-frontier-content");
 
-        paretoContainer
-            .append("h3")
-            .text("Pareto Frontier Models");
+        paretoContent.append('h2').html('Pareto frontier models');
+        
+        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The models circled in red ⭕ are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
+        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The red dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
 
-        const modelsContainer = paretoContainer
+        paretoContent.append('p').html('Below is a list of all models on the Pareto frontier, sorted by ELO score descending :');
+        
+        const modelsContainer = paretoContent
             .append("div")
             .attr("class", "pareto-models");
+
+        // Sort models by ELO score descending for ordered display.
+        paretoData.sort((a, b) => b.elo - a.elo);
 
         paretoData.forEach(model => {
             const modelElement = modelsContainer
                 .append("div")
                 .attr("class", "pareto-model")
                 .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.provider) : "#ccc"}`);
-
-            modelElement
-                .append("strong")
-                .text(model.model);
-
+            
+            modelElement.append("strong").text(model.model);
+            
             modelElement
                 .append("span")
                 .style("display", "block")
                 .style("font-size", "11px")
                 .style("color", "#666")
-                .text(`${model.provider} • ${model.elo} • $${model.price}/M tokens`);
+                .html(`Provider: ${model.provider}<br>ELO: ${model.elo}<br>Cost: $${model.price}/M tokens`);
         });
     }
 
@@ -181,6 +185,26 @@ export class UIController {
             }
             
             chartInfoElement.innerHTML = innerHTML;
+        }
+    }
+
+    /**
+     * Sets up collapsible sections in the UI.
+     */
+    setupCollapsibleSections() {
+        const toggle = document.querySelector('.explanation-toggle');
+        const content = document.querySelector('.explanation-content');
+
+        if (toggle && content) {
+            // Set initial state
+            if (!content.classList.contains('collapsed')) {
+                toggle.classList.add('expanded');
+            }
+
+            toggle.addEventListener('click', () => {
+                content.classList.toggle('collapsed');
+                toggle.classList.toggle('expanded');
+            });
         }
     }
 } 

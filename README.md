@@ -1,4 +1,4 @@
-# LLM Arena Pareto Frontier
+# LLM Pareto frontier
 
 ![llm-pareto-frontier](/screenshot.png)
 > Screenshot of the Pareto frontier visualization on 27/05/2025
@@ -40,10 +40,10 @@ and open http://localhost:8000 in your browser.
 │       └── deploy-pages.yml        # GitHub Pages deployment configuration
 ├── data/
 │   ├── synthesized_data.js         # Final LLM model data (auto-updated)
-│   ├── rank_data.json              # Raw ranking data from LLM Arena
+│   ├── rank_data.json              # Raw ranking data from LM Arena
 │   └── price_data.json             # Raw pricing data
 ├── utils/
-│   ├── extract_leaderboard.py      # Web scraper for LLM Arena rankings (using Hugging Face API)
+│   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (using Hugging Face API)
 │   └── generate_synthesized_data.py # Main data processing & synthesis utility
 └── js/
     ├── loader.js                   # Dynamic module loader with global namespace
@@ -69,6 +69,6 @@ Contributions are welcome! I'm interested in evolving this project in these dire
 
 This project builds upon the work of several projects. Special thanks to:
 
-- The **LMSYS team** for creating and maintaining the [LLM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall).
+- The **LM Arena team** for creating and maintaining the [LM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall).
 - **Lincoln Gachagua** for his work on the [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) based on **Philipp Schmid**'s [original version](https://huggingface.co/spaces/philschmid/llm-pricing-calculator).
 - **Winston Bosan** for the [original implementation](https://github.com/winston-bosan/llm-pareto-frontier) that inspired me to continue the project.

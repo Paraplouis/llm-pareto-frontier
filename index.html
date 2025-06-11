@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>LLM Pareto Frontier</title>
+        <title>LLM Pareto frontier</title>
         <link rel="stylesheet" href="styles.css" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
-        <meta name="description" content="Interactive visualization of LLM Arena ELO scores vs API costs, showing the Pareto frontier of optimal language models.">
+        <meta name="description" content="Interactive visualization of LM Arena ELO scores vs API costs, showing the Pareto frontier of optimal language models.">
         <meta name="keywords" content="LLM, language models, Pareto frontier, cost efficiency, performance, AI">
         <script src="js/vendor/d3.v7.min.js"></script>
     </head>
@@ -17,6 +17,7 @@
             rel="noopener noreferrer"
             class="github-icon"
             aria-label="View source on GitHub"
+            title="View source on GitHub"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +36,8 @@
             </svg>
         </a>
         <div class="container">
-            <h1 id="main-title">LM Arena Elo score vs API Cost</h1>
+            <h1 id="main-title">LLM Pareto frontier</h1>
+            <h2 id="main-subtitle">LM Arena ELO scores vs API costs</h2>
 
             <div id="chart-info" class="chart-info"></div>
 
@@ -47,6 +49,20 @@
             </div>
 
             <div id="legend" class="legend"></div>
+
+            <div class="explanation">
+                <h2 class="explanation-toggle">How to read this chart? <span class="toggle-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span></h2>
+                <div class="explanation-content collapsed">
+                    <p>The cost of LLMs is steadily falling, and their quality is rising. This chart helps you navigate the trade-offs.</p>
+                
+                    <h3>Quality (Elo Score)</h3>
+                    <p>We use the ELO score (without style control) from the <a href="https://lmarena.ai/leaderboard/text" target="_blank" rel="noopener noreferrer">LM Arena leaderboard</a> as a proxy for quality. It's like a chess Elo rating, but for LLMs, based on thousands of human votes.</p>
+                
+                    <h3><a href="https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator" target="_blank" rel="noopener noreferrer">Cost ($/MTok)</a></h3>
+                    <p>We use the cost per million input tokens as a proxy for cost, based on data from the <a href="https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator" target="_blank" rel="noopener noreferrer">LLM Pricing Calculator</a>. Output tokens are typically more expensive, but input tokens usually make up the bulk of the cost.</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Load data first -->

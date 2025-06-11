@@ -31,6 +31,9 @@ export class LLMApp {
             
             // Setup event listeners
             this.setupEventListeners();
+
+            // Setup collapsible sections
+            this.uiController.setupCollapsibleSections();
             
         } catch (error) {
             console.error('Failed to initialize app:', error);
