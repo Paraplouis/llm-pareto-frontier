@@ -5,8 +5,8 @@
     "models": [
       {
         "name": "o3",
-        "inputPrice": 10,
-        "outputPrice": 40
+        "inputPrice": 2,
+        "outputPrice": 8
       },
       {
         "name": "o4-mini",
@@ -437,6 +437,16 @@
     "provider": "Mistral",
     "uri": "https://docs.mistral.ai/platform/pricing",
     "models": [
+      {
+        "name": "Magistral Medium",
+        "inputPrice": 2,
+        "outputPrice": 5
+      },
+      {
+        "name": "Magistral Small",
+        "inputPrice": 0.5,
+        "outputPrice": 1.5
+      },
       {
         "name": "Mistral Devstral",
         "inputPrice": 0.1,
