@@ -9,6 +9,11 @@
         "outputPrice": 8
       },
       {
+        "name": "o3-pro",
+        "inputPrice": 20,
+        "outputPrice": 80
+      },
+      {
         "name": "o4-mini",
         "inputPrice": 1.1,
         "outputPrice": 4.4
