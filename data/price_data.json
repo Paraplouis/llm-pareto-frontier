@@ -1604,6 +1604,21 @@
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
       {
+        "name": "Claude Sonnet 3.7",
+        "inputPrice": 3.3,
+        "outputPrice": 16.5
+      },
+      {
+        "name": "Claude Sonnet 4",
+        "inputPrice": 3.3,
+        "outputPrice": 16.5
+      },
+      {
+        "name": "Claude Opus 4",
+        "inputPrice": 16.5,
+        "outputPrice": 82.5
+      },
+      {
         "name": "DeepSeek R1 0528",
         "inputPrice": 0.5,
         "outputPrice": 2.18
