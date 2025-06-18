@@ -341,6 +341,36 @@
     "uri": "https://ai.google.dev/pricing?hl=en",
     "models": [
       {
+        "name": "Gemini 2.5 Pro 200K",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
+        "name": "Gemini 2.5 Pro 2M",
+        "inputPrice": 2.5,
+        "outputPrice": 15
+      },
+      {
+        "name": "Gemini 2.5 Flash",
+        "inputPrice": 0.3,
+        "outputPrice": 2.5
+      },
+      {
+        "name": "Gemini 2.5 Flash Audio In Text Out",
+        "inputPrice": 1,
+        "outputPrice": 2.5
+      },
+      {
+        "name": "Gemini 2.5 Flash Lite",
+        "inputPrice": 0.1,
+        "outputPrice": 0.4
+      },
+      {
+        "name": "Gemini 2.5 Flash Lite Audio In Text Out",
+        "inputPrice": 0.5,
+        "outputPrice": 0.4
+      },
+      {
         "name": "Gemini 2.5 Flash Preview 04-17 Thinking",
         "inputPrice": 0.15,
         "outputPrice": 3.5
@@ -359,16 +389,6 @@
         "name": "Gemini 2.0 Flash Lite",
         "inputPrice": 0.075,
         "outputPrice": 0.3
-      },
-      {
-        "name": "Gemini 2.5 Pro 200K",
-        "inputPrice": 1.25,
-        "outputPrice": 10
-      },
-      {
-        "name": "Gemini 2.5 Pro 2M",
-        "inputPrice": 2.5,
-        "outputPrice": 15
       },
       {
         "name": "Gemini 1.5 Pro 128K",
@@ -1603,6 +1623,16 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "Gemini 2.5 Flash",
+        "inputPrice": 0.105,
+        "outputPrice": 2.45
+      },
+      {
+        "name": "Gemini 2.5 Pro",
+        "inputPrice": 0.875,
+        "outputPrice": 7
+      },
       {
         "name": "Claude Sonnet 3.7",
         "inputPrice": 3.3,

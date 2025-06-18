@@ -1,15 +1,15 @@
 [
   {
     "rank_model": "gemini-2.5-pro-preview-06-05",
-    "matched_price_model": "Gemini 2.5 Pro 200K",
-    "price": 1.25,
-    "provider": "Google"
+    "matched_price_model": "Gemini 2.5 Pro",
+    "price": 0.875,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "gemini-2.5-pro-preview-05-06",
-    "matched_price_model": "Gemini 2.5 Pro 200K",
-    "price": 1.25,
-    "provider": "Google"
+    "matched_price_model": "Gemini 2.5 Pro",
+    "price": 0.875,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "o3-2025-04-16",
@@ -18,15 +18,15 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "gemini-2.5-flash-preview-05-20",
-    "matched_price_model": "Gemini 2.5 Flash Preview 04-17 Thinking",
-    "price": 0.15,
-    "provider": "Google"
-  },
-  {
     "rank_model": "deepseek-r1-0528",
     "matched_price_model": "DeepSeek R1",
     "price": 0.45,
+    "provider": "DeepInfra"
+  },
+  {
+    "rank_model": "gemini-2.5-flash-preview-05-20",
+    "matched_price_model": "Gemini 2.5 Flash",
+    "price": 0.105,
     "provider": "DeepInfra"
   },
   {
@@ -43,9 +43,9 @@
   },
   {
     "rank_model": "gemini-2.5-flash-preview-04-17",
-    "matched_price_model": "Gemini 2.5 Flash Preview 04-17 Thinking",
-    "price": 0.15,
-    "provider": "Google"
+    "matched_price_model": "Gemini 2.5 Flash",
+    "price": 0.105,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "qwen3-235b-a22b-no-thinking",
@@ -64,6 +64,12 @@
     "matched_price_model": "DeepSeek-V3-0324",
     "price": 0.9,
     "provider": "Fireworks"
+  },
+  {
+    "rank_model": "gemini-2.5-flash-lite-preview-06-17-thinking",
+    "matched_price_model": "Gemini 2.5 Flash Lite",
+    "price": 0.1,
+    "provider": "Google"
   },
   {
     "rank_model": "claude-opus-4-20250514",
@@ -312,15 +318,15 @@
     "provider": "DeepSpeek"
   },
   {
-    "rank_model": "qwen2.5-72b-instruct",
-    "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 2,
-    "provider": "SambaNova Cloud"
-  },
-  {
     "rank_model": "llama-3.3-70b-instruct",
     "matched_price_model": "Llama 3.3 70B",
     "price": 0.6,
+    "provider": "SambaNova Cloud"
+  },
+  {
+    "rank_model": "qwen2.5-72b-instruct",
+    "matched_price_model": "Qwen2.5-72B-Instruct",
+    "price": 2,
     "provider": "SambaNova Cloud"
   },
   {
@@ -594,16 +600,16 @@
     "provider": "Together.AI"
   },
   {
-    "rank_model": "qwen1.5-72b-chat",
-    "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 2,
-    "provider": "SambaNova Cloud"
-  },
-  {
     "rank_model": "reka-flash-21b-20240226",
     "matched_price_model": "Reka Flash",
     "price": 0.2,
     "provider": "Reka"
+  },
+  {
+    "rank_model": "qwen1.5-72b-chat",
+    "matched_price_model": "Qwen2.5-72B-Instruct",
+    "price": 2,
+    "provider": "SambaNova Cloud"
   },
   {
     "rank_model": "granite-3.1-8b-instruct",
@@ -613,9 +619,9 @@
   },
   {
     "rank_model": "gemini-pro-dev-api",
-    "matched_price_model": "Gemini 2.5 Pro 200K",
-    "price": 1.25,
-    "provider": "Google"
+    "matched_price_model": "Gemini 2.5 Pro",
+    "price": 0.875,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "qwen1.5-32b-chat",
@@ -637,9 +643,9 @@
   },
   {
     "rank_model": "gemini-pro",
-    "matched_price_model": "Gemini 2.5 Pro 200K",
-    "price": 1.25,
-    "provider": "Google"
+    "matched_price_model": "Gemini 2.5 Pro",
+    "price": 0.875,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "gpt-3.5-turbo-0125",
