@@ -103,11 +103,17 @@ h2 {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 4px;
     transition: background-color 0.2s ease;
+    cursor: pointer;
 }
 
 .legend-item:hover {
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.legend-item.disabled {
+    opacity: 0.5;
+    background-color: #f0f0f0;
 }
 
 .legend-color {
@@ -232,9 +238,9 @@ h2 {
 }
 
 .datapoint.pareto {
-    stroke: #ff4444;
+    stroke: #000;
     stroke-width: 2px;
-    filter: drop-shadow(0 0 2px rgba(255, 68, 68, 0.4));
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
 }
 
 #modelCount {
@@ -315,6 +321,7 @@ h2 {
 /* Add styles for main-title */
 #main-title {
     text-align: center;
+    margin-top: 0;
     margin-bottom: 0px;
 }
 
@@ -339,10 +346,10 @@ h2 {
 }
 
 .container {
-    width: 80%;
+    width: 90%;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem 2rem;
 }
 
 .github-icon {
@@ -492,4 +499,4 @@ h2 {
 
 .explanation h3 a:hover {
     text-decoration: underline;
-} 
+}
