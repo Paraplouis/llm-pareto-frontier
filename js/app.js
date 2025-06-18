@@ -16,9 +16,11 @@ export class LLMApp {
         this.modelDataLastUpdated = dataLastUpdated;
         this.minElo = minElo;
         this.excludeFree = excludeFree;
+        this.activeProviders = new Set(); // Store currently active providers
         
         // Bind event handlers
         this.handleResize = this.handleResize.bind(this);
+        this.handleProviderToggle = this.handleProviderToggle.bind(this);
     }
 
     /**
@@ -26,6 +28,15 @@ export class LLMApp {
      */
     async init() {
         try {
+            // Get all unique providers
+            const allProviders = this.dataProcessor.getUniqueProviders(this.modelData);
+
+            // Setup color scale once
+            this.chartRenderer.setupColorScale(allProviders);
+
+            // Initialize activeProviders with all unique providers
+            this.activeProviders = new Set(allProviders);
+
             // Process and display data
             await this.loadAndDisplayData();
             
@@ -45,12 +56,12 @@ export class LLMApp {
      * Load and display the data
      */
     async loadAndDisplayData() {
-        const validData = this.dataProcessor.getValidData(this.modelData);
+        const validData = this.dataProcessor.getValidData(this.modelData, this.activeProviders);
 
-        // Render chart with all data
+        // Render chart with filtered data
         await this.renderChart(validData);
         
-        // Update legend with providers
+        // Update legend with providers and their active state
         this.updateLegendAndParetoInfo(validData);
     }
 
@@ -70,6 +81,9 @@ export class LLMApp {
         document.addEventListener('modelUnhover', () => {
             this.uiController.hideTooltip();
         });
+
+        // Provider toggle event handler
+        document.addEventListener('providerToggle', this.handleProviderToggle);
     }
 
     /**
@@ -84,10 +98,23 @@ export class LLMApp {
     }
 
     /**
+     * Handle provider toggle event
+     */
+    handleProviderToggle(event) {
+        const { provider, isChecked } = event.detail;
+        if (isChecked) {
+            this.activeProviders.add(provider);
+        } else {
+            this.activeProviders.delete(provider);
+        }
+        this.refreshChart();
+    }
+
+    /**
      * Refresh the chart with current data
      */
     async refreshChart() {
-        const validData = this.dataProcessor.getValidData(this.modelData);
+        const validData = this.dataProcessor.getValidData(this.modelData, this.activeProviders);
         await this.renderChart(validData);
         
         // Update legend and Pareto info
@@ -132,10 +159,10 @@ export class LLMApp {
             this.excludeFree
         );
         
-        // Update legend
-        this.uiController.updateLegend(providers);
+        // Update legend, passing all providers and the set of active ones
+        this.uiController.updateLegend(providers, this.activeProviders);
         
         // Update Pareto information
         this.uiController.updateParetoInfo(paretoData);
     }
-} 
+}

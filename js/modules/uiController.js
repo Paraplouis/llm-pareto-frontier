@@ -36,7 +36,7 @@ export class UIController {
         `;
 
         if (isPareto) {
-            tooltipHTML += `<br/><span style="color: #d62728; font-weight: bold;">Pareto Optimal</span>`;
+            tooltipHTML += `<br/><span style="color: #ff4444; font-weight: bold;">Pareto Optimal</span>`;
         }
 
         tooltip.html(tooltipHTML);
@@ -50,18 +50,31 @@ export class UIController {
     }
 
     /**
-     * Update provider legend
+     * Update provider legend with clickable items for toggling visibility.
+     * @param {Array<string>} providers - Array of all unique provider names.
+     * @param {Set<string>} activeProviders - Set of currently active provider names.
      */
-    updateLegend(providers) {
+    updateLegend(providers, activeProviders) {
         const legendContainer = d3.select("#legend");
         if (legendContainer.empty()) return;
 
-        legendContainer.html("");
+        legendContainer.html(""); // Clear existing legend
 
         providers.forEach(provider => {
+            const isActive = activeProviders.has(provider);
             const legendItem = legendContainer
                 .append("div")
-                .attr("class", "legend-item");
+                .attr("class", "legend-item")
+                .classed("disabled", !isActive)
+                .on("click", function() {
+                    // Dispatch a custom event when the item is clicked
+                    document.dispatchEvent(new CustomEvent('providerToggle', {
+                        detail: {
+                            provider: provider,
+                            isChecked: !isActive // Toggle the state
+                        }
+                    }));
+                });
 
             legendItem
                 .append("div")
@@ -92,7 +105,7 @@ export class UIController {
 
         paretoContent.append('h2').html('Pareto frontier models');
         
-        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The models circled in red ⭕ are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
+        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The models circled in black ⚫ are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
         paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The red dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
 
         paretoContent.append('p').html('Below is a list of all models on the Pareto frontier, sorted by ELO score descending :');
@@ -207,4 +220,4 @@ export class UIController {
             });
         }
     }
-} 
+}
