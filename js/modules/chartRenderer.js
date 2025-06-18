@@ -363,11 +363,6 @@ export class ChartRenderer {
         this.container.select(".error").remove();
         d3.selectAll(".tooltip").remove();
 
-        if (data.length > 0) {
-            const providers = [...new Set(data.map(d => d.provider))];
-            this.setupColorScale(providers);
-        }
-
         this.dimensions = this.calculateDimensions();
 
         this.svg = this.container
