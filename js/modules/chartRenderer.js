@@ -239,7 +239,7 @@ export class ChartRenderer {
             .attr("cx", d => xScale(d.price))
             .attr("cy", d => yScale(d.elo))
             .attr("r", d => this.getPointRadius(d))
-            .attr("fill", d => this.colorScale ? this.colorScale(d.provider) : "#666")
+            .attr("fill", d => this.colorScale ? this.colorScale(d.cheapest_provider) : "#666")
             .attr("stroke", d => {
                 const isPareto = this.isParetoOptimal(d.model);
                 return isPareto ? this.config.CHART.COLORS.PARETO_STROKE : "#fff";
@@ -364,7 +364,7 @@ export class ChartRenderer {
         d3.selectAll(".tooltip").remove();
 
         if (data.length > 0) {
-            const providers = [...new Set(data.map(d => d.provider))];
+            const providers = [...new Set(data.map(d => d.cheapest_provider))];
             this.setupColorScale(providers);
         }
 

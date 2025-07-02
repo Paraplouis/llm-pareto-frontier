@@ -82,7 +82,7 @@ export class DataProcessor {
         }
 
         return data.filter(model => 
-            model.provider && model.provider.toLowerCase() === provider.toLowerCase()
+            model.cheapest_provider && model.cheapest_provider.toLowerCase() === provider.toLowerCase()
         );
     }
 
@@ -118,7 +118,7 @@ export class DataProcessor {
             return [];
         }
 
-        const providers = [...new Set(data.map(model => model.provider).filter(Boolean))];
+        const providers = [...new Set(data.map(model => model.cheapest_provider).filter(Boolean))];
         return providers.sort();
     }
 } 

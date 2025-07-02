@@ -19,7 +19,7 @@ class ModelData:
     model: str
     elo: int
     price: float
-    provider: str
+    cheapest_provider: str
     votes: int
     matched_price_model: str
 
@@ -324,11 +324,18 @@ class DataSynthesizer:
                 provider_name = provider["provider"]
                 for model in provider["models"]:
                     model_name = model["name"].lower()
-                    price_lookup[model_name] = PriceInfo(
-                        price=model["inputPrice"],
-                        provider=provider_name,
-                        original_name=model["name"],
-                    )
+                    current_price = model["inputPrice"]
+
+                    # If model already exists, keep the one with the lower price
+                    if (
+                        model_name not in price_lookup
+                        or current_price < price_lookup[model_name].price
+                    ):
+                        price_lookup[model_name] = PriceInfo(
+                            price=current_price,
+                            provider=provider_name,
+                            original_name=model["name"],
+                        )
 
             logger.info(f"💰 Loaded pricing data for {len(price_lookup)} models")
             return price_lookup
@@ -357,7 +364,7 @@ class DataSynthesizer:
                 model=model_name,
                 elo=int(round(elo_score)),
                 price=price_info.price,
-                provider=price_info.provider,
+                cheapest_provider=price_info.provider,
                 votes=votes,
                 matched_price_model=price_info.original_name
             )
@@ -379,7 +386,7 @@ class DataSynthesizer:
                 model=model_name,
                 elo=int(round(elo_score)),
                 price=default_price,
-                provider=provider,
+                cheapest_provider=provider,
                 votes=votes,
                 matched_price_model=model_name
             )

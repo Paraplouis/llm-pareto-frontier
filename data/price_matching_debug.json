@@ -1,6 +1,6 @@
 [
   {
-    "rank_model": "gemini-2.5-pro-preview-06-05",
+    "rank_model": "gemini-2.5-pro",
     "matched_price_model": "Gemini 2.5 Pro",
     "price": 0.875,
     "provider": "DeepInfra"
@@ -24,16 +24,16 @@
     "provider": "DeepInfra"
   },
   {
-    "rank_model": "gemini-2.5-flash-preview-05-20",
+    "rank_model": "grok-3-preview-02-24",
+    "matched_price_model": "grok-3",
+    "price": 3,
+    "provider": "XAI"
+  },
+  {
+    "rank_model": "gemini-2.5-flash",
     "matched_price_model": "Gemini 2.5 Flash",
     "price": 0.105,
     "provider": "DeepInfra"
-  },
-  {
-    "rank_model": "grok-3-preview-02-24",
-    "matched_price_model": "grok-3-beta",
-    "price": 3,
-    "provider": "XAI"
   },
   {
     "rank_model": "gpt-4.5-preview-2025-02-27",
@@ -51,7 +51,7 @@
     "rank_model": "qwen3-235b-a22b-no-thinking",
     "matched_price_model": "Qwen 3 A22B 235B",
     "price": 0.2,
-    "provider": "Novita AI"
+    "provider": "Together.AI"
   },
   {
     "rank_model": "gpt-4.1-2025-04-14",
@@ -62,26 +62,20 @@
   {
     "rank_model": "deepseek-v3-0324",
     "matched_price_model": "DeepSeek-V3-0324",
-    "price": 0.9,
-    "provider": "Fireworks"
-  },
-  {
-    "rank_model": "gemini-2.5-flash-lite-preview-06-17-thinking",
-    "matched_price_model": "Gemini 2.5 Flash Lite",
-    "price": 0.1,
-    "provider": "Google"
-  },
-  {
-    "rank_model": "claude-opus-4-20250514",
-    "matched_price_model": "Claude Opus 4",
-    "price": 16.5,
-    "provider": "DeepInfra"
+    "price": 0,
+    "provider": "Chutes"
   },
   {
     "rank_model": "deepseek-r1",
     "matched_price_model": "DeepSeek-R1",
     "price": 2.19,
     "provider": "Chutes"
+  },
+  {
+    "rank_model": "claude-opus-4-20250514",
+    "matched_price_model": "Claude Opus 4",
+    "price": 15,
+    "provider": "Anthropic"
   },
   {
     "rank_model": "mistral-medium-2505",
@@ -96,16 +90,16 @@
     "provider": "OpenAI"
   },
   {
+    "rank_model": "qwen3-235b-a22b",
+    "matched_price_model": "Qwen 3 A22B 235B",
+    "price": 0.2,
+    "provider": "Together.AI"
+  },
+  {
     "rank_model": "gemini-2.0-flash-001",
     "matched_price_model": "Gemini 2.0 Flash",
     "price": 0.1,
     "provider": "Google"
-  },
-  {
-    "rank_model": "qwen3-235b-a22b",
-    "matched_price_model": "Qwen 3 A22B 235B",
-    "price": 0.2,
-    "provider": "Novita AI"
   },
   {
     "rank_model": "o4-mini-2025-04-16",
@@ -114,16 +108,16 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "grok-3-mini-beta",
-    "matched_price_model": "grok-3-mini-beta",
-    "price": 0.3,
-    "provider": "XAI"
-  },
-  {
     "rank_model": "qwen2.5-max",
     "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 2,
-    "provider": "SambaNova Cloud"
+    "price": 0.23,
+    "provider": "DeepInfra"
+  },
+  {
+    "rank_model": "grok-3-mini-beta",
+    "matched_price_model": "grok-3-mini",
+    "price": 0.3,
+    "provider": "XAI"
   },
   {
     "rank_model": "gemma-3-27b-it",
@@ -140,8 +134,8 @@
   {
     "rank_model": "claude-sonnet-4-20250514",
     "matched_price_model": "Claude Sonnet 4",
-    "price": 3.3,
-    "provider": "DeepInfra"
+    "price": 3,
+    "provider": "Anthropic"
   },
   {
     "rank_model": "o3-mini-high",
@@ -150,16 +144,16 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "gpt-4.1-mini-2025-04-14",
-    "matched_price_model": "gpt-4.1-mini",
-    "price": 0.4,
-    "provider": "OpenAI"
-  },
-  {
     "rank_model": "gemma-3-12b-it",
     "matched_price_model": "unsloth/gemma-3-12b-it",
     "price": 0,
     "provider": "Chutes"
+  },
+  {
+    "rank_model": "gpt-4.1-mini-2025-04-14",
+    "matched_price_model": "gpt-4.1-mini",
+    "price": 0.4,
+    "provider": "OpenAI"
   },
   {
     "rank_model": "deepseek-v3",
@@ -178,6 +172,12 @@
     "matched_price_model": "Gemini 2.0 Flash Lite",
     "price": 0.075,
     "provider": "Google"
+  },
+  {
+    "rank_model": "amazon-nova-experimental-chat-05-14",
+    "matched_price_model": "Amazon Nova Micro",
+    "price": 0.035,
+    "provider": "Amazon"
   },
   {
     "rank_model": "command-a-03-2025",
@@ -206,14 +206,14 @@
   {
     "rank_model": "claude-3-7-sonnet-20250219-thinking-32k",
     "matched_price_model": "Claude Sonnet 3.7",
-    "price": 3.3,
-    "provider": "DeepInfra"
+    "price": 3,
+    "provider": "Anthropic"
   },
   {
     "rank_model": "claude-3-7-sonnet-20250219",
     "matched_price_model": "Claude Sonnet 3.7",
-    "price": 3.3,
-    "provider": "DeepInfra"
+    "price": 3,
+    "provider": "Anthropic"
   },
   {
     "rank_model": "grok-2-2024-08-13",
@@ -236,8 +236,8 @@
   {
     "rank_model": "qwen2.5-plus-1127",
     "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 2,
-    "provider": "SambaNova Cloud"
+    "price": 0.23,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "deepseek-v2.5-1210",
@@ -272,8 +272,8 @@
   {
     "rank_model": "llama-3.1-405b-instruct-bf16",
     "matched_price_model": "Llama 3.1 405B",
-    "price": 9.5,
-    "provider": "Replicate"
+    "price": 5,
+    "provider": "SambaNova Cloud"
   },
   {
     "rank_model": "llama-3.1-nemotron-70b-instruct",
@@ -290,8 +290,8 @@
   {
     "rank_model": "llama-3.1-405b-instruct-fp8",
     "matched_price_model": "Llama 3.1 405B",
-    "price": 9.5,
-    "provider": "Replicate"
+    "price": 5,
+    "provider": "SambaNova Cloud"
   },
   {
     "rank_model": "grok-2-mini-2024-08-13",
@@ -326,8 +326,8 @@
   {
     "rank_model": "qwen2.5-72b-instruct",
     "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 2,
-    "provider": "SambaNova Cloud"
+    "price": 0.23,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "gpt-4-turbo-2024-04-09",
@@ -336,16 +336,16 @@
     "provider": "OpenAI"
   },
   {
-    "rank_model": "mistral-large-2407",
-    "matched_price_model": "Mistral Large 2411",
-    "price": 2,
-    "provider": "Mistral"
-  },
-  {
     "rank_model": "mistral-small-3.1-24b-instruct-2503",
     "matched_price_model": "chutesai/Mistral-Small-3.1-24B-Instruct-2503",
     "price": 0,
     "provider": "Chutes"
+  },
+  {
+    "rank_model": "mistral-large-2407",
+    "matched_price_model": "Mistral Large 2411",
+    "price": 2,
+    "provider": "Mistral"
   },
   {
     "rank_model": "gpt-4-1106-preview",
@@ -390,6 +390,12 @@
     "provider": "SambaNova Cloud"
   },
   {
+    "rank_model": "magistral-medium-2506",
+    "matched_price_model": "Magistral Medium",
+    "price": 2,
+    "provider": "Mistral"
+  },
+  {
     "rank_model": "claude-3-5-haiku-20241022",
     "matched_price_model": "Claude Haiku 3.5 ",
     "price": 0.8,
@@ -420,16 +426,16 @@
     "provider": "DeepInfra"
   },
   {
+    "rank_model": "qwen2.5-coder-32b-instruct",
+    "matched_price_model": "Qwen2.5-Coder-32B-Instruct",
+    "price": 0.058,
+    "provider": "Chutes"
+  },
+  {
     "rank_model": "mistral-small-24b-instruct-2501",
     "matched_price_model": "unsloth/Mistral-Small-24B-Instruct-2501",
     "price": 0.432,
     "provider": "Chutes"
-  },
-  {
-    "rank_model": "qwen2.5-coder-32b-instruct",
-    "matched_price_model": "Qwen2.5-Coder-32B-Instruct",
-    "price": 1.5,
-    "provider": "SambaNova Cloud"
   },
   {
     "rank_model": "amazon-nova-lite-v1.0",
@@ -482,8 +488,8 @@
   {
     "rank_model": "claude-3-sonnet-20240229",
     "matched_price_model": "Claude Sonnet 3.7",
-    "price": 3.3,
-    "provider": "DeepInfra"
+    "price": 3,
+    "provider": "Anthropic"
   },
   {
     "rank_model": "amazon-nova-micro-v1.0",
@@ -608,8 +614,8 @@
   {
     "rank_model": "qwen1.5-72b-chat",
     "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 2,
-    "provider": "SambaNova Cloud"
+    "price": 0.23,
+    "provider": "DeepInfra"
   },
   {
     "rank_model": "granite-3.1-8b-instruct",
@@ -759,7 +765,7 @@
     "rank_model": "qwen-14b-chat",
     "matched_price_model": "Qwen 3 14B",
     "price": 0.08,
-    "provider": "DeepInfra"
+    "provider": "Nebius AI Studio"
   },
   {
     "rank_model": "mistral-7b-instruct",

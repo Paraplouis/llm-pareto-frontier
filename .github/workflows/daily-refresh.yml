@@ -30,7 +30,7 @@ jobs:
       - name: Run refresh script
         run: |
           chmod +x ./refresh.sh
-          ./refresh.sh
+          ./refresh.sh || exit 1
       - name: Configure git for GitHub Actions bot
         run: |
           git config user.name "github-actions[bot]"

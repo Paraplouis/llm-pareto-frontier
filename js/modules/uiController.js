@@ -29,7 +29,7 @@ export class UIController {
             
         let tooltipHTML = `
             <strong>${model.model}</strong><br/>
-            Provider: ${model.provider}<br/>
+            Cheapest Provider: ${model.cheapest_provider}<br/>
             ELO: ${model.elo}<br/>
             Price: $${model.price}/M tokens<br/>
             Votes: ${model.votes || 'N/A'}
@@ -108,7 +108,7 @@ export class UIController {
             const modelElement = modelsContainer
                 .append("div")
                 .attr("class", "pareto-model")
-                .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.provider) : "#ccc"}`);
+                .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.cheapest_provider) : "#ccc"}`);
             
             modelElement.append("strong").text(model.model);
             
@@ -117,7 +117,7 @@ export class UIController {
                 .style("display", "block")
                 .style("font-size", "11px")
                 .style("color", "#666")
-                .html(`Provider: ${model.provider}<br>ELO: ${model.elo}<br>Cost: $${model.price}/M tokens`);
+                .html(`Cheapest Provider: ${model.cheapest_provider}<br>ELO: ${model.elo}<br>Cost: $${model.price}/M tokens`);
         });
     }
 
