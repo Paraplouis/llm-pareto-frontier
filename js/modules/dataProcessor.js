@@ -89,15 +89,16 @@ export class DataProcessor {
     /**
      * Get valid data by filtering out models with missing required fields
      * @param {Array} data - Array of model objects
+     * @param {Set<string>} [activeProviders=null]
      * @returns {Array} Valid model data
      */
-    getValidData(data) {
+    getValidData(data, activeProviders = null) {
         if (!Array.isArray(data)) {
             console.warn('Invalid data provided to getValidData');
             return [];
         }
 
-        return data.filter(model => 
+        let filteredData = data.filter(model => 
             model && 
             typeof model.elo === 'number' && 
             typeof model.price === 'number' &&
@@ -105,6 +106,15 @@ export class DataProcessor {
             model.price > 0 &&
             model.model
         );
+
+        // Apply provider filter if activeProviders set is provided and not empty
+        if (activeProviders && activeProviders.size > 0) {
+            filteredData = filteredData.filter(model =>
+                activeProviders.has(model.cheapest_provider)
+            );
+        }
+
+        return filteredData;
     }
 
     /**
@@ -121,4 +131,4 @@ export class DataProcessor {
         const providers = [...new Set(data.map(model => model.cheapest_provider).filter(Boolean))];
         return providers.sort();
     }
-} 
+}

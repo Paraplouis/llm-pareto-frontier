@@ -38,8 +38,8 @@ export class ChartRenderer {
                     },
                 },
                 COLORS: {
-                    PARETO_STROKE: "#d62728",
-                    PARETO_LINE: "#d62728",
+                    PARETO_STROKE: "#000",
+                    PARETO_LINE: "#000",
                 },
             },
             ANIMATION: {
@@ -127,11 +127,6 @@ export class ChartRenderer {
             .tickPadding(3)
             .tickFormat(d => `$${d < 1 ? d.toFixed(2) : d}`);
 
-        const yAxis = d3.axisLeft(yScale)
-            .ticks(height < 400 ? 5 : 8)
-            .tickSize(6)
-            .tickPadding(3);
-
         this.svg.append("g")
             .attr("transform", `translate(0,${height})`)
             .attr("class", "x-axis axis")
@@ -142,6 +137,11 @@ export class ChartRenderer {
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", "rotate(-45)");
+
+        const yAxis = d3.axisLeft(yScale)
+            .ticks(height < 400 ? 5 : 8)
+            .tickSize(6)
+            .tickPadding(3);
 
         this.svg.append("g")
             .attr("class", "y-axis axis")
@@ -363,11 +363,6 @@ export class ChartRenderer {
         this.container.select(".error").remove();
         d3.selectAll(".tooltip").remove();
 
-        if (data.length > 0) {
-            const providers = [...new Set(data.map(d => d.cheapest_provider))];
-            this.setupColorScale(providers);
-        }
-
         this.dimensions = this.calculateDimensions();
 
         this.svg = this.container
@@ -394,4 +389,4 @@ export class ChartRenderer {
         
         console.log('✅ Chart rendered successfully');
     }
-} 
+}
