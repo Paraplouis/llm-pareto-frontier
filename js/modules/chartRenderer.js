@@ -11,6 +11,9 @@ export class ChartRenderer {
         this.dimensions = null;
         this.currentData = [];
         this.currentParetoFrontier = [];
+        this.sortedParetoFrontier = [];
+        this.paretoIndexLookup = new Map();
+        this.paretoLabelInfo = new Map();
         this.config = {
             RESPONSIVE: {
                 MOBILE_BREAKPOINT: 600,
@@ -310,8 +313,27 @@ export class ChartRenderer {
             .enter()
             .append("text")
             .attr("class", "model-label")
-            .attr("x", d => xScale(d.price) + (isMobile ? 4 : 6))
-            .attr("y", d => yScale(d.elo) + 3)
+            .attr("text-anchor", d => {
+                if (this.isParetoOptimal(d.model)) {
+                    return this.paretoLabelInfo.get(d.model).anchor;
+                }
+                return "start"; // Default for non-Pareto
+            })
+            .attr("x", d => {
+                const xBase = xScale(d.price);
+                if (this.isParetoOptimal(d.model)) {
+                    return xBase + this.paretoLabelInfo.get(d.model).x_offset;
+                }
+                const baseOffset = isMobile ? 4 : 6;
+                return xBase + baseOffset;
+            })
+            .attr("y", d => {
+                const yBase = yScale(d.elo);
+                if (this.isParetoOptimal(d.model)) {
+                    return yBase + this.paretoLabelInfo.get(d.model).y_offset;
+                }
+                return yBase + 3;
+            })
             .text(d => {
                 if (isMobile) {
                     const isPareto = this.isParetoOptimal(d.model);
@@ -358,6 +380,15 @@ export class ChartRenderer {
         this.currentData = data;
         this.currentParetoFrontier = paretoFrontier;
         
+        // Sort pareto frontier by price to determine neighbors for label placement
+        if (paretoFrontier.length > 0) {
+            this.sortedParetoFrontier = [...paretoFrontier].sort((a, b) => a.price - b.price);
+            this.paretoIndexLookup = new Map(this.sortedParetoFrontier.map((p, i) => [p.model, i]));
+        } else {
+            this.sortedParetoFrontier = [];
+            this.paretoIndexLookup.clear();
+        }
+        
         this.container.select("svg").remove();
         this.container.select(".loading").remove();
         this.container.select(".error").remove();
@@ -374,6 +405,47 @@ export class ChartRenderer {
             .attr("transform", `translate(${this.dimensions.margin.left},${this.dimensions.margin.top})`);
 
         const scales = this.createScales();
+
+        // Pre-calculate label positions for Pareto points
+        this.paretoLabelInfo.clear();
+        if (this.sortedParetoFrontier.length > 0) {
+            this.sortedParetoFrontier.forEach((p, i) => {
+                const p_left = i > 0 ? this.sortedParetoFrontier[i - 1] : null;
+                const p_right = i < this.sortedParetoFrontier.length - 1 ? this.sortedParetoFrontier[i + 1] : null;
+
+                const isMobile = this.dimensions.isMobile;
+                // Default position: right of the point
+                let anchor = "start";
+                let x_offset = this.getPointRadius(p) + 5;
+                let y_offset = 3;
+
+                // If the point is on a convex part of the curve (a peak or elbow), move the label above it.
+                if (p_left && p_right) {
+                    const x_p = scales.xScale(p.price);
+                    const y_p = scales.yScale(p.elo);
+                    const x_left = scales.xScale(p_left.price);
+                    const y_left = scales.yScale(p_left.elo);
+                    const x_right = scales.xScale(p_right.price);
+                    const y_right = scales.yScale(p_right.elo);
+
+                    if (x_right > x_left) {
+                        // Find the y-coordinate on the line segment connecting the neighbors
+                        const y_on_line = y_left + (y_right - y_left) * (x_p - x_left) / (x_right - x_left);
+                        
+                        // If the point's y is below the line on screen (higher ELO), it's a convex point.
+                        // Add a small tolerance to handle near-straight lines.
+                        if (y_p < y_on_line - 2) { 
+                            anchor = "middle";
+                            x_offset = 0;
+                            y_offset = -this.getPointRadius(p) - 4;
+                        }
+                    }
+                }
+                
+                this.paretoLabelInfo.set(p.model, { anchor, x_offset, y_offset });
+            });
+        }
+        
         this.createAxes(scales);
         
         if (data.length > 0) {
