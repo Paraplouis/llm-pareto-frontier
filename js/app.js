@@ -16,11 +16,30 @@ export class LLMApp {
         this.modelDataLastUpdated = dataLastUpdated;
         this.minElo = minElo;
         this.excludeFree = excludeFree;
-        this.activeProviders = new Set(); // Store currently active providers
+        this.activeOrganizations = new Set(); // Store currently active organizations
+
+        // Token settings (default 750 in / 250 out)
+        this.promptTokens = 750;
+        this.outputTokens = 250;
+
+        // Cache DOM elements for token inputs
+        this.inputTokenEl = document.getElementById('input-tokens');
+        this.outputTokenEl = document.getElementById('output-tokens');
+
+        if (this.inputTokenEl && this.outputTokenEl) {
+            this.inputTokenEl.value = this.promptTokens;
+            this.outputTokenEl.value = this.outputTokens;
+        }
+
+        // Ratio label element
+        this.ratioLabelEl = document.getElementById('current-ratio');
+        this.presetButtons = Array.from(document.querySelectorAll('.preset-button'));
+        this.updateRatioDisplayAndPresets();
         
         // Bind event handlers
         this.handleResize = this.handleResize.bind(this);
-        this.handleProviderToggle = this.handleProviderToggle.bind(this);
+        this.handleOrganizationToggle = this.handleOrganizationToggle.bind(this);
+        this.handleResetOrganizations = this.handleResetOrganizations.bind(this);
     }
 
     /**
@@ -28,14 +47,14 @@ export class LLMApp {
      */
     async init() {
         try {
-            // Get all unique providers
-            const allProviders = this.dataProcessor.getUniqueProviders(this.modelData);
+            // Get all unique organizations
+            const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
 
             // Setup color scale once
-            this.chartRenderer.setupColorScale(allProviders);
+            this.chartRenderer.setupColorScale(allOrganizations);
 
-            // Initialize activeProviders with all unique providers
-            this.activeProviders = new Set(allProviders);
+            // Initialize activeOrganizations with all unique organizations
+            this.activeOrganizations = new Set(allOrganizations);
 
             // Process and display data
             await this.loadAndDisplayData();
@@ -56,7 +75,7 @@ export class LLMApp {
      * Load and display the data
      */
     async loadAndDisplayData() {
-        const validData = this.dataProcessor.getValidData(this.modelData, this.activeProviders);
+        const validData = this.dataProcessor.getValidData(this.modelData, this.activeOrganizations, this.excludeFree, this.promptTokens, this.outputTokens);
 
         // Render chart with filtered data
         await this.renderChart(validData);
@@ -82,8 +101,45 @@ export class LLMApp {
             this.uiController.hideTooltip();
         });
 
-        // Provider toggle event handler
-        document.addEventListener('providerToggle', this.handleProviderToggle);
+        // Organization toggle event handler
+        document.addEventListener('organizationToggle', this.handleOrganizationToggle);
+        
+        // Reset organizations event handler
+        document.addEventListener('resetOrganizations', this.handleResetOrganizations);
+
+        // Token input handlers
+        if (this.inputTokenEl) {
+            this.inputTokenEl.addEventListener('input', (e) => {
+                this.promptTokens = Math.max(0, parseInt(e.target.value || 0, 10));
+                this.updateRatioDisplayAndPresets();
+                this.refreshChart();
+            });
+        }
+
+        if (this.outputTokenEl) {
+            this.outputTokenEl.addEventListener('input', (e) => {
+                this.outputTokens = Math.max(0, parseInt(e.target.value || 0, 10));
+                this.updateRatioDisplayAndPresets();
+                this.refreshChart();
+            });
+        }
+
+        // Preset ratio buttons
+        const presetButtons = document.querySelectorAll('.preset-button');
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const prompt = parseInt(btn.dataset.prompt || 0, 10);
+                const output = parseInt(btn.dataset.output || 0, 10);
+                this.promptTokens = prompt;
+                this.outputTokens = output;
+
+                if (this.inputTokenEl) this.inputTokenEl.value = prompt;
+                if (this.outputTokenEl) this.outputTokenEl.value = output;
+
+                this.refreshChart();
+                this.updateRatioDisplayAndPresets();
+            });
+        });
     }
 
     /**
@@ -98,27 +154,37 @@ export class LLMApp {
     }
 
     /**
-     * Handle provider toggle event
+     * Handle organization toggle event
      */
-    handleProviderToggle(event) {
-        const { provider, isChecked } = event.detail;
+    handleOrganizationToggle(event) {
+        const { organization, isChecked } = event.detail;
         if (isChecked) {
-            this.activeProviders.add(provider);
+            this.activeOrganizations.add(organization);
         } else {
-            this.activeProviders.delete(provider);
+            this.activeOrganizations.delete(organization);
         }
         this.refreshChart();
     }
 
     /**
+     * Handle reset organizations event
+     */
+    handleResetOrganizations() {
+        const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
+        this.activeOrganizations = new Set(allOrganizations);
+        this.refreshChart();
+    }
+    
+    /**
      * Refresh the chart with current data
      */
     async refreshChart() {
-        const validData = this.dataProcessor.getValidData(this.modelData, this.activeProviders);
+        const validData = this.dataProcessor.getValidData(this.modelData, this.activeOrganizations, this.excludeFree, this.promptTokens, this.outputTokens);
         await this.renderChart(validData);
         
         // Update legend and Pareto info
         this.updateLegendAndParetoInfo(validData);
+        this.updateRatioDisplayAndPresets();
     }
 
     /**
@@ -142,7 +208,7 @@ export class LLMApp {
      * Update legend and Pareto information
      */
     updateLegendAndParetoInfo(data) {
-        const providers = this.dataProcessor.getUniqueProviders(this.modelData);
+        const organizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
         const paretoData = this.dataProcessor.calculateParetoFrontier(data);
         
         // Set color scale in UI controller
@@ -159,10 +225,38 @@ export class LLMApp {
             this.excludeFree
         );
         
-        // Update legend, passing all providers and the set of active ones
-        this.uiController.updateLegend(providers, this.activeProviders);
+        // Update legend, passing all organizations and the set of active ones
+        this.uiController.updateLegend(organizations, this.activeOrganizations);
         
         // Update Pareto information
         this.uiController.updateParetoInfo(paretoData);
+    }
+
+    /**
+     * Update the ratio display and preset buttons
+     */
+    updateRatioDisplayAndPresets() {
+        if (this.ratioLabelEl) {
+            const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+            const divisor = gcd(this.promptTokens, this.outputTokens);
+            const simpleIn = divisor ? this.promptTokens / divisor : this.promptTokens;
+            const simpleOut = divisor ? this.outputTokens / divisor : this.outputTokens;
+            this.ratioLabelEl.textContent = `${simpleIn}:${simpleOut}`;
+        }
+
+        const currentGCD = (a, b) => b === 0 ? a : currentGCD(b, a % b);
+        const curDiv = currentGCD(this.promptTokens, this.outputTokens);
+        const curIn = curDiv ? this.promptTokens / curDiv : this.promptTokens;
+        const curOut = curDiv ? this.outputTokens / curDiv : this.outputTokens;
+
+        this.presetButtons.forEach(btn => {
+            const prompt = parseInt(btn.dataset.prompt || 0, 10);
+            const output = parseInt(btn.dataset.output || 0, 10);
+            const gcd = currentGCD(prompt, output);
+            const simpIn = gcd ? prompt / gcd : prompt;
+            const simpOut = gcd ? output / gcd : output;
+            const isActive = simpIn === curIn && simpOut === curOut;
+            btn.classList.toggle('active', isActive);
+        });
     }
 }

@@ -1,2709 +1,1313 @@
 {
-  "last_updated": "2025-07-01",
+  "last_updated": "2025-07-16",
   "models": [
     {
-      "Score": 1473.4990849185378,
-      "variance": 6.639390866924926,
-      "rating_q975": 1478.2131369759313,
-      "rating_q025": 1469.077019825055,
-      "Votes": 14062,
-      "Rank (UB)": 1,
-      "Model": "gemini-2.5-pro",
-      "95% CI": {
-        "rating_q025": 1469.077019825055,
-        "rating_q975": 1478.2131369759313
-      }
+      "Model": "Gemini-2.5-Pro",
+      "Score": 1474,
+      "Votes": 19209,
+      "organization": "Google"
     },
     {
-      "Score": 1446.0,
-      "variance": 5.843161478506137,
-      "rating_q975": 1450.4452986674835,
-      "rating_q025": 1441.345170117388,
-      "Votes": 14432,
-      "Rank (UB)": 2,
-      "Model": "gemini-2.5-pro-preview-05-06",
-      "95% CI": {
-        "rating_q025": 1441.345170117388,
-        "rating_q975": 1450.4452986674835
-      }
+      "Model": "Gemini-2.5-Pro-Preview-05-06",
+      "Score": 1446,
+      "Votes": 13692,
+      "organization": "Google"
     },
     {
-      "Score": 1427.8169664839927,
-      "variance": 4.307988494666503,
-      "rating_q975": 1431.875280984477,
-      "rating_q025": 1424.3450668129824,
-      "Votes": 23599,
-      "Rank (UB)": 3,
-      "Model": "chatgpt-4o-latest-20250326",
-      "95% CI": {
-        "rating_q025": 1424.3450668129824,
-        "rating_q975": 1431.875280984477
-      }
+      "Model": "Grok-4-0709",
+      "Score": 1443,
+      "Votes": 5725,
+      "organization": "xAI"
     },
     {
-      "Score": 1426.09897210443,
-      "variance": 5.691130282890396,
-      "rating_q975": 1431.013331588834,
-      "rating_q025": 1421.7211965573836,
-      "Votes": 20095,
-      "Rank (UB)": 3,
+      "Model": "ChatGPT-4o-latest (2025-03-26)",
+      "Score": 1429,
+      "Votes": 26230,
+      "organization": "OpenAI"
+    },
+    {
       "Model": "o3-2025-04-16",
-      "95% CI": {
-        "rating_q025": 1421.7211965573836,
-        "rating_q975": 1431.013331588834
-      }
+      "Score": 1428,
+      "Votes": 25442,
+      "organization": "OpenAI"
     },
     {
-      "Score": 1424.4270604038245,
-      "variance": 6.383662788917014,
-      "rating_q975": 1429.1871321770784,
-      "rating_q025": 1419.369979719526,
-      "Votes": 12396,
-      "Rank (UB)": 3,
-      "Model": "deepseek-r1-0528",
-      "95% CI": {
-        "rating_q025": 1419.369979719526,
-        "rating_q975": 1429.1871321770784
-      }
+      "Model": "DeepSeek-R1-0528",
+      "Score": 1424,
+      "Votes": 14514,
+      "organization": "DeepSeek"
     },
     {
-      "Score": 1422.7065893969225,
-      "variance": 3.4075660919948088,
-      "rating_q975": 1425.9687774102838,
-      "rating_q025": 1419.1395556073335,
-      "Votes": 25067,
-      "Rank (UB)": 3,
-      "Model": "grok-3-preview-02-24",
-      "95% CI": {
-        "rating_q025": 1419.1395556073335,
-        "rating_q975": 1425.9687774102838
-      }
+      "Model": "Grok-3-Preview-02-24",
+      "Score": 1423,
+      "Votes": 27643,
+      "organization": "xAI"
     },
     {
-      "Score": 1417.6068401489708,
-      "variance": 4.163883980623534,
-      "rating_q975": 1421.7925317936895,
-      "rating_q025": 1413.7318150166352,
-      "Votes": 19451,
-      "Rank (UB)": 4,
-      "Model": "gemini-2.5-flash",
-      "95% CI": {
-        "rating_q025": 1413.7318150166352,
-        "rating_q975": 1421.7925317936895
-      }
+      "Model": "Gemini-2.5-Flash",
+      "Score": 1417,
+      "Votes": 24656,
+      "organization": "Google"
     },
     {
-      "Score": 1415.1868767978597,
-      "variance": 6.426508916434186,
-      "rating_q975": 1420.6933533857803,
-      "rating_q025": 1410.6130826985352,
+      "Model": "GPT-4.5-Preview",
+      "Score": 1413,
       "Votes": 15271,
-      "Rank (UB)": 5,
-      "Model": "gpt-4.5-preview-2025-02-27",
-      "95% CI": {
-        "rating_q025": 1410.6130826985352,
-        "rating_q975": 1420.6933533857803
-      }
+      "organization": "OpenAI"
     },
     {
-      "Score": 1398.4909395312038,
-      "variance": 6.124298733882872,
-      "rating_q975": 1403.0641115961573,
-      "rating_q025": 1393.6161086650866,
-      "Votes": 16552,
-      "Rank (UB)": 11,
-      "Model": "gemini-2.5-flash-preview-04-17",
-      "95% CI": {
-        "rating_q025": 1393.6161086650866,
-        "rating_q975": 1403.0641115961573
-      }
+      "Model": "Gemini-2.5-Flash-Preview-04-17",
+      "Score": 1397,
+      "Votes": 18607,
+      "organization": "Google"
     },
     {
-      "Score": 1389.4351138376792,
-      "variance": 5.238522273609691,
-      "rating_q975": 1394.5839494225982,
-      "rating_q025": 1385.5348766198122,
-      "Votes": 14090,
-      "Rank (UB)": 11,
-      "Model": "qwen3-235b-a22b-no-thinking",
-      "95% CI": {
-        "rating_q025": 1385.5348766198122,
-        "rating_q975": 1394.5839494225982
-      }
+      "Model": "Qwen3-235B-A22B-no-thinking",
+      "Score": 1392,
+      "Votes": 19352,
+      "organization": "Alibaba"
     },
     {
-      "Score": 1385.276379503343,
-      "variance": 5.968335397377698,
-      "rating_q975": 1389.9082694105116,
-      "rating_q025": 1380.894001375532,
-      "Votes": 17456,
-      "Rank (UB)": 14,
-      "Model": "gpt-4.1-2025-04-14",
-      "95% CI": {
-        "rating_q025": 1380.894001375532,
-        "rating_q975": 1389.9082694105116
-      }
+      "Model": "GPT-4.1-2025-04-14",
+      "Score": 1384,
+      "Votes": 20325,
+      "organization": "OpenAI"
     },
     {
-      "Score": 1384.1311220804726,
-      "variance": 4.171202134021884,
-      "rating_q975": 1387.4989304250698,
-      "rating_q025": 1380.019631925367,
-      "Votes": 20171,
-      "Rank (UB)": 16,
-      "Model": "deepseek-v3-0324",
-      "95% CI": {
-        "rating_q025": 1380.019631925367,
-        "rating_q975": 1387.4989304250698
-      }
+      "Model": "DeepSeek-V3-0324",
+      "Score": 1382,
+      "Votes": 23031,
+      "organization": "DeepSeek"
     },
     {
-      "Score": 1380.1875577732887,
-      "variance": 11.709413653143478,
-      "rating_q975": 1386.4995477222196,
-      "rating_q025": 1374.6396600817777,
-      "Votes": 8244,
-      "Rank (UB)": 16,
-      "Model": "hunyuan-turbos-20250416",
-      "95% CI": {
-        "rating_q025": 1374.6396600817777,
-        "rating_q975": 1386.4995477222196
-      }
+      "Model": "Hunyuan-Turbos-20250416",
+      "Score": 1378,
+      "Votes": 8950,
+      "organization": "Tencent"
     },
     {
-      "Score": 1375.4026547232588,
-      "variance": 3.9782572894175465,
-      "rating_q975": 1379.885521279991,
-      "rating_q025": 1372.087728237974,
+      "Model": "kimi-k2-0711-preview",
+      "Score": 1374,
+      "Votes": 3166,
+      "organization": "Moonshot"
+    },
+    {
+      "Model": "DeepSeek-R1",
+      "Score": 1373,
       "Votes": 19430,
-      "Rank (UB)": 20,
-      "Model": "deepseek-r1",
-      "95% CI": {
-        "rating_q025": 1372.087728237974,
-        "rating_q975": 1379.885521279991
-      }
+      "organization": "DeepSeek"
     },
     {
-      "Score": 1373.6655822857776,
-      "variance": 15.07888601815421,
-      "rating_q975": 1381.4152738148814,
-      "rating_q025": 1365.7060334056573,
-      "Votes": 6117,
-      "Rank (UB)": 17,
-      "Model": "minimax-m1",
-      "95% CI": {
-        "rating_q025": 1365.7060334056573,
-        "rating_q975": 1381.4152738148814
-      }
+      "Model": "Mistral Medium 3",
+      "Score": 1372,
+      "Votes": 23574,
+      "organization": "Mistral"
     },
     {
-      "Score": 1371.6231136908448,
-      "variance": 2.9897012874672617,
-      "rating_q975": 1374.493349526875,
-      "rating_q025": 1368.4857751868828,
-      "Votes": 19708,
-      "Rank (UB)": 23,
-      "Model": "claude-opus-4-20250514",
-      "95% CI": {
-        "rating_q025": 1368.4857751868828,
-        "rating_q975": 1374.493349526875
-      }
+      "Model": "Claude Opus 4 (thinking-16k)",
+      "Score": 1371,
+      "Votes": 13582,
+      "organization": "Anthropic"
     },
     {
-      "Score": 1368.694385360521,
-      "variance": 5.864919046415783,
-      "rating_q975": 1374.0664307234133,
-      "rating_q025": 1364.214303033108,
-      "Votes": 18439,
-      "Rank (UB)": 23,
-      "Model": "mistral-medium-2505",
-      "95% CI": {
-        "rating_q025": 1364.214303033108,
-        "rating_q975": 1374.0664307234133
-      }
+      "Model": "Claude Opus 4 (20250514)",
+      "Score": 1368,
+      "Votes": 21663,
+      "organization": "Anthropic"
     },
     {
-      "Score": 1367.1987993912862,
-      "variance": 3.0320054881348373,
-      "rating_q975": 1370.3057332333929,
-      "rating_q025": 1363.7282724406846,
-      "Votes": 29038,
-      "Rank (UB)": 24,
+      "Model": "Qwen3-235B-A22B",
+      "Score": 1367,
+      "Votes": 16482,
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "Minimax-M1",
+      "Score": 1364,
+      "Votes": 11524,
+      "organization": "MiniMax"
+    },
+    {
       "Model": "o1-2024-12-17",
-      "95% CI": {
-        "rating_q025": 1363.7282724406846,
-        "rating_q975": 1370.3057332333929
-      }
+      "Score": 1365,
+      "Votes": 29038,
+      "organization": "OpenAI"
     },
     {
-      "Score": 1366.893479175243,
-      "variance": 5.470372204037169,
-      "rating_q975": 1371.2350627223852,
-      "rating_q025": 1362.8924263431607,
-      "Votes": 13817,
-      "Rank (UB)": 24,
-      "Model": "qwen3-235b-a22b",
-      "95% CI": {
-        "rating_q025": 1362.8924263431607,
-        "rating_q975": 1371.2350627223852
-      }
-    },
-    {
-      "Score": 1363.8904556252478,
-      "variance": 2.7609440869684025,
-      "rating_q975": 1366.9679602007118,
-      "rating_q025": 1361.0055959514877,
-      "Votes": 36673,
-      "Rank (UB)": 26,
-      "Model": "gemini-2.0-flash-001",
-      "95% CI": {
-        "rating_q025": 1361.0055959514877,
-        "rating_q975": 1366.9679602007118
-      }
-    },
-    {
-      "Score": 1363.7020906647133,
-      "variance": 4.758039390063246,
-      "rating_q975": 1368.225522387638,
-      "rating_q025": 1359.6844975803162,
-      "Votes": 17150,
-      "Rank (UB)": 26,
       "Model": "o4-mini-2025-04-16",
-      "95% CI": {
-        "rating_q025": 1359.6844975803162,
-        "rating_q975": 1368.225522387638
-      }
+      "Score": 1363,
+      "Votes": 20096,
+      "organization": "OpenAI"
     },
     {
-      "Score": 1363.3650895689416,
-      "variance": 2.7562531911011545,
-      "rating_q975": 1366.8612813266598,
-      "rating_q025": 1359.844312418656,
-      "Votes": 31778,
-      "Rank (UB)": 26,
-      "Model": "qwen2.5-max",
-      "95% CI": {
-        "rating_q025": 1359.844312418656,
-        "rating_q975": 1366.8612813266598
-      }
+      "Model": "Qwen2.5-Max",
+      "Score": 1363,
+      "Votes": 32937,
+      "organization": "Alibaba"
     },
     {
-      "Score": 1361.2677658497514,
-      "variance": 8.188764748379501,
-      "rating_q975": 1366.3674148187627,
-      "rating_q025": 1356.2462357080137,
-      "Votes": 9759,
-      "Rank (UB)": 26,
-      "Model": "grok-3-mini-beta",
-      "95% CI": {
-        "rating_q025": 1356.2462357080137,
-        "rating_q975": 1366.3674148187627
-      }
+      "Model": "Grok-3-mini-high",
+      "Score": 1361,
+      "Votes": 6020,
+      "organization": "xAI"
     },
     {
-      "Score": 1360.508820719994,
-      "variance": 3.422330267776682,
-      "rating_q975": 1363.723973314548,
-      "rating_q025": 1356.7666081464006,
-      "Votes": 25902,
-      "Rank (UB)": 29,
-      "Model": "gemma-3-27b-it",
-      "95% CI": {
-        "rating_q025": 1356.7666081464006,
-        "rating_q975": 1363.723973314548
-      }
+      "Model": "Gemini-2.0-Flash-001",
+      "Score": 1361,
+      "Votes": 37796,
+      "organization": "Google"
     },
     {
-      "Score": 1352.4125494285072,
-      "variance": 2.1809880141758042,
-      "rating_q975": 1355.6030945843881,
-      "rating_q025": 1349.7245345517442,
-      "Votes": 33177,
-      "Rank (UB)": 36,
+      "Model": "Grok-3-Mini-beta",
+      "Score": 1357,
+      "Votes": 12522,
+      "organization": "xAI"
+    },
+    {
+      "Model": "Gemma-3-27B-it",
+      "Score": 1359,
+      "Votes": 28099,
+      "organization": "Google"
+    },
+    {
+      "Model": "Claude Sonnet 4 (thinking-32k)",
+      "Score": 1351,
+      "Votes": 12534,
+      "organization": "Anthropic"
+    },
+    {
       "Model": "o1-preview",
-      "95% CI": {
-        "rating_q025": 1349.7245345517442,
-        "rating_q975": 1355.6030945843881
-      }
+      "Score": 1350,
+      "Votes": 33177,
+      "organization": "OpenAI"
     },
     {
-      "Score": 1345.2386331414134,
-      "variance": 7.505757597954845,
-      "rating_q975": 1350.2211087329993,
-      "rating_q025": 1339.8908257731127,
-      "Votes": 15543,
-      "Rank (UB)": 37,
-      "Model": "claude-sonnet-4-20250514",
-      "95% CI": {
-        "rating_q025": 1339.8908257731127,
-        "rating_q975": 1350.2211087329993
-      }
+      "Model": "Qwen3-32B",
+      "Score": 1344,
+      "Votes": 4074,
+      "organization": "Alibaba"
     },
     {
-      "Score": 1341.8227969713912,
-      "variance": 4.4246977403886385,
-      "rating_q975": 1346.4420458611269,
-      "rating_q025": 1338.3066726041006,
-      "Votes": 19404,
-      "Rank (UB)": 38,
+      "Model": "Claude Sonnet 4 (20250514)",
+      "Score": 1341,
+      "Votes": 17996,
+      "organization": "Anthropic"
+    },
+    {
       "Model": "o3-mini-high",
-      "95% CI": {
-        "rating_q025": 1338.3066726041006,
-        "rating_q975": 1346.4420458611269
-      }
+      "Score": 1340,
+      "Votes": 19404,
+      "organization": "OpenAI"
     },
     {
-      "Score": 1338.277056521563,
-      "variance": 25.304403420284935,
-      "rating_q975": 1348.0467437994787,
-      "rating_q025": 1327.9685343343544,
+      "Model": "GPT-4.1-mini-2025-04-14",
+      "Score": 1337,
+      "Votes": 19404,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Gemma-3-12B-it",
+      "Score": 1337,
       "Votes": 3976,
-      "Rank (UB)": 38,
-      "Model": "gemma-3-12b-it",
-      "95% CI": {
-        "rating_q025": 1327.9685343343544,
-        "rating_q975": 1348.0467437994787
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1337.7948010419016,
-      "variance": 5.176008502372731,
-      "rating_q975": 1341.9427274497455,
-      "rating_q025": 1333.6607411995208,
-      "Votes": 16454,
-      "Rank (UB)": 38,
-      "Model": "gpt-4.1-mini-2025-04-14",
-      "95% CI": {
-        "rating_q025": 1333.6607411995208,
-        "rating_q975": 1341.9427274497455
-      }
+      "Model": "Mistral-Small-2506",
+      "Score": 1335,
+      "Votes": 4940,
+      "organization": "Mistral"
     },
     {
-      "Score": 1335.9331751173545,
-      "variance": 3.2821853136795887,
-      "rating_q975": 1338.8976818180633,
-      "rating_q025": 1331.6129764561936,
+      "Model": "DeepSeek-V3",
+      "Score": 1334,
       "Votes": 22841,
-      "Rank (UB)": 39,
-      "Model": "deepseek-v3",
-      "95% CI": {
-        "rating_q025": 1331.6129764561936,
-        "rating_q975": 1338.8976818180633
-      }
+      "organization": "DeepSeek"
     },
     {
-      "Score": 1334.0390666753199,
-      "variance": 5.520157645801376,
-      "rating_q975": 1338.3905008695417,
-      "rating_q025": 1329.3703496618366,
-      "Votes": 18063,
-      "Rank (UB)": 39,
-      "Model": "qwq-32b",
-      "95% CI": {
-        "rating_q025": 1329.3703496618366,
-        "rating_q975": 1338.3905008695417
-      }
+      "Model": "QwQ-32B",
+      "Score": 1332,
+      "Votes": 19232,
+      "organization": "Alibaba"
     },
     {
-      "Score": 1330.2225265534453,
-      "variance": 2.594936503840898,
-      "rating_q975": 1332.9991602067587,
-      "rating_q025": 1326.480768141436,
-      "Votes": 26104,
-      "Rank (UB)": 41,
-      "Model": "gemini-2.0-flash-lite-preview-02-05",
-      "95% CI": {
-        "rating_q025": 1326.480768141436,
-        "rating_q975": 1332.9991602067587
-      }
-    },
-    {
-      "Score": 1329.6754172344297,
-      "variance": 12.490829433575692,
-      "rating_q975": 1336.5343180828847,
-      "rating_q025": 1322.982475198565,
-      "Votes": 6343,
-      "Rank (UB)": 40,
-      "Model": "amazon-nova-experimental-chat-05-14",
-      "95% CI": {
-        "rating_q025": 1322.982475198565,
-        "rating_q975": 1336.5343180828847
-      }
-    },
-    {
-      "Score": 1328.4429845877432,
-      "variance": 15.308714545451034,
-      "rating_q975": 1336.748859447807,
-      "rating_q025": 1321.9562720698907,
-      "Votes": 6028,
-      "Rank (UB)": 40,
-      "Model": "glm-4-plus-0111",
-      "95% CI": {
-        "rating_q025": 1321.9562720698907,
-        "rating_q975": 1336.748859447807
-      }
-    },
-    {
-      "Score": 1327.8165181665481,
-      "variance": 11.195443669246071,
-      "rating_q975": 1333.5961111162126,
-      "rating_q025": 1319.8503978057115,
+      "Model": "Qwen-Plus-0125",
+      "Score": 1325,
       "Votes": 6055,
-      "Rank (UB)": 41,
-      "Model": "qwen-plus-0125",
-      "95% CI": {
-        "rating_q025": 1319.8503978057115,
-        "rating_q975": 1333.5961111162126
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1326.9753093635777,
-      "variance": 3.3261940044988116,
-      "rating_q975": 1329.6683614777698,
-      "rating_q025": 1323.2353158393892,
-      "Votes": 23879,
-      "Rank (UB)": 43,
-      "Model": "command-a-03-2025",
-      "95% CI": {
-        "rating_q025": 1323.2353158393892,
-        "rating_q975": 1329.6683614777698
-      }
+      "Model": "Gemini-2.0-Flash-Lite",
+      "Score": 1328,
+      "Votes": 26104,
+      "organization": "Google"
     },
     {
-      "Score": 1322.2536675001138,
-      "variance": 14.226479858775269,
-      "rating_q975": 1330.1242921006883,
-      "rating_q025": 1315.8891526842826,
+      "Model": "Command A (03-2025)",
+      "Score": 1327,
+      "Votes": 26540,
+      "organization": "Cohere"
+    },
+    {
+      "Model": "GLM-4-Plus-0111",
+      "Score": 1326,
+      "Votes": 6028,
+      "organization": "Zhipu"
+    },
+    {
+      "Model": "Amazon-Nova-Experimental-Chat-05-14",
+      "Score": 1325,
+      "Votes": 9753,
+      "organization": "Amazon"
+    },
+    {
+      "Model": "Llama-3.1-Nemotron-Ultra-253B-v1",
+      "Score": 1321,
+      "Votes": 2656,
+      "organization": "Nvidia"
+    },
+    {
+      "Model": "Qwen3-30B-A3B",
+      "Score": 1321,
+      "Votes": 16285,
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "Step-2-16K-Exp",
+      "Score": 1320,
       "Votes": 5126,
-      "Rank (UB)": 43,
-      "Model": "step-2-16k-exp-202412",
-      "95% CI": {
-        "rating_q025": 1315.8891526842826,
-        "rating_q975": 1330.1242921006883
-      }
+      "organization": "StepFun"
     },
     {
-      "Score": 1321.6755828459518,
-      "variance": 2.5335770873645,
-      "rating_q975": 1324.6958636944146,
-      "rating_q025": 1318.7428283984368,
-      "Votes": 36135,
-      "Rank (UB)": 46,
-      "Model": "o3-mini",
-      "95% CI": {
-        "rating_q025": 1318.7428283984368,
-        "rating_q975": 1324.6958636944146
-      }
-    },
-    {
-      "Score": 1321.362433455325,
-      "variance": 1.533114276819843,
-      "rating_q975": 1323.3874415924627,
-      "rating_q025": 1318.723440346583,
-      "Votes": 54951,
-      "Rank (UB)": 46,
-      "Model": "o1-mini",
-      "95% CI": {
-        "rating_q025": 1318.723440346583,
-        "rating_q975": 1323.3874415924627
-      }
-    },
-    {
-      "Score": 1319.9473877535959,
-      "variance": 34.09813278304223,
-      "rating_q975": 1330.7108997401251,
-      "rating_q025": 1307.5479514260514,
+      "Model": "Hunyuan-TurboS-20250226",
+      "Score": 1318,
       "Votes": 2452,
-      "Rank (UB)": 42,
-      "Model": "hunyuan-turbos-20250226",
-      "95% CI": {
-        "rating_q025": 1307.5479514260514,
-        "rating_q975": 1330.7108997401251
-      }
+      "organization": "Tencent"
     },
     {
-      "Score": 1319.6079826328737,
-      "variance": 1.3271101649863797,
-      "rating_q975": 1322.1663368347492,
-      "rating_q025": 1317.840767223804,
-      "Votes": 58645,
-      "Rank (UB)": 48,
-      "Model": "gemini-1.5-pro-002",
-      "95% CI": {
-        "rating_q025": 1317.840767223804,
-        "rating_q975": 1322.1663368347492
-      }
-    },
-    {
-      "Score": 1315.2052250317765,
-      "variance": 3.1169170789463014,
-      "rating_q975": 1319.0095085583164,
-      "rating_q025": 1312.6898995696913,
-      "Votes": 25145,
-      "Rank (UB)": 50,
-      "Model": "claude-3-7-sonnet-20250219-thinking-32k",
-      "95% CI": {
-        "rating_q025": 1312.6898995696913,
-        "rating_q975": 1319.0095085583164
-      }
-    },
-    {
-      "Score": 1313.912623952285,
-      "variance": 37.34106722268919,
-      "rating_q975": 1327.9209216352908,
-      "rating_q025": 1305.7439863985335,
+      "Model": "Llama-3.3-Nemotron-Super-49B-v1",
+      "Score": 1312,
       "Votes": 2371,
-      "Rank (UB)": 45,
-      "Model": "llama-3.3-nemotron-49b-super-v1",
-      "95% CI": {
-        "rating_q025": 1305.7439863985335,
-        "rating_q975": 1327.9209216352908
-      }
+      "organization": "Nvidia"
     },
     {
-      "Score": 1313.636688995846,
-      "variance": 31.706687562449225,
-      "rating_q975": 1324.2199484443602,
-      "rating_q025": 1303.0554598284086,
+      "Model": "o1-mini",
+      "Score": 1319,
+      "Votes": 54951,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "o3-mini",
+      "Score": 1318,
+      "Votes": 38885,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Gemini-1.5-Pro-002",
+      "Score": 1317,
+      "Votes": 58645,
+      "organization": "Google"
+    },
+    {
+      "Model": "Hunyuan-Turbo-0110",
+      "Score": 1311,
       "Votes": 2510,
-      "Rank (UB)": 46,
-      "Model": "hunyuan-turbo-0110",
-      "95% CI": {
-        "rating_q025": 1303.0554598284086,
-        "rating_q975": 1324.2199484443602
-      }
+      "organization": "Tencent"
     },
     {
-      "Score": 1309.2104305857426,
-      "variance": 13.538638134020498,
-      "rating_q975": 1316.1361089587563,
-      "rating_q025": 1301.506879894739,
-      "Votes": 6311,
-      "Rank (UB)": 53,
-      "Model": "gemma-3n-e4b-it",
-      "95% CI": {
-        "rating_q025": 1301.506879894739,
-        "rating_q975": 1316.1361089587563
-      }
+      "Model": "Claude 3.7 Sonnet (thinking-32k)",
+      "Score": 1312,
+      "Votes": 28145,
+      "organization": "Anthropic"
     },
     {
-      "Score": 1308.4464037275309,
-      "variance": 2.869765226289798,
-      "rating_q975": 1311.4128844751237,
-      "rating_q025": 1304.7852075343415,
-      "Votes": 29775,
-      "Rank (UB)": 57,
-      "Model": "claude-3-7-sonnet-20250219",
-      "95% CI": {
-        "rating_q025": 1304.7852075343415,
-        "rating_q975": 1311.4128844751237
-      }
+      "Model": "Gemma-3n-e4b-it",
+      "Score": 1305,
+      "Votes": 9350,
+      "organization": "Google"
     },
     {
-      "Score": 1305.2992654388158,
-      "variance": 1.1636072841324239,
-      "rating_q975": 1307.0471466871136,
-      "rating_q025": 1303.22683556947,
+      "Model": "Claude 3.7 Sonnet",
+      "Score": 1305,
+      "Votes": 32904,
+      "organization": "Anthropic"
+    },
+    {
+      "Model": "Grok-2-08-13",
+      "Score": 1303,
       "Votes": 67084,
-      "Rank (UB)": 58,
-      "Model": "grok-2-2024-08-13",
-      "95% CI": {
-        "rating_q025": 1303.22683556947,
-        "rating_q975": 1307.0471466871136
-      }
+      "organization": "xAI"
     },
     {
-      "Score": 1304.5137978280268,
-      "variance": 2.244209782977572,
-      "rating_q975": 1307.0066054175927,
-      "rating_q025": 1300.8082292190102,
+      "Model": "Yi-Lightning",
+      "Score": 1302,
       "Votes": 28968,
-      "Rank (UB)": 58,
-      "Model": "yi-lightning",
-      "95% CI": {
-        "rating_q025": 1300.8082292190102,
-        "rating_q975": 1307.0066054175927
-      }
+      "organization": "01 AI"
     },
     {
-      "Score": 1302.4438885103807,
-      "variance": 0.8433927548600856,
-      "rating_q975": 1304.1193311995967,
-      "rating_q025": 1301.0059157545331,
+      "Model": "GPT-4o-2024-05-13",
+      "Score": 1300,
       "Votes": 117747,
-      "Rank (UB)": 60,
-      "Model": "gpt-4o-2024-05-13",
-      "95% CI": {
-        "rating_q025": 1301.0059157545331,
-        "rating_q975": 1304.1193311995967
-      }
+      "organization": "OpenAI"
     },
     {
-      "Score": 1301.048545234696,
-      "variance": 1.3283358321227852,
-      "rating_q975": 1303.109130875321,
-      "rating_q025": 1298.4990695087663,
-      "Votes": 77078,
-      "Rank (UB)": 61,
-      "Model": "claude-3-5-sonnet-20241022",
-      "95% CI": {
-        "rating_q025": 1298.4990695087663,
-        "rating_q975": 1303.109130875321
-      }
-    },
-    {
-      "Score": 1299.6497235495187,
-      "variance": 8.241146489494053,
-      "rating_q975": 1304.6973556536184,
-      "rating_q025": 1293.653456010314,
+      "Model": "Qwen2.5-plus-1127",
+      "Score": 1297,
       "Votes": 10715,
-      "Rank (UB)": 60,
-      "Model": "qwen2.5-plus-1127",
-      "95% CI": {
-        "rating_q025": 1293.653456010314,
-        "rating_q975": 1304.6973556536184
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1296.590854348215,
-      "variance": 10.037577014404846,
-      "rating_q975": 1301.0737630238007,
-      "rating_q025": 1289.706645421397,
-      "Votes": 7243,
-      "Rank (UB)": 63,
-      "Model": "deepseek-v2.5-1210",
-      "95% CI": {
-        "rating_q025": 1289.706645421397,
-        "rating_q975": 1301.0737630238007
-      }
-    },
-    {
-      "Score": 1292.8684447892706,
-      "variance": 2.441138112890903,
-      "rating_q975": 1295.3780541564354,
-      "rating_q025": 1289.7546081588664,
-      "Votes": 26074,
-      "Rank (UB)": 66,
-      "Model": "athene-v2-chat",
-      "95% CI": {
-        "rating_q025": 1289.7546081588664,
-        "rating_q975": 1295.3780541564354
-      }
-    },
-    {
-      "Score": 1292.8110293119787,
-      "variance": 5.599406418612376,
-      "rating_q975": 1296.7010872670694,
-      "rating_q025": 1287.7773666890591,
-      "Votes": 17075,
-      "Rank (UB)": 66,
-      "Model": "llama-4-maverick-17b-128e-instruct",
-      "95% CI": {
-        "rating_q025": 1287.7773666890591,
-        "rating_q975": 1296.7010872670694
-      }
-    },
-    {
-      "Score": 1292.6969020596516,
-      "variance": 18.486278054422563,
-      "rating_q975": 1301.110380087118,
-      "rating_q025": 1284.3789828853335,
+      "Model": "Gemma-3-4B-it",
+      "Score": 1291,
       "Votes": 4321,
-      "Rank (UB)": 63,
-      "Model": "gemma-3-4b-it",
-      "95% CI": {
-        "rating_q025": 1284.3789828853335,
-        "rating_q975": 1301.110380087118
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1291.416698646996,
-      "variance": 2.49834771832145,
-      "rating_q975": 1294.621995794098,
-      "rating_q025": 1287.9713670457159,
-      "Votes": 27788,
-      "Rank (UB)": 66,
-      "Model": "glm-4-plus",
-      "95% CI": {
-        "rating_q025": 1287.9713670457159,
-        "rating_q975": 1294.621995794098
-      }
+      "Model": "Claude 3.5 Sonnet (20241022)",
+      "Score": 1298,
+      "Votes": 79949,
+      "organization": "Anthropic"
     },
     {
-      "Score": 1289.2673264627474,
-      "variance": 21.704730723888225,
-      "rating_q975": 1298.534063596466,
-      "rating_q025": 1279.2806817230903,
+      "Model": "Deepseek-v2.5-1210",
+      "Score": 1294,
+      "Votes": 7243,
+      "organization": "DeepSeek"
+    },
+    {
+      "Model": "Llama-4-Maverick-17B-128E-Instruct",
+      "Score": 1292,
+      "Votes": 20106,
+      "organization": "Meta"
+    },
+    {
+      "Model": "Hunyuan-Large-2025-02-10",
+      "Score": 1287,
       "Votes": 3856,
-      "Rank (UB)": 65,
-      "Model": "hunyuan-large-2025-02-10",
-      "95% CI": {
-        "rating_q025": 1279.2806817230903,
-        "rating_q975": 1298.534063596466
-      }
+      "organization": "Tencent"
     },
     {
-      "Score": 1289.1294924025897,
-      "variance": 0.9192984438964948,
-      "rating_q975": 1291.3659748398225,
-      "rating_q025": 1287.4877170952366,
-      "Votes": 72531,
-      "Rank (UB)": 67,
-      "Model": "gpt-4o-mini-2024-07-18",
-      "95% CI": {
-        "rating_q025": 1287.4877170952366,
-        "rating_q975": 1291.3659748398225
-      }
+      "Model": "Athene-v2-Chat-72B",
+      "Score": 1290,
+      "Votes": 26074,
+      "organization": "NexusFlow"
     },
     {
-      "Score": 1288.9445431569284,
-      "variance": 2.1039185923449035,
-      "rating_q975": 1291.5221778842335,
-      "rating_q025": 1285.4986453872825,
-      "Votes": 37021,
-      "Rank (UB)": 67,
-      "Model": "gemini-1.5-flash-002",
-      "95% CI": {
-        "rating_q025": 1285.4986453872825,
-        "rating_q975": 1291.5221778842335
-      }
-    },
-    {
-      "Score": 1288.3586164998096,
-      "variance": 13.224478772475818,
-      "rating_q975": 1294.9074865747527,
-      "rating_q025": 1281.432509919224,
+      "Model": "GPT-4.1-nano-2025-04-14",
+      "Score": 1287,
       "Votes": 6302,
-      "Rank (UB)": 66,
-      "Model": "gpt-4.1-nano-2025-04-14",
-      "95% CI": {
-        "rating_q025": 1281.432509919224,
-        "rating_q975": 1294.9074865747527
-      }
+      "organization": "OpenAI"
     },
     {
-      "Score": 1286.399991384941,
-      "variance": 1.80483128813107,
-      "rating_q975": 1289.048369862108,
-      "rating_q025": 1283.8440290259816,
-      "Votes": 43788,
-      "Rank (UB)": 69,
-      "Model": "llama-3.1-405b-instruct-bf16",
-      "95% CI": {
-        "rating_q025": 1283.8440290259816,
-        "rating_q975": 1289.048369862108
-      }
+      "Model": "GLM-4-Plus",
+      "Score": 1289,
+      "Votes": 27788,
+      "organization": "Zhipu AI"
     },
     {
-      "Score": 1285.996814098994,
-      "variance": 10.25072472999025,
-      "rating_q975": 1292.2999439559949,
-      "rating_q025": 1279.6035348957296,
+      "Model": "GPT-4o-mini-2024-07-18",
+      "Score": 1287,
+      "Votes": 72423,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Gemini-1.5-Flash-002",
+      "Score": 1287,
+      "Votes": 37021,
+      "organization": "Google"
+    },
+    {
+      "Model": "Llama-3.1-Nemotron-70B-Instruct",
+      "Score": 1284,
       "Votes": 7577,
-      "Rank (UB)": 67,
-      "Model": "llama-3.1-nemotron-70b-instruct",
-      "95% CI": {
-        "rating_q025": 1279.6035348957296,
-        "rating_q975": 1292.2999439559949
-      }
+      "organization": "Nvidia"
     },
     {
-      "Score": 1285.671065348664,
-      "variance": 1.1432152341231059,
-      "rating_q975": 1287.8571175624154,
-      "rating_q025": 1283.7972820071452,
-      "Votes": 86159,
-      "Rank (UB)": 70,
-      "Model": "claude-3-5-sonnet-20240620",
-      "95% CI": {
-        "rating_q025": 1283.7972820071452,
-        "rating_q975": 1287.8571175624154
-      }
+      "Model": "Meta-Llama-3.1-405B-Instruct-bf16",
+      "Score": 1284,
+      "Votes": 43788,
+      "organization": "Meta"
     },
     {
-      "Score": 1284.9624527962835,
-      "variance": 1.1334128996096042,
-      "rating_q975": 1287.0439786107745,
-      "rating_q025": 1283.1221435108705,
+      "Model": "Meta-Llama-3.1-405B-Instruct-fp8",
+      "Score": 1283,
       "Votes": 63038,
-      "Rank (UB)": 72,
-      "Model": "llama-3.1-405b-instruct-fp8",
-      "95% CI": {
-        "rating_q025": 1283.1221435108705,
-        "rating_q975": 1287.0439786107745
-      }
+      "organization": "Meta"
     },
     {
-      "Score": 1283.9947178626508,
-      "variance": 1.5397955522505877,
-      "rating_q975": 1286.3659390799362,
-      "rating_q025": 1281.4939577800715,
+      "Model": "Claude 3.5 Sonnet (20240620)",
+      "Score": 1283,
+      "Votes": 86159,
+      "organization": "Anthropic"
+    },
+    {
+      "Model": "Gemini Advanced App (2024-05-14)",
+      "Score": 1282,
       "Votes": 52144,
-      "Rank (UB)": 72,
-      "Model": "gemini-advanced-0514",
-      "95% CI": {
-        "rating_q025": 1281.4939577800715,
-        "rating_q975": 1286.3659390799362
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1283.648521750753,
-      "variance": 1.446150390983149,
-      "rating_q975": 1286.0891605237844,
-      "rating_q025": 1281.7783826302616,
+      "Model": "Llama-4-Scout-17B-16E-Instruct",
+      "Score": 1279,
+      "Votes": 9771,
+      "organization": "Meta"
+    },
+    {
+      "Model": "Grok-2-Mini-08-13",
+      "Score": 1281,
       "Votes": 55442,
-      "Rank (UB)": 72,
-      "Model": "grok-2-mini-2024-08-13",
-      "95% CI": {
-        "rating_q025": 1281.7783826302616,
-        "rating_q975": 1286.0891605237844
-      }
+      "organization": "xAI"
     },
     {
-      "Score": 1282.7044969420283,
-      "variance": 1.8569133876478539,
-      "rating_q975": 1285.2560206820938,
-      "rating_q025": 1280.1808920329424,
-      "Votes": 47973,
-      "Rank (UB)": 73,
-      "Model": "gpt-4o-2024-08-06",
-      "95% CI": {
-        "rating_q025": 1280.1808920329424,
-        "rating_q975": 1285.2560206820938
-      }
-    },
-    {
-      "Score": 1280.795183603639,
-      "variance": 5.0229193392947,
-      "rating_q975": 1285.0675662479473,
-      "rating_q025": 1276.44815681518,
-      "Votes": 17432,
-      "Rank (UB)": 73,
-      "Model": "qwen-max-0919",
-      "95% CI": {
-        "rating_q025": 1276.44815681518,
-        "rating_q975": 1285.0675662479473
-      }
-    },
-    {
-      "Score": 1278.128850809691,
-      "variance": 21.862264122227753,
-      "rating_q975": 1285.0218470461143,
-      "rating_q025": 1269.5709752599319,
+      "Model": "Hunyuan-Standard-2025-02-10",
+      "Score": 1276,
       "Votes": 4014,
-      "Rank (UB)": 73,
-      "Model": "hunyuan-standard-2025-02-10",
-      "95% CI": {
-        "rating_q025": 1269.5709752599319,
-        "rating_q975": 1285.0218470461143
-      }
+      "organization": "Tencent"
     },
     {
-      "Score": 1277.325852391698,
-      "variance": 1.03184290270236,
-      "rating_q975": 1279.0603912600725,
-      "rating_q025": 1275.1585235832008,
+      "Model": "GPT-4o-2024-08-06",
+      "Score": 1280,
+      "Votes": 47973,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Qwen-Max-0919",
+      "Score": 1278,
+      "Votes": 17432,
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "Gemini-1.5-Pro-001",
+      "Score": 1275,
       "Votes": 82435,
-      "Rank (UB)": 84,
-      "Model": "gemini-1.5-pro-001",
-      "95% CI": {
-        "rating_q025": 1275.1585235832008,
-        "rating_q975": 1279.0603912600725
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1275.5442245941144,
-      "variance": 3.4590363190475952,
-      "rating_q975": 1278.937114877562,
-      "rating_q025": 1271.8004816431098,
+      "Model": "Deepseek-v2.5",
+      "Score": 1273,
       "Votes": 26344,
-      "Rank (UB)": 84,
-      "Model": "deepseek-v2.5",
-      "95% CI": {
-        "rating_q025": 1271.8004816431098,
-        "rating_q975": 1278.937114877562
-      }
+      "organization": "DeepSeek"
     },
     {
-      "Score": 1274.9750105939481,
-      "variance": 1.9643006293419283,
-      "rating_q975": 1277.2307908320838,
-      "rating_q025": 1271.7182447849978,
-      "Votes": 47256,
-      "Rank (UB)": 85,
-      "Model": "llama-3.3-70b-instruct",
-      "95% CI": {
-        "rating_q025": 1271.7182447849978,
-        "rating_q975": 1277.2307908320838
-      }
+      "Model": "Llama-3.3-70B-Instruct",
+      "Score": 1273,
+      "Votes": 48583,
+      "organization": "Meta"
     },
     {
-      "Score": 1274.5569189430998,
-      "variance": 1.5356315456296639,
-      "rating_q975": 1277.0309399904627,
-      "rating_q025": 1272.110849932218,
+      "Model": "Qwen2.5-72B-Instruct",
+      "Score": 1272,
       "Votes": 41519,
-      "Rank (UB)": 85,
-      "Model": "qwen2.5-72b-instruct",
-      "95% CI": {
-        "rating_q025": 1272.110849932218,
-        "rating_q975": 1277.0309399904627
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1273.8908358529334,
-      "variance": 0.8312815089062755,
-      "rating_q975": 1275.7287202809546,
-      "rating_q025": 1272.4052935863253,
+      "Model": "GPT-4-Turbo-2024-04-09",
+      "Score": 1271,
       "Votes": 102133,
-      "Rank (UB)": 86,
-      "Model": "gpt-4-turbo-2024-04-09",
-      "95% CI": {
-        "rating_q025": 1272.4052935863253,
-        "rating_q975": 1275.7287202809546
-      }
+      "organization": "OpenAI"
     },
     {
-      "Score": 1273.4095741886044,
-      "variance": 15.228682001269458,
-      "rating_q975": 1280.0134958327008,
-      "rating_q025": 1266.1963622193873,
-      "Votes": 6154,
-      "Rank (UB)": 82,
-      "Model": "mistral-small-3.1-24b-instruct-2503",
-      "95% CI": {
-        "rating_q025": 1266.1963622193873,
-        "rating_q975": 1280.0134958327008
-      }
+      "Model": "Mistral-Small-3.1-24B-Instruct-2503",
+      "Score": 1268,
+      "Votes": 9738,
+      "organization": "Mistral"
     },
     {
-      "Score": 1269.01981674141,
-      "variance": 1.7547342436678084,
-      "rating_q975": 1271.4549728479142,
-      "rating_q025": 1266.4776770000435,
+      "Model": "Mistral-Large-2407",
+      "Score": 1267,
       "Votes": 48217,
-      "Rank (UB)": 92,
-      "Model": "mistral-large-2407",
-      "95% CI": {
-        "rating_q025": 1266.4776770000435,
-        "rating_q975": 1271.4549728479142
-      }
+      "organization": "Mistral"
     },
     {
-      "Score": 1267.7992121057437,
-      "variance": 4.3509022980730565,
-      "rating_q975": 1271.61696739573,
-      "rating_q025": 1263.9828947596523,
+      "Model": "Athene-70B",
+      "Score": 1265,
       "Votes": 20580,
-      "Rank (UB)": 92,
-      "Model": "athene-70b-0725",
-      "95% CI": {
-        "rating_q025": 1263.9828947596523,
-        "rating_q975": 1271.61696739573
-      }
+      "organization": "NexusFlow"
     },
     {
-      "Score": 1267.414811566211,
-      "variance": 1.3419503048455104,
-      "rating_q975": 1269.9659849586817,
-      "rating_q025": 1265.4494749586495,
-      "Votes": 103748,
-      "Rank (UB)": 92,
-      "Model": "gpt-4-1106-preview",
-      "95% CI": {
-        "rating_q025": 1265.4494749586495,
-        "rating_q975": 1269.9659849586817
-      }
-    },
-    {
-      "Score": 1266.340379548335,
-      "variance": 2.60990059556755,
-      "rating_q975": 1270.1799822942992,
-      "rating_q025": 1263.7386733876988,
-      "Votes": 29633,
-      "Rank (UB)": 92,
-      "Model": "mistral-large-2411",
-      "95% CI": {
-        "rating_q025": 1263.7386733876988,
-        "rating_q975": 1270.1799822942992
-      }
-    },
-    {
-      "Score": 1265.1874306603838,
-      "variance": 1.3336171910441341,
-      "rating_q975": 1267.160961094662,
-      "rating_q025": 1263.0106491132037,
-      "Votes": 58637,
-      "Rank (UB)": 93,
-      "Model": "llama-3.1-70b-instruct",
-      "95% CI": {
-        "rating_q025": 1263.0106491132037,
-        "rating_q975": 1267.160961094662
-      }
-    },
-    {
-      "Score": 1264.723508241334,
-      "variance": 0.538926645037782,
-      "rating_q975": 1266.2448238122745,
-      "rating_q025": 1263.4098498214128,
-      "Votes": 202641,
-      "Rank (UB)": 94,
-      "Model": "claude-3-opus-20240229",
-      "95% CI": {
-        "rating_q025": 1263.4098498214128,
-        "rating_q975": 1266.2448238122745
-      }
-    },
-    {
-      "Score": 1262.4489150919292,
-      "variance": 3.5755821945241704,
-      "rating_q975": 1266.4258140784789,
-      "rating_q025": 1259.0241961077993,
-      "Votes": 26371,
-      "Rank (UB)": 94,
-      "Model": "amazon-nova-pro-v1.0",
-      "95% CI": {
-        "rating_q025": 1259.0241961077993,
-        "rating_q975": 1266.4258140784789
-      }
-    },
-    {
-      "Score": 1262.3316883776843,
-      "variance": 1.0237557272110005,
-      "rating_q975": 1264.368900224953,
-      "rating_q025": 1260.1590191950074,
-      "Votes": 97079,
-      "Rank (UB)": 96,
-      "Model": "gpt-4-0125-preview",
-      "95% CI": {
-        "rating_q025": 1260.1590191950074,
-        "rating_q975": 1264.368900224953
-      }
-    },
-    {
-      "Score": 1261.7449128157195,
-      "variance": 23.84871916613222,
-      "rating_q975": 1270.1820413209705,
-      "rating_q025": 1252.8783816156733,
+      "Model": "Llama-3.1-Tulu-3-70B",
+      "Score": 1259,
       "Votes": 3010,
-      "Rank (UB)": 92,
-      "Model": "llama-3.1-tulu-3-70b",
-      "95% CI": {
-        "rating_q025": 1252.8783816156733,
-        "rating_q975": 1270.1820413209705
-      }
+      "organization": "Ai2"
     },
     {
-      "Score": 1261.7347135918963,
-      "variance": 21.67665829244658,
-      "rating_q975": 1270.8912404500056,
-      "rating_q025": 1251.103809374283,
-      "Votes": 3602,
-      "Rank (UB)": 92,
+      "Model": "GPT-4-1106-preview",
+      "Score": 1265,
+      "Votes": 103748,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Mistral-Large-2411",
+      "Score": 1264,
+      "Votes": 29633,
+      "organization": "Mistral"
+    },
+    {
+      "Model": "Meta-Llama-3.1-70B-Instruct",
+      "Score": 1263,
+      "Votes": 58637,
+      "organization": "Meta"
+    },
+    {
+      "Model": "Claude 3 Opus",
+      "Score": 1262,
+      "Votes": 202641,
+      "organization": "Anthropic"
+    },
+    {
+      "Model": "Amazon Nova Pro 1.0",
+      "Score": 1260,
+      "Votes": 26371,
+      "organization": "Amazon"
+    },
+    {
+      "Model": "GPT-4-0125-preview",
+      "Score": 1260,
+      "Votes": 97079,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Hunyuan-Large-Vision",
+      "Score": 1255,
+      "Votes": 4995,
+      "organization": "Tencent"
+    },
+    {
       "Model": "magistral-medium-2506",
-      "95% CI": {
-        "rating_q025": 1251.103809374283,
-        "rating_q975": 1270.8912404500056
-      }
+      "Score": 1253,
+      "Votes": 5732,
+      "organization": "Mistral"
     },
     {
-      "Score": 1256.553217717963,
-      "variance": 2.0562155303867535,
-      "rating_q975": 1259.3258469116931,
-      "rating_q025": 1254.2909589610156,
-      "Votes": 48556,
-      "Rank (UB)": 101,
-      "Model": "claude-3-5-haiku-20241022",
-      "95% CI": {
-        "rating_q025": 1254.2909589610156,
-        "rating_q975": 1259.3258469116931
-      }
+      "Model": "Claude 3.5 Haiku (20241022)",
+      "Score": 1254,
+      "Votes": 51504,
+      "organization": "Anthropic"
     },
     {
-      "Score": 1252.5681209021768,
-      "variance": 8.087498288393503,
-      "rating_q975": 1259.3341439903718,
-      "rating_q025": 1248.7885857189654,
+      "Model": "Reka-Core-20240904",
+      "Score": 1250,
       "Votes": 7948,
-      "Rank (UB)": 101,
-      "Model": "reka-core-20240904",
-      "95% CI": {
-        "rating_q025": 1248.7885857189654,
-        "rating_q975": 1259.3341439903718
-      }
+      "organization": "Reka AI"
     },
     {
-      "Score": 1244.324463097149,
-      "variance": 1.4560872560946578,
-      "rating_q975": 1246.5603664780551,
-      "rating_q025": 1242.1238779574046,
+      "Model": "Gemini-1.5-Flash-001",
+      "Score": 1242,
       "Votes": 65661,
-      "Rank (UB)": 107,
-      "Model": "gemini-1.5-flash-001",
-      "95% CI": {
-        "rating_q025": 1242.1238779574046,
-        "rating_q975": 1246.5603664780551
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1239.091800576421,
-      "variance": 7.371146813150361,
-      "rating_q975": 1245.263216479496,
-      "rating_q025": 1235.0010655461,
+      "Model": "Jamba-1.5-Large",
+      "Score": 1237,
       "Votes": 9125,
-      "Rank (UB)": 107,
-      "Model": "jamba-1.5-large",
-      "95% CI": {
-        "rating_q025": 1235.0010655461,
-        "rating_q975": 1245.263216479496
-      }
+      "organization": "AI21 Labs"
     },
     {
-      "Score": 1237.291389975768,
-      "variance": 1.3645426295443677,
-      "rating_q975": 1239.507557731366,
-      "rating_q025": 1235.1206234862618,
+      "Model": "Gemma-2-27B-it",
+      "Score": 1235,
       "Votes": 79538,
-      "Rank (UB)": 110,
-      "Model": "gemma-2-27b-it",
-      "95% CI": {
-        "rating_q025": 1235.1206234862618,
-        "rating_q975": 1239.507557731366
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1235.8722955250341,
-      "variance": 26.522664511064598,
-      "rating_q975": 1244.3959916817835,
-      "rating_q025": 1224.1765684180064,
-      "Votes": 3905,
-      "Rank (UB)": 107,
-      "Model": "hunyuan-large-vision",
-      "95% CI": {
-        "rating_q025": 1224.1765684180064,
-        "rating_q975": 1244.3959916817835
-      }
-    },
-    {
-      "Score": 1234.7460758968732,
-      "variance": 13.701954169101882,
-      "rating_q975": 1241.2788166716994,
-      "rating_q025": 1227.986335342935,
-      "Votes": 5730,
-      "Rank (UB)": 109,
-      "Model": "qwen2.5-coder-32b-instruct",
-      "95% CI": {
-        "rating_q025": 1227.986335342935,
-        "rating_q975": 1241.2788166716994
-      }
-    },
-    {
-      "Score": 1234.7143175351816,
-      "variance": 6.226929895640335,
-      "rating_q975": 1239.8880329018214,
-      "rating_q025": 1229.8461044524217,
+      "Model": "Mistral-Small-24B-Instruct-2501",
+      "Score": 1233,
       "Votes": 15321,
-      "Rank (UB)": 110,
-      "Model": "mistral-small-24b-instruct-2501",
-      "95% CI": {
-        "rating_q025": 1229.8461044524217,
-        "rating_q975": 1239.8880329018214
-      }
+      "organization": "Mistral"
     },
     {
-      "Score": 1234.3347344949989,
-      "variance": 4.598606381070344,
-      "rating_q975": 1238.8251349292138,
-      "rating_q025": 1230.2973558123485,
+      "Model": "Qwen2.5-Coder-32B-Instruct",
+      "Score": 1232,
+      "Votes": 5730,
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "Amazon Nova Lite 1.0",
+      "Score": 1232,
       "Votes": 20646,
-      "Rank (UB)": 110,
-      "Model": "amazon-nova-lite-v1.0",
-      "95% CI": {
-        "rating_q025": 1230.2973558123485,
-        "rating_q975": 1238.8251349292138
-      }
+      "organization": "Amazon"
     },
     {
-      "Score": 1233.5528491136054,
-      "variance": 7.902313680037883,
-      "rating_q975": 1239.5527040311188,
-      "rating_q025": 1228.965816422162,
+      "Model": "Gemma-2-9B-it-SimPO",
+      "Score": 1231,
       "Votes": 10548,
-      "Rank (UB)": 110,
-      "Model": "gemma-2-9b-it-simpo",
-      "95% CI": {
-        "rating_q025": 1228.965816422162,
-        "rating_q975": 1239.5527040311188
-      }
+      "organization": "Princeton"
     },
     {
-      "Score": 1232.759400762236,
-      "variance": 7.020234556195992,
-      "rating_q975": 1237.4438624967809,
-      "rating_q025": 1228.6148507434114,
+      "Model": "Command R+ (08-2024)",
+      "Score": 1230,
       "Votes": 10535,
-      "Rank (UB)": 110,
-      "Model": "command-r-plus-08-2024",
-      "95% CI": {
-        "rating_q025": 1228.6148507434114,
-        "rating_q975": 1237.4438624967809
-      }
+      "organization": "Cohere"
     },
     {
-      "Score": 1230.0753166561708,
-      "variance": 1.8637093514570233,
-      "rating_q975": 1233.0595029026201,
-      "rating_q025": 1227.9072333341223,
-      "Votes": 37697,
-      "Rank (UB)": 113,
-      "Model": "gemini-1.5-flash-8b-001",
-      "95% CI": {
-        "rating_q025": 1227.9072333341223,
-        "rating_q975": 1233.0595029026201
-      }
-    },
-    {
-      "Score": 1229.2430375447393,
-      "variance": 17.92036525939349,
-      "rating_q975": 1238.3121303634591,
-      "rating_q025": 1222.2094309888034,
+      "Model": "Llama-3.1-Nemotron-51B-Instruct",
+      "Score": 1227,
       "Votes": 3889,
-      "Rank (UB)": 110,
-      "Model": "llama-3.1-nemotron-51b-instruct",
-      "95% CI": {
-        "rating_q025": 1222.2094309888034,
-        "rating_q975": 1238.3121303634591
-      }
+      "organization": "Nvidia"
     },
     {
-      "Score": 1226.6937031611722,
-      "variance": 3.5303048178991685,
-      "rating_q975": 1230.1919490290009,
-      "rating_q025": 1223.6857732621845,
-      "Votes": 28768,
-      "Rank (UB)": 114,
-      "Model": "c4ai-aya-expanse-32b",
-      "95% CI": {
-        "rating_q025": 1223.6857732621845,
-        "rating_q975": 1230.1919490290009
-      }
-    },
-    {
-      "Score": 1226.5499328430192,
-      "variance": 2.8159079799445874,
-      "rating_q975": 1230.381405385467,
-      "rating_q025": 1223.7728991206961,
-      "Votes": 20608,
-      "Rank (UB)": 113,
-      "Model": "nemotron-4-340b-instruct",
-      "95% CI": {
-        "rating_q025": 1223.7728991206961,
-        "rating_q975": 1230.381405385467
-      }
-    },
-    {
-      "Score": 1224.087872247522,
-      "variance": 7.811217490728096,
-      "rating_q975": 1228.907717628476,
-      "rating_q025": 1219.7867862980618,
-      "Votes": 10221,
-      "Rank (UB)": 116,
-      "Model": "glm-4-0520",
-      "95% CI": {
-        "rating_q025": 1219.7867862980618,
-        "rating_q975": 1228.907717628476
-      }
-    },
-    {
-      "Score": 1223.962231279501,
-      "variance": 0.8046075613498479,
-      "rating_q975": 1225.3254192296556,
-      "rating_q025": 1222.053284006502,
-      "Votes": 163629,
-      "Rank (UB)": 121,
-      "Model": "llama-3-70b-instruct",
-      "95% CI": {
-        "rating_q025": 1222.053284006502,
-        "rating_q975": 1225.3254192296556
-      }
-    },
-    {
-      "Score": 1223.300606425144,
-      "variance": 20.42199353133517,
-      "rating_q975": 1232.8778946717168,
-      "rating_q025": 1215.1264612377709,
+      "Model": "OLMo-2-0325-32B-Instruct",
+      "Score": 1222,
       "Votes": 3460,
-      "Rank (UB)": 113,
-      "Model": "olmo-2-0325-32b-instruct",
-      "95% CI": {
-        "rating_q025": 1215.1264612377709,
-        "rating_q975": 1232.8778946717168
-      }
+      "organization": "Allen AI"
     },
     {
-      "Score": 1222.9839635253081,
-      "variance": 11.315889345714492,
-      "rating_q975": 1229.5864699598294,
-      "rating_q025": 1216.9599849340784,
+      "Model": "Gemini-1.5-Flash-8B-001",
+      "Score": 1228,
+      "Votes": 37697,
+      "organization": "Google"
+    },
+    {
+      "Model": "Nemotron-4-340B-Instruct",
+      "Score": 1224,
+      "Votes": 20608,
+      "organization": "Nvidia"
+    },
+    {
+      "Model": "Aya-Expanse-32B",
+      "Score": 1224,
+      "Votes": 28768,
+      "organization": "Cohere"
+    },
+    {
+      "Model": "GLM-4-0520",
+      "Score": 1222,
+      "Votes": 10221,
+      "organization": "Zhipu AI"
+    },
+    {
+      "Model": "Reka-Flash-20240904",
+      "Score": 1221,
       "Votes": 8132,
-      "Rank (UB)": 115,
-      "Model": "reka-flash-20240904",
-      "95% CI": {
-        "rating_q025": 1216.9599849340784,
-        "rating_q975": 1229.5864699598294
-      }
+      "organization": "Reka AI"
     },
     {
-      "Score": 1222.7640961370744,
-      "variance": 3.772498282119582,
-      "rating_q975": 1226.2664834508719,
-      "rating_q025": 1219.227105897281,
+      "Model": "Llama-3-70B-Instruct",
+      "Score": 1222,
+      "Votes": 163629,
+      "organization": "Meta"
+    },
+    {
+      "Model": "Phi-4",
+      "Score": 1221,
       "Votes": 25213,
-      "Rank (UB)": 120,
-      "Model": "phi-4",
-      "95% CI": {
-        "rating_q025": 1219.227105897281,
-        "rating_q975": 1226.2664834508719
-      }
+      "organization": "Microsoft"
     },
     {
-      "Score": 1218.448383194669,
-      "variance": 1.2652153683913356,
-      "rating_q975": 1220.8182041888094,
-      "rating_q025": 1216.3908694740335,
+      "Model": "Claude 3 Sonnet",
+      "Score": 1216,
       "Votes": 113067,
-      "Rank (UB)": 126,
-      "Model": "claude-3-sonnet-20240229",
-      "95% CI": {
-        "rating_q025": 1216.3908694740335,
-        "rating_q975": 1220.8182041888094
-      }
+      "organization": "Anthropic"
     },
     {
-      "Score": 1215.4426134311325,
-      "variance": 3.8887316814318025,
-      "rating_q975": 1219.0814018087553,
-      "rating_q025": 1211.3721191301213,
+      "Model": "Amazon Nova Micro 1.0",
+      "Score": 1213,
       "Votes": 20654,
-      "Rank (UB)": 130,
-      "Model": "amazon-nova-micro-v1.0",
-      "95% CI": {
-        "rating_q025": 1211.3721191301213,
-        "rating_q975": 1219.0814018087553
-      }
+      "organization": "Amazon"
     },
     {
-      "Score": 1209.4814472129901,
-      "variance": 1.5727758185940401,
-      "rating_q975": 1211.4223109024426,
-      "rating_q025": 1207.4094655919187,
-      "Votes": 57197,
-      "Rank (UB)": 135,
-      "Model": "gemma-2-9b-it",
-      "95% CI": {
-        "rating_q025": 1207.4094655919187,
-        "rating_q975": 1211.4223109024426
-      }
-    },
-    {
-      "Score": 1207.3736445565855,
-      "variance": 1.6258776753692548,
-      "rating_q975": 1209.7939661723951,
-      "rating_q025": 1204.9263263133184,
-      "Votes": 80846,
-      "Rank (UB)": 136,
-      "Model": "command-r-plus",
-      "95% CI": {
-        "rating_q025": 1204.9263263133184,
-        "rating_q975": 1209.7939661723951
-      }
-    },
-    {
-      "Score": 1206.361418524149,
-      "variance": 23.473203177467514,
-      "rating_q975": 1214.7691037108978,
-      "rating_q025": 1197.5730427411038,
+      "Model": "Hunyuan-Standard-256K",
+      "Score": 1204,
       "Votes": 2901,
-      "Rank (UB)": 134,
-      "Model": "hunyuan-standard-256k",
-      "95% CI": {
-        "rating_q025": 1197.5730427411038,
-        "rating_q975": 1214.7691037108978
-      }
+      "organization": "Tencent"
     },
     {
-      "Score": 1204.520590084156,
-      "variance": 1.5493932281894105,
-      "rating_q975": 1206.5053695505405,
-      "rating_q025": 1201.8758744889305,
+      "Model": "Gemma-2-9B-it",
+      "Score": 1207,
+      "Votes": 57197,
+      "organization": "Google"
+    },
+    {
+      "Model": "Command R+ (04-2024)",
+      "Score": 1205,
+      "Votes": 80846,
+      "organization": "Cohere"
+    },
+    {
+      "Model": "Qwen2-72B-Instruct",
+      "Score": 1202,
       "Votes": 38872,
-      "Rank (UB)": 137,
-      "Model": "qwen2-72b-instruct",
-      "95% CI": {
-        "rating_q025": 1201.8758744889305,
-        "rating_q975": 1206.5053695505405
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1203.5950667157203,
-      "variance": 1.7879365447062743,
-      "rating_q975": 1205.7568096015232,
-      "rating_q025": 1201.0170231132872,
-      "Votes": 55962,
-      "Rank (UB)": 137,
-      "Model": "gpt-4-0314",
-      "95% CI": {
-        "rating_q025": 1201.0170231132872,
-        "rating_q975": 1205.7568096015232
-      }
-    },
-    {
-      "Score": 1202.8404951442433,
-      "variance": 20.99507320901828,
-      "rating_q975": 1211.2873107287485,
-      "rating_q025": 1193.6337505070835,
+      "Model": "Llama-3.1-Tulu-3-8B",
+      "Score": 1200,
       "Votes": 3074,
-      "Rank (UB)": 136,
-      "Model": "llama-3.1-tulu-3-8b",
-      "95% CI": {
-        "rating_q025": 1193.6337505070835,
-        "rating_q975": 1211.2873107287485
-      }
+      "organization": "Ai2"
     },
     {
-      "Score": 1199.697815278882,
-      "variance": 17.203167399167707,
-      "rating_q975": 1207.2044194183172,
-      "rating_q025": 1192.0252376089684,
+      "Model": "GPT-4-0314",
+      "Score": 1201,
+      "Votes": 55962,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Ministral-8B-2410",
+      "Score": 1197,
       "Votes": 5111,
-      "Rank (UB)": 137,
-      "Model": "ministral-8b-2410",
-      "95% CI": {
-        "rating_q025": 1192.0252376089684,
-        "rating_q975": 1207.2044194183172
-      }
+      "organization": "Mistral"
     },
     {
-      "Score": 1197.4510755582223,
-      "variance": 8.688965497697987,
-      "rating_q975": 1202.2931319502557,
-      "rating_q025": 1190.8478560265773,
+      "Model": "Aya-Expanse-8B",
+      "Score": 1195,
       "Votes": 10391,
-      "Rank (UB)": 138,
-      "Model": "c4ai-aya-expanse-8b",
-      "95% CI": {
-        "rating_q025": 1190.8478560265773,
-        "rating_q975": 1202.2931319502557
-      }
+      "organization": "Cohere"
     },
     {
-      "Score": 1197.1040106365583,
-      "variance": 5.9230786363166095,
-      "rating_q975": 1201.9069429238145,
-      "rating_q025": 1192.5297794067792,
+      "Model": "Command R (08-2024)",
+      "Score": 1195,
       "Votes": 10851,
-      "Rank (UB)": 138,
-      "Model": "command-r-08-2024",
-      "95% CI": {
-        "rating_q025": 1192.5297794067792,
-        "rating_q975": 1201.9069429238145
-      }
+      "organization": "Cohere"
     },
     {
-      "Score": 1196.7151824877908,
-      "variance": 0.870087755978808,
-      "rating_q975": 1198.2455544242468,
-      "rating_q025": 1194.851555799413,
-      "Votes": 122309,
-      "Rank (UB)": 140,
-      "Model": "claude-3-haiku-20240307",
-      "95% CI": {
-        "rating_q025": 1194.851555799413,
-        "rating_q975": 1198.2455544242468
-      }
-    },
-    {
-      "Score": 1195.8320367881565,
-      "variance": 5.321238893947534,
-      "rating_q975": 1200.0656020675476,
-      "rating_q025": 1191.1575308954905,
+      "Model": "DeepSeek-Coder-V2-Instruct",
+      "Score": 1193,
       "Votes": 15753,
-      "Rank (UB)": 140,
-      "Model": "deepseek-coder-v2",
-      "95% CI": {
-        "rating_q025": 1191.1575308954905,
-        "rating_q975": 1200.0656020675476
-      }
+      "organization": "DeepSeek AI"
     },
     {
-      "Score": 1193.363019785704,
-      "variance": 6.7463094690201615,
-      "rating_q975": 1197.9587023837803,
-      "rating_q025": 1188.0825905305062,
+      "Model": "Claude 3 Haiku",
+      "Score": 1194,
+      "Votes": 122309,
+      "organization": "Anthropic"
+    },
+    {
+      "Model": "Jamba-1.5-Mini",
+      "Score": 1191,
       "Votes": 9274,
-      "Rank (UB)": 140,
-      "Model": "jamba-1.5-mini",
-      "95% CI": {
-        "rating_q025": 1188.0825905305062,
-        "rating_q975": 1197.9587023837803
-      }
+      "organization": "AI21 Labs"
     },
     {
-      "Score": 1193.125005312079,
-      "variance": 1.531192400231397,
-      "rating_q975": 1195.0293248269386,
-      "rating_q025": 1190.55618135251,
+      "Model": "Meta-Llama-3.1-8B-Instruct",
+      "Score": 1191,
       "Votes": 52578,
-      "Rank (UB)": 142,
-      "Model": "llama-3.1-8b-instruct",
-      "95% CI": {
-        "rating_q025": 1190.55618135251,
-        "rating_q975": 1195.0293248269386
-      }
+      "organization": "Meta"
     },
     {
-      "Score": 1180.4992111212055,
-      "variance": 1.2763706154876735,
-      "rating_q975": 1182.4966400151259,
-      "rating_q025": 1178.2204056925705,
+      "Model": "GPT-4-0613",
+      "Score": 1178,
       "Votes": 91614,
-      "Rank (UB)": 151,
-      "Model": "gpt-4-0613",
-      "95% CI": {
-        "rating_q025": 1178.2204056925705,
-        "rating_q975": 1182.4966400151259
-      }
+      "organization": "OpenAI"
     },
     {
-      "Score": 1178.7146209796786,
-      "variance": 3.1208456064134933,
-      "rating_q975": 1182.6513501879422,
-      "rating_q025": 1175.8513114073721,
+      "Model": "Qwen1.5-110B-Chat",
+      "Score": 1176,
       "Votes": 27430,
-      "Rank (UB)": 151,
-      "Model": "qwen1.5-110b-chat",
-      "95% CI": {
-        "rating_q025": 1175.8513114073721,
-        "rating_q975": 1182.6513501879422
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1174.8305445521132,
-      "variance": 2.8397007938720336,
-      "rating_q975": 1178.2185608843024,
-      "rating_q025": 1172.1196065948122,
+      "Model": "Yi-1.5-34B-Chat",
+      "Score": 1172,
       "Votes": 25135,
-      "Rank (UB)": 153,
-      "Model": "yi-1.5-34b-chat",
-      "95% CI": {
-        "rating_q025": 1172.1196065948122,
-        "rating_q975": 1178.2185608843024
-      }
+      "organization": "01 AI"
     },
     {
-      "Score": 1174.7641792504685,
-      "variance": 1.5846529059297716,
-      "rating_q975": 1177.2316992852786,
-      "rating_q025": 1172.1970429620935,
-      "Votes": 64926,
-      "Rank (UB)": 153,
-      "Model": "mistral-large-2402",
-      "95% CI": {
-        "rating_q025": 1172.1970429620935,
-        "rating_q975": 1177.2316992852786
-      }
-    },
-    {
-      "Score": 1173.2509253894384,
-      "variance": 5.941212928845196,
-      "rating_q975": 1177.6213701180923,
-      "rating_q025": 1168.603235812682,
-      "Votes": 16027,
-      "Rank (UB)": 153,
-      "Model": "reka-flash-21b-20240226-online",
-      "95% CI": {
-        "rating_q025": 1168.603235812682,
-        "rating_q975": 1177.6213701180923
-      }
-    },
-    {
-      "Score": 1170.3099020806105,
-      "variance": 23.258300800525596,
-      "rating_q975": 1178.976196850348,
-      "rating_q025": 1162.0228810335216,
+      "Model": "QwQ-32B-Preview",
+      "Score": 1168,
       "Votes": 3410,
-      "Rank (UB)": 152,
-      "Model": "qwq-32b-preview",
-      "95% CI": {
-        "rating_q025": 1162.0228810335216,
-        "rating_q975": 1178.976196850348
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1169.428967660544,
-      "variance": 0.9720353445643458,
-      "rating_q975": 1171.4036381259161,
-      "rating_q025": 1167.4642494497286,
-      "Votes": 109056,
-      "Rank (UB)": 156,
-      "Model": "llama-3-8b-instruct",
-      "95% CI": {
-        "rating_q025": 1167.4642494497286,
-        "rating_q975": 1171.4036381259161
-      }
+      "Model": "Mistral-Large-2402",
+      "Score": 1172,
+      "Votes": 64926,
+      "organization": "Mistral"
     },
     {
-      "Score": 1166.4371583619788,
-      "variance": 5.767772794179796,
-      "rating_q975": 1170.2093678221233,
-      "rating_q025": 1161.617532663578,
+      "Model": "Reka-Flash-21B-online",
+      "Score": 1171,
+      "Votes": 16027,
+      "organization": "Reka AI"
+    },
+    {
+      "Model": "InternLM2.5-20B-chat",
+      "Score": 1164,
       "Votes": 10599,
-      "Rank (UB)": 156,
-      "Model": "internlm2_5-20b-chat",
-      "95% CI": {
-        "rating_q025": 1161.617532663578,
-        "rating_q975": 1170.2093678221233
-      }
+      "organization": "InternLM"
     },
     {
-      "Score": 1166.094313655771,
-      "variance": 1.171961668760769,
-      "rating_q975": 1168.3190208062083,
-      "rating_q025": 1164.1042231824758,
-      "Votes": 56398,
-      "Rank (UB)": 157,
-      "Model": "command-r",
-      "95% CI": {
-        "rating_q025": 1164.1042231824758,
-        "rating_q975": 1168.3190208062083
-      }
+      "Model": "Llama-3-8B-Instruct",
+      "Score": 1167,
+      "Votes": 109056,
+      "organization": "Meta"
     },
     {
-      "Score": 1165.2847448992338,
-      "variance": 2.848755642609919,
-      "rating_q975": 1168.4586061964383,
-      "rating_q025": 1162.2468680397535,
-      "Votes": 35556,
-      "Rank (UB)": 157,
-      "Model": "mistral-medium",
-      "95% CI": {
-        "rating_q025": 1162.2468680397535,
-        "rating_q975": 1168.4586061964383
-      }
-    },
-    {
-      "Score": 1165.0149894108115,
-      "variance": 1.3515089825585973,
-      "rating_q975": 1167.4166634456308,
-      "rating_q025": 1162.643339519292,
-      "Votes": 53751,
-      "Rank (UB)": 158,
-      "Model": "mixtral-8x22b-instruct-v0.1",
-      "95% CI": {
-        "rating_q025": 1162.643339519292,
-        "rating_q975": 1167.4166634456308
-      }
-    },
-    {
-      "Score": 1164.856009475952,
-      "variance": 4.1924476444287775,
-      "rating_q975": 1169.0674856712683,
-      "rating_q025": 1161.4772747252969,
-      "Votes": 25803,
-      "Rank (UB)": 156,
-      "Model": "reka-flash-21b-20240226",
-      "95% CI": {
-        "rating_q025": 1161.4772747252969,
-        "rating_q975": 1169.0674856712683
-      }
-    },
-    {
-      "Score": 1164.8494048835216,
-      "variance": 1.896703492396531,
-      "rating_q975": 1167.3088919615325,
-      "rating_q025": 1162.3323668698629,
-      "Votes": 40658,
-      "Rank (UB)": 158,
-      "Model": "qwen1.5-72b-chat",
-      "95% CI": {
-        "rating_q025": 1162.3323668698629,
-        "rating_q975": 1167.3088919615325
-      }
-    },
-    {
-      "Score": 1161.2704387661536,
-      "variance": 1.6830154281264653,
-      "rating_q975": 1163.625847808763,
-      "rating_q025": 1159.2171399836604,
-      "Votes": 48892,
-      "Rank (UB)": 159,
-      "Model": "gemma-2-2b-it",
-      "95% CI": {
-        "rating_q025": 1159.2171399836604,
-        "rating_q975": 1163.625847808763
-      }
-    },
-    {
-      "Score": 1160.324520991387,
-      "variance": 25.304972041551977,
-      "rating_q975": 1170.6922637916969,
-      "rating_q025": 1152.219716056165,
+      "Model": "Granite-3.1-8B-Instruct",
+      "Score": 1158,
       "Votes": 3289,
-      "Rank (UB)": 156,
-      "Model": "granite-3.1-8b-instruct",
-      "95% CI": {
-        "rating_q025": 1152.219716056165,
-        "rating_q975": 1170.6922637916969
-      }
+      "organization": "IBM"
     },
     {
-      "Score": 1148.7661782673242,
-      "variance": 4.778426977678361,
-      "rating_q975": 1152.9192253739027,
-      "rating_q025": 1144.7866228010582,
+      "Model": "Command R (04-2024)",
+      "Score": 1164,
+      "Votes": 56398,
+      "organization": "Cohere"
+    },
+    {
+      "Model": "Mistral Medium",
+      "Score": 1163,
+      "Votes": 35556,
+      "organization": "Mistral"
+    },
+    {
+      "Model": "Reka-Flash-21B",
+      "Score": 1162,
+      "Votes": 25803,
+      "organization": "Reka AI"
+    },
+    {
+      "Model": "Mixtral-8x22b-Instruct-v0.1",
+      "Score": 1163,
+      "Votes": 53751,
+      "organization": "Mistral"
+    },
+    {
+      "Model": "Qwen1.5-72B-Chat",
+      "Score": 1162,
+      "Votes": 40658,
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "Gemma-2-2b-it",
+      "Score": 1159,
+      "Votes": 48892,
+      "organization": "Google"
+    },
+    {
+      "Model": "Gemini-1.0-Pro-001",
+      "Score": 1146,
       "Votes": 18800,
-      "Rank (UB)": 167,
-      "Model": "gemini-pro-dev-api",
-      "95% CI": {
-        "rating_q025": 1144.7866228010582,
-        "rating_q975": 1152.9192253739027
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1144.5642497719355,
-      "variance": 17.418427831826865,
-      "rating_q975": 1153.2911399829015,
-      "rating_q025": 1137.0301982958242,
+      "Model": "Zephyr-ORPO-141b-A35b-v0.1",
+      "Score": 1142,
       "Votes": 4854,
-      "Rank (UB)": 167,
-      "Model": "zephyr-orpo-141b-A35b-v0.1",
-      "95% CI": {
-        "rating_q025": 1137.0301982958242,
-        "rating_q975": 1153.2911399829015
-      }
+      "organization": "HuggingFace"
     },
     {
-      "Score": 1142.7880453833209,
-      "variance": 3.321936805240713,
-      "rating_q975": 1145.72778745159,
-      "rating_q025": 1138.9909941649655,
+      "Model": "Qwen1.5-32B-Chat",
+      "Score": 1140,
       "Votes": 22765,
-      "Rank (UB)": 168,
-      "Model": "qwen1.5-32b-chat",
-      "95% CI": {
-        "rating_q025": 1138.9909941649655,
-        "rating_q975": 1145.72778745159
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1140.3998084027116,
-      "variance": 3.85819801897633,
-      "rating_q975": 1143.5753784340825,
-      "rating_q025": 1136.4416965521873,
-      "Votes": 26105,
-      "Rank (UB)": 170,
-      "Model": "phi-3-medium-4k-instruct",
-      "95% CI": {
-        "rating_q025": 1136.4416965521873,
-        "rating_q975": 1143.5753784340825
-      }
-    },
-    {
-      "Score": 1136.908455172275,
-      "variance": 21.895234828343536,
-      "rating_q975": 1146.4573484050004,
-      "rating_q025": 1128.5607600657404,
+      "Model": "Granite-3.1-2B-Instruct",
+      "Score": 1135,
       "Votes": 3380,
-      "Rank (UB)": 168,
-      "Model": "granite-3.1-2b-instruct",
-      "95% CI": {
-        "rating_q025": 1128.5607600657404,
-        "rating_q975": 1146.4573484050004
-      }
+      "organization": "IBM"
     },
     {
-      "Score": 1136.358593260643,
-      "variance": 5.586920736607351,
-      "rating_q975": 1140.3821156610038,
-      "rating_q025": 1131.851506241364,
+      "Model": "Phi-3-Medium-4k-Instruct",
+      "Score": 1138,
+      "Votes": 26105,
+      "organization": "Microsoft"
+    },
+    {
+      "Model": "Starling-LM-7B-beta",
+      "Score": 1134,
       "Votes": 16676,
-      "Rank (UB)": 170,
-      "Model": "starling-lm-7b-beta",
-      "95% CI": {
-        "rating_q025": 1131.851506241364,
-        "rating_q975": 1140.3821156610038
-      }
+      "organization": "Nexusflow"
     },
     {
-      "Score": 1131.4693462589894,
-      "variance": 1.2616093624461475,
-      "rating_q975": 1134.113245825968,
-      "rating_q025": 1129.6563242970499,
+      "Model": "Mixtral-8x7B-Instruct-v0.1",
+      "Score": 1129,
       "Votes": 76126,
-      "Rank (UB)": 174,
-      "Model": "mixtral-8x7b-instruct-v0.1",
-      "95% CI": {
-        "rating_q025": 1129.6563242970499,
-        "rating_q975": 1134.113245825968
-      }
+      "organization": "Mistral"
     },
     {
-      "Score": 1128.6571744873856,
-      "variance": 6.1555321392277795,
-      "rating_q975": 1133.2439046847167,
-      "rating_q025": 1124.4539828825068,
+      "Model": "Yi-34B-Chat",
+      "Score": 1126,
       "Votes": 15917,
-      "Rank (UB)": 174,
-      "Model": "yi-34b-chat",
-      "95% CI": {
-        "rating_q025": 1124.4539828825068,
-        "rating_q975": 1133.2439046847167
-      }
+      "organization": "01 AI"
     },
     {
-      "Score": 1128.091765551268,
-      "variance": 14.867968316013437,
-      "rating_q975": 1134.1145701081666,
-      "rating_q025": 1120.2396752759787,
+      "Model": "Gemini Pro",
+      "Score": 1126,
       "Votes": 6557,
-      "Rank (UB)": 174,
-      "Model": "gemini-pro",
-      "95% CI": {
-        "rating_q025": 1120.2396752759787,
-        "rating_q975": 1134.1145701081666
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1126.3889437607545,
-      "variance": 4.5240282470615165,
-      "rating_q975": 1131.0213241619554,
-      "rating_q025": 1122.4023646763078,
+      "Model": "Qwen1.5-14B-Chat",
+      "Score": 1124,
       "Votes": 18687,
-      "Rank (UB)": 176,
-      "Model": "qwen1.5-14b-chat",
-      "95% CI": {
-        "rating_q025": 1122.4023646763078,
-        "rating_q975": 1131.0213241619554
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1123.888361475127,
-      "variance": 8.328542757543095,
-      "rating_q975": 1129.0235359547771,
-      "rating_q025": 1119.1618431719303,
+      "Model": "WizardLM-70B-v1.0",
+      "Score": 1121,
       "Votes": 8383,
-      "Rank (UB)": 178,
-      "Model": "wizardlm-70b",
-      "95% CI": {
-        "rating_q025": 1119.1618431719303,
-        "rating_q975": 1129.0235359547771
-      }
+      "organization": "Microsoft"
     },
     {
-      "Score": 1123.3085529905716,
-      "variance": 1.6739281544757987,
-      "rating_q975": 1126.2965412582928,
-      "rating_q025": 1121.397528879498,
+      "Model": "GPT-3.5-Turbo-0125",
+      "Score": 1121,
       "Votes": 68867,
-      "Rank (UB)": 179,
-      "Model": "gpt-3.5-turbo-0125",
-      "95% CI": {
-        "rating_q025": 1121.397528879498,
-        "rating_q975": 1126.2965412582928
-      }
+      "organization": "OpenAI"
     },
     {
-      "Score": 1120.5794400715931,
-      "variance": 2.484414308545518,
-      "rating_q975": 1123.4760717514748,
-      "rating_q025": 1117.4904950695652,
-      "Votes": 33743,
-      "Rank (UB)": 181,
-      "Model": "dbrx-instruct-preview",
-      "95% CI": {
-        "rating_q025": 1117.4904950695652,
-        "rating_q975": 1123.4760717514748
-      }
-    },
-    {
-      "Score": 1120.2370498362402,
-      "variance": 11.378219010249234,
-      "rating_q975": 1126.5520207744432,
-      "rating_q025": 1114.3205741203867,
+      "Model": "Meta-Llama-3.2-3B-Instruct",
+      "Score": 1118,
       "Votes": 8390,
-      "Rank (UB)": 179,
-      "Model": "llama-3.2-3b-instruct",
-      "95% CI": {
-        "rating_q025": 1114.3205741203867,
-        "rating_q975": 1126.5520207744432
-      }
+      "organization": "Meta"
     },
     {
-      "Score": 1119.425394286141,
-      "variance": 5.24884371228529,
-      "rating_q975": 1123.4742999446569,
-      "rating_q025": 1114.8776820827704,
-      "Votes": 18476,
-      "Rank (UB)": 181,
-      "Model": "phi-3-small-8k-instruct",
-      "95% CI": {
-        "rating_q025": 1114.8776820827704,
-        "rating_q975": 1123.4742999446569
-      }
+      "Model": "DBRX-Instruct-Preview",
+      "Score": 1118,
+      "Votes": 33743,
+      "organization": "Databricks"
     },
     {
-      "Score": 1116.4600749844994,
-      "variance": 10.137638470453076,
-      "rating_q975": 1123.0148474054306,
-      "rating_q025": 1111.5202347379843,
+      "Model": "Tulu-2-DPO-70B",
+      "Score": 1114,
       "Votes": 6658,
-      "Rank (UB)": 181,
-      "Model": "tulu-2-dpo-70b",
-      "95% CI": {
-        "rating_q025": 1111.5202347379843,
-        "rating_q975": 1123.0148474054306
-      }
+      "organization": "AllenAI/UW"
     },
     {
-      "Score": 1110.6023176790325,
-      "variance": 13.223774577060489,
-      "rating_q975": 1116.8519601235287,
-      "rating_q025": 1102.8582211530556,
+      "Model": "Phi-3-Small-8k-Instruct",
+      "Score": 1117,
+      "Votes": 18476,
+      "organization": "Microsoft"
+    },
+    {
+      "Model": "Granite-3.0-8B-Instruct",
+      "Score": 1108,
       "Votes": 7002,
-      "Rank (UB)": 186,
-      "Model": "granite-3.0-8b-instruct",
-      "95% CI": {
-        "rating_q025": 1102.8582211530556,
-        "rating_q975": 1116.8519601235287
-      }
+      "organization": "IBM"
     },
     {
-      "Score": 1110.3699962053784,
-      "variance": 2.3751303553334386,
-      "rating_q975": 1114.1173379199265,
-      "rating_q025": 1107.7286883831707,
+      "Model": "Llama-2-70B-chat",
+      "Score": 1108,
       "Votes": 39595,
-      "Rank (UB)": 189,
-      "Model": "llama-2-70b-chat",
-      "95% CI": {
-        "rating_q025": 1107.7286883831707,
-        "rating_q975": 1114.1173379199265
-      }
+      "organization": "Meta"
     },
     {
-      "Score": 1108.8536413609352,
-      "variance": 5.968709751198619,
-      "rating_q975": 1113.5713709421234,
-      "rating_q025": 1103.9584690571328,
+      "Model": "OpenChat-3.5-0106",
+      "Score": 1106,
       "Votes": 12990,
-      "Rank (UB)": 189,
-      "Model": "openchat-3.5-0106",
-      "95% CI": {
-        "rating_q025": 1103.9584690571328,
-        "rating_q975": 1113.5713709421234
-      }
+      "organization": "OpenChat"
     },
     {
-      "Score": 1108.1311119263682,
-      "variance": 4.22971836356005,
-      "rating_q975": 1111.8676897629448,
-      "rating_q025": 1104.1121264298622,
+      "Model": "Vicuna-33B",
+      "Score": 1106,
       "Votes": 22936,
-      "Rank (UB)": 189,
-      "Model": "vicuna-33b",
-      "95% CI": {
-        "rating_q025": 1104.1121264298622,
-        "rating_q975": 1111.8676897629448
-      }
+      "organization": "LMSYS"
     },
     {
-      "Score": 1107.3937530682995,
-      "variance": 2.26564501980233,
-      "rating_q975": 1110.3423500263393,
-      "rating_q025": 1104.7336137979783,
+      "Model": "Snowflake Arctic Instruct",
+      "Score": 1105,
       "Votes": 34173,
-      "Rank (UB)": 190,
-      "Model": "snowflake-arctic-instruct",
-      "95% CI": {
-        "rating_q025": 1104.7336137979783,
-        "rating_q975": 1110.3423500263393
-      }
+      "organization": "Snowflake"
     },
     {
-      "Score": 1105.832783936755,
-      "variance": 8.928060218409891,
-      "rating_q975": 1111.0264328708556,
-      "rating_q025": 1098.9908018625363,
+      "Model": "Starling-LM-7B-alpha",
+      "Score": 1103,
       "Votes": 10415,
-      "Rank (UB)": 190,
-      "Model": "starling-lm-7b-alpha",
-      "95% CI": {
-        "rating_q025": 1098.9908018625363,
-        "rating_q975": 1111.0264328708556
-      }
+      "organization": "UC Berkeley"
     },
     {
-      "Score": 1101.5110667868046,
-      "variance": 16.31730191658112,
-      "rating_q975": 1109.210170249199,
-      "rating_q025": 1094.0602990696052,
+      "Model": "Nous-Hermes-2-Mixtral-8x7B-DPO",
+      "Score": 1099,
       "Votes": 3836,
-      "Rank (UB)": 190,
-      "Model": "nous-hermes-2-mixtral-8x7b-dpo",
-      "95% CI": {
-        "rating_q025": 1094.0602990696052,
-        "rating_q975": 1109.210170249199
-      }
+      "organization": "NousResearch"
     },
     {
-      "Score": 1101.1457776261786,
-      "variance": 2.8937784776315696,
-      "rating_q975": 1103.9023672967592,
-      "rating_q025": 1097.6818198045157,
-      "Votes": 25070,
-      "Rank (UB)": 194,
-      "Model": "gemma-1.1-7b-it",
-      "95% CI": {
-        "rating_q025": 1097.6818198045157,
-        "rating_q975": 1103.9023672967592
-      }
-    },
-    {
-      "Score": 1098.0987232756147,
-      "variance": 23.380159703907072,
-      "rating_q975": 1105.7436975351216,
-      "rating_q025": 1088.9444296216566,
+      "Model": "NV-Llama2-70B-SteerLM-Chat",
+      "Score": 1096,
       "Votes": 3636,
-      "Rank (UB)": 191,
-      "Model": "llama2-70b-steerlm-chat",
-      "95% CI": {
-        "rating_q025": 1088.9444296216566,
-        "rating_q975": 1105.7436975351216
-      }
+      "organization": "Nvidia"
     },
     {
-      "Score": 1094.3781392715828,
-      "variance": 16.30917105411128,
-      "rating_q975": 1101.2408036964798,
-      "rating_q025": 1084.6364785281658,
+      "Model": "Gemma-1.1-7B-it",
+      "Score": 1099,
+      "Votes": 25070,
+      "organization": "Google"
+    },
+    {
+      "Model": "DeepSeek-LLM-67B-Chat",
+      "Score": 1092,
       "Votes": 4988,
-      "Rank (UB)": 195,
-      "Model": "deepseek-llm-67b-chat",
-      "95% CI": {
-        "rating_q025": 1084.6364785281658,
-        "rating_q975": 1101.2408036964798
-      }
+      "organization": "DeepSeek AI"
     },
     {
-      "Score": 1093.9188806091788,
-      "variance": 13.01669443086169,
-      "rating_q975": 1099.650035585656,
-      "rating_q025": 1085.6858389983538,
-      "Votes": 8106,
-      "Rank (UB)": 195,
-      "Model": "openchat-3.5",
-      "95% CI": {
-        "rating_q025": 1085.6858389983538,
-        "rating_q975": 1099.650035585656
-      }
-    },
-    {
-      "Score": 1091.6817998888323,
-      "variance": 13.728392571418965,
-      "rating_q975": 1097.2889061878434,
-      "rating_q025": 1083.529580722471,
+      "Model": "OpenHermes-2.5-Mistral-7B",
+      "Score": 1089,
       "Votes": 5088,
-      "Rank (UB)": 197,
-      "Model": "openhermes-2.5-mistral-7b",
-      "95% CI": {
-        "rating_q025": 1083.529580722471,
-        "rating_q975": 1097.2889061878434
-      }
+      "organization": "NousResearch"
     },
     {
-      "Score": 1091.163858445575,
-      "variance": 13.843844484783077,
-      "rating_q975": 1098.3797223919057,
-      "rating_q025": 1083.8580384269076,
+      "Model": "OpenChat-3.5",
+      "Score": 1092,
+      "Votes": 8106,
+      "organization": "OpenChat"
+    },
+    {
+      "Model": "Granite-3.0-2B-Instruct",
+      "Score": 1089,
       "Votes": 7191,
-      "Rank (UB)": 196,
-      "Model": "granite-3.0-2b-instruct",
-      "95% CI": {
-        "rating_q025": 1083.8580384269076,
-        "rating_q975": 1098.3797223919057
-      }
+      "organization": "IBM"
     },
     {
-      "Score": 1089.7291016580539,
-      "variance": 4.113804745316099,
-      "rating_q975": 1093.2613677698796,
-      "rating_q025": 1086.1575979040933,
-      "Votes": 20067,
-      "Rank (UB)": 198,
-      "Model": "mistral-7b-instruct-v0.2",
-      "95% CI": {
-        "rating_q025": 1086.1575979040933,
-        "rating_q975": 1093.2613677698796
-      }
-    },
-    {
-      "Score": 1088.2813487602107,
-      "variance": 5.734991129336636,
-      "rating_q975": 1092.4241246864806,
-      "rating_q025": 1083.420739572176,
-      "Votes": 12808,
-      "Rank (UB)": 198,
-      "Model": "phi-3-mini-4k-instruct-june-2024",
-      "95% CI": {
-        "rating_q025": 1083.420739572176,
-        "rating_q975": 1092.4241246864806
-      }
-    },
-    {
-      "Score": 1087.1581155926,
-      "variance": 19.685450946636205,
-      "rating_q975": 1094.9152710990184,
-      "rating_q025": 1078.6032511712885,
+      "Model": "Qwen1.5-7B-Chat",
+      "Score": 1085,
       "Votes": 4872,
-      "Rank (UB)": 197,
-      "Model": "qwen1.5-7b-chat",
-      "95% CI": {
-        "rating_q025": 1078.6032511712885,
-        "rating_q975": 1094.9152710990184
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 1085.0741382899755,
-      "variance": 7.027191440443195,
-      "rating_q975": 1090.149088669218,
-      "rating_q025": 1079.86086204665,
-      "Votes": 17036,
-      "Rank (UB)": 198,
-      "Model": "gpt-3.5-turbo-1106",
-      "95% CI": {
-        "rating_q025": 1079.86086204665,
-        "rating_q975": 1090.149088669218
-      }
+      "Model": "Mistral-7B-Instruct-v0.2",
+      "Score": 1087,
+      "Votes": 20067,
+      "organization": "Mistral"
     },
     {
-      "Score": 1083.8781603676769,
-      "variance": 3.8377409550903625,
-      "rating_q975": 1087.4134713444375,
-      "rating_q025": 1080.535762064972,
-      "Votes": 21097,
-      "Rank (UB)": 199,
-      "Model": "phi-3-mini-4k-instruct",
-      "95% CI": {
-        "rating_q025": 1080.535762064972,
-        "rating_q975": 1087.4134713444375
-      }
+      "Model": "Phi-3-Mini-4K-Instruct-June-24",
+      "Score": 1086,
+      "Votes": 12808,
+      "organization": "Microsoft"
     },
     {
-      "Score": 1080.6198286664671,
-      "variance": 5.5283476109831255,
-      "rating_q975": 1085.6994844471133,
-      "rating_q025": 1075.5963141854722,
-      "Votes": 19722,
-      "Rank (UB)": 201,
-      "Model": "llama-2-13b-chat",
-      "95% CI": {
-        "rating_q025": 1075.5963141854722,
-        "rating_q975": 1085.6994844471133
-      }
-    },
-    {
-      "Score": 1079.8259701279949,
-      "variance": 43.892213779992616,
-      "rating_q975": 1091.413936912212,
-      "rating_q025": 1065.260946903039,
+      "Model": "Dolphin-2.2.1-Mistral-7B",
+      "Score": 1078,
       "Votes": 1714,
-      "Rank (UB)": 198,
-      "Model": "dolphin-2.2.1-mistral-7b",
-      "95% CI": {
-        "rating_q025": 1065.260946903039,
-        "rating_q975": 1091.413936912212
-      }
+      "organization": "Cognitive Computations"
     },
     {
-      "Score": 1079.508567545669,
-      "variance": 16.62888649478788,
-      "rating_q975": 1086.4167487010593,
-      "rating_q025": 1072.0605465393146,
+      "Model": "GPT-3.5-Turbo-1106",
+      "Score": 1083,
+      "Votes": 17036,
+      "organization": "OpenAI"
+    },
+    {
+      "Model": "Phi-3-Mini-4k-Instruct",
+      "Score": 1081,
+      "Votes": 21097,
+      "organization": "Microsoft"
+    },
+    {
+      "Model": "SOLAR-10.7B-Instruct-v1.0",
+      "Score": 1077,
       "Votes": 4286,
-      "Rank (UB)": 200,
-      "Model": "solar-10.7b-instruct-v1.0",
-      "95% CI": {
-        "rating_q025": 1072.0605465393146,
-        "rating_q975": 1086.4167487010593
-      }
+      "organization": "Upstage AI"
     },
     {
-      "Score": 1076.1329633338532,
-      "variance": 16.60454814031718,
-      "rating_q975": 1083.6051420321298,
-      "rating_q025": 1068.8409046014763,
+      "Model": "Llama-2-13b-chat",
+      "Score": 1078,
+      "Votes": 19722,
+      "organization": "Meta"
+    },
+    {
+      "Model": "WizardLM-13b-v1.2",
+      "Score": 1074,
       "Votes": 7176,
-      "Rank (UB)": 204,
-      "Model": "wizardlm-13b",
-      "95% CI": {
-        "rating_q025": 1068.8409046014763,
-        "rating_q975": 1083.6051420321298
-      }
+      "organization": "Microsoft"
     },
     {
-      "Score": 1071.149313039146,
-      "variance": 7.611871901639011,
-      "rating_q975": 1076.7320202339795,
-      "rating_q025": 1065.2831674797121,
+      "Model": "Meta-Llama-3.2-1B-Instruct",
+      "Score": 1069,
       "Votes": 8523,
-      "Rank (UB)": 209,
-      "Model": "llama-3.2-1b-instruct",
-      "95% CI": {
-        "rating_q025": 1065.2831674797121,
-        "rating_q975": 1076.7320202339795
-      }
+      "organization": "Meta"
     },
     {
-      "Score": 1070.6628529787251,
-      "variance": 9.375271570519454,
-      "rating_q975": 1076.7036061909591,
-      "rating_q025": 1065.2647778106757,
-      "Votes": 11321,
-      "Rank (UB)": 209,
-      "Model": "zephyr-7b-beta",
-      "95% CI": {
-        "rating_q025": 1065.2647778106757,
-        "rating_q975": 1076.7036061909591
-      }
-    },
-    {
-      "Score": 1063.7246558689558,
-      "variance": 50.85149030994536,
-      "rating_q975": 1076.4385661847602,
-      "rating_q025": 1051.2295037862048,
+      "Model": "SmolLM2-1.7B-Instruct",
+      "Score": 1062,
       "Votes": 2375,
-      "Rank (UB)": 209,
-      "Model": "smollm2-1.7b-instruct",
-      "95% CI": {
-        "rating_q025": 1051.2295037862048,
-        "rating_q975": 1076.4385661847602
-      }
+      "organization": "HuggingFace"
     },
     {
-      "Score": 1062.9048602527353,
-      "variance": 26.649364995779145,
-      "rating_q975": 1072.5114733812518,
-      "rating_q025": 1053.9972318944544,
+      "Model": "Zephyr-7B-beta",
+      "Score": 1068,
+      "Votes": 11321,
+      "organization": "HuggingFace"
+    },
+    {
+      "Model": "MPT-30B-chat",
+      "Score": 1061,
       "Votes": 2644,
-      "Rank (UB)": 210,
-      "Model": "mpt-30b-chat",
-      "95% CI": {
-        "rating_q025": 1053.9972318944544,
-        "rating_q975": 1072.5114733812518
-      }
+      "organization": "MosaicML"
     },
     {
-      "Score": 1060.1994148122053,
-      "variance": 11.701069922961796,
-      "rating_q975": 1067.6868224163761,
-      "rating_q025": 1054.6638908423054,
-      "Votes": 7509,
-      "Rank (UB)": 212,
-      "Model": "codellama-34b-instruct",
-      "95% CI": {
-        "rating_q025": 1054.6638908423054,
-        "rating_q975": 1067.6868224163761
-      }
-    },
-    {
-      "Score": 1059.4407917239275,
-      "variance": 4.677614796561317,
-      "rating_q975": 1063.289928769434,
-      "rating_q025": 1055.2827763256792,
-      "Votes": 19775,
-      "Rank (UB)": 215,
-      "Model": "vicuna-13b",
-      "95% CI": {
-        "rating_q025": 1055.2827763256792,
-        "rating_q975": 1063.289928769434
-      }
-    },
-    {
-      "Score": 1058.9699060931443,
-      "variance": 71.5753451264501,
-      "rating_q975": 1076.7632856472906,
-      "rating_q025": 1042.821018304875,
+      "Model": "CodeLlama-70B-instruct",
+      "Score": 1056,
       "Votes": 1192,
-      "Rank (UB)": 209,
-      "Model": "codellama-70b-instruct",
-      "95% CI": {
-        "rating_q025": 1042.821018304875,
-        "rating_q975": 1076.7632856472906
-      }
+      "organization": "Meta"
     },
     {
-      "Score": 1057.9284255188013,
-      "variance": 44.297511148573314,
-      "rating_q975": 1070.4584344074858,
-      "rating_q025": 1047.6523523243713,
+      "Model": "Zephyr-7B-alpha",
+      "Score": 1056,
       "Votes": 1811,
-      "Rank (UB)": 211,
-      "Model": "zephyr-7b-alpha",
-      "95% CI": {
-        "rating_q025": 1047.6523523243713,
-        "rating_q975": 1070.4584344074858
-      }
+      "organization": "HuggingFace"
     },
     {
-      "Score": 1054.8446071190515,
-      "variance": 10.905402001048225,
-      "rating_q975": 1061.1387274018102,
-      "rating_q025": 1049.017622022604,
-      "Votes": 9176,
-      "Rank (UB)": 215,
-      "Model": "gemma-7b-it",
-      "95% CI": {
-        "rating_q025": 1049.017622022604,
-        "rating_q975": 1061.1387274018102
-      }
-    },
-    {
-      "Score": 1054.3925447019192,
-      "variance": 3.6350325240660037,
-      "rating_q975": 1058.1334483986257,
-      "rating_q025": 1051.4758377355133,
-      "Votes": 21622,
-      "Rank (UB)": 215,
-      "Model": "phi-3-mini-128k-instruct",
-      "95% CI": {
-        "rating_q025": 1051.4758377355133,
-        "rating_q975": 1058.1334483986257
-      }
-    },
-    {
-      "Score": 1054.3306326527359,
-      "variance": 4.922082874841457,
-      "rating_q975": 1058.995105970962,
-      "rating_q025": 1050.7742231785257,
-      "Votes": 14532,
-      "Rank (UB)": 215,
-      "Model": "llama-2-7b-chat",
-      "95% CI": {
-        "rating_q025": 1050.7742231785257,
-        "rating_q975": 1058.995105970962
-      }
-    },
-    {
-      "Score": 1052.3544697306743,
-      "variance": 21.65515955916982,
-      "rating_q975": 1062.1017199828038,
-      "rating_q025": 1044.19219168897,
-      "Votes": 5065,
-      "Rank (UB)": 215,
-      "Model": "qwen-14b-chat",
-      "95% CI": {
-        "rating_q025": 1044.19219168897,
-        "rating_q975": 1062.1017199828038
-      }
-    },
-    {
-      "Score": 1051.4902137212573,
-      "variance": 63.529403033668814,
-      "rating_q975": 1066.7175607628496,
-      "rating_q025": 1036.9076702847985,
-      "Votes": 1327,
-      "Rank (UB)": 212,
       "Model": "falcon-180b-chat",
-      "95% CI": {
-        "rating_q025": 1036.9076702847985,
-        "rating_q975": 1066.7175607628496
-      }
+      "Score": 1049,
+      "Votes": 1327,
+      "organization": "TII"
     },
     {
-      "Score": 1050.2549240801045,
-      "variance": 30.8109826627429,
-      "rating_q975": 1060.2178714803954,
-      "rating_q025": 1039.7869511931967,
+      "Model": "CodeLlama-34B-instruct",
+      "Score": 1058,
+      "Votes": 7509,
+      "organization": "Meta"
+    },
+    {
+      "Model": "Vicuna-13B",
+      "Score": 1057,
+      "Votes": 19775,
+      "organization": "LMSYS"
+    },
+    {
+      "Model": "Gemma-7B-it",
+      "Score": 1052,
+      "Votes": 9176,
+      "organization": "Google"
+    },
+    {
+      "Model": "Phi-3-Mini-128k-Instruct",
+      "Score": 1052,
+      "Votes": 21622,
+      "organization": "Microsoft"
+    },
+    {
+      "Model": "Llama-2-7B-chat",
+      "Score": 1052,
+      "Votes": 14532,
+      "organization": "Meta"
+    },
+    {
+      "Model": "Qwen-14B-Chat",
+      "Score": 1050,
+      "Votes": 5065,
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "Guanaco-33B",
+      "Score": 1048,
       "Votes": 2996,
-      "Rank (UB)": 215,
-      "Model": "guanaco-33b",
-      "95% CI": {
-        "rating_q025": 1039.7869511931967,
-        "rating_q975": 1060.2178714803954
-      }
+      "organization": "UW"
     },
     {
-      "Score": 1038.0920201111826,
-      "variance": 6.728993845222792,
-      "rating_q975": 1042.9106669647506,
-      "rating_q025": 1032.5363084960234,
+      "Model": "Gemma-1.1-2b-it",
+      "Score": 1036,
       "Votes": 11351,
-      "Rank (UB)": 225,
-      "Model": "gemma-1.1-2b-it",
-      "95% CI": {
-        "rating_q025": 1032.5363084960234,
-        "rating_q975": 1042.9106669647506
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1034.7093735150206,
-      "variance": 14.690348710048635,
-      "rating_q975": 1041.7603093986882,
-      "rating_q025": 1028.4769431809643,
+      "Model": "StripedHyena-Nous-7B",
+      "Score": 1032,
       "Votes": 5276,
-      "Rank (UB)": 226,
-      "Model": "stripedhyena-nous-7b",
-      "95% CI": {
-        "rating_q025": 1028.4769431809643,
-        "rating_q975": 1041.7603093986882
-      }
+      "organization": "Together AI"
     },
     {
-      "Score": 1032.5829425760185,
-      "variance": 12.743683968675862,
-      "rating_q975": 1039.8775239560416,
-      "rating_q025": 1026.3205066087858,
+      "Model": "OLMo-7B-instruct",
+      "Score": 1030,
       "Votes": 6503,
-      "Rank (UB)": 226,
-      "Model": "olmo-7b-instruct",
-      "95% CI": {
-        "rating_q025": 1026.3205066087858,
-        "rating_q975": 1039.8775239560416
-      }
+      "organization": "Allen AI"
     },
     {
-      "Score": 1025.0774388355928,
-      "variance": 11.084547836909866,
-      "rating_q975": 1030.6533668072252,
-      "rating_q025": 1019.049534496367,
+      "Model": "Mistral-7B-Instruct-v0.1",
+      "Score": 1023,
       "Votes": 9142,
-      "Rank (UB)": 229,
-      "Model": "mistral-7b-instruct",
-      "95% CI": {
-        "rating_q025": 1019.049534496367,
-        "rating_q975": 1030.6533668072252
-      }
+      "organization": "Mistral"
     },
     {
-      "Score": 1022.2198058863839,
-      "variance": 12.565333770774705,
-      "rating_q975": 1029.0284465236646,
-      "rating_q025": 1015.307465576634,
+      "Model": "Vicuna-7B",
+      "Score": 1020,
       "Votes": 7017,
-      "Rank (UB)": 229,
-      "Model": "vicuna-7b",
-      "95% CI": {
-        "rating_q025": 1015.307465576634,
-        "rating_q975": 1029.0284465236646
-      }
+      "organization": "LMSYS"
     },
     {
-      "Score": 1020.8315413127265,
-      "variance": 12.582863379134709,
-      "rating_q975": 1026.9592431854078,
-      "rating_q025": 1014.1737597345949,
+      "Model": "PaLM-Chat-Bison-001",
+      "Score": 1018,
       "Votes": 8713,
-      "Rank (UB)": 230,
-      "Model": "palm-2",
-      "95% CI": {
-        "rating_q025": 1014.1737597345949,
-        "rating_q975": 1026.9592431854078
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1006.9081365728439,
-      "variance": 14.93499961522906,
-      "rating_q975": 1013.8258896161358,
-      "rating_q025": 999.7119990294749,
+      "Model": "Gemma-2B-it",
+      "Score": 1004,
       "Votes": 4918,
-      "Rank (UB)": 234,
-      "Model": "gemma-2b-it",
-      "95% CI": {
-        "rating_q025": 999.7119990294749,
-        "rating_q975": 1013.8258896161358
-      }
+      "organization": "Google"
     },
     {
-      "Score": 1005.74395257146,
-      "variance": 12.997228888677574,
-      "rating_q975": 1012.5855669266142,
-      "rating_q025": 998.9005241476991,
+      "Model": "Qwen1.5-4B-Chat",
+      "Score": 1003,
       "Votes": 7816,
-      "Rank (UB)": 234,
-      "Model": "qwen1.5-4b-chat",
-      "95% CI": {
-        "rating_q025": 998.9005241476991,
-        "rating_q975": 1012.5855669266142
-      }
+      "organization": "Alibaba"
     },
     {
-      "Score": 981.9940268993869,
-      "variance": 12.8677454596204,
-      "rating_q975": 988.3522719896688,
-      "rating_q025": 975.0179098813492,
+      "Model": "Koala-13B",
+      "Score": 979,
       "Votes": 7020,
-      "Rank (UB)": 236,
-      "Model": "koala-13b",
-      "95% CI": {
-        "rating_q025": 975.0179098813492,
-        "rating_q975": 988.3522719896688
-      }
+      "organization": "UC Berkeley"
     },
     {
-      "Score": 972.2628076077751,
-      "variance": 20.749478203288756,
-      "rating_q975": 981.9599725280552,
-      "rating_q025": 963.7539521288733,
+      "Model": "ChatGLM3-6B",
+      "Score": 970,
       "Votes": 4763,
-      "Rank (UB)": 236,
-      "Model": "chatglm3-6b",
-      "95% CI": {
-        "rating_q025": 963.7539521288733,
-        "rating_q975": 981.9599725280552
-      }
+      "organization": "Tsinghua"
     },
     {
-      "Score": 949.7918766404484,
-      "variance": 52.05307507525096,
-      "rating_q975": 961.3665561273261,
-      "rating_q025": 934.9874880855378,
+      "Model": "GPT4All-13B-Snoozy",
+      "Score": 947,
       "Votes": 1788,
-      "Rank (UB)": 238,
-      "Model": "gpt4all-13b-snoozy",
-      "95% CI": {
-        "rating_q025": 934.9874880855378,
-        "rating_q975": 961.3665561273261
-      }
+      "organization": "Nomic AI"
     },
     {
-      "Score": 945.5885881562087,
-      "variance": 24.59513119790853,
-      "rating_q975": 953.0646784297979,
-      "rating_q025": 934.0222996151913,
+      "Model": "MPT-7B-Chat",
+      "Score": 943,
       "Votes": 3997,
-      "Rank (UB)": 238,
-      "Model": "mpt-7b-chat",
-      "95% CI": {
-        "rating_q025": 934.0222996151913,
-        "rating_q975": 953.0646784297979
-      }
+      "organization": "MosaicML"
     },
     {
-      "Score": 941.788875238251,
-      "variance": 35.93951871113768,
-      "rating_q975": 952.470856202732,
-      "rating_q025": 929.9564195877256,
+      "Model": "ChatGLM2-6B",
+      "Score": 939,
       "Votes": 2713,
-      "Rank (UB)": 238,
-      "Model": "chatglm2-6b",
-      "95% CI": {
-        "rating_q025": 929.9564195877256,
-        "rating_q975": 952.470856202732
-      }
+      "organization": "Tsinghua"
     },
     {
-      "Score": 939.0720825422563,
-      "variance": 17.562410562862055,
-      "rating_q975": 946.2132238571019,
-      "rating_q025": 931.6228490306528,
-      "Votes": 4920,
-      "Rank (UB)": 238,
       "Model": "RWKV-4-Raven-14B",
-      "95% CI": {
-        "rating_q025": 931.6228490306528,
-        "rating_q975": 946.2132238571019
-      }
+      "Score": 937,
+      "Votes": 4920,
+      "organization": "RWKV"
     },
     {
-      "Score": 918.8890010585887,
-      "variance": 20.869979158005762,
-      "rating_q975": 929.169525201213,
-      "rating_q025": 911.0992987062604,
+      "Model": "Alpaca-13B",
+      "Score": 916,
       "Votes": 5864,
-      "Rank (UB)": 242,
-      "Model": "alpaca-13b",
-      "95% CI": {
-        "rating_q025": 911.0992987062604,
-        "rating_q975": 929.169525201213
-      }
+      "organization": "Stanford"
     },
     {
-      "Score": 910.5045887087952,
-      "variance": 19.78070581125294,
-      "rating_q975": 919.150152151212,
-      "rating_q025": 902.2820800525568,
+      "Model": "OpenAssistant-Pythia-12B",
+      "Score": 908,
       "Votes": 6368,
-      "Rank (UB)": 242,
-      "Model": "oasst-pythia-12b",
-      "95% CI": {
-        "rating_q025": 902.2820800525568,
-        "rating_q975": 919.150152151212
-      }
+      "organization": "OpenAssistant"
     },
     {
-      "Score": 896.4752397377547,
-      "variance": 23.00092257132961,
-      "rating_q975": 906.9005334065025,
-      "rating_q025": 887.2128388057864,
+      "Model": "ChatGLM-6B",
+      "Score": 894,
       "Votes": 4983,
-      "Rank (UB)": 243,
-      "Model": "chatglm-6b",
-      "95% CI": {
-        "rating_q025": 887.2128388057864,
-        "rating_q975": 906.9005334065025
-      }
+      "organization": "Tsinghua"
     },
     {
-      "Score": 885.2206184165309,
-      "variance": 19.951616895529142,
-      "rating_q975": 894.503146343138,
-      "rating_q025": 877.3939222157147,
+      "Model": "FastChat-T5-3B",
+      "Score": 883,
       "Votes": 4288,
-      "Rank (UB)": 244,
-      "Model": "fastchat-t5-3b",
-      "95% CI": {
-        "rating_q025": 877.3939222157147,
-        "rating_q975": 894.503146343138
-      }
+      "organization": "LMSYS"
     },
     {
-      "Score": 857.4362507365969,
-      "variance": 27.42488963844109,
-      "rating_q975": 866.7064803565103,
-      "rating_q025": 847.2946827636639,
+      "Model": "StableLM-Tuned-Alpha-7B",
+      "Score": 855,
       "Votes": 3336,
-      "Rank (UB)": 246,
-      "Model": "stablelm-tuned-alpha-7b",
-      "95% CI": {
-        "rating_q025": 847.2946827636639,
-        "rating_q975": 866.7064803565103
-      }
+      "organization": "Stability AI"
     },
     {
-      "Score": 839.662213467466,
-      "variance": 31.4545032995237,
-      "rating_q975": 849.8804355683066,
-      "rating_q025": 830.4725137061356,
+      "Model": "Dolly-V2-12B",
+      "Score": 837,
       "Votes": 3480,
-      "Rank (UB)": 246,
-      "Model": "dolly-v2-12b",
-      "95% CI": {
-        "rating_q025": 830.4725137061356,
-        "rating_q975": 849.8804355683066
-      }
+      "organization": "Databricks"
     },
     {
-      "Score": 817.0010754648335,
-      "variance": 50.28810587341084,
-      "rating_q975": 829.1604516324895,
-      "rating_q025": 802.2304373427701,
+      "Model": "LLaMA-13B",
+      "Score": 814,
       "Votes": 2446,
-      "Rank (UB)": 248,
-      "Model": "llama-13b",
-      "95% CI": {
-        "rating_q025": 802.2304373427701,
-        "rating_q975": 829.1604516324895
-      }
+      "organization": "Meta"
     }
   ]
 }

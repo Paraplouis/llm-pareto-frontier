@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>LLM Pareto frontier</title>
+        <title>The LLM Pareto frontier</title>
         <link rel="stylesheet" href="styles.css" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
-        <meta name="description" content="Interactive visualization of LM Arena ELO scores vs API costs, showing the Pareto frontier of optimal language models.">
+        <meta name="description" content="Interactive visualization of LM Arena ELO scores vs cheapest provider API costs for input tokens, showing the Pareto frontier of 100+ language models.">
         <meta name="keywords" content="LLM, language models, Pareto frontier, cost efficiency, performance, AI">
         <script src="js/vendor/d3.v7.min.js"></script>
     </head>
@@ -36,15 +36,34 @@
             </svg>
         </a>
         <div class="container">
-            <h1 id="main-title">LLM Pareto frontier</h1>
-            <h2 id="main-subtitle">LM Arena ELO scores vs API costs</h2>
+            <h1 id="main-title">The LLM Pareto frontier</h1>
+            <h2 id="main-subtitle">ELO scores vs API costs</h2>
+
+            <!-- Token controls will be rendered after chart-info -->
 
             <div id="chart-info" class="chart-info"></div>
+
+            <!-- Prompt/Output token controls with presets -->
+            <div class="token-controls">
+                <label>Prompt tokens (input):
+                    <input type="number" id="input-tokens" value="750" min="0" step="50" />
+                </label>
+                <label>Output tokens:
+                    <input type="number" id="output-tokens" value="250" min="0" step="50" />
+                </label>
+
+                <div class="preset-buttons">
+                    <button class="preset-button" data-prompt="1000" data-output="0">1&nbsp;:&nbsp;0</button>
+                    <button class="preset-button" data-prompt="750" data-output="250">3&nbsp;:&nbsp;1</button>
+                    <button class="preset-button" data-prompt="500" data-output="500">1&nbsp;:&nbsp;1</button>
+                    <button class="preset-button" data-prompt="1000" data-output="500">2&nbsp;:&nbsp;1</button>
+                </div>
+            </div>
 
             <div id="chart" class="chart-container">
                 <div class="loading">Initializing chart...</div>
                 <div class="chart-notes">
-                    * Price shown is per million tokens (input). NOT assuming a 3:1 input-output tokens ratio.
+                    * Price shown recomputes dynamically based on your prompt/output token settings.
                 </div>
             </div>
 
@@ -56,10 +75,10 @@
                     <p>The cost of LLMs is steadily falling, and their quality is rising. This chart helps you navigate the trade-offs.</p>
                 
                     <h3>Quality (Elo Score)</h3>
-                    <p>We use the ELO score (without style control) from the <a href="https://lmarena.ai/leaderboard/text" target="_blank" rel="noopener noreferrer">LM Arena leaderboard</a> as a proxy for quality. It's like a chess Elo rating, but for LLMs, based on thousands of human votes.</p>
+                    <p>We use the ELO score (without <em>style control</em>) from the <a href="https://lmarena.ai/leaderboard/text" target="_blank" rel="noopener noreferrer">LM Arena leaderboard</a> as a proxy for quality. It's like a chess Elo rating, but for LLMs, based on thousands of human votes.</p>
                 
                     <h3>Cost ($/MTok)</h3>
-                    <p>We use the cost per million input tokens as a proxy for cost, based on data from the <a href="https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator" target="_blank" rel="noopener noreferrer">LLM Pricing Calculator</a>. Output tokens are typically more expensive, but input tokens usually make up the bulk of the cost.</p>
+                    <p>The price is calculated from both <em>input</em> and <em>output</em> token rates (per&nbsp;million) based on the prompt/output split you choose above (default&nbsp;<strong>3:1</strong>). Data comes from the <a href="https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator" target="_blank" rel="noopener noreferrer">LLM&nbsp;Pricing&nbsp;Calculator</a>. Historically this chart used input-only pricing as a proxy for cost—equivalent to a <strong>1:0</strong> ratio—which you can still reproduce via the preset buttons.</p>
                 </div>
             </div>
 

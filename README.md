@@ -43,7 +43,7 @@ and open http://localhost:8000 in your browser.
 │   ├── rank_data.json              # Raw ranking data from LM Arena
 │   └── price_data.json             # Raw pricing data
 ├── utils/
-│   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (using Hugging Face API)
+│   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (using Gradio client)
 │   └── generate_synthesized_data.py # Main data processing & synthesis utility
 └── js/
     ├── loader.js                   # Dynamic module loader with global namespace

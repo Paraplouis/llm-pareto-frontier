@@ -34,101 +34,103 @@ export class DataProcessor {
             return [];
         }
 
+        // Efficient O(n log n) implementation
+        // 1. Sort models by ascending price
+        const sortedByPrice = [...data].sort((a, b) => a.price - b.price);
+
         const paretoOptimal = [];
-        
-        for (let i = 0; i < data.length; i++) {
-            const currentModel = data[i];
-            let isDominated = false;
-            
-            // Check if current model is dominated by any other model
-            for (let j = 0; j < data.length; j++) {
-                if (i === j) continue;
-                
-                const otherModel = data[j];
-                
-                // A model dominates another if it has higher or equal ELO AND lower or equal price
-                // AND at least one of these is strictly better
-                const hasHigherOrEqualElo = otherModel.elo >= currentModel.elo;
-                const hasLowerOrEqualPrice = otherModel.price <= currentModel.price;
-                const hasStrictlyHigherElo = otherModel.elo > currentModel.elo;
-                const hasStrictlyLowerPrice = otherModel.price < currentModel.price;
-                
-                if (hasHigherOrEqualElo && hasLowerOrEqualPrice && 
-                    (hasStrictlyHigherElo || hasStrictlyLowerPrice)) {
-                    isDominated = true;
-                    break;
-                }
-            }
-            
-            if (!isDominated) {
-                paretoOptimal.push(currentModel);
+        let maxEloSoFar = -Infinity;
+
+        // 2. Sweep from cheapest to most expensive, keeping only models that
+        //    improve on the best ELO encountered so far.
+        for (const model of sortedByPrice) {
+            if (model.elo > maxEloSoFar) {
+                paretoOptimal.push(model);
+                maxEloSoFar = model.elo;
             }
         }
-        
-        // Sort by ELO descending for better visualization
+
+        // Return by ELO desc for display
         return paretoOptimal.sort((a, b) => b.elo - a.elo);
     }
 
     /**
-     * Get models by provider
+     * Get models by organization
      * @param {Array} data - Array of model objects
-     * @param {string} provider - Provider name to filter by
-     * @returns {Array} Models from the specified provider
+     * @param {string} organization - Organization name to filter by
+     * @returns {Array} Models from the specified organization
      */
-    getModelsByProvider(data, provider) {
+    getModelsByOrganization(data, organization) {
         if (!Array.isArray(data)) {
-            console.warn('Invalid data provided to getModelsByProvider');
+            console.warn('Invalid data provided to getModelsByOrganization');
             return [];
         }
 
         return data.filter(model => 
-            model.cheapest_provider && model.cheapest_provider.toLowerCase() === provider.toLowerCase()
+            model.organization && model.organization.toLowerCase() === organization.toLowerCase()
         );
     }
 
     /**
      * Get valid data by filtering out models with missing required fields
      * @param {Array} data - Array of model objects
-     * @param {Set<string>} [activeProviders=null]
+     * @param {Set<string>} [activeOrganizations=null]
+     * @param {boolean} [excludeFree=false]
+     * @param {number} [promptTokens=750]
+     * @param {number} [outputTokens=250]
      * @returns {Array} Valid model data
      */
-    getValidData(data, activeProviders = null) {
+    getValidData(data, activeOrganizations = null, excludeFree = false, promptTokens = 750, outputTokens = 250) {
         if (!Array.isArray(data)) {
             console.warn('Invalid data provided to getValidData');
             return [];
         }
 
+        const totalTokens = promptTokens + outputTokens;
+        const inputRatio = totalTokens > 0 ? promptTokens / totalTokens : 1;
+
         let filteredData = data.filter(model => 
             model && 
             typeof model.elo === 'number' && 
-            typeof model.price === 'number' &&
+            (typeof model.input_price === 'number' || typeof model.price === 'number') &&
             model.elo > 0 && 
-            model.price > 0 &&
+            // Honour excludeFree flag – only drop free models when requested
+            (excludeFree ? (model.input_price ? model.input_price > 0 : model.price > 0) : true) &&
             model.model
         );
 
-        // Apply provider filter if activeProviders set is provided and not empty
-        if (activeProviders && activeProviders.size > 0) {
+        // Apply organization filter if activeOrganizations set is provided and not empty
+        if (activeOrganizations && activeOrganizations.size > 0) {
             filteredData = filteredData.filter(model =>
-                activeProviders.has(model.cheapest_provider)
+                activeOrganizations.has(model.organization)
             );
         }
 
-        return filteredData;
+        // Compute effective price for each model
+        const mappedData = filteredData.map(model => {
+            if (typeof model.input_price === 'number' && typeof model.output_price === 'number') {
+                const effectivePrice = (model.input_price * inputRatio) + (model.output_price * (1 - inputRatio));
+                return { ...model, price: effectivePrice };
+            }
+            // Fallback to existing price field
+            return model;
+        });
+
+        return mappedData;
     }
 
     /**
-     * Get unique providers from data
+     * Get unique organizations from data
      * @param {Array} data - Array of model objects
-     * @returns {Array} Array of unique provider names
+     * @returns {Array} Array of unique organization names
      */
-    getUniqueProviders(data) {
+    getUniqueOrganizations(data) {
         if (!Array.isArray(data)) {
-            console.warn('Invalid data provided to getUniqueProviders');
+            console.warn('Invalid data provided to getUniqueOrganizations');
             return [];
         }
 
-        const providers = [...new Set(data.map(model => model.cheapest_provider).filter(Boolean))];
-        return providers.sort();
+        const organizations = [...new Set(data.map(model => model.organization).filter(Boolean))];
+        return organizations.sort();
     }
 }

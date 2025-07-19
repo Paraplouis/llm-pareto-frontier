@@ -1,119 +1,110 @@
 import polars as pl
 import json
 from pathlib import Path
-import pickle
-from huggingface_hub import hf_hub_download, list_repo_files
-from huggingface_hub.utils import HfHubHTTPError
 import re
-import requests
+from gradio_client import Client
+import pandas as pd
+import io
+from contextlib import redirect_stdout
+from tenacity import retry, wait_exponential, stop_after_attempt
+
+
+def _clean_html(html_string: str) -> str:
+    """Removes HTML tags from a string."""
+    if not isinstance(html_string, str):
+        return html_string
+    return re.sub(r'<.*?>', '', html_string)
+
+
+def _find_date_in_config(component, search_string="last updated"):
+    """Recursively search for a date string in a component's properties."""
+    if isinstance(component, dict):
+        props = component.get("props", {})
+        if isinstance(props, dict):
+            value = props.get("value")
+            if isinstance(value, str) and search_string in value.lower():
+                match = re.search(r'\d{4}-\d{2}-\d{2}', value)
+                if match:
+                    return match.group(0)
+        
+        if "children" in props and props["children"]:
+            for child in props["children"]:
+                found = _find_date_in_config(child, search_string)
+                if found:
+                    return found
+    return None
 
 
 def fetch_latest_leaderboard_df():
     """
-    Fetches the latest leaderboard data from the Hugging Face Space.
-
-    This function finds the most recent elo_results_*.pkl file,
-    downloads it, and extracts the leaderboard DataFrame.
-    It also fetches data from the lm-sys/FastChat GitHub repository to
-    identify and filter out inactive/deprecated models.
-
-    Returns:
-        (pl.DataFrame, str): A tuple containing the leaderboard polars DataFrame and the file date.
+    Fetches the latest leaderboard data from the Hugging Face Space using the Gradio client.
     """
     try:
-        # Fetch and parse monitor_md.py to find deprecated models
-        inactive_models = []
-        try:
-            url = "https://raw.githubusercontent.com/lm-sys/FastChat/main/fastchat/serve/monitor/monitor_md.py"
-            response = requests.get(url)
-            response.raise_for_status()
-            monitor_content = response.text
-            
-            match = re.search(r"deprecated_model_name\s*=\s*\[([^\]]+)\]", monitor_content, re.DOTALL)
-            if match:
-                models_str = match.group(1)
-                inactive_models = [model.strip().strip('"\'') for model in models_str.split(',') if model.strip() and not model.startswith("#")]
-                print(f"Found {len(inactive_models)} deprecated models to exclude.")
-        except Exception as e:
-            print(f"Could not fetch or parse monitor_md.py to find deprecated models: {e}")
+        print("  ↳ Initializing Gradio client for lmarena-ai/chatbot-arena-leaderboard...")
+        
+        s = io.StringIO()
+        with redirect_stdout(s):
+            client = Client("lmarena-ai/chatbot-arena-leaderboard")
+        output = s.getvalue().strip()
+        if output:
+            print(f"  ↳ {output}")
 
-        repo_id = "lmarena-ai/chatbot-arena-leaderboard"
-        
-        all_files = list_repo_files(repo_id, repo_type="space")
-        
-        elo_files = [f for f in all_files if f.startswith("elo_results_") and f.endswith(".pkl")]
-        
-        if not elo_files:
-            print("No elo_results_*.pkl files found in the repository.")
-            return None, None
-            
-        latest_file = sorted(elo_files, key=lambda x: re.search(r"(\d{8}|\d{4})", x).group(0), reverse=True)[0]
-        print(f"Found latest leaderboard file: {latest_file}")
-        
-        # Extract date from filename
-        file_date = None
-        file_date_match = re.search(r"(\d{8})", latest_file)
-        if file_date_match:
-            date_str = file_date_match.group(1)
-            file_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}"
+        print("  ↳ Calling the /update_leaderboard_and_plots endpoint...")
+        @retry(wait=wait_exponential(multiplier=2, min=1, max=20), stop=stop_after_attempt(5))
+        def _predict():
+            return client.predict(
+                category="Overall",
+                filters=[],
+                api_name="/update_leaderboard_and_plots"
+            )
 
-        downloaded_file_path = hf_hub_download(
-            repo_id=repo_id,
-            repo_type="space",
-            filename=latest_file
-        )
+        result = _predict()
+        
+        leaderboard_payload = None
+        if isinstance(result, tuple) and len(result) > 0:
+            leaderboard_payload = result[0]
 
-        with open(downloaded_file_path, "rb") as f:
-            data = pickle.load(f)
-        
-        # The data structure can vary. Let's find the correct key for the leaderboard.
-        df_pd = None
-        if "full" in data and "leaderboard_table_df" in data["full"]:
-            df_pd = data["full"]["leaderboard_table_df"]
-        elif "text" in data and "full" in data["text"] and "leaderboard_table_df" in data["text"]["full"]:
-            df_pd = data["text"]["full"]["leaderboard_table_df"]
-        elif "text" in data and "leaderboard_table_df" in data["text"]:
-            df_pd = data["text"]["leaderboard_table_df"]
-        
-        if df_pd is not None:
-            # The model name is in the index of the pandas DataFrame
-            df_pd['Model'] = df_pd.index
+        # Extract the last updated date from the client's config
+        last_updated_date = "Unknown"
+        if hasattr(client, 'config'):
+            for component in client.config.get("components", []):
+                date = _find_date_in_config(component)
+                if date:
+                    last_updated_date = date
+                    break
+
+        if (leaderboard_payload and 
+            isinstance(leaderboard_payload, dict) and 
+            'value' in leaderboard_payload and
+            isinstance(leaderboard_payload['value'], dict) and
+            'headers' in leaderboard_payload['value'] and 
+            'data' in leaderboard_payload['value']):
             
-            # Convert pandas DataFrame to polars DataFrame
+            headers = leaderboard_payload['value']['headers']
+            data = leaderboard_payload['value']['data']
+            
+            df_pd = pd.DataFrame(data, columns=headers)
+
+            df_pd['Model'] = df_pd['Model'].apply(_clean_html)
+            
             df = pl.from_pandas(df_pd)
-
-            # Filter out inactive models
-            if inactive_models:
-                initial_count = len(df)
-                df = df.filter(~pl.col('Model').is_in(inactive_models))
-                print(f"Filtered out {initial_count - len(df)} inactive models.")
-
+            
             df = df.rename({
-                "rating": "Score",
-                "num_battles": "Votes",
-                "final_ranking": "Rank (UB)",
+                "Arena Score": "Score",
+                "Votes": "Votes",
+                "Organization": "organization"
             })
+            
+            df = df.select(["Model", "Score", "Votes", "organization"])
 
-            df = df.with_columns([
-                pl.struct([pl.col('rating_q025'), pl.col('rating_q975')]).alias('95% CI'),
-                pl.col('Score').cast(pl.Float64, strict=False),
-                pl.col('Votes').cast(pl.Int64, strict=False)
-            ])
+            print("  ↳ Leaderboard data loaded and parsed...")
+            # The date is not available in the response, so we'll use a placeholder.
+            return df, last_updated_date
 
-            print("Data fetched and processed successfully.")
-            return df, file_date
         else:
-            print("Could not find 'leaderboard_table_df' in the pickle file.")
-            # For debugging, print the structure if we can't find the data
-            print("DEBUG: Pickle file keys:", data.keys())
-            for key in data.keys():
-                if isinstance(data[key], dict):
-                    print(f"DEBUG: Keys in data['{key}']:", data[key].keys())
+            print("Could not find or parse the leaderboard dataframe from the Gradio result.")
             return None, None
 
-    except HfHubHTTPError as e:
-        print(f"HTTP Error fetching file list from Hugging Face Hub: {e}")
-        return None, None
     except Exception as e:
         print(f"An error occurred: {e}")
         return None, None
@@ -128,8 +119,9 @@ if __name__ == '__main__':
         
         output_data = {"last_updated": file_date, "models": records}
         
-        with open(output_path, "w") as f:
-            json.dump(output_data, f, indent=2)
-        print(f"✅ Successfully scraped and processed LM Arena data")
+        with open(output_path, "w", encoding='utf-8') as f:
+            json.dump(output_data, f, indent=2, ensure_ascii=False)
+            
+        print(f"  ✅ Successfully scraped LM Arena data, saved to data/rank_data.json")
     else:
-        print("Failed to extract data.") 
+        print("Failed to extract data.")

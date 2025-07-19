@@ -4,31 +4,39 @@ import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, asdict
+from datetime import date, datetime
+from collections import Counter, defaultdict
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(message)s"
 )
 logger = logging.getLogger(__name__)
 
 
+# ------------------------------
+# Data classes
+# ------------------------------
+
 @dataclass
 class ModelData:
-    """Data class for model information"""
+    """Data class for synthesized model information including token pricing"""
 
     model: str
     elo: int
-    price: float
+    input_price: float
+    output_price: float
     cheapest_provider: str
     votes: int
     matched_price_model: str
-
+    organization: str
 
 @dataclass
 class PriceInfo:
-    """Data class for pricing information"""
+    """Data class for pricing information with separate input/output rates"""
 
-    price: float
+    input_price: float
+    output_price: float
     provider: str
     original_name: str
 
@@ -41,15 +49,24 @@ class MatchingDebugInfo:
     matched_price_model: str
     price: float
     provider: str
+    organization: str
 
 
 class ModelNameNormalizer:
     """Utility class for normalizing model names for better matching"""
 
+    SPECIAL_CASES = {
+        r'\bchatgpt-4o\b': 'gpt-4o',
+    }
+
     @staticmethod
     def normalize(name: str) -> str:
         """Normalize model name for better matching"""
         name = name.lower()
+
+        for pattern, replacement in ModelNameNormalizer.SPECIAL_CASES.items():
+            name = re.sub(pattern, replacement, name, flags=re.IGNORECASE)
+
         # Remove version dates and preview indicators more robustly
         name = re.sub(r"-\d{4}-\d{2}-\d{2}|-\d{4,}", "", name)
         name = re.sub(r"-\d{2}-\d{2}", "", name)
@@ -68,8 +85,6 @@ class ModelNameNormalizer:
 
 class PriceMatcher:
     """Class responsible for matching model names with pricing data"""
-
-    MODEL_FAMILIES = ["gemini", "gpt", "claude", "deepseek", "qwen", "grok"]
 
     def __init__(self, price_lookup: Dict[str, PriceInfo]):
         self.price_lookup = price_lookup
@@ -138,7 +153,7 @@ class PriceMatcher:
         """Calculate bonus for model family matches"""
         bonus = 0
 
-        for family in self.MODEL_FAMILIES:
+        for family in ModelNameFormatter.MODEL_FAMILIES:
             if family in model_lower and family in price_model_lower:
                 bonus += 0.3
 
@@ -156,96 +171,55 @@ class PriceMatcher:
         return bonus
 
 
-class DefaultPricingEstimator:
-    """Class for estimating default pricing based on model families"""
+class ModelNameFormatter:
+    """Formats model names for display using dynamic rules."""
 
-    PRICING_RULES = {
-        "openai": {
-            "patterns": [
-                (r"4\.5|o3", 15.0, "Premium models"),
-                (r"4o|4\.1", 2.5, "Standard GPT-4 models"),
-                (r"mini|nano", 0.5, "Smaller models"),
-            ],
-            "default": 5.0,
-            "provider": "OpenAI",
-        },
-        "anthropic": {
-            "patterns": [
-                (r"3\.7|opus", 15.0, "Premium Claude"),
-                (r"sonnet", 3.0, "Standard Claude"),
-                (r"haiku", 0.8, "Smaller Claude"),
-            ],
-            "default": 3.0,
-            "provider": "Anthropic",
-        },
-        "google": {
-            "patterns": [
-                (r"2\.5.*pro", 1.25, "Gemini 2.5 Pro"),
-                (r"pro", 1.25, "Pro models"),
-                (r"flash", 0.15, "Flash models"),
-            ],
-            "default": 1.0,
-            "provider": "Google",
-        },
-        "deepseek": {
-            "patterns": [
-                (r"v3", 0.27, "DeepSeek V3"),
-                (r"r1", 0.55, "DeepSeek R1"),
-            ],
-            "default": 0.5,
-            "provider": "DeepSeek",
-        },
-        "alibaba": {"patterns": [], "default": 0.9, "provider": "Alibaba"},
-        "xai": {"patterns": [], "default": 2.0, "provider": "xAI"},
-    }
+    ACRONYMS = {"ai", "dpo", "gpu", "it", "llm", "moe", "eu", "uk", "us", "vqa"}  # Removed 'claude'
+    MODEL_FAMILIES = ["claude", "codellama", "command", "deepseek", "gemma", "gemini", "gpt", "grok", "llama", "mistral", "mixtral", "qwen"]
 
-    @classmethod
-    def estimate_pricing(cls, model_name: str, organization: str) -> Tuple[float, str]:
-        """Get default pricing for unknown models based on organization"""
-        model_lower = model_name.lower()
-        org_lower = organization.lower()
+    @staticmethod
+    def format_name(name: str, file_date: str) -> str:
+        """
+        Dynamically formats a model name using rules for capitalization, dates, and families.
+        """
+        # Normalize and split into words
+        normalized = ModelNameNormalizer.normalize(name)
+        words = re.split(r'[\s_-]+', normalized)
 
-        # Determine provider family
-        provider_family = cls._determine_provider_family(model_lower, org_lower)
+        # Capitalize intelligently
+        formatted_words = []
+        for word in words:
+            if word.lower() in ModelNameFormatter.ACRONYMS:
+                formatted_words.append(word.upper())
+            elif word.lower() in ModelNameFormatter.MODEL_FAMILIES:
+                formatted_words.append(word.capitalize())
+            elif re.match(r'\d+(\.\d+)?', word):  # Versions like 3.1
+                formatted_words.append(word)
+            else:
+                formatted_words.append(word.capitalize())
 
-        if provider_family in cls.PRICING_RULES:
-            rules = cls.PRICING_RULES[provider_family]
+        formatted_name = " ".join(formatted_words)
 
-            # Check pattern matches
-            for pattern, price, description in rules["patterns"]:
-                if re.search(pattern, model_lower):
-                    logger.debug(
-                        f"Matched pattern '{pattern}' for {model_name}: ${price} ({description})"
-                    )
-                    return price, rules["provider"]
+        # Improved date handling: detect YYYYMMDD or partial dates
+        import datetime
+        current_year = datetime.date.today().year
+        date_match = re.search(r'(\d{4})(\d{2})(\d{2})', name)  # For YYYYMMDD
+        if date_match:
+            year, month, day = date_match.groups()
+            formatted_name += f" ({year}-{month}-{day})"
+        else:
+            partial_date = re.search(r'(\d{2})(\d{2})', name)  # For MMDD, prepend current year
+            if partial_date:
+                month, day = partial_date.groups()
+                formatted_name += f" ({current_year}-{month}-{day})"
 
-            # Use default for provider
-            return rules["default"], rules["provider"]
+        # Special handling for previews/betas
+        if "preview" in name.lower():
+            formatted_name += " Preview"
+        elif "beta" in name.lower():
+            formatted_name += " beta"
 
-        # Fallback default
-        return 1.0, organization or "Unknown"
-
-    @classmethod
-    def _determine_provider_family(
-        cls, model_lower: str, org_lower: str
-    ) -> Optional[str]:
-        """Determine the provider family from model name and organization"""
-        family_checks = [
-            ("openai", ["gpt", "openai"]),
-            ("anthropic", ["claude", "anthropic"]),
-            ("google", ["gemini", "google"]),
-            ("deepseek", ["deepseek"]),
-            ("alibaba", ["qwen", "alibaba"]),
-            ("xai", ["grok", "xai"]),
-        ]
-
-        for family, keywords in family_checks:
-            if any(
-                keyword in model_lower or keyword in org_lower for keyword in keywords
-            ):
-                return family
-
-        return None
+        return formatted_name
 
 
 class DataSynthesizer:
@@ -286,9 +260,6 @@ class DataSynthesizer:
             # Save results
             self._save_results(synthesized_data, matching_debug, last_updated)
 
-            logger.info(
-                f"✅ Generated synthesized_data.js with {len(synthesized_data)} models"
-            )
             return synthesized_data
 
         except Exception as e:
@@ -305,7 +276,7 @@ class DataSynthesizer:
             last_updated = data.get("last_updated")
             models = data.get("models", [])
             
-            logger.info(f"📊 Loaded {len(models)} models from ranking data (updated: {last_updated})")
+            logger.info(f"  ↳ Loaded {len(models)} models from ranking data (updated: {last_updated})")
             return models, last_updated
         except FileNotFoundError:
             raise FileNotFoundError(f"Ranking data file not found: {rank_file}")
@@ -329,15 +300,16 @@ class DataSynthesizer:
                     # If model already exists, keep the one with the lower price
                     if (
                         model_name not in price_lookup
-                        or current_price < price_lookup[model_name].price
+                        or current_price < price_lookup[model_name].input_price
                     ):
                         price_lookup[model_name] = PriceInfo(
-                            price=current_price,
+                            input_price=current_price,
+                            output_price=model.get("outputPrice", current_price),
                             provider=provider_name,
                             original_name=model["name"],
                         )
 
-            logger.info(f"💰 Loaded pricing data for {len(price_lookup)} models")
+            logger.info(f"  ↳ Loaded {len(price_lookup)} models from pricing data (updated: {date.today().strftime("%Y-%m-%d")})")
             return price_lookup
 
         except FileNotFoundError:
@@ -348,63 +320,52 @@ class DataSynthesizer:
     def _process_model(
         self, model: Dict[str, Any], price_matcher: PriceMatcher
     ) -> Optional[Tuple[ModelData, MatchingDebugInfo]]:
-        """Process a single model to find its price and create data objects"""
-        model_name = model.get("Model", "").strip()
-        elo_score = model.get("Score")
-        votes = model.get("Votes")
-        organization = model.get("Organization", "")
+        """
+        Processes a single model record.
+        It normalizes the model name, finds a price match, and returns
+        structured data for the model and for debugging.
+        """
+        model_name = model["Model"]
+        elo = int(model["Score"])
+        votes = model.get("Votes", 0)
+        organization = model.get("organization", "Unknown")
 
-        if not all([model_name, elo_score, votes]):
+        # Skip model if below min_elo
+        if elo < self.min_elo:
             return None
 
+        # Format model name for display
+        file_date = model.get("file_date", "")
+        formatted_name = ModelNameFormatter.format_name(model_name, file_date)
+
+        # Attempt to find a price match
         price_info = price_matcher.find_match(model_name)
 
         if price_info:
+            if self.exclude_free and price_info.input_price == 0:
+                return None  # Skip free models if excluded
+
             model_data = ModelData(
-                model=model_name,
-                elo=int(round(elo_score)),
-                price=price_info.price,
+                model=formatted_name,
+                elo=elo,
+                input_price=price_info.input_price,
+                output_price=price_info.output_price,
                 cheapest_provider=price_info.provider,
                 votes=votes,
-                matched_price_model=price_info.original_name
+                matched_price_model=price_info.original_name,
+                organization=organization
             )
             debug_info = MatchingDebugInfo(
                 rank_model=model_name,
                 matched_price_model=price_info.original_name,
-                price=price_info.price,
+                price=price_info.input_price,
                 provider=price_info.provider,
+                organization=organization
             )
-        else:
-            default_price, provider = DefaultPricingEstimator.estimate_pricing(
-                model_name, organization
-            )
+            return model_data, debug_info
 
-            if self.exclude_free and default_price <= 0:
-                return None
-
-            model_data = ModelData(
-                model=model_name,
-                elo=int(round(elo_score)),
-                price=default_price,
-                cheapest_provider=provider,
-                votes=votes,
-                matched_price_model=model_name
-            )
-
-            debug_info = MatchingDebugInfo(
-                rank_model=model_name,
-                matched_price_model="DEFAULT_ESTIMATE",
-                price=default_price,
-                provider=provider,
-            )
-
-        if (
-            debug_info.matched_price_model == "DEFAULT_ESTIMATE"
-            or debug_info.provider == "Unknown"
-        ):
+        # New: Skip if no real match found
             return None
-
-        return model_data, debug_info
 
     def _save_results(
         self, synthesized_data: List[ModelData], matching_debug: List[MatchingDebugInfo], timestamp: str
@@ -428,76 +389,55 @@ class DataSynthesizer:
                     "matched_price_model": debug.matched_price_model,
                     "price": debug.price,
                     "provider": debug.provider,
+                    "organization": debug.organization,
                 }
                 for debug in matching_debug
             ]
             json.dump(debug_data, f, indent=2, ensure_ascii=False)
 
-        logger.info("💾 Saved synthesized data and debug information")
+        logger.info("  ↳ Created debug and synthesized data files")
 
     def _generate_js_content(
-        self, synthesized_data: List[ModelData], timestamp: str, min_elo: int, exclude_free: bool
+        self,
+        synthesized_data: List[ModelData],
+        timestamp: str,
+        min_elo: int,
+        exclude_free: bool,
     ) -> str:
         """Generate JavaScript file content"""
-        from collections import Counter
         
-        matched_model_counts = Counter(item.matched_price_model for item in synthesized_data)
-
+        # Pretty-print JSON for readability
         records = []
         for item in synthesized_data:
-            item_dict = asdict(item)
-            display_name = item.matched_price_model
-            
-            if matched_model_counts[item.matched_price_model] > 1:
-                # If the matched name is not unique, create a more descriptive name
-                date_match = re.search(r"(\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{2}-\d{2})", item.model)
-                version_match = re.search(r"([vV]\d+(\.\d+)*)", item.model)
-                
-                suffix = None
-                if date_match:
-                    suffix = date_match.group(1)
-                elif version_match:
-                    suffix = version_match.group(1)
+            records.append(
+                {
+                    "model": item.model,
+                    "elo": item.elo,
+                    "input_price": item.input_price,
+                    "output_price": item.output_price,
+                    "cheapest_provider": item.cheapest_provider,
+                    "votes": item.votes,
+                    "organization": item.organization
+                }
+            )
 
-                if suffix:
-                    # To avoid redundancy, remove any similar pattern from the matched_price_model
-                    base_name = re.sub(r"(\d{8}|\d{6}|\d{4}-\d{2}-\d{2}|\d{2}-\d{2}|[vV]\d+(\.\d+)*)", "", item.matched_price_model).strip()
-                    base_name = re.sub(r'\s\s+', ' ', base_name)
-                    display_name = f"{base_name} ({suffix})"
-                else:
-                    # Fallback to rank model if no version/date found
-                    display_name = item.model
-            
-            # Remove provider prefixes like "nvidia/"
-            if "/" in display_name:
-                display_name = display_name.split("/")[-1]
+        js_array = ",\n  ".join([json.dumps(record) for record in records])
+        js_content = f"""export const data = [\n  {js_array}\n];
 
-            item_dict['model'] = display_name
-            del item_dict['matched_price_model'] # Not needed in the final JS
-            records.append(item_dict)
-
-        # Format each record as a single-line JSON object for better readability
-        if records:
-            json_records = [json.dumps(r, ensure_ascii=False) for r in records]
-            data_json = "[\n  " + ",\n  ".join(json_records) + "\n]"
-        else:
-            data_json = "[]"
-
-        return (
-            f"export const data = {data_json};\n\n"
-            f'export const dataLastUpdated = "{timestamp}";\n'
-            f"export const minElo = {min_elo};\n"
-            f"export const excludeFree = {str(exclude_free).lower()};\n"
-        )
+export const dataLastUpdated = "{timestamp}";
+export const minElo = {min_elo};
+export const excludeFree = {'true' if exclude_free else 'false'};
+"""
+        return js_content
 
 
 def main():
     """Main function to run the data synthesis"""
     try:
-        synthesizer = DataSynthesizer(min_elo=0, exclude_free=False)
+        synthesizer = DataSynthesizer(min_elo=1000, exclude_free=True)
         data = synthesizer.generate()
 
-        print(f"\n✅ Successfully generated data for {len(data)} models")
+        print(f"  ✅ Successfully synthesized data for {len(data)} models, saved to data/synthesized_data.js")
 
     except Exception as e:
         logger.error(f"❌ Data synthesis failed: {e}")

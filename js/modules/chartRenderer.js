@@ -22,7 +22,7 @@ export class ChartRenderer {
                 MARGIN: {
                     top: 20,
                     right: 80,
-                    bottom: 60,
+                    bottom: 30,
                     left: 60,
                     mobile: {
                         right: 40,
@@ -52,23 +52,14 @@ export class ChartRenderer {
     }
 
     /**
-     * Create tooltip for model details
+     * Setup color scale for organizations
      */
-    createTooltip() {
-        return d3.select("body")
-            .append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0)
-            .style("pointer-events", "none");
-    }
-
-    /**
-     * Setup color scale for providers
-     */
-    setupColorScale(providers) {
+    setupColorScale(organizations) {
+        // Use a larger categorical palette to avoid color collisions when organizations >10
+        const palette = [...d3.schemeTableau10, ...d3.schemeSet3];
         this.colorScale = d3.scaleOrdinal()
-            .domain(providers)
-            .range(d3.schemeCategory10);
+            .domain(organizations)
+            .range(palette);
     }
 
     /**
@@ -100,17 +91,27 @@ export class ChartRenderer {
      */
     createScales() {
         const { width, height } = this.dimensions;
-        
-        const xDomain = this.config.CHART.SCALES.X_DOMAIN;
-        const yDomain = this.config.CHART.SCALES.Y_DOMAIN;
-        
+
+        // Dynamically derive domains from data; fall back to config defaults
+        const priceValues = (this.currentData || []).map(d => d.price).filter(p => p > 0);
+        const eloValues   = (this.currentData || []).map(d => d.elo);
+
+        const defaultX = this.config.CHART.SCALES.X_DOMAIN;
+        const defaultY = this.config.CHART.SCALES.Y_DOMAIN;
+
+        const xMin = priceValues.length ? Math.min(...priceValues) * 0.9 : defaultX[0];
+        const xMax = priceValues.length ? Math.max(...priceValues) * 1.1 : defaultX[1];
+
+        const yMin = eloValues.length ? Math.min(...eloValues) - 20 : defaultY[0];
+        const yMax = eloValues.length ? Math.max(...eloValues) + 20 : defaultY[1];
+
         const xScale = d3.scaleLog()
-            .domain(xDomain)
+            .domain([Math.max(0.01, xMin), xMax])
             .range([0, width])
             .clamp(true);
 
         const yScale = d3.scaleLinear()
-            .domain(yDomain)
+            .domain([yMin, yMax])
             .range([height, 0])
             .clamp(true);
 
@@ -128,7 +129,10 @@ export class ChartRenderer {
             .ticks(isMobile ? 4 : 6)
             .tickSize(6)
             .tickPadding(3)
-            .tickFormat(d => `$${d < 1 ? d.toFixed(2) : d}`);
+            .tickFormat(d => {
+                const formatted = d < 1 ? Number(d.toFixed(4)) : Number(d.toFixed(2));
+                return `$${formatted}`;
+            });
 
         this.svg.append("g")
             .attr("transform", `translate(0,${height})`)
@@ -231,8 +235,15 @@ export class ChartRenderer {
     renderDataPoints(scales, data) {
         const { xScale, yScale } = scales;
 
+        // Draw non-Pareto points first, Pareto points last for correct stacking order
+        const orderedData = [...data].sort((a, b) => {
+            const aPareto = this.isParetoOptimal(a.model) ? 1 : 0;
+            const bPareto = this.isParetoOptimal(b.model) ? 1 : 0;
+            return aPareto - bPareto; // non-Pareto (0) first, Pareto (1) last
+        });
+
         this.svg.selectAll(".datapoint")
-            .data(data)
+            .data(orderedData)
             .enter()
             .append("circle")
             .attr("class", d => {
@@ -242,7 +253,7 @@ export class ChartRenderer {
             .attr("cx", d => xScale(d.price))
             .attr("cy", d => yScale(d.elo))
             .attr("r", d => this.getPointRadius(d))
-            .attr("fill", d => this.colorScale ? this.colorScale(d.cheapest_provider) : "#666")
+            .attr("fill", d => this.colorScale ? this.colorScale(d.organization) : "#666")
             .attr("stroke", d => {
                 const isPareto = this.isParetoOptimal(d.model);
                 return isPareto ? this.config.CHART.COLORS.PARETO_STROKE : "#fff";
@@ -258,25 +269,24 @@ export class ChartRenderer {
     }
 
     /**
-     * Handle mouse over event for data points
+     * Handle mouseover on a data point
      */
     handleMouseOver(event, d) {
-        d3.select(event.target)
+        d3.select(event.currentTarget)
             .transition()
             .duration(this.config.ANIMATION.HOVER_DURATION)
             .attr("r", this.getPointRadius(d, 'hover'))
             .attr("opacity", 1);
 
-        const isPareto = this.isParetoOptimal(d.model);
-
-        document.dispatchEvent(new CustomEvent('modelHover', {
+        const hoverEvent = new CustomEvent('modelHover', {
             detail: {
                 model: d,
                 x: event.pageX,
                 y: event.pageY,
-                isPareto: isPareto
+                isPareto: this.isParetoOptimal(d.model)
             }
-        }));
+        });
+        document.dispatchEvent(hoverEvent);
     }
 
     /**
@@ -302,6 +312,52 @@ export class ChartRenderer {
     }
 
     /**
+     * Pre-calculates positions for Pareto point labels to avoid collisions.
+     */
+    precomputeParetoLabels(scales) {
+        this.paretoLabelInfo.clear();
+        if (this.sortedParetoFrontier.length === 0) return;
+
+        const { xScale, yScale } = scales;
+        const { isMobile } = this.dimensions;
+
+        this.sortedParetoFrontier.forEach((p, i) => {
+            const p_left = i > 0 ? this.sortedParetoFrontier[i - 1] : null;
+            const p_right = i < this.sortedParetoFrontier.length - 1 ? this.sortedParetoFrontier[i + 1] : null;
+
+            // Default position: right of the point
+            let anchor = "start";
+            let x_offset = this.getPointRadius(p) + 5;
+            let y_offset = 3;
+
+            // If the point is on a convex part of the curve (a peak or elbow), move the label above it.
+            if (p_left && p_right) {
+                const x_p = xScale(p.price);
+                const y_p = yScale(p.elo);
+                const x_left = xScale(p_left.price);
+                const y_left = yScale(p_left.elo);
+                const x_right = xScale(p_right.price);
+                const y_right = yScale(p_right.elo);
+
+                if (x_right > x_left) {
+                    // Find the y-coordinate on the line segment connecting the neighbors
+                    const y_on_line = y_left + (y_right - y_left) * (x_p - x_left) / (x_right - x_left);
+                    
+                    // If the point's y is below the line on screen (higher ELO), it's a convex point.
+                    // Add a small tolerance to handle near-straight lines.
+                    if (y_p < y_on_line - 2) { 
+                        anchor = "middle";
+                        x_offset = 0;
+                        y_offset = -this.getPointRadius(p) - 4;
+                    }
+                }
+            }
+            
+            this.paretoLabelInfo.set(p.model, { anchor, x_offset, y_offset });
+        });
+    }
+    
+    /**
      * Render model labels
      */
     renderLabels(scales, data) {
@@ -314,14 +370,14 @@ export class ChartRenderer {
             .append("text")
             .attr("class", "model-label")
             .attr("text-anchor", d => {
-                if (this.isParetoOptimal(d.model)) {
+                if (this.isParetoOptimal(d.model) && this.paretoLabelInfo.has(d.model)) {
                     return this.paretoLabelInfo.get(d.model).anchor;
                 }
                 return "start"; // Default for non-Pareto
             })
             .attr("x", d => {
                 const xBase = xScale(d.price);
-                if (this.isParetoOptimal(d.model)) {
+                if (this.isParetoOptimal(d.model) && this.paretoLabelInfo.has(d.model)) {
                     return xBase + this.paretoLabelInfo.get(d.model).x_offset;
                 }
                 const baseOffset = isMobile ? 4 : 6;
@@ -329,7 +385,7 @@ export class ChartRenderer {
             })
             .attr("y", d => {
                 const yBase = yScale(d.elo);
-                if (this.isParetoOptimal(d.model)) {
+                if (this.isParetoOptimal(d.model) && this.paretoLabelInfo.has(d.model)) {
                     return yBase + this.paretoLabelInfo.get(d.model).y_offset;
                 }
                 return yBase + 3;
@@ -375,11 +431,14 @@ export class ChartRenderer {
      * Main render method for the chart
      */
     async render(data = [], paretoFrontier = []) {
-        console.log('🎨 Rendering chart with', data.length, 'models,', paretoFrontier.length, 'Pareto optimal...');
+        if (!this.container.node()) {
+            console.error("Chart container not found.");
+            return;
+        }
         
         this.currentData = data;
         this.currentParetoFrontier = paretoFrontier;
-        
+
         // Sort pareto frontier by price to determine neighbors for label placement
         if (paretoFrontier.length > 0) {
             this.sortedParetoFrontier = [...paretoFrontier].sort((a, b) => a.price - b.price);
@@ -388,12 +447,8 @@ export class ChartRenderer {
             this.sortedParetoFrontier = [];
             this.paretoIndexLookup.clear();
         }
-        
-        this.container.select("svg").remove();
-        this.container.select(".loading").remove();
-        this.container.select(".error").remove();
-        d3.selectAll(".tooltip").remove();
 
+        this.container.selectAll("*").remove();
         this.dimensions = this.calculateDimensions();
 
         this.svg = this.container
@@ -403,62 +458,15 @@ export class ChartRenderer {
             .style("overflow", "visible")
             .append("g")
             .attr("transform", `translate(${this.dimensions.margin.left},${this.dimensions.margin.top})`);
-
+        
         const scales = this.createScales();
+        this.createAxes(scales);
 
         // Pre-calculate label positions for Pareto points
-        this.paretoLabelInfo.clear();
-        if (this.sortedParetoFrontier.length > 0) {
-            this.sortedParetoFrontier.forEach((p, i) => {
-                const p_left = i > 0 ? this.sortedParetoFrontier[i - 1] : null;
-                const p_right = i < this.sortedParetoFrontier.length - 1 ? this.sortedParetoFrontier[i + 1] : null;
-
-                const isMobile = this.dimensions.isMobile;
-                // Default position: right of the point
-                let anchor = "start";
-                let x_offset = this.getPointRadius(p) + 5;
-                let y_offset = 3;
-
-                // If the point is on a convex part of the curve (a peak or elbow), move the label above it.
-                if (p_left && p_right) {
-                    const x_p = scales.xScale(p.price);
-                    const y_p = scales.yScale(p.elo);
-                    const x_left = scales.xScale(p_left.price);
-                    const y_left = scales.yScale(p_left.elo);
-                    const x_right = scales.xScale(p_right.price);
-                    const y_right = scales.yScale(p_right.elo);
-
-                    if (x_right > x_left) {
-                        // Find the y-coordinate on the line segment connecting the neighbors
-                        const y_on_line = y_left + (y_right - y_left) * (x_p - x_left) / (x_right - x_left);
-                        
-                        // If the point's y is below the line on screen (higher ELO), it's a convex point.
-                        // Add a small tolerance to handle near-straight lines.
-                        if (y_p < y_on_line - 2) { 
-                            anchor = "middle";
-                            x_offset = 0;
-                            y_offset = -this.getPointRadius(p) - 4;
-                        }
-                    }
-                }
-                
-                this.paretoLabelInfo.set(p.model, { anchor, x_offset, y_offset });
-            });
-        }
+        this.precomputeParetoLabels(scales);
         
-        this.createAxes(scales);
-        
-        if (data.length > 0) {
-            this.renderDataPoints(scales, data);
-            this.renderLabels(scales, data);
-        }
-        
-        if (paretoFrontier.length > 0) {
-            this.renderParetoLine(scales, paretoFrontier);
-        }
-
-        this.tooltip = this.createTooltip();
-        
-        console.log('✅ Chart rendered successfully');
+        this.renderDataPoints(scales, this.currentData);
+        this.renderLabels(scales, this.currentData);
+        this.renderParetoLine(scales, this.currentParetoFrontier);
     }
 }

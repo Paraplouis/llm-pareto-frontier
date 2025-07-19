@@ -111,9 +111,39 @@ h2 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.legend-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.legend-header h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.legend-header p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
 .legend-item.disabled {
     opacity: 0.5;
     background-color: #f0f0f0;
+}
+
+.reset-button {
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #333;
+}
+
+.reset-button:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
 }
 
 .legend-color {
@@ -499,4 +529,116 @@ h2 {
 
 .explanation h3 a:hover {
     text-decoration: underline;
+}
+
+/* --------------------------- */
+/* Token Controls (Prompt/Output) */
+/* --------------------------- */
+
+.token-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 8px 0;
+}
+
+.preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.preset-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.preset-button:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.preset-button:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+.preset-button.active {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #3498db;
+}
+
+.ratio-display {
+    font-size: 14px;
+    color: #333;
+    background: rgba(255,255,255,0.8);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.token-controls label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.token-controls label:hover {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.token-controls input[type="number"] {
+    width: 80px;
+    padding: 4px 6px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    -moz-appearance: textfield; /* Hide arrows in Firefox */
+}
+
+.token-controls input[type="number"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+/* Remove number input arrows for Chrome, Safari, Edge */
+.token-controls input[type="number"]::-webkit-outer-spin-button,
+.token-controls input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .token-controls label {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .token-controls input[type="number"] {
+        width: 70px;
+        font-size: 12px;
+    }
 }

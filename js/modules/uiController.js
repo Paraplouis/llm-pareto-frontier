@@ -27,12 +27,19 @@ export class UIController {
             .style('left', (x + 10) + 'px')
             .style('top', (y - 10) + 'px');
             
+        const formatPrice = (p) => {
+            // cap to 4 decimals and strip trailing zeros
+            const fixed = Number(p).toFixed(4);
+            return parseFloat(fixed).toString();
+        };
+
         let tooltipHTML = `
             <strong>${model.model}</strong><br/>
-            Cheapest Provider: ${model.cheapest_provider}<br/>
-            ELO: ${model.elo}<br/>
-            Price: $${model.price}/M tokens<br/>
-            Votes: ${model.votes || 'N/A'}
+            <br/>ELO: ${model.elo}<br/>
+            Votes: ${model.votes || 'N/A'}<br/>
+            Price: $${formatPrice(model.price)}/M tokens<br/>
+            Cheapest provider: ${model.cheapest_provider}<br>
+            Organization: ${model.organization || 'N/A'}<br>
         `;
 
         if (isPareto) {
@@ -51,40 +58,73 @@ export class UIController {
 
     /**
      * Update provider legend with clickable items for toggling visibility.
-     * @param {Array<string>} providers - Array of all unique provider names.
-     * @param {Set<string>} activeProviders - Set of currently active provider names.
+     * @param {Array<string>} organizations - Array of all unique organization names.
+     * @param {Set<string>} activeOrganizations - Set of currently active organization names.
      */
-    updateLegend(providers, activeProviders) {
+    updateLegend(organizations, activeOrganizations) {
         const legendContainer = d3.select("#legend");
         if (legendContainer.empty()) return;
 
         legendContainer.html(""); // Clear existing legend
 
-        providers.forEach(provider => {
-            const isActive = activeProviders.has(provider);
+        // Add a title and explanation for the legend
+        const legendHeader = legendContainer.append("div").attr("class", "legend-header");
+        legendHeader.append("h3").text("Filter by organization");
+        legendHeader.append("p").text("Click an organization (the company that created the model) to show/hide its models.");
+
+        organizations.forEach(organization => {
+            const isActive = activeOrganizations.has(organization);
             const legendItem = legendContainer
                 .append("div")
                 .attr("class", "legend-item")
+                .attr("tabindex", 0) // keyboard focusable
                 .classed("disabled", !isActive)
                 .on("click", function() {
-                    // Dispatch a custom event when the item is clicked
-                    document.dispatchEvent(new CustomEvent('providerToggle', {
+                    // Determine new state from DOM (robust against double-clicks)
+                    const currentlyDisabled = d3.select(this).classed('disabled');
+                    document.dispatchEvent(new CustomEvent('organizationToggle', {
                         detail: {
-                            provider: provider,
-                            isChecked: !isActive // Toggle the state
+                            organization: organization,
+                            isChecked: currentlyDisabled // we will enable if it was disabled
                         }
                     }));
+                })
+                .on("keydown", function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        // Trigger click handler for keyboard
+                        d3.select(this).dispatch('click');
+                    }
                 });
 
             legendItem
                 .append("div")
                 .attr("class", "legend-color")
-                .style("background-color", this.colorScale ? this.colorScale(provider) : "#ccc");
+                .style("background-color", this.colorScale ? this.colorScale(organization) : "#ccc");
 
             legendItem
                 .append("span")
-                .text(provider);
+                .text(organization);
         });
+
+        // Add a "Reset" button at the end of the legend
+        if (organizations.length > 0) {
+            const resetItem = legendContainer
+                .append("div")
+                .attr("class", "legend-item reset-button")
+                .attr("tabindex", 0)
+                .on("click", function() {
+                    document.dispatchEvent(new CustomEvent('resetOrganizations'));
+                })
+                .on("keydown", function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        d3.select(this).dispatch('click');
+                    }
+                });
+
+            resetItem.append("span").text("Reset Selections");
+        }
     }
 
     /**
@@ -106,7 +146,7 @@ export class UIController {
         paretoContent.append('h2').html('Pareto frontier models');
         
         paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The models circled in black ⚫ are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
-        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The red dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
+        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The black dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
 
         paretoContent.append('p').html('Below is a list of all models on the Pareto frontier, sorted by ELO score descending :');
         
@@ -117,11 +157,16 @@ export class UIController {
         // Sort models by ELO score descending for ordered display.
         paretoData.sort((a, b) => b.elo - a.elo);
 
+        const formatPrice = (p) => {
+            const fixed = Number(p).toFixed(4);
+            return parseFloat(fixed).toString();
+        };
+
         paretoData.forEach(model => {
             const modelElement = modelsContainer
                 .append("div")
                 .attr("class", "pareto-model")
-                .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.cheapest_provider) : "#ccc"}`);
+                .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.organization) : "#ccc"}`);
             
             modelElement.append("strong").text(model.model);
             
@@ -130,7 +175,7 @@ export class UIController {
                 .style("display", "block")
                 .style("font-size", "11px")
                 .style("color", "#666")
-                .html(`Cheapest Provider: ${model.cheapest_provider}<br>ELO: ${model.elo}<br>Cost: $${model.price}/M tokens`);
+                .html(`Organization: ${model.organization}<br>Cheapest provider: ${model.cheapest_provider}<br>ELO: ${model.elo}<br>Cost: $${formatPrice(model.price)}/M tokens`);
         });
     }
 

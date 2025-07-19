@@ -575,6 +575,16 @@
     "uri": "https://x.ai/api",
     "models": [
       {
+        "name": "grok-4 128K",
+        "inputPrice": 3,
+        "outputPrice": 15
+      },
+      {
+        "name": "grok-4 1M",
+        "inputPrice": 6,
+        "outputPrice": 30
+      },
+      {
         "name": "grok-3",
         "inputPrice": 3,
         "outputPrice": 15
@@ -628,9 +638,155 @@
     ]
   },
   {
-    "provider": "Moonshot AI",
-    "uri": "https://platform.moonshot.cn/docs#models-and-pricing",
+    "provider": "Qwen",
+    "uri": "https://bailian.console.alibabacloud.com",
     "models": [
+      {
+        "name": "Qwen-Max-Latest",
+        "inputPrice": 1.6,
+        "outputPrice": 6.4
+      },
+      {
+        "name": "Qwen-Plus-Latest",
+        "inputPrice": 0.4,
+        "outputPrice": 1.2
+      },
+      {
+        "name": "Qwen3-235B-A22B",
+        "inputPrice": 0.7,
+        "outputPrice": 2.8
+      },
+      {
+        "name": "Qwen3-32B",
+        "inputPrice": 0.7,
+        "outputPrice": 2.8
+      },
+      {
+        "name": "Qwen2.5-72B-Instruct",
+        "inputPrice": 1.4,
+        "outputPrice": 5.6
+      },
+      {
+        "name": "Qwen2.5-32B-Instruct",
+        "inputPrice": 0.7,
+        "outputPrice": 2.8
+      },
+      {
+        "name": "Qwen-Turbo-Latest",
+        "inputPrice": 0.05,
+        "outputPrice": 0.2
+      },
+      {
+        "name": "Qwen3-30B-A3B",
+        "inputPrice": 0.2,
+        "outputPrice": 0.8
+      },
+      {
+        "name": "Qwen3-14B",
+        "inputPrice": 0.35,
+        "outputPrice": 1.4
+      },
+      {
+        "name": "Qwen3-8B",
+        "inputPrice": 0.18,
+        "outputPrice": 0.7
+      },
+      {
+        "name": "Qwen3-4B",
+        "inputPrice": 0.11,
+        "outputPrice": 0.42
+      },
+      {
+        "name": "Qwen3-1.7B",
+        "inputPrice": 0.11,
+        "outputPrice": 0.42
+      },
+      {
+        "name": "Qwen3-0.6B",
+        "inputPrice": 0.11,
+        "outputPrice": 0.42
+      },
+      {
+        "name": "Qwen2.5-14B-Instruct",
+        "inputPrice": 0.35,
+        "outputPrice": 1.4
+      },
+      {
+        "name": "Qwen2.5-14B-Instruct-1M",
+        "inputPrice": 0.805,
+        "outputPrice": 3.22
+      },
+      {
+        "name": "Qwen2.5-7B-Instruct",
+        "inputPrice": 0.175,
+        "outputPrice": 0.7
+      },
+      {
+        "name": "Qwen2.5-7B-Instruct-1M",
+        "inputPrice": 0.368,
+        "outputPrice": 1.47
+      },
+      {
+        "name": "Qwen-VL-Max-Latest",
+        "inputPrice": 0.8,
+        "outputPrice": 3.2
+      },
+      {
+        "name": "Qwen-VL-Plus-Latest",
+        "inputPrice": 0.21,
+        "outputPrice": 0.63
+      },
+      {
+        "name": "Qwen2.5-VL-72B-Instruct",
+        "inputPrice": 2.8,
+        "outputPrice": 8.4
+      },
+      {
+        "name": "Qwen2.5-VL-32B-Instruct",
+        "inputPrice": 1.4,
+        "outputPrice": 4.2
+      },
+      {
+        "name": "Qwen2.5-VL-7B-Instruct",
+        "inputPrice": 0.35,
+        "outputPrice": 1.05
+      },
+      {
+        "name": "Qwen2.5-VL-3B-Instruct",
+        "inputPrice": 0.21,
+        "outputPrice": 0.63
+      },
+      {
+        "name": "Qwen-VL-OCR",
+        "inputPrice": 0.72,
+        "outputPrice": 0.72
+      },
+      {
+        "name": "Qwen-QwQ-Plus",
+        "inputPrice": 0.8,
+        "outputPrice": 2.4
+      },
+      {
+        "name": "QVQ-Max-Latest",
+        "inputPrice": 1.2,
+        "outputPrice": 4.8
+      },
+      {
+        "name": "Text-Embedding-v3",
+        "inputPrice": 0.07,
+        "outputPrice": 0.07
+      }
+    ]
+  },
+  {
+    "provider": "Moonshot AI",
+    "uri": "https://platform.moonshot.ai",
+    "models": [
+      {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 0.6,
+        "outputPrice": 2.5
+      },
       {
         "name": "kimi-latest-8k",
         "inputPrice": 0.2,
@@ -713,6 +869,11 @@
     "provider": "Chutes",
     "uri": "https://chutes.ai/app",
     "models": [
+      {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 0.53,
+        "outputPrice": 0.53
+      },
       {
         "name": "DeepSeek R1 0528",
         "inputPrice": 0,
@@ -1061,6 +1222,11 @@
     "uri": "https://www.together.ai/pricing",
     "models": [
       {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 1,
+        "outputPrice": 3
+      },
+      {
         "name": "Qwen 3 A22B 235B",
         "inputPrice": 0.2,
         "outputPrice": 0.6
@@ -1331,6 +1497,11 @@
     "provider": "Fireworks",
     "uri": "https://fireworks.ai/pricing",
     "models": [
+      {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 1,
+        "outputPrice": 3
+      },
       {
         "name": "DeepSeek R1 0528 (Fast)",
         "inputPrice": 3,
@@ -1639,6 +1810,11 @@
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
       {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 0.55,
+        "outputPrice": 2.2
+      },
+      {
         "name": "Gemini 2.5 Flash",
         "inputPrice": 0.105,
         "outputPrice": 2.45
@@ -1870,6 +2046,11 @@
     "uri": "https://groq.com/pricing/",
     "models": [
       {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 1,
+        "outputPrice": 3
+      },
+      {
         "name": "Llama 4 Scout Instruct (17Bx16E)",
         "inputPrice": 0.11,
         "outputPrice": 0.34
@@ -2096,22 +2277,6 @@
     ]
   },
   {
-    "provider": "Anyscale",
-    "uri": "https://www.anyscale.com/pricing-detail",
-    "models": [
-      {
-        "name": "Mixtral 8x7B",
-        "inputPrice": 0.5,
-        "outputPrice": 0.5
-      },
-      {
-        "name": "Llama 3 70B",
-        "inputPrice": 1,
-        "outputPrice": 1
-      }
-    ]
-  },
-  {
     "provider": "IBM Watsonx",
     "uri": "https://www.ibm.com/products/watsonx-ai/pricing",
     "models": [
@@ -2312,6 +2477,11 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "kimi-k2-0711-preview",
+        "inputPrice": 0.57,
+        "outputPrice": 2.2
+      },
       {
         "name": "DeepSeek R1 0528",
         "inputPrice": 0.7,
@@ -2544,9 +2714,29 @@
     "uri": "https://dev.writer.com/home/pricing",
     "models": [
       {
-        "name": "Palmyra X 004",
-        "inputPrice": 5,
-        "outputPrice": 12
+        "name": "Palmyra X5",
+        "inputPrice": 0.6,
+        "outputPrice": 6
+      },
+      {
+        "name": "Palmyra Vision Text",
+        "inputPrice": 7.5,
+        "outputPrice": 22.5
+      },
+      {
+        "name": "Palmyra Vision Image",
+        "inputPrice": 0.005,
+        "outputPrice": 8
+      },
+      {
+        "name": "Palmyra Vision Video",
+        "inputPrice": 0.005,
+        "outputPrice": 8
+      },
+      {
+        "name": "Palmyra X4",
+        "inputPrice": 2.5,
+        "outputPrice": 10
       },
       {
         "name": "Palmyra X 003 Instruct",
@@ -2554,39 +2744,19 @@
         "outputPrice": 22.5
       },
       {
+        "name": "Palmyra Med",
+        "inputPrice": 5,
+        "outputPrice": 12
+      },
+      {
+        "name": "Palmyra Fin",
+        "inputPrice": 5,
+        "outputPrice": 12
+      },
+      {
         "name": "Palmyra Creative",
         "inputPrice": 5,
         "outputPrice": 12
-      },
-      {
-        "name": "Palmyra Med 32K",
-        "inputPrice": 5,
-        "outputPrice": 12
-      },
-      {
-        "name": "Palmyra Med",
-        "inputPrice": 4,
-        "outputPrice": 10
-      },
-      {
-        "name": "Palmyra Fin 32K",
-        "inputPrice": 5,
-        "outputPrice": 12
-      },
-      {
-        "name": "Palmyra X 32K Instruct",
-        "inputPrice": 1,
-        "outputPrice": 2
-      },
-      {
-        "name": "Palmyra X 002 Instruct",
-        "inputPrice": 1,
-        "outputPrice": 2
-      },
-      {
-        "name": "Palmyra X 002 32K",
-        "inputPrice": 1,
-        "outputPrice": 2
       }
     ]
   }
