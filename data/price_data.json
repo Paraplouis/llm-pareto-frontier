@@ -1107,9 +1107,65 @@
     ]
   },
   {
+    "provider": "W&B",
+    "uri": "https://wandb.ai/site/pricing/inference",
+    "models": [
+      {
+        "name": "Qwen3 Coder 480B A35B",
+        "inputPrice": 1,
+        "outputPrice": 1.5
+      },
+      {
+        "name": "Qwen3 235B A22B-2507",
+        "inputPrice": 0.1,
+        "outputPrice": 0.1
+      },
+      {
+        "name": "MoonshotAI Kimi K2",
+        "inputPrice": 1.35,
+        "outputPrice": 4
+      },
+      {
+        "name": "DeepSeek R1-0528",
+        "inputPrice": 1.35,
+        "outputPrice": 5.4
+      },
+      {
+        "name": "DeepSeek V3-0324",
+        "inputPrice": 1.14,
+        "outputPrice": 2.75
+      },
+      {
+        "name": "Meta Llama 3.1 8B",
+        "inputPrice": 0.22,
+        "outputPrice": 0.22
+      },
+      {
+        "name": "Meta Llama 3.3 70B",
+        "inputPrice": 0.71,
+        "outputPrice": 0.71
+      },
+      {
+        "name": "Meta Llama 4 Scout 17Bx16E",
+        "inputPrice": 0.17,
+        "outputPrice": 0.66
+      },
+      {
+        "name": "Microsoft Phi 4 Mini 3.8B",
+        "inputPrice": 0.08,
+        "outputPrice": 0.35
+      }
+    ]
+  },
+  {
     "provider": "Hyperbolic",
     "uri": "https://hyperbolic.xyz/pricing",
     "models": [
+      {
+        "name": "Qwen3-Coder-480B-A35B-Instruct",
+        "inputPrice": 2,
+        "outputPrice": 2
+      },
       {
         "name": "DeepSeek R1 0528",
         "inputPrice": 3,
@@ -2477,6 +2533,11 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "Qwen3-Coder-480B-A35B-Instruct",
+        "inputPrice": 2,
+        "outputPrice": 2
+      },
       {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 0.57,

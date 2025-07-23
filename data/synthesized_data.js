@@ -102,7 +102,7 @@ export const data = [
   {"model": "Deepseek Coder", "elo": 1193, "input_price": 0.08, "output_price": 0.24, "cheapest_provider": "Nebius AI Studio", "votes": 15753, "organization": "DeepSeek AI"},
   {"model": "Claude 3 Haiku", "elo": 1194, "input_price": 0.25, "output_price": 1.25, "cheapest_provider": "Anthropic", "votes": 122309, "organization": "Anthropic"},
   {"model": "Jamba 1.5 Mini", "elo": 1191, "input_price": 0.2, "output_price": 0.4, "cheapest_provider": "AI21 Labs", "votes": 9274, "organization": "AI21 Labs"},
-  {"model": "Meta Llama 3.1 8b", "elo": 1191, "input_price": 0.03, "output_price": 0.05, "cheapest_provider": "DeepInfra", "votes": 52578, "organization": "Meta"},
+  {"model": "Meta Llama 3.1 8b", "elo": 1191, "input_price": 0.22, "output_price": 0.22, "cheapest_provider": "W&B", "votes": 52578, "organization": "Meta"},
   {"model": "Gpt 4 (2025-06-13)", "elo": 1178, "input_price": 10, "output_price": 30, "cheapest_provider": "OpenAI", "votes": 91614, "organization": "OpenAI"},
   {"model": "Qwq 32b Preview", "elo": 1168, "input_price": 0.1, "output_price": 0.2, "cheapest_provider": "SambaNova Cloud", "votes": 3410, "organization": "Alibaba"},
   {"model": "Mistral Large (2025-24-02)", "elo": 1172, "input_price": 2, "output_price": 6, "cheapest_provider": "Mistral", "votes": 64926, "organization": "Mistral"},

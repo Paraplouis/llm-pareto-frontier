@@ -722,9 +722,9 @@
   },
   {
     "rank_model": "Meta-Llama-3.1-8B-Instruct",
-    "matched_price_model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
-    "price": 0.03,
-    "provider": "DeepInfra",
+    "matched_price_model": "Meta Llama 3.1 8B",
+    "price": 0.22,
+    "provider": "W&B",
     "organization": "Meta"
   },
   {
