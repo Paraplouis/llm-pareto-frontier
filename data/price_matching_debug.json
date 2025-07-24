@@ -71,9 +71,9 @@
   },
   {
     "rank_model": "Qwen3-235B-A22B-no-thinking",
-    "matched_price_model": "Qwen3-235B-A22B",
-    "price": 0.7,
-    "provider": "Qwen",
+    "matched_price_model": "Qwen 3 235B A22B",
+    "price": 0.2,
+    "provider": "Together.AI",
     "organization": "Alibaba"
   },
   {
@@ -120,9 +120,9 @@
   },
   {
     "rank_model": "Qwen3-235B-A22B",
-    "matched_price_model": "Qwen3-235B-A22B",
-    "price": 0.7,
-    "provider": "Qwen",
+    "matched_price_model": "Qwen 3 235B A22B",
+    "price": 0.2,
+    "provider": "Together.AI",
     "organization": "Alibaba"
   },
   {
@@ -138,13 +138,6 @@
     "price": 1.1,
     "provider": "OpenAI",
     "organization": "OpenAI"
-  },
-  {
-    "rank_model": "Qwen2.5-Max",
-    "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 0.23,
-    "provider": "DeepInfra",
-    "organization": "Alibaba"
   },
   {
     "rank_model": "Grok-3-mini-high",
@@ -187,13 +180,6 @@
     "price": 15,
     "provider": "OpenAI",
     "organization": "OpenAI"
-  },
-  {
-    "rank_model": "Qwen3-32B",
-    "matched_price_model": "Qwen3-32B",
-    "price": 0.7,
-    "provider": "Qwen",
-    "organization": "Alibaba"
   },
   {
     "rank_model": "Claude Sonnet 4 (20250514)",
@@ -274,7 +260,7 @@
   },
   {
     "rank_model": "Qwen3-30B-A3B",
-    "matched_price_model": "Qwen3-30B-A3B",
+    "matched_price_model": "Qwen 3-30B-A3B",
     "price": 0.2,
     "provider": "Qwen",
     "organization": "Alibaba"
@@ -343,13 +329,6 @@
     "organization": "OpenAI"
   },
   {
-    "rank_model": "Qwen2.5-plus-1127",
-    "matched_price_model": "Qwen2.5-72B-Instruct",
-    "price": 0.23,
-    "provider": "DeepInfra",
-    "organization": "Alibaba"
-  },
-  {
     "rank_model": "Claude 3.5 Sonnet (20241022)",
     "matched_price_model": "Claude Sonnet 3.5",
     "price": 3,
@@ -360,7 +339,7 @@
     "rank_model": "Deepseek-v2.5-1210",
     "matched_price_model": "DeepSeek V2",
     "price": 0.14,
-    "provider": "DeepSpeek",
+    "provider": "DeepSeek",
     "organization": "DeepSeek"
   },
   {
@@ -444,7 +423,7 @@
     "rank_model": "Deepseek-v2.5",
     "matched_price_model": "DeepSeek V2",
     "price": 0.14,
-    "provider": "DeepSpeek",
+    "provider": "DeepSeek",
     "organization": "DeepSeek"
   },
   {
@@ -456,7 +435,7 @@
   },
   {
     "rank_model": "Qwen2.5-72B-Instruct",
-    "matched_price_model": "Qwen2.5-72B-Instruct",
+    "matched_price_model": "Qwen 2.5-72B-Instruct",
     "price": 0.23,
     "provider": "DeepInfra",
     "organization": "Alibaba"
@@ -575,9 +554,9 @@
   },
   {
     "rank_model": "Qwen2.5-Coder-32B-Instruct",
-    "matched_price_model": "Qwen2.5-Coder-32B-Instruct",
-    "price": 0.058,
-    "provider": "Chutes",
+    "matched_price_model": "Qwen 2.5-Coder-32B",
+    "price": 0.09,
+    "provider": "Lambda Labs",
     "organization": "Alibaba"
   },
   {
@@ -663,13 +642,6 @@
     "price": 0.5,
     "provider": "Cohere",
     "organization": "Cohere"
-  },
-  {
-    "rank_model": "Qwen2-72B-Instruct",
-    "matched_price_model": "Qwen2-VL-72B-Instruct (BF16)",
-    "price": 0.4,
-    "provider": "Hyperbolic",
-    "organization": "Alibaba"
   },
   {
     "rank_model": "Llama-3.1-Tulu-3-8B",
@@ -792,7 +764,7 @@
   },
   {
     "rank_model": "Qwen1.5-72B-Chat",
-    "matched_price_model": "Qwen2.5-72B-Instruct",
+    "matched_price_model": "Qwen 2.5-72B-Instruct",
     "price": 0.23,
     "provider": "DeepInfra",
     "organization": "Alibaba"
@@ -813,7 +785,7 @@
   },
   {
     "rank_model": "Qwen1.5-32B-Chat",
-    "matched_price_model": "Qwen2.5-32B-Instruct",
+    "matched_price_model": "Qwen 2.5-32B-Instruct",
     "price": 0.7,
     "provider": "Qwen",
     "organization": "Alibaba"
@@ -841,7 +813,7 @@
   },
   {
     "rank_model": "Qwen1.5-14B-Chat",
-    "matched_price_model": "Qwen2.5-14B-Instruct",
+    "matched_price_model": "Qwen 2.5-14B-Instruct",
     "price": 0.35,
     "provider": "Qwen",
     "organization": "Alibaba"
@@ -925,7 +897,7 @@
   },
   {
     "rank_model": "Qwen1.5-7B-Chat",
-    "matched_price_model": "Qwen2.5-7B-Instruct",
+    "matched_price_model": "Qwen 2.5-7B-Instruct",
     "price": 0.175,
     "provider": "Qwen",
     "organization": "Alibaba"
@@ -995,9 +967,9 @@
   },
   {
     "rank_model": "Qwen-14B-Chat",
-    "matched_price_model": "Qwen 3 14B",
-    "price": 0.08,
-    "provider": "Nebius AI Studio",
+    "matched_price_model": "Qwen 3-14B",
+    "price": 0.35,
+    "provider": "Qwen",
     "organization": "Alibaba"
   },
   {

@@ -330,7 +330,7 @@
         "outputPrice": 0.2
       },
       {
-        "name": "Qwen2.5-Coder-32B",
+        "name": "Qwen 2.5-Coder-32B",
         "inputPrice": 0.09,
         "outputPrice": 0.09
       }
@@ -617,7 +617,7 @@
     ]
   },
   {
-    "provider": "DeepSpeek",
+    "provider": "DeepSeek",
     "uri": "https://platform.deepseek.com/api-docs/pricing/",
     "models": [
       {
@@ -652,22 +652,22 @@
         "outputPrice": 1.2
       },
       {
-        "name": "Qwen3-235B-A22B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 0.7,
         "outputPrice": 2.8
       },
       {
-        "name": "Qwen3-32B",
+        "name": "Qwen 3-32B",
         "inputPrice": 0.7,
         "outputPrice": 2.8
       },
       {
-        "name": "Qwen2.5-72B-Instruct",
+        "name": "Qwen 2.5-72B-Instruct",
         "inputPrice": 1.4,
         "outputPrice": 5.6
       },
       {
-        "name": "Qwen2.5-32B-Instruct",
+        "name": "Qwen 2.5-32B-Instruct",
         "inputPrice": 0.7,
         "outputPrice": 2.8
       },
@@ -677,52 +677,52 @@
         "outputPrice": 0.2
       },
       {
-        "name": "Qwen3-30B-A3B",
+        "name": "Qwen 3-30B-A3B",
         "inputPrice": 0.2,
         "outputPrice": 0.8
       },
       {
-        "name": "Qwen3-14B",
+        "name": "Qwen 3-14B",
         "inputPrice": 0.35,
         "outputPrice": 1.4
       },
       {
-        "name": "Qwen3-8B",
+        "name": "Qwen 3-8B",
         "inputPrice": 0.18,
         "outputPrice": 0.7
       },
       {
-        "name": "Qwen3-4B",
+        "name": "Qwen 3-4B",
         "inputPrice": 0.11,
         "outputPrice": 0.42
       },
       {
-        "name": "Qwen3-1.7B",
+        "name": "Qwen 3-1.7B",
         "inputPrice": 0.11,
         "outputPrice": 0.42
       },
       {
-        "name": "Qwen3-0.6B",
+        "name": "Qwen 3-0.6B",
         "inputPrice": 0.11,
         "outputPrice": 0.42
       },
       {
-        "name": "Qwen2.5-14B-Instruct",
+        "name": "Qwen 2.5-14B-Instruct",
         "inputPrice": 0.35,
         "outputPrice": 1.4
       },
       {
-        "name": "Qwen2.5-14B-Instruct-1M",
+        "name": "Qwen 2.5-14B-Instruct-1M",
         "inputPrice": 0.805,
         "outputPrice": 3.22
       },
       {
-        "name": "Qwen2.5-7B-Instruct",
+        "name": "Qwen 2.5-7B-Instruct",
         "inputPrice": 0.175,
         "outputPrice": 0.7
       },
       {
-        "name": "Qwen2.5-7B-Instruct-1M",
+        "name": "Qwen 2.5-7B-Instruct-1M",
         "inputPrice": 0.368,
         "outputPrice": 1.47
       },
@@ -737,22 +737,22 @@
         "outputPrice": 0.63
       },
       {
-        "name": "Qwen2.5-VL-72B-Instruct",
+        "name": "Qwen 2.5-VL-72B-Instruct",
         "inputPrice": 2.8,
         "outputPrice": 8.4
       },
       {
-        "name": "Qwen2.5-VL-32B-Instruct",
+        "name": "Qwen 2.5-VL-32B-Instruct",
         "inputPrice": 1.4,
         "outputPrice": 4.2
       },
       {
-        "name": "Qwen2.5-VL-7B-Instruct",
+        "name": "Qwen 2.5-VL-7B-Instruct",
         "inputPrice": 0.35,
         "outputPrice": 1.05
       },
       {
-        "name": "Qwen2.5-VL-3B-Instruct",
+        "name": "Qwen 2.5-VL-3B-Instruct",
         "inputPrice": 0.21,
         "outputPrice": 0.63
       },
@@ -870,6 +870,11 @@
     "uri": "https://chutes.ai/app",
     "models": [
       {
+        "name": "Qwen 3 Coder 480B A35B",
+        "inputPrice": 0.3,
+        "outputPrice": 0.3
+      },
+      {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 0.53,
         "outputPrice": 0.53
@@ -915,7 +920,7 @@
         "outputPrice": 0.47
       },
       {
-        "name": "Qwen 3 A22B 235B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 2.28,
         "outputPrice": 2.28
       },
@@ -985,7 +990,7 @@
         "outputPrice": 0.048
       },
       {
-        "name": "Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen 2.5-Coder-32B-Instruct",
         "inputPrice": 0.058,
         "outputPrice": 0.058
       },
@@ -1015,7 +1020,7 @@
         "outputPrice": 0
       },
       {
-        "name": "Qwen2.5-72B-Instruct",
+        "name": "Qwen 2.5-72B-Instruct",
         "inputPrice": 1.62,
         "outputPrice": 1.62
       },
@@ -1090,12 +1095,12 @@
         "outputPrice": 0.108
       },
       {
-        "name": "Qwen2.5-VL-7B-Instruct",
+        "name": "Qwen 2.5-VL-7B-Instruct",
         "inputPrice": 0.108,
         "outputPrice": 0.108
       },
       {
-        "name": "Qwen2.5-VL-3B-Instruct",
+        "name": "Qwen 2.5-VL-3B-Instruct",
         "inputPrice": 0.027,
         "outputPrice": 0.027
       },
@@ -1111,12 +1116,12 @@
     "uri": "https://wandb.ai/site/pricing/inference",
     "models": [
       {
-        "name": "Qwen3 Coder 480B A35B",
+        "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 1,
         "outputPrice": 1.5
       },
       {
-        "name": "Qwen3 235B A22B-2507",
+        "name": "Qwen 3 235B A22B 2507",
         "inputPrice": 0.1,
         "outputPrice": 0.1
       },
@@ -1162,7 +1167,7 @@
     "uri": "https://hyperbolic.xyz/pricing",
     "models": [
       {
-        "name": "Qwen3-Coder-480B-A35B-Instruct",
+        "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 2,
         "outputPrice": 2
       },
@@ -1172,7 +1177,7 @@
         "outputPrice": 1
       },
       {
-        "name": "Qwen 3 A22B 235B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 0.4,
         "outputPrice": 0.4
       },
@@ -1262,12 +1267,12 @@
         "outputPrice": 0.1
       },
       {
-        "name": "Qwen2-VL-7B-Instruct (BF16)",
+        "name": "Qwen 2-VL-7B-Instruct (BF16)",
         "inputPrice": 0.1,
         "outputPrice": 0.1
       },
       {
-        "name": "Qwen2-VL-72B-Instruct (BF16)",
+        "name": "Qwen 2-VL-72B-Instruct (BF16)",
         "inputPrice": 0.4,
         "outputPrice": 0.4
       }
@@ -1283,7 +1288,7 @@
         "outputPrice": 3
       },
       {
-        "name": "Qwen 3 A22B 235B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 0.2,
         "outputPrice": 0.6
       },
@@ -1358,7 +1363,7 @@
         "outputPrice": 0.8
       },
       {
-        "name": "Qwen2.5 72B Instruct Turbo",
+        "name": "Qwen 2.5 72B Instruct Turbo",
         "inputPrice": 1.2,
         "outputPrice": 1.2
       },
@@ -1373,7 +1378,7 @@
         "outputPrice": 0.18
       },
       {
-        "name": "Qwen2.5 7B Instruct Turbo",
+        "name": "Qwen 2.5 7B Instruct Turbo",
         "inputPrice": 0.3,
         "outputPrice": 0.3
       },
@@ -1554,6 +1559,16 @@
     "uri": "https://fireworks.ai/pricing",
     "models": [
       {
+        "name": "Qwen 3 Coder 480B A35B",
+        "inputPrice": 0.45,
+        "outputPrice": 1.8
+      },
+      {
+        "name": "Qwen 3 235B A22B 2507",
+        "inputPrice": 0.22,
+        "outputPrice": 0.88
+      },
+      {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 1,
         "outputPrice": 3
@@ -1669,17 +1684,17 @@
         "outputPrice": 0.9
       },
       {
-        "name": "Qwen2.5 72B Instruct",
+        "name": "Qwen 2.5 72B Instruct",
         "inputPrice": 0.9,
         "outputPrice": 0.9
       },
       {
-        "name": "Qwen2 VL 72B Instruct",
+        "name": "Qwen 2 VL 72B Instruct",
         "inputPrice": 0.9,
         "outputPrice": 0.9
       },
       {
-        "name": "Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen 2.5-Coder-32B-Instruct",
         "inputPrice": 0.9,
         "outputPrice": 0.9
       },
@@ -1715,7 +1730,7 @@
     "uri": "https://nebius.com/prices-ai-studio",
     "models": [
       {
-        "name": "Qwen 3 A22B 235B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 0.2,
         "outputPrice": 0.6
       },
@@ -1830,12 +1845,12 @@
         "outputPrice": 0.12
       },
       {
-        "name": "Qwen2.5 Coder 7B (fast)",
+        "name": "Qwen 2.5 Coder 7B (fast)",
         "inputPrice": 0.03,
         "outputPrice": 0.09
       },
       {
-        "name": "Qwen2.5 Coder 7B (base)",
+        "name": "Qwen 2.5 Coder 7B (base)",
         "inputPrice": 0.01,
         "outputPrice": 0.03
       },
@@ -1865,6 +1880,16 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "Qwen 3 Coder 480B A35B",
+        "inputPrice": 0.9,
+        "outputPrice": 4.5
+      },
+      {
+        "name": "Qwen 3 235B A22B 2507",
+        "inputPrice": 0.13,
+        "outputPrice": 0.6
+      },
       {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 0.55,
@@ -1901,7 +1926,7 @@
         "outputPrice": 2.18
       },
       {
-        "name": "Qwen 3 A22B 235B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 0.2,
         "outputPrice": 0.6
       },
@@ -1986,7 +2011,7 @@
         "outputPrice": 0.055
       },
       {
-        "name": "Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen 2.5-Coder-32B-Instruct",
         "inputPrice": 0.08,
         "outputPrice": 0.18
       },
@@ -2056,7 +2081,7 @@
         "outputPrice": 0.4
       },
       {
-        "name": "Qwen2.5-72B-Instruct",
+        "name": "Qwen 2.5-72B-Instruct",
         "inputPrice": 0.23,
         "outputPrice": 0.4
       },
@@ -2213,7 +2238,7 @@
         "outputPrice": 0.2
       },
       {
-        "name": "Qwen2.5-Coder-32B-Instruct",
+        "name": "Qwen 2.5-Coder-32B-Instruct",
         "inputPrice": 1.5,
         "outputPrice": 3
       },
@@ -2238,7 +2263,7 @@
         "outputPrice": 1.2
       },
       {
-        "name": "Qwen2.5-72B-Instruct",
+        "name": "Qwen 2.5-72B-Instruct",
         "inputPrice": 2,
         "outputPrice": 4
       },
@@ -2534,7 +2559,7 @@
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
       {
-        "name": "Qwen3-Coder-480B-A35B-Instruct",
+        "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 2,
         "outputPrice": 2
       },
@@ -2554,7 +2579,7 @@
         "outputPrice": 2.5
       },
       {
-        "name": "Qwen 3 A22B 235B",
+        "name": "Qwen 3 235B A22B",
         "inputPrice": 0.2,
         "outputPrice": 0.8
       },
@@ -2649,7 +2674,7 @@
         "outputPrice": 0.04
       },
       {
-        "name": "qwen-2.5-72b-instruct",
+        "name": "qwen 2.5-72b-instruct",
         "inputPrice": 0.38,
         "outputPrice": 0.4
       },
@@ -2729,12 +2754,12 @@
         "outputPrice": 0.2
       },
       {
-        "name": "qwen2.5-vl-72b-instruct",
+        "name": "qwen 2.5-vl-72b-instruct",
         "inputPrice": 0.8,
         "outputPrice": 0.8
       },
       {
-        "name": "qwen-2-vl-72b-instruct",
+        "name": "qwen 2-vl-72b-instruct",
         "inputPrice": 0.45,
         "outputPrice": 0.45
       },
@@ -2764,7 +2789,7 @@
         "outputPrice": 1.48
       },
       {
-        "name": "qwen-2-7b-instruct",
+        "name": "qwen 2-7b-instruct",
         "inputPrice": 0.054,
         "outputPrice": 0.054
       }
