@@ -7,7 +7,7 @@ import pandas as pd
 import io
 from contextlib import redirect_stdout
 from tenacity import retry, wait_exponential, stop_after_attempt
-
+import sys
 
 def _clean_html(html_string: str) -> str:
     """Removes HTML tags from a string."""
@@ -106,7 +106,7 @@ def fetch_latest_leaderboard_df():
             return None, None
 
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"    ❌ An error occurred: {e}")
         return None, None
 
 
@@ -124,4 +124,6 @@ if __name__ == '__main__':
             
         print(f"  ✅ Successfully scraped LM Arena data, saved to data/rank_data.json")
     else:
-        print("Failed to extract data.")
+        print("  ❌ Failed to extract data.")
+        print("\n❌ DATA REFRESH FAILED")
+        sys.exit(1)
