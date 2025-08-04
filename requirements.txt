@@ -1,4 +1,4 @@
 pandas==2.3.0
-gradio_client==1.10.4
+huggingface_hub==0.32.4
 polars==1.31.0
-tenacity==9.1.2
+pyarrow
