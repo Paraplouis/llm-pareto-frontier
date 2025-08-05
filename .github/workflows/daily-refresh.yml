@@ -31,11 +31,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
-      - name: Install Playwright browsers & deps
-        run: python -m playwright install --with-deps chromium
       - name: Install Python dependencies
         run: |
           pip install -r requirements.txt
+      - name: Install Playwright browsers & deps
+        run: python -m playwright install --with-deps chromium
       - name: Run refresh script
         run: |
           chmod +x ./refresh.sh
