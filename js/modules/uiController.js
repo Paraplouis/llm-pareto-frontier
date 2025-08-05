@@ -20,13 +20,13 @@ export class UIController {
      */
     showTooltip(model, x, y, isPareto = false) {
         d3.selectAll('.tooltip').remove();
-        
+
         const tooltip = d3.select('body')
             .append('div')
             .attr('class', 'tooltip')
             .style('left', (x + 10) + 'px')
             .style('top', (y - 10) + 'px');
-            
+
         const formatPrice = (p) => {
             // cap to 4 decimals and strip trailing zeros
             const fixed = Number(p).toFixed(4);
@@ -132,24 +132,24 @@ export class UIController {
      */
     updateParetoInfo(paretoData) {
         const explanationContainer = d3.select(".explanation");
-        
+
         // Clear previous Pareto content to prevent duplication. (DEPRECATED: Remove old separate pareto-info container if it exists.)
         explanationContainer.select("#pareto-frontier-content").remove();
 
         if (!paretoData || paretoData.length === 0) {
             return;
         }
-        
+
         // Append Pareto content into the main explanation container.
         const paretoContent = explanationContainer.append("div").attr("id", "pareto-frontier-content");
 
         paretoContent.append('h2').html('Pareto frontier models');
-        
+
         paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The models circled in black ⚫ are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
         paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The black dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
 
         paretoContent.append('p').html('Below is a list of all models on the Pareto frontier, sorted by ELO score descending :');
-        
+
         const modelsContainer = paretoContent
             .append("div")
             .attr("class", "pareto-models");
@@ -167,9 +167,9 @@ export class UIController {
                 .append("div")
                 .attr("class", "pareto-model")
                 .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.organization) : "#ccc"}`);
-            
+
             modelElement.append("strong").text(model.model);
-            
+
             modelElement
                 .append("span")
                 .style("display", "block")
@@ -216,7 +216,7 @@ export class UIController {
         const chartInfoElement = document.getElementById("chart-info");
         if (chartInfoElement) {
             const mainText = `Showing ${modelCount} models with ${paretoCount} Pareto optimal models`;
-            
+
             const details = [];
             if (lastUpdated) {
                 const updateDate = new Date(lastUpdated);
@@ -231,7 +231,7 @@ export class UIController {
             if (excludeFree) {
                 details.push(`excluding free models`);
             }
-            
+
             let detailsText = '';
             if (details.length > 0) {
                 detailsText = `(${details.join(', ')})`;
@@ -241,7 +241,7 @@ export class UIController {
             if (detailsText) {
                 innerHTML += `<br><span class="chart-info-details">${detailsText}</span>`;
             }
-            
+
             chartInfoElement.innerHTML = innerHTML;
         }
     }

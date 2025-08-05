@@ -35,7 +35,7 @@ export class LLMApp {
         this.ratioLabelEl = document.getElementById('current-ratio');
         this.presetButtons = Array.from(document.querySelectorAll('.preset-button'));
         this.updateRatioDisplayAndPresets();
-        
+
         // Bind event handlers
         this.handleResize = this.handleResize.bind(this);
         this.handleOrganizationToggle = this.handleOrganizationToggle.bind(this);
@@ -58,13 +58,13 @@ export class LLMApp {
 
             // Process and display data
             await this.loadAndDisplayData();
-            
+
             // Setup event listeners
             this.setupEventListeners();
 
             // Setup collapsible sections
             this.uiController.setupCollapsibleSections();
-            
+
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.uiController.showError('Failed to load application data');
@@ -79,7 +79,7 @@ export class LLMApp {
 
         // Render chart with filtered data
         await this.renderChart(validData);
-        
+
         // Update legend with providers and their active state
         this.updateLegendAndParetoInfo(validData);
     }
@@ -90,20 +90,20 @@ export class LLMApp {
     setupEventListeners() {
         // Window resize handler
         window.addEventListener('resize', this.handleResize);
-        
+
         // Tooltip event handlers
         document.addEventListener('modelHover', (event) => {
             const { model, x, y, isPareto } = event.detail;
             this.uiController.showTooltip(model, x, y, isPareto);
         });
-        
+
         document.addEventListener('modelUnhover', () => {
             this.uiController.hideTooltip();
         });
 
         // Organization toggle event handler
         document.addEventListener('organizationToggle', this.handleOrganizationToggle);
-        
+
         // Reset organizations event handler
         document.addEventListener('resetOrganizations', this.handleResetOrganizations);
 
@@ -174,14 +174,14 @@ export class LLMApp {
         this.activeOrganizations = new Set(allOrganizations);
         this.refreshChart();
     }
-    
+
     /**
      * Refresh the chart with current data
      */
     async refreshChart() {
         const validData = this.dataProcessor.getValidData(this.modelData, this.activeOrganizations, this.excludeFree, this.promptTokens, this.outputTokens);
         await this.renderChart(validData);
-        
+
         // Update legend and Pareto info
         this.updateLegendAndParetoInfo(validData);
         this.updateRatioDisplayAndPresets();
@@ -194,10 +194,10 @@ export class LLMApp {
         try {
             // Calculate Pareto frontier
             const paretoData = this.dataProcessor.calculateParetoFrontier(data);
-            
+
             // Render the chart
             await this.chartRenderer.render(data, paretoData);
-            
+
         } catch (error) {
             console.error('Error rendering chart:', error);
             this.uiController.showError('Failed to render chart');
@@ -210,12 +210,12 @@ export class LLMApp {
     updateLegendAndParetoInfo(data) {
         const organizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
         const paretoData = this.dataProcessor.calculateParetoFrontier(data);
-        
+
         // Set color scale in UI controller
         if (this.chartRenderer.colorScale) {
             this.uiController.setColorScale(this.chartRenderer.colorScale);
         }
-        
+
         // Update chart info display
         this.uiController.updateChartInfo(
             data.length,
@@ -224,10 +224,10 @@ export class LLMApp {
             this.minElo,
             this.excludeFree
         );
-        
+
         // Update legend, passing all organizations and the set of active ones
         this.uiController.updateLegend(organizations, this.activeOrganizations);
-        
+
         // Update Pareto information
         this.uiController.updateParetoInfo(paretoData);
     }

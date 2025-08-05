@@ -65,7 +65,7 @@ body {
         height: 450px;
         border-radius: 0;
     }
-    
+
     .loading, .error {
         font-size: 14px;
         padding: 15px;
@@ -307,7 +307,7 @@ h2 {
     .loading::after {
         animation: none;
     }
-    
+
     .datapoint, .pareto-model, .legend-item {
         transition: none;
     }
@@ -325,7 +325,7 @@ h2 {
         background-color: black;
         border: 1px solid white;
     }
-    
+
     .pareto-note {
         border-left-width: 6px;
     }
@@ -337,12 +337,12 @@ h2 {
         background-color: white;
         color: black;
     }
-    
+
     .chart-container {
         box-shadow: none;
         border: 1px solid #ccc;
     }
-    
+
     .tooltip {
         display: none;
     }

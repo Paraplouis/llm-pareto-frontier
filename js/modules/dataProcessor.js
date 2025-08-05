@@ -66,7 +66,7 @@ export class DataProcessor {
             return [];
         }
 
-        return data.filter(model => 
+        return data.filter(model =>
             model.organization && model.organization.toLowerCase() === organization.toLowerCase()
         );
     }
@@ -89,11 +89,11 @@ export class DataProcessor {
         const totalTokens = promptTokens + outputTokens;
         const inputRatio = totalTokens > 0 ? promptTokens / totalTokens : 1;
 
-        let filteredData = data.filter(model => 
-            model && 
-            typeof model.elo === 'number' && 
+        let filteredData = data.filter(model =>
+            model &&
+            typeof model.elo === 'number' &&
             (typeof model.input_price === 'number' || typeof model.price === 'number') &&
-            model.elo > 0 && 
+            model.elo > 0 &&
             // Honour excludeFree flag – only drop free models when requested
             (excludeFree ? (model.input_price ? model.input_price > 0 : model.price > 0) : true) &&
             model.model

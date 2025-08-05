@@ -221,11 +221,11 @@ export class ChartRenderer {
         const device = isMobile ? 'mobile' : 'desktop';
         const isPareto = this.isParetoOptimal(d.model);
         const pointType = isPareto ? 'pareto' : 'normal';
-        
+
         if (state === 'hover') {
             return this.config.CHART.POINTS.RADIUS.hover[device];
         }
-        
+
         return this.config.CHART.POINTS.RADIUS[pointType][device];
     }
 
@@ -342,21 +342,21 @@ export class ChartRenderer {
                 if (x_right > x_left) {
                     // Find the y-coordinate on the line segment connecting the neighbors
                     const y_on_line = y_left + (y_right - y_left) * (x_p - x_left) / (x_right - x_left);
-                    
+
                     // If the point's y is below the line on screen (higher ELO), it's a convex point.
                     // Add a small tolerance to handle near-straight lines.
-                    if (y_p < y_on_line - 2) { 
+                    if (y_p < y_on_line - 2) {
                         anchor = "middle";
                         x_offset = 0;
                         y_offset = -this.getPointRadius(p) - 4;
                     }
                 }
             }
-            
+
             this.paretoLabelInfo.set(p.model, { anchor, x_offset, y_offset });
         });
     }
-    
+
     /**
      * Render model labels
      */
@@ -435,7 +435,7 @@ export class ChartRenderer {
             console.error("Chart container not found.");
             return;
         }
-        
+
         this.currentData = data;
         this.currentParetoFrontier = paretoFrontier;
 
@@ -458,13 +458,13 @@ export class ChartRenderer {
             .style("overflow", "visible")
             .append("g")
             .attr("transform", `translate(${this.dimensions.margin.left},${this.dimensions.margin.top})`);
-        
+
         const scales = this.createScales();
         this.createAxes(scales);
 
         // Pre-calculate label positions for Pareto points
         this.precomputeParetoLabels(scales);
-        
+
         this.renderDataPoints(scales, this.currentData);
         this.renderLabels(scales, this.currentData);
         this.renderParetoLine(scales, this.currentParetoFrontier);
