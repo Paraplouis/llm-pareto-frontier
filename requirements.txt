@@ -1,4 +1,8 @@
-pandas==2.3.0
-gradio_client==1.10.4
-polars==1.31.0
+pandas==2.3.1
+polars==1.32.0
 tenacity==9.1.2
+beautifulsoup4==4.13.4
+lxml==6.0.0
+cloudscraper @ git+https://github.com/VeNoMouS/cloudscraper@3.0.0
+playwright==1.44.0
+html5lib==1.1

@@ -3,24 +3,18 @@ import re
 import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
-from dataclasses import dataclass, asdict
-from datetime import date, datetime
-from collections import Counter, defaultdict
+from dataclasses import dataclass
+from datetime import date
 
-# Configure logging
+
 logging.basicConfig(
     level=logging.INFO, format="%(message)s"
 )
 logger = logging.getLogger(__name__)
 
-
-# ------------------------------
-# Data classes
-# ------------------------------
-
 @dataclass
 class ModelData:
-    """Data class for synthesized model information including token pricing"""
+    """Data class for synthesized model information including pricing information"""
 
     model: str
     elo: int
@@ -33,7 +27,7 @@ class ModelData:
 
 @dataclass
 class PriceInfo:
-    """Data class for pricing information with separate input/output rates"""
+    """Data class for pricing information only"""
 
     input_price: float
     output_price: float
@@ -43,7 +37,7 @@ class PriceInfo:
 
 @dataclass
 class MatchingDebugInfo:
-    """Data class for debugging price matching"""
+    """Data class for debugging price matching between model names"""
 
     rank_model: str
     matched_price_model: str
@@ -67,14 +61,14 @@ class ModelNameNormalizer:
         for pattern, replacement in ModelNameNormalizer.SPECIAL_CASES.items():
             name = re.sub(pattern, replacement, name, flags=re.IGNORECASE)
 
-        # Remove version dates and preview indicators more robustly
+        # Remove version dates and preview indicators
         name = re.sub(r"-\d{4}-\d{2}-\d{2}|-\d{4,}", "", name)
         name = re.sub(r"-\d{2}-\d{2}", "", name)
         name = re.sub(r"preview.*|exp.*|latest.*|beta.*|v\d.*", "", name)
-        
+
         # Remove quality/quantization indicators
         name = re.sub(r"-bf16|-fp\d+|-instruct|-chat", "", name)
-        
+
         # Standardize model size indicators
         name = re.sub(r"(\d+)b-", r"\1b ", name)
 
@@ -90,7 +84,7 @@ class PriceMatcher:
         self.price_lookup = price_lookup
 
     def find_match(self, model_name: str) -> Optional[PriceInfo]:
-        """Find the best price match for a model name with improved logic"""
+        """Try to find the best price match for a model name"""
         model_lower = model_name.lower()
         model_normalized = ModelNameNormalizer.normalize(model_name)
 
@@ -174,7 +168,7 @@ class PriceMatcher:
 class ModelNameFormatter:
     """Formats model names for display using dynamic rules."""
 
-    ACRONYMS = {"ai", "dpo", "gpu", "it", "llm", "moe", "eu", "uk", "us", "vqa"}  # Removed 'claude'
+    ACRONYMS = {"ai", "dpo", "gpu", "it", "llm", "moe", "eu", "uk", "us", "vqa"}
     MODEL_FAMILIES = ["claude", "codellama", "command", "deepseek", "gemma", "gemini", "gpt", "grok", "llama", "mistral", "mixtral", "qwen"]
 
     @staticmethod
@@ -200,9 +194,8 @@ class ModelNameFormatter:
 
         formatted_name = " ".join(formatted_words)
 
-        # Improved date handling: detect YYYYMMDD or partial dates
-        import datetime
-        current_year = datetime.date.today().year
+        # Detect YYYYMMDD or partial dates
+        current_year = date.today().year
         date_match = re.search(r'(\d{4})(\d{2})(\d{2})', name)  # For YYYYMMDD
         if date_match:
             year, month, day = date_match.groups()
@@ -212,12 +205,6 @@ class ModelNameFormatter:
             if partial_date:
                 month, day = partial_date.groups()
                 formatted_name += f" ({current_year}-{month}-{day})"
-
-        # Special handling for previews/betas
-        if "preview" in name.lower():
-            formatted_name += " Preview"
-        elif "beta" in name.lower():
-            formatted_name += " beta"
 
         return formatted_name
 
@@ -272,10 +259,10 @@ class DataSynthesizer:
         try:
             with open(rank_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            
+
             last_updated = data.get("last_updated")
             models = data.get("models", [])
-            
+
             logger.info(f"  ↳ Loaded {len(models)} models from ranking data (updated: {last_updated})")
             return models, last_updated
         except FileNotFoundError:
@@ -364,8 +351,8 @@ class DataSynthesizer:
             )
             return model_data, debug_info
 
-        # New: Skip if no real match found
-            return None
+        # If no price match found, skip the model
+        return None
 
     def _save_results(
         self, synthesized_data: List[ModelData], matching_debug: List[MatchingDebugInfo], timestamp: str
@@ -405,7 +392,7 @@ class DataSynthesizer:
         exclude_free: bool,
     ) -> str:
         """Generate JavaScript file content"""
-        
+
         # Pretty-print JSON for readability
         records = []
         for item in synthesized_data:

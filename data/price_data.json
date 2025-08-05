@@ -840,6 +840,22 @@
     ]
   },
   {
+    "provider": "Z AI",
+    "uri": "https://docs.z.ai/guides/overview/pricing#agents-%26-pricing",
+    "models": [
+      {
+        "name": "GLM 4.5",
+        "inputPrice": 0.6,
+        "outputPrice": 2.2
+      },
+      {
+        "name": "GLM 4.5 Air",
+        "inputPrice": 0.2,
+        "outputPrice": 1.1
+      }
+    ]
+  },
+  {
     "provider": "01.ai",
     "uri": "https://platform.01.ai/docs#models-and-pricing",
     "models": [
@@ -869,6 +885,16 @@
     "provider": "Chutes",
     "uri": "https://chutes.ai/app",
     "models": [
+      {
+        "name": "GLM 4.5",
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
+      {
+        "name": "GLM 4.5 Air",
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
       {
         "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 0.3,
@@ -1282,6 +1308,11 @@
     "provider": "Together.AI",
     "uri": "https://www.together.ai/pricing",
     "models": [
+      {
+        "name": "GLM 4.5 Air FP8",
+        "inputPrice": 0.2,
+        "outputPrice": 1.1
+      },
       {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 1,
@@ -1880,6 +1911,16 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "GLM 4.5",
+        "inputPrice": 0.55,
+        "outputPrice": 2
+      },
+      {
+        "name": "GLM 4.5 Air",
+        "inputPrice": 0.2,
+        "outputPrice": 1.1
+      },
       {
         "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 0.9,
@@ -2558,6 +2599,11 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "GLM 4.5",
+        "inputPrice": 0.6,
+        "outputPrice": 2.2
+      },
       {
         "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 2,
