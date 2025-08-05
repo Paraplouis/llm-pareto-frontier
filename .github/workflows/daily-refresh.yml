@@ -30,12 +30,13 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y jq
+          sudo apt-get install -y jq libasound2t64 libnss3 libx11-xcb1 libatk-bridge2.0-0t64 \
+            libxkbcommon0 libgtk-3-0t64 libxdamage1 libxrandr2 libdrm2 libgbm1 libatspi2.0-0t64
       - name: Install Python dependencies
         run: |
           pip install -r requirements.txt
-      - name: Install Playwright browsers & deps
-        run: python -m playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        run: python -m playwright install chromium
       - name: Run refresh script
         run: |
           chmod +x ./refresh.sh
