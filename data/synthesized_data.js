@@ -139,6 +139,6 @@ export const data = [
   {"model": "Gemma 2b IT", "elo": 1092, "input_price": 0.1, "output_price": 0.1, "cheapest_provider": "Together.AI", "votes": "4918", "organization": "Google"}
 ];
 
-export const dataLastUpdated = "2025-08-06";
+export const dataLastUpdated = "2025-08-07";
 export const minElo = 1000;
 export const excludeFree = true;
