@@ -4,6 +4,26 @@
     "uri": "https://openai.com/api/pricing/",
     "models": [
       {
+        "name": "gpt-5",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
+        "name": "gpt-5-mini",
+        "inputPrice": 0.25,
+        "outputPrice": 2
+      },
+      {
+        "name": "gpt-5-nano",
+        "inputPrice": 0.05,
+        "outputPrice": 0.4
+      },
+      {
+        "name": "gpt-5-chat-latest",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
         "name": "o3",
         "inputPrice": 2,
         "outputPrice": 8
