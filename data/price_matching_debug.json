@@ -133,6 +133,13 @@
     "organization": "DeepSeek"
   },
   {
+    "rank_model": "gpt-oss-120b",
+    "matched_price_model": "GPT OSS 120B 128k",
+    "price": 0.09,
+    "provider": "DeepInfra",
+    "organization": "OpenAI"
+  },
+  {
     "rank_model": "claude-sonnet-4-20250514",
     "matched_price_model": "Claude Sonnet 4",
     "price": 3,
@@ -189,25 +196,11 @@
     "organization": "Alibaba"
   },
   {
-    "rank_model": "claude-3-7-sonnet-20250219",
-    "matched_price_model": "Claude Sonnet 3.7",
-    "price": 3,
-    "provider": "Anthropic",
-    "organization": "Anthropic"
-  },
-  {
-    "rank_model": "claude-3-5-sonnet-20241022",
+    "rank_model": "Claude 3.5 Sonnet (10/22)",
     "matched_price_model": "Claude Sonnet 3.5",
     "price": 3,
     "provider": "Anthropic",
     "organization": "Anthropic"
-  },
-  {
-    "rank_model": "gemini-2.0-flash-001",
-    "matched_price_model": "Gemini 2.0 Flash",
-    "price": 0.1,
-    "provider": "Google",
-    "organization": "Google"
   },
   {
     "rank_model": "gemma-3-27b-it",
@@ -252,7 +245,7 @@
     "organization": "Google"
   },
   {
-    "rank_model": "gemini-1.5-pro-002",
+    "rank_model": "Gemini-1.5-Pro-002",
     "matched_price_model": "Gemini 1.5 Pro 128K",
     "price": 1.25,
     "provider": "Google",
@@ -280,6 +273,13 @@
     "organization": "Nvidia"
   },
   {
+    "rank_model": "gpt-oss-20b",
+    "matched_price_model": "GPT OSS 20B 128k",
+    "price": 0.04,
+    "provider": "DeepInfra",
+    "organization": "OpenAI"
+  },
+  {
     "rank_model": "qwen-plus-0125",
     "matched_price_model": "Qwen-Plus-Latest",
     "price": 0.4,
@@ -301,7 +301,7 @@
     "organization": "OpenAI"
   },
   {
-    "rank_model": "claude-3-5-sonnet-20240620",
+    "rank_model": "Claude 3.5 Sonnet (06/20)",
     "matched_price_model": "Claude Sonnet 3.5",
     "price": 3,
     "provider": "Anthropic",
@@ -329,7 +329,7 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "gpt-4o-2024-08-06",
+    "rank_model": "GPT-4o (08/06)",
     "matched_price_model": "gpt-4o",
     "price": 2.5,
     "provider": "OpenAI",
@@ -434,7 +434,7 @@
     "organization": "Google"
   },
   {
-    "rank_model": "gpt-4o-mini-2024-07-18",
+    "rank_model": "GPT-4o-mini (07/18)",
     "matched_price_model": "gpt-4o-mini",
     "price": 0.15,
     "provider": "OpenAI",
@@ -462,7 +462,7 @@
     "organization": "Mistral"
   },
   {
-    "rank_model": "gemini-1.5-flash-002",
+    "rank_model": "Gemini-1.5-Flash-002",
     "matched_price_model": "Gemini 1.5 Flash 128K",
     "price": 0.075,
     "provider": "Google",
@@ -511,18 +511,18 @@
     "organization": "Nvidia"
   },
   {
-    "rank_model": "llama-3.1-70b-instruct",
-    "matched_price_model": "Llama 3.1 70B",
-    "price": 0.6,
-    "provider": "SambaNova Cloud",
-    "organization": "Meta"
-  },
-  {
     "rank_model": "llama-3.1-tulu-3-70b",
     "matched_price_model": "Llama 3.1 70B",
     "price": 0.6,
     "provider": "SambaNova Cloud",
     "organization": "Ai2"
+  },
+  {
+    "rank_model": "Meta-Llama-3.1-70B-Instruct",
+    "matched_price_model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
+    "price": 0.23,
+    "provider": "DeepInfra",
+    "organization": "Meta"
   },
   {
     "rank_model": "jamba-1.5-large",

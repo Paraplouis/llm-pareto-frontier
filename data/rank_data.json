@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-08-10",
+  "last_updated": "2025-08-11",
   "models": [
     {
       "Model": "gpt-5",
@@ -134,6 +134,12 @@
       "organization": "DeepSeek"
     },
     {
+      "Model": "gpt-oss-120b",
+      "Score": 1372,
+      "Votes": "547",
+      "organization": "OpenAI"
+    },
+    {
       "Model": "claude-sonnet-4-20250514",
       "Score": 1385,
       "Votes": "23094",
@@ -206,22 +212,10 @@
       "organization": "Alibaba"
     },
     {
-      "Model": "claude-3-7-sonnet-20250219",
-      "Score": 1369,
-      "Votes": "38108",
-      "organization": "Anthropic"
-    },
-    {
-      "Model": "claude-3-5-sonnet-20241022",
+      "Model": "Claude 3.5 Sonnet (10/22)",
       "Score": 1366,
       "Votes": "85000",
       "organization": "Anthropic"
-    },
-    {
-      "Model": "gemini-2.0-flash-001",
-      "Score": 1364,
-      "Votes": "41372",
-      "organization": "Google"
     },
     {
       "Model": "gemma-3-27b-it",
@@ -260,7 +254,7 @@
       "organization": "Google"
     },
     {
-      "Model": "gemini-1.5-pro-002",
+      "Model": "Gemini-1.5-Pro-002",
       "Score": 1350,
       "Votes": "58645",
       "organization": "Google"
@@ -294,6 +288,12 @@
       "Score": 1343,
       "Votes": "3854",
       "organization": "Nvidia"
+    },
+    {
+      "Model": "gpt-oss-20b",
+      "Score": 1325,
+      "Votes": "477",
+      "organization": "OpenAI"
     },
     {
       "Model": "qwen-plus-0125",
@@ -338,7 +338,7 @@
       "organization": "OpenAI"
     },
     {
-      "Model": "claude-3-5-sonnet-20240620",
+      "Model": "Claude 3.5 Sonnet (06/20)",
       "Score": 1339,
       "Votes": "86159",
       "organization": "Anthropic"
@@ -362,7 +362,7 @@
       "organization": "Meta"
     },
     {
-      "Model": "gpt-4o-2024-08-06",
+      "Model": "GPT-4o (08/06)",
       "Score": 1332,
       "Votes": "47973",
       "organization": "OpenAI"
@@ -500,7 +500,7 @@
       "organization": "Alibaba"
     },
     {
-      "Model": "gpt-4o-mini-2024-07-18",
+      "Model": "GPT-4o-mini (07/18)",
       "Score": 1315,
       "Votes": "72427",
       "organization": "OpenAI"
@@ -536,7 +536,7 @@
       "organization": "Tencent"
     },
     {
-      "Model": "gemini-1.5-flash-002",
+      "Model": "Gemini-1.5-Flash-002",
       "Score": 1312,
       "Votes": "37021",
       "organization": "Google"
@@ -602,16 +602,16 @@
       "organization": "Mistral"
     },
     {
-      "Model": "llama-3.1-70b-instruct",
-      "Score": 1294,
-      "Votes": "58637",
-      "organization": "Meta"
-    },
-    {
       "Model": "llama-3.1-tulu-3-70b",
       "Score": 1288,
       "Votes": "3010",
       "organization": "Ai2"
+    },
+    {
+      "Model": "Meta-Llama-3.1-70B-Instruct",
+      "Score": 1294,
+      "Votes": "58637",
+      "organization": "Meta"
     },
     {
       "Model": "jamba-1.5-large",

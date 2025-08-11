@@ -18,6 +18,7 @@ export const data = [
   {"model": "O1 (2025-20-24)", "elo": 1398, "input_price": 15, "output_price": 60, "cheapest_provider": "OpenAI", "votes": "29038", "organization": "OpenAI"},
   {"model": "O4 Mini (2025-20-25)", "elo": 1397, "input_price": 1.1, "output_price": 4.4, "cheapest_provider": "OpenAI", "votes": "24917", "organization": "OpenAI"},
   {"model": "Deepseek R1", "elo": 1394, "input_price": 2.19, "output_price": 2.19, "cheapest_provider": "Chutes", "votes": "19430", "organization": "DeepSeek"},
+  {"model": "Gpt Oss 120b", "elo": 1372, "input_price": 0.09, "output_price": 0.45, "cheapest_provider": "DeepInfra", "votes": "547", "organization": "OpenAI"},
   {"model": "Claude Sonnet 4 (2025-05-14)", "elo": 1385, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "23094", "organization": "Anthropic"},
   {"model": "O1", "elo": 1385, "input_price": 15, "output_price": 60, "cheapest_provider": "OpenAI", "votes": "33177", "organization": "OpenAI"},
   {"model": "Claude 3 7 Sonnet Thinking 32k (2025-02-19)", "elo": 1385, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "32999", "organization": "Anthropic"},
@@ -26,9 +27,7 @@ export const data = [
   {"model": "Qwen3 30b A3b (2025-25-07)", "elo": 1377, "input_price": 0.2, "output_price": 0.8, "cheapest_provider": "Qwen", "votes": "3057", "organization": "Alibaba"},
   {"model": "Gpt 4.1 Mini (2025-20-25)", "elo": 1372, "input_price": 0.4, "output_price": 1.6, "cheapest_provider": "OpenAI", "votes": "24335", "organization": "OpenAI"},
   {"model": "Qwen3 235b A22b", "elo": 1372, "input_price": 0.2, "output_price": 0.6, "cheapest_provider": "Together.AI", "votes": "20876", "organization": "Alibaba"},
-  {"model": "Claude 3 7 Sonnet (2025-02-19)", "elo": 1369, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "38108", "organization": "Anthropic"},
-  {"model": "Claude 3 5 Sonnet (2024-10-22)", "elo": 1366, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "85000", "organization": "Anthropic"},
-  {"model": "Gemini 2.0 Flash 001", "elo": 1364, "input_price": 0.1, "output_price": 0.4, "cheapest_provider": "Google", "votes": "41372", "organization": "Google"},
+  {"model": "Claude 3.5 Sonnet (10/22)", "elo": 1366, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "85000", "organization": "Anthropic"},
   {"model": "Gemma 3 27b IT", "elo": 1363, "input_price": 2.28, "output_price": 2.28, "cheapest_provider": "Chutes", "votes": "32590", "organization": "Google"},
   {"model": "O3 Mini High", "elo": 1363, "input_price": 1.1, "output_price": 4.4, "cheapest_provider": "OpenAI", "votes": "19404", "organization": "OpenAI"},
   {"model": "Grok 3 Mini High", "elo": 1359, "input_price": 0.3, "output_price": 0.5, "cheapest_provider": "XAI", "votes": "10614", "organization": "xAI"},
@@ -39,14 +38,15 @@ export const data = [
   {"model": "Mistral Small (2025-25-06)", "elo": 1348, "input_price": 0.1, "output_price": 0.3, "cheapest_provider": "Mistral", "votes": "9597", "organization": "Mistral"},
   {"model": "Nvidiallama 3.1 Nemotron Ultra 253b", "elo": 1345, "input_price": 0.23, "output_price": 0.4, "cheapest_provider": "DeepInfra", "votes": "2656", "organization": "Nvidia"},
   {"model": "Nvidianvidia Llama 3.3 Nemotron Super 49b", "elo": 1343, "input_price": 0.6, "output_price": 1.2, "cheapest_provider": "SambaNova Cloud", "votes": "3854", "organization": "Nvidia"},
+  {"model": "Gpt Oss 20b", "elo": 1325, "input_price": 0.04, "output_price": 0.16, "cheapest_provider": "DeepInfra", "votes": "477", "organization": "OpenAI"},
   {"model": "Qwen Plus (2025-01-25)", "elo": 1344, "input_price": 0.4, "output_price": 1.2, "cheapest_provider": "Qwen", "votes": "6055", "organization": "Alibaba"},
   {"model": "O3 Mini", "elo": 1344, "input_price": 1.1, "output_price": 4.4, "cheapest_provider": "OpenAI", "votes": "43671", "organization": "OpenAI"},
   {"model": "Gpt 4o (2025-20-24)", "elo": 1343, "input_price": 2.5, "output_price": 10, "cheapest_provider": "OpenAI", "votes": "117747", "organization": "OpenAI"},
-  {"model": "Claude 3 5 Sonnet (2024-06-20)", "elo": 1339, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "86159", "organization": "Anthropic"},
+  {"model": "Claude 3.5 Sonnet (06/20)", "elo": 1339, "input_price": 3, "output_price": 15, "cheapest_provider": "Anthropic", "votes": "86159", "organization": "Anthropic"},
   {"model": "Qwq 32b", "elo": 1336, "input_price": 0.18, "output_price": 0.2, "cheapest_provider": "Novita AI", "votes": "22453", "organization": "Alibaba"},
   {"model": "O1 Mini", "elo": 1335, "input_price": 1.1, "output_price": 4.4, "cheapest_provider": "OpenAI", "votes": "54951", "organization": "OpenAI"},
   {"model": "Llama 3.1 405b", "elo": 1334, "input_price": 5, "output_price": 10, "cheapest_provider": "SambaNova Cloud", "votes": "43788", "organization": "Meta"},
-  {"model": "Gpt 4o (2025-20-24)", "elo": 1332, "input_price": 2.5, "output_price": 10, "cheapest_provider": "OpenAI", "votes": "47973", "organization": "OpenAI"},
+  {"model": "Gpt 4o (08/06)", "elo": 1332, "input_price": 2.5, "output_price": 10, "cheapest_provider": "OpenAI", "votes": "47973", "organization": "OpenAI"},
   {"model": "Llama 3.1 405b", "elo": 1333, "input_price": 5, "output_price": 10, "cheapest_provider": "SambaNova Cloud", "votes": "63038", "organization": "Meta"},
   {"model": "Nvidiallama 3.3 Nemotron 49b Super", "elo": 1324, "input_price": 0.23, "output_price": 0.4, "cheapest_provider": "DeepInfra", "votes": "2371", "organization": "Nvidia"},
   {"model": "Grok 2 (2025-20-24)", "elo": 1331, "input_price": 2, "output_price": 10, "cheapest_provider": "XAI", "votes": "67084", "organization": "xAI"},
@@ -61,7 +61,7 @@ export const data = [
   {"model": "Claude 3 5 Haiku (2024-10-22)", "elo": 1316, "input_price": 0.8, "output_price": 4, "cheapest_provider": "Anthropic", "votes": "56356", "organization": "Anthropic"},
   {"model": "Qwen Max (2025-09-19)", "elo": 1316, "input_price": 1.6, "output_price": 6.4, "cheapest_provider": "Qwen", "votes": "17432", "organization": "Alibaba"},
   {"model": "Gemma 3n E4b IT", "elo": 1316, "input_price": 2.28, "output_price": 2.28, "cheapest_provider": "Chutes", "votes": "13595", "organization": "Google"},
-  {"model": "Gpt 4o Mini (2025-20-24)", "elo": 1315, "input_price": 0.15, "output_price": 0.6, "cheapest_provider": "OpenAI", "votes": "72427", "organization": "OpenAI"},
+  {"model": "Gpt 4o Mini (07/18)", "elo": 1315, "input_price": 0.15, "output_price": 0.6, "cheapest_provider": "OpenAI", "votes": "72427", "organization": "OpenAI"},
   {"model": "Gpt 4 (2025-11-06)", "elo": 1314, "input_price": 10, "output_price": 30, "cheapest_provider": "OpenAI", "votes": "103748", "organization": "OpenAI"},
   {"model": "Gpt 4 (2025-01-25)", "elo": 1314, "input_price": 10, "output_price": 30, "cheapest_provider": "OpenAI", "votes": "97079", "organization": "OpenAI"},
   {"model": "Mistral Large (2025-24-07)", "elo": 1313, "input_price": 2, "output_price": 6, "cheapest_provider": "Mistral", "votes": "48217", "organization": "Mistral"},
@@ -72,8 +72,8 @@ export const data = [
   {"model": "Qwen2.5 72b", "elo": 1301, "input_price": 0.23, "output_price": 0.4, "cheapest_provider": "DeepInfra", "votes": "41519", "organization": "Alibaba"},
   {"model": "Magistral Medium (2025-25-06)", "elo": 1300, "input_price": 2, "output_price": 5, "cheapest_provider": "Mistral", "votes": "8695", "organization": "Mistral"},
   {"model": "Nvidiallama 3.1 Nemotron 70b", "elo": 1297, "input_price": 0.23, "output_price": 0.4, "cheapest_provider": "DeepInfra", "votes": "7577", "organization": "Nvidia"},
-  {"model": "Llama 3.1 70b", "elo": 1294, "input_price": 0.6, "output_price": 1.2, "cheapest_provider": "SambaNova Cloud", "votes": "58637", "organization": "Meta"},
   {"model": "Llama 3.1 Tulu 3 70b", "elo": 1288, "input_price": 0.6, "output_price": 1.2, "cheapest_provider": "SambaNova Cloud", "votes": "3010", "organization": "Ai2"},
+  {"model": "Meta Llama 3.1 70b", "elo": 1294, "input_price": 0.23, "output_price": 0.4, "cheapest_provider": "DeepInfra", "votes": "58637", "organization": "Meta"},
   {"model": "Jamba 1.5 Large", "elo": 1288, "input_price": 2, "output_price": 8, "cheapest_provider": "AI21 Labs", "votes": "9125", "organization": "AI21 Labs"},
   {"model": "Reka Core (2024-09-04)", "elo": 1288, "input_price": 2, "output_price": 2, "cheapest_provider": "Reka", "votes": "7948", "organization": "Reka AI"},
   {"model": "Nvidiallama 3.1 Nemotron 51b", "elo": 1286, "input_price": 0.23, "output_price": 0.4, "cheapest_provider": "DeepInfra", "votes": "3889", "organization": "Nvidia"},
@@ -140,6 +140,6 @@ export const data = [
   {"model": "Gemma 2b IT", "elo": 1092, "input_price": 0.1, "output_price": 0.1, "cheapest_provider": "Together.AI", "votes": "4918", "organization": "Google"}
 ];
 
-export const dataLastUpdated = "2025-08-10";
+export const dataLastUpdated = "2025-08-11";
 export const minElo = 1000;
 export const excludeFree = true;
