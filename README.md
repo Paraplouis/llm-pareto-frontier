@@ -9,9 +9,10 @@ The Pareto frontier shows models that are "Pareto optimal" - meaning no other mo
 
 Available at https://paraplouis.github.io/llm-pareto-frontier/
 
-## 🔄 Automated Updates
+## 🔄 Updates and Deployment
 
-The project automatically updates data daily via GitHub Actions at 2 PM UTC.
+- Data refresh is manual: run `./refresh.sh` locally, solve Cloudflare in the opened Chromium window, and commit the updated files in `data/`.
+- GitHub Pages deploys automatically on pushes that change files under `data/**`.
 
 ### 🛠️ Usage
 
@@ -36,14 +37,13 @@ and open http://localhost:8000 in your browser.
 ├── screenshot.png                  # Project screenshot for documentation
 ├── .github/
 │   └── workflows/
-│       ├── daily-refresh.yml       # Automated daily data refresh via GitHub Actions
-│       └── deploy-pages.yml        # GitHub Pages deployment configuration
+│       └── daily-refresh.yml       # Deploy Pages on data/** changes
 ├── data/
 │   ├── synthesized_data.js         # Final LLM model data (auto-updated)
 │   ├── rank_data.json              # Raw ranking data from LM Arena
 │   └── price_data.json             # Raw pricing data
 ├── utils/
-│   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (using Gradio client)
+│   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (manual via Pydoll)
 │   └── generate_synthesized_data.py # Main data processing & synthesis utility
 └── js/
     ├── loader.js                   # Dynamic module loader with global namespace

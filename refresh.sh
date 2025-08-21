@@ -49,7 +49,9 @@ node "$TMP_JS_FILE" | jq '.' > data/price_data.json
 # ==============================================================================
 # STEP 2: SCRAPE LATEST LM ARENA RANKING DATA
 # ==============================================================================
-echo -e "\n🏆 Scraping latest LM Arena rankings from lmarena.ai..."
+echo -e "\n🏆 Scraping latest LM Arena rankings from lmarena.ai (manual)..."
+command -v node >/dev/null 2>&1 || { echo "❌ node is required for price data conversion"; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "❌ jq is required for price data conversion"; exit 1; }
 python3 utils/extract_leaderboard.py
 if [ $? -ne 0 ]; then
     echo "❌ Failed to scrape LM Arena data. Please check the scraper script."

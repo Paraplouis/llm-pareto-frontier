@@ -16,7 +16,7 @@ export class LLMApp {
         this.modelDataLastUpdated = dataLastUpdated;
         this.minElo = minElo;
         this.excludeFree = excludeFree;
-        this.activeOrganizations = new Set(); // Store currently active organizations
+        this.activeOrganizations = new Set();
 
         // Token settings (default 750 in / 250 out)
         this.promptTokens = 750;
@@ -31,8 +31,19 @@ export class LLMApp {
             this.outputTokenEl.value = this.outputTokens;
         }
 
-        // Ratio label element
+        // Ratio label element (create if missing)
         this.ratioLabelEl = document.getElementById('current-ratio');
+        if (!this.ratioLabelEl) {
+            const ratioSpan = document.createElement('span');
+            ratioSpan.id = 'current-ratio';
+            ratioSpan.className = 'ratio-display';
+            const tokenControls = document.querySelector('.token-controls .preset-buttons');
+            if (tokenControls) {
+                tokenControls.appendChild(ratioSpan);
+            }
+            this.ratioLabelEl = ratioSpan;
+        }
+
         this.presetButtons = Array.from(document.querySelectorAll('.preset-button'));
         this.updateRatioDisplayAndPresets();
 
@@ -47,24 +58,12 @@ export class LLMApp {
      */
     async init() {
         try {
-            // Get all unique organizations
             const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
-
-            // Setup color scale once
             this.chartRenderer.setupColorScale(allOrganizations);
-
-            // Initialize activeOrganizations with all unique organizations
             this.activeOrganizations = new Set(allOrganizations);
-
-            // Process and display data
             await this.loadAndDisplayData();
-
-            // Setup event listeners
             this.setupEventListeners();
-
-            // Setup collapsible sections
             this.uiController.setupCollapsibleSections();
-
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.uiController.showError('Failed to load application data');
@@ -75,13 +74,19 @@ export class LLMApp {
      * Load and display the data
      */
     async loadAndDisplayData() {
-        const validData = this.dataProcessor.getValidData(this.modelData, this.activeOrganizations, this.excludeFree, this.promptTokens, this.outputTokens);
+        const validData = this.dataProcessor.getValidData(
+            this.modelData,
+            this.activeOrganizations,
+            this.excludeFree,
+            this.promptTokens,
+            this.outputTokens
+        );
 
-        // Render chart with filtered data
-        await this.renderChart(validData);
+        // Compute Pareto once
+        const paretoData = this.dataProcessor.calculateParetoFrontier(validData);
 
-        // Update legend with providers and their active state
-        this.updateLegendAndParetoInfo(validData);
+        await this.renderChart(validData, paretoData);
+        this.updateLegendAndParetoInfo(validData, paretoData);
     }
 
     /**
@@ -97,9 +102,7 @@ export class LLMApp {
             this.uiController.showTooltip(model, x, y, isPareto);
         });
 
-        document.addEventListener('modelUnhover', () => {
-            this.uiController.hideTooltip();
-        });
+        document.addEventListener('modelUnhover', () => this.uiController.hideTooltip());
 
         // Organization toggle event handler
         document.addEventListener('organizationToggle', this.handleOrganizationToggle);
@@ -148,9 +151,7 @@ export class LLMApp {
     handleResize() {
         // Debounce resize events
         clearTimeout(this.resizeTimeout);
-        this.resizeTimeout = setTimeout(() => {
-            this.refreshChart();
-        }, 250);
+        this.resizeTimeout = setTimeout(() => this.refreshChart(), 250);
     }
 
     /**
@@ -179,23 +180,24 @@ export class LLMApp {
      * Refresh the chart with current data
      */
     async refreshChart() {
-        const validData = this.dataProcessor.getValidData(this.modelData, this.activeOrganizations, this.excludeFree, this.promptTokens, this.outputTokens);
-        await this.renderChart(validData);
-
-        // Update legend and Pareto info
-        this.updateLegendAndParetoInfo(validData);
+        const validData = this.dataProcessor.getValidData(
+            this.modelData,
+            this.activeOrganizations,
+            this.excludeFree,
+            this.promptTokens,
+            this.outputTokens
+        );
+        const paretoData = this.dataProcessor.calculateParetoFrontier(validData);
+        await this.renderChart(validData, paretoData);
+        this.updateLegendAndParetoInfo(validData, paretoData);
         this.updateRatioDisplayAndPresets();
     }
 
     /**
      * Render the chart with processed data
      */
-    async renderChart(data) {
+    async renderChart(data, paretoData) {
         try {
-            // Calculate Pareto frontier
-            const paretoData = this.dataProcessor.calculateParetoFrontier(data);
-
-            // Render the chart
             await this.chartRenderer.render(data, paretoData);
 
         } catch (error) {
@@ -207,16 +209,11 @@ export class LLMApp {
     /**
      * Update legend and Pareto information
      */
-    updateLegendAndParetoInfo(data) {
+    updateLegendAndParetoInfo(data, paretoData) {
         const organizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
-        const paretoData = this.dataProcessor.calculateParetoFrontier(data);
-
-        // Set color scale in UI controller
         if (this.chartRenderer.colorScale) {
             this.uiController.setColorScale(this.chartRenderer.colorScale);
         }
-
-        // Update chart info display
         this.uiController.updateChartInfo(
             data.length,
             paretoData.length,
@@ -224,37 +221,30 @@ export class LLMApp {
             this.minElo,
             this.excludeFree
         );
-
-        // Update legend, passing all organizations and the set of active ones
         this.uiController.updateLegend(organizations, this.activeOrganizations);
-
-        // Update Pareto information
-        this.uiController.updateParetoInfo(paretoData);
+        this.uiController.updateParetoInfo([...paretoData]); // pass copy to avoid mutation
     }
 
     /**
      * Update the ratio display and preset buttons
      */
     updateRatioDisplayAndPresets() {
+        const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
         if (this.ratioLabelEl) {
-            const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
-            const divisor = gcd(this.promptTokens, this.outputTokens);
-            const simpleIn = divisor ? this.promptTokens / divisor : this.promptTokens;
-            const simpleOut = divisor ? this.outputTokens / divisor : this.outputTokens;
+            const divisor = gcd(this.promptTokens, this.outputTokens) || 1;
+            const simpleIn = this.promptTokens / divisor;
+            const simpleOut = this.outputTokens / divisor;
             this.ratioLabelEl.textContent = `${simpleIn}:${simpleOut}`;
         }
-
-        const currentGCD = (a, b) => b === 0 ? a : currentGCD(b, a % b);
-        const curDiv = currentGCD(this.promptTokens, this.outputTokens);
-        const curIn = curDiv ? this.promptTokens / curDiv : this.promptTokens;
-        const curOut = curDiv ? this.outputTokens / curDiv : this.outputTokens;
-
+        const curDiv = gcd(this.promptTokens, this.outputTokens) || 1;
+        const curIn = this.promptTokens / curDiv;
+        const curOut = this.outputTokens / curDiv;
         this.presetButtons.forEach(btn => {
             const prompt = parseInt(btn.dataset.prompt || 0, 10);
             const output = parseInt(btn.dataset.output || 0, 10);
-            const gcd = currentGCD(prompt, output);
-            const simpIn = gcd ? prompt / gcd : prompt;
-            const simpOut = gcd ? output / gcd : output;
+            const d = gcd(prompt, output) || 1;
+            const simpIn = prompt / d;
+            const simpOut = output / d;
             const isActive = simpIn === curIn && simpOut === curOut;
             btn.classList.toggle('active', isActive);
         });

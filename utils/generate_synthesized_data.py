@@ -296,7 +296,7 @@ class DataSynthesizer:
                             original_name=model["name"],
                         )
 
-            logger.info(f"  ↳ Loaded {len(price_lookup)} models from pricing data (updated: {date.today().strftime("%Y-%m-%d")})")
+            logger.info(f"  ↳ Loaded {len(price_lookup)} models from pricing data (updated: {date.today().strftime('%Y-%m-%d')})")
             return price_lookup
 
         except FileNotFoundError:
@@ -314,7 +314,12 @@ class DataSynthesizer:
         """
         model_name = model["Model"]
         elo = int(model["Score"])
-        votes = model.get("Votes", 0)
+        votes_raw = model.get("Votes", 0)
+        try:
+            # Ensure votes is an integer; handle strings with commas or NBSPs
+            votes = int(re.sub(r"[^0-9]", "", str(votes_raw))) if str(votes_raw) else 0
+        except Exception:
+            votes = 0
         organization = model.get("organization", "Unknown")
 
         # Skip model if below min_elo

@@ -3,17 +3,16 @@ import json
 from pathlib import Path
 import re
 import pandas as pd
-from tenacity import retry, wait_exponential, stop_after_attempt
-import certifi
 import io
 import sys
+import os
+import shutil
 from typing import Tuple
 from datetime import date, datetime
-from cloudscraper import create_scraper
-try:
-    from playwright.sync_api import sync_playwright  # type: ignore
-except ImportError:  # noqa: F401
-    sync_playwright = None  # type: ignore
+from pydoll.browser import Chrome as PydollChrome  # type: ignore
+from pydoll.browser.options import ChromiumOptions as PydollOptions  # type: ignore
+
+# Pydoll and HTTP fallback removed for manual-only flow
 
 def _clean_html(html_string: str) -> str:
     """Removes HTML tags from a string."""
@@ -23,137 +22,122 @@ def _clean_html(html_string: str) -> str:
 
 
 def _find_date_in_config(component, search_string="last updated"):
-    """Recursively search for a date string in a component's properties."""
-    if isinstance(component, dict):
-        props = component.get("props", {})
-        if isinstance(props, dict):
-            value = props.get("value")
-            if isinstance(value, str) and search_string in value.lower():
-                match = re.search(r'\d{4}-\d{2}-\d{2}', value)
-                if match:
-                    return match.group(0)
-
-        if "children" in props and props["children"]:
-            for child in props["children"]:
-                found = _find_date_in_config(child, search_string)
-                if found:
-                    return found
+    # Deprecated: kept only for backwards compatibility if needed elsewhere
     return None
 
 
-def fetch_latest_leaderboard_df(use_headless: bool = True) -> Tuple[pl.DataFrame, str]:
-    """Download the latest leaderboard from lmarena.ai.
+def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
+    """Manually assisted download of the leaderboard from lmarena.ai (Pydoll only).
 
-    The site is behind Cloudflare, so we use cloudscraper to negotiate the challenge automatically.
+    Opens a visible Chromium window via Pydoll. Perform any required interactions
+    yourself (solve Cloudflare/Turnstile challenge, remove style control). The
+    script polls for the table and captures it automatically once visible.
 
     Returns:
         Tuple[pl.DataFrame, str]: DataFrame with columns [Model, Score, Votes, organization] and
         date string in the page footer (YYYY-MM-DD)
     """
 
-    base_url = "https://lmarena.ai/leaderboard/text"
+    base_url = "https://lmarena.ai/leaderboard/text/overall-no-style-control"
+    html = ""
     date_raw = ""
 
-    if use_headless:
-        print("  ↳ Launching headless Chromium (Playwright)…")
-        try:
-            with sync_playwright() as pw:
-                browser = pw.chromium.launch(headless=True, args=[
-                    "--no-sandbox", "--disable-dev-shm-usage"
-                ])
+    print("  ↳ Launching Chromium via Pydoll (visible)…")
+    try:
+        import asyncio
 
-                context = browser.new_context(user_agent=(
-                    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                    "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
-                ))
+        def _find_chromium_binary() -> tuple[str | None, list[str]]:
+            tried: list[str] = []
 
-                page = context.new_page()
-                # Block only images to keep JS/CSS (needed for Cloudflare challenge)
-                page.route(r"**/*.{png,jpg,jpeg,svg,webp}", lambda route: route.abort())
+            # 1) Look on PATH for common names
+            for name in (
+                "thorium-browser",
+                "thorium",
+                "google-chrome-stable",
+                "google-chrome",
+                "chromium",
+                "chromium-browser",
+            ):
+                path = shutil.which(name)
+                if path:
+                    return path, tried
+                tried.append(name)
 
-                # Let the Cloudflare JS challenge run (wait for network to go idle)
-                # Pre-solve Cloudflare with CloudScraper and reuse its cookies/UA
-                _scraper = create_scraper(browser={'browser': 'firefox', 'platform': 'linux', 'mobile': False})
-                _scraper.get(base_url, timeout=30, verify=certifi.where())
-                ua = _scraper.headers.get('User-Agent', (
-                    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                    "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
-                ))
+            # 2) Known absolute paths
+            for cand in (
+                "/usr/bin/thorium-browser",
+                "/opt/chromium.org/thorium/thorium-browser",
+                "/usr/bin/google-chrome-stable",
+                "/usr/bin/google-chrome",
+                "/usr/bin/chromium",
+                "/usr/bin/chromium-browser",
+                "/snap/bin/chromium",
+                "/opt/google/chrome/chrome",
+            ):
+                if os.path.exists(cand):
+                    return cand, tried
+                tried.append(cand)
 
-                context = browser.new_context(user_agent=ua)
-                for c in _scraper.cookies:
-                    context.add_cookies([{
-                        'name': c.name,
-                        'value': c.value,
-                        'domain': c.domain.lstrip('.'),
-                        'path': c.path,
-                        'expires': -1,
-                        'httpOnly': False,
-                        'secure': True,
-                    }])
-                page = context.new_page()
-                page.route(r"**/*.{png,jpg,jpeg,svg,webp}", lambda route: route.abort())
+            return None, tried
 
-                for attempt in range(3):  # first load + up to 2 reloads
-                    page.goto(base_url, wait_until="domcontentloaded", timeout=60000)
+        async def _run_pydoll(url: str) -> tuple[str, str]:
+            options = PydollOptions()
+            binary_override, tried = _find_chromium_binary()
+            if binary_override:
+                options.binary_location = binary_override
+            else:
+                raise RuntimeError("No valid Chromium/Chrome/Thorium binary found. Tried: " + ", ".join(tried))
+            options.add_argument('--disable-dev-shm-usage')
+            options.start_timeout = 20
 
-                    # Accept cookie banner if present
+            manual_wait_secs = 60
+
+            async with PydollChrome(options=options) as browser:
+                tab = await browser.start()
+                bypass_ctx = getattr(tab, 'expect_and_bypass_cloudflare_captcha', None)
+                if callable(bypass_ctx):
+                    async with bypass_ctx():
+                        await tab.go_to(url)
+                else:
+                    await tab.go_to(url)
+
+                print("\nIf a Cloudflare/Turnstile challenge appears, solve it in the opened window.")
+                print("Once solved, the script will detect the table automatically (waiting up to 60s).")
+
+                # Manual mode: no auto-click loop; user resolves challenge directly
+                table_found = False
+                for _ in range(manual_wait_secs):
                     try:
-                        page.get_by_role("button", name="Accept Cookies").click(timeout=3000)
+                        try:
+                            await tab.query("iframe[src*='leaderboard/text']")
+                            await tab.switch_to_frame("iframe[src*='leaderboard/text']")
+                        except Exception:
+                            pass
+                        node = await tab.find(tag_name='table', timeout=1, raise_exc=False)
+                        if node is not None:
+                            table_found = True
+                            break
                     except Exception:
                         pass
 
-                    # Open the dropdown (label usually shows "Default") and pick the no-style option
-                    try:
-                        page.locator("button:has-text('Default')").first.click()
-                    except Exception:
-                        try:
-                            page.get_by_role("combobox").click()
-                        except Exception:
-                            pass
+                if not table_found:
+                    return "", ""
 
-                    page.locator("text=Remove Style Control").first.click()
+                table_html = await tab.execute_script("return document.querySelector('table')?.outerHTML || ''")
+                last_updated = await tab.execute_script("const n=[...document.querySelectorAll('*')].find(x=>/Last Updated/i.test(x.textContent||''));return n? (n.nextElementSibling?.textContent||n.textContent||''):'';")
+                return str(table_html or ""), str(last_updated or "")
 
-                    page.wait_for_timeout(1500)  # allow table JS to refresh
-                    page.wait_for_selector("table tr", timeout=20000)
-
-                    top_score_txt = page.locator("table tr td:nth-child(4)").first.inner_text().strip()
-                    if top_score_txt.isdigit() and int(top_score_txt) >= 1460:
-                        break  # got the style-control-OFF table
-                    page.wait_for_timeout(1000)
-                    # reload and try again
-                # capture table HTML and date
-                _full_html = page.content()
-                html = page.locator("table").first.evaluate("el => el.outerHTML")
-                try:
-                    date_raw = page.locator("text=Last Updated").first.evaluate("el => el.nextElementSibling.textContent")
-                except Exception:
-                    date_raw = ""
-                browser.close()
-        except Exception as e:
-            print(f"    ⚠️ Playwright path failed: {e}\n    ↳ Falling back to CloudScraper…")
-            use_headless = False  # fallback
-
-    if not use_headless:
-        print("  ↳ Downloading leaderboard HTML via CloudScraper…")
-        scraper = create_scraper(browser={
-            'browser': 'firefox',
-            'platform': 'linux',
-            'mobile': False
-        })
-
-        @retry(wait=wait_exponential(multiplier=2, min=2, max=30), stop=stop_after_attempt(4))
-        def _get_html():
-            resp = scraper.get(base_url, timeout=30, verify=certifi.where())
-            resp.raise_for_status()
-            return resp.text
-        try:
-            html = _get_html()
-        except Exception as e:
-            print(f"    ❌ Failed to fetch leaderboard HTML: {e}")
-            return None, None
+        html, date_raw = asyncio.run(_run_pydoll(base_url))
+        if not html:
+            print("    ❌ Pydoll did not capture the table.")
+    except Exception as e:
+        print(f"    ❌ Pydoll error: {e}")
+        return None, None
 
     # Parse all tables on the page. The first one is the overall leaderboard.
+    if not html:
+        print("    ❌ Empty HTML content after manual capture.")
+        return None, None
     tables = pd.read_html(io.StringIO(html))
     if not tables:
         print("    ❌ pandas.read_html found no tables in the page.")
@@ -199,7 +183,7 @@ def fetch_latest_leaderboard_df(use_headless: bool = True) -> Tuple[pl.DataFrame
     if m_iso:
         last_updated_date = m_iso.group(1)
     else:
-        # Try human-readable pattern inside the (possibly truncated) HTML or the date_raw captured via Playwright
+        # Try human-readable pattern inside the (possibly truncated) HTML or the date_raw captured
         raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html, flags=re.I)
         raw = raw_match.group(1) if raw_match else date_raw
         if raw:

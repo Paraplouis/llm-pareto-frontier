@@ -4,6 +4,26 @@
     "uri": "https://openai.com/api/pricing/",
     "models": [
       {
+        "name": "gpt-5",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
+        "name": "gpt-5-mini",
+        "inputPrice": 0.25,
+        "outputPrice": 2
+      },
+      {
+        "name": "gpt-5-nano",
+        "inputPrice": 0.05,
+        "outputPrice": 0.4
+      },
+      {
+        "name": "gpt-5-chat-latest",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
         "name": "o3",
         "inputPrice": 2,
         "outputPrice": 8
@@ -150,9 +170,14 @@
         "outputPrice": 75
       },
       {
-        "name": "Claude Sonnet 4",
+        "name": "Claude Sonnet 4 <= 200K",
         "inputPrice": 3,
         "outputPrice": 15
+      },
+      {
+        "name": "Claude Sonnet 4 > 200K",
+        "inputPrice": 6,
+        "outputPrice": 22
       },
       {
         "name": "Claude Sonnet 3.7",
@@ -341,12 +366,12 @@
     "uri": "https://ai.google.dev/pricing?hl=en",
     "models": [
       {
-        "name": "Gemini 2.5 Pro 200K",
+        "name": "Gemini 2.5 Pro <= 200K",
         "inputPrice": 1.25,
         "outputPrice": 10
       },
       {
-        "name": "Gemini 2.5 Pro 2M",
+        "name": "Gemini 2.5 Pro > 200K",
         "inputPrice": 2.5,
         "outputPrice": 15
       },
@@ -391,27 +416,27 @@
         "outputPrice": 0.3
       },
       {
-        "name": "Gemini 1.5 Pro 128K",
+        "name": "Gemini 1.5 Pro <= 128K",
         "inputPrice": 1.25,
         "outputPrice": 5
       },
       {
-        "name": "Gemini 1.5 Pro 2M",
+        "name": "Gemini 1.5 Pro > 128K",
         "inputPrice": 2.5,
         "outputPrice": 10
       },
       {
-        "name": "Gemini 1.5 Flash 128K",
+        "name": "Gemini 1.5 Flash <= 128K",
         "inputPrice": 0.075,
         "outputPrice": 0.3
       },
       {
-        "name": "Gemini 1.5 Flash 1M",
+        "name": "Gemini 1.5 Flash > 128K",
         "inputPrice": 0.15,
         "outputPrice": 0.6
       },
       {
-        "name": "Gemini 1.5 Flash 8B 128K",
+        "name": "Gemini 1.5 Flash 8B <= 128K",
         "inputPrice": 0.0375,
         "outputPrice": 0.15
       },
@@ -575,12 +600,12 @@
     "uri": "https://x.ai/api",
     "models": [
       {
-        "name": "grok-4 128K",
+        "name": "grok-4 <= 128K",
         "inputPrice": 3,
         "outputPrice": 15
       },
       {
-        "name": "grok-4 1M",
+        "name": "grok-4 > 128K",
         "inputPrice": 6,
         "outputPrice": 30
       },
@@ -886,6 +911,11 @@
     "uri": "https://chutes.ai/app",
     "models": [
       {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.1,
+        "outputPrice": 0.41
+      },
+      {
         "name": "GLM 4.5",
         "inputPrice": 0,
         "outputPrice": 0
@@ -1142,6 +1172,16 @@
     "uri": "https://wandb.ai/site/pricing/inference",
     "models": [
       {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.05,
+        "outputPrice": 0.2
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
+      },
+      {
         "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 1,
         "outputPrice": 1.5
@@ -1192,6 +1232,16 @@
     "provider": "Hyperbolic",
     "uri": "https://hyperbolic.xyz/pricing",
     "models": [
+      {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.1,
+        "outputPrice": 0.1
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.3,
+        "outputPrice": 0.3
+      },
       {
         "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 2,
@@ -1308,6 +1358,11 @@
     "provider": "Together.AI",
     "uri": "https://www.together.ai/pricing",
     "models": [
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.5,
+        "outputPrice": 1.5
+      },
       {
         "name": "GLM 4.5 Air FP8",
         "inputPrice": 0.2,
@@ -1590,6 +1645,16 @@
     "uri": "https://fireworks.ai/pricing",
     "models": [
       {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.05,
+        "outputPrice": 0.2
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
+      },
+      {
         "name": "Qwen 3 Coder 480B A35B",
         "inputPrice": 0.45,
         "outputPrice": 1.8
@@ -1761,6 +1826,16 @@
     "uri": "https://nebius.com/prices-ai-studio",
     "models": [
       {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.05,
+        "outputPrice": 0.2
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
+      },
+      {
         "name": "Qwen 3 235B A22B",
         "inputPrice": 0.2,
         "outputPrice": 0.6
@@ -1911,6 +1986,16 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.04,
+        "outputPrice": 0.16
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.09,
+        "outputPrice": 0.45
+      },
       {
         "name": "GLM 4.5",
         "inputPrice": 0.55,
@@ -2168,6 +2253,16 @@
     "uri": "https://groq.com/pricing/",
     "models": [
       {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.1,
+        "outputPrice": 0.5
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.15,
+        "outputPrice": 0.75
+      },
+      {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 1,
         "outputPrice": 3
@@ -2343,6 +2438,11 @@
         "name": "Llama 3 70b",
         "inputPrice": 0.6,
         "outputPrice": 0.6
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.25,
+        "outputPrice": 0.69
       }
     ]
   },
@@ -2599,6 +2699,16 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "GPT OSS 20B 128k",
+        "inputPrice": 0.05,
+        "outputPrice": 0.2
+      },
+      {
+        "name": "GPT OSS 120B 128k",
+        "inputPrice": 0.1,
+        "outputPrice": 0.5
+      },
       {
         "name": "GLM 4.5",
         "inputPrice": 0.6,

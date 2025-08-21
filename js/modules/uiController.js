@@ -133,15 +133,19 @@ export class UIController {
     updateParetoInfo(paretoData) {
         const explanationContainer = d3.select(".explanation");
 
-        // Clear previous Pareto content to prevent duplication. (DEPRECATED: Remove old separate pareto-info container if it exists.)
-        explanationContainer.select("#pareto-frontier-content").remove();
+        // Replace content idempotently
+        let paretoMount = explanationContainer.select("#pareto-frontier-content");
+        if (!paretoMount.node()) {
+            paretoMount = explanationContainer.append("div").attr("id", "pareto-frontier-content");
+        } else {
+            paretoMount.html("");
+        }
 
         if (!paretoData || paretoData.length === 0) {
             return;
         }
 
-        // Append Pareto content into the main explanation container.
-        const paretoContent = explanationContainer.append("div").attr("id", "pareto-frontier-content");
+        const paretoContent = paretoMount;
 
         paretoContent.append('h2').html('Pareto frontier models');
 
@@ -154,15 +158,15 @@ export class UIController {
             .append("div")
             .attr("class", "pareto-models");
 
-        // Sort models by ELO score descending for ordered display.
-        paretoData.sort((a, b) => b.elo - a.elo);
+        // Sort a copy by ELO desc to avoid mutating upstream data
+        const sortedPareto = [...paretoData].sort((a, b) => b.elo - a.elo);
 
         const formatPrice = (p) => {
             const fixed = Number(p).toFixed(4);
             return parseFloat(fixed).toString();
         };
 
-        paretoData.forEach(model => {
+        sortedPareto.forEach(model => {
             const modelElement = modelsContainer
                 .append("div")
                 .attr("class", "pareto-model")
