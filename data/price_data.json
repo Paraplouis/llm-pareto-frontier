@@ -656,6 +656,11 @@
         "outputPrice": 1.1
       },
       {
+        "name": "DeepSeek V3.1",
+        "inputPrice": 0.56,
+        "outputPrice": 1.68
+      },
+      {
         "name": "DeepSeek R1",
         "inputPrice": 0.55,
         "outputPrice": 2.19
@@ -910,6 +915,11 @@
     "provider": "Chutes",
     "uri": "https://chutes.ai/app",
     "models": [
+      {
+        "name": "DeepSeek V3.1",
+        "inputPrice": 0.2,
+        "outputPrice": 0.8
+      },
       {
         "name": "GPT OSS 120B 128k",
         "inputPrice": 0.1,
@@ -1645,6 +1655,11 @@
     "uri": "https://fireworks.ai/pricing",
     "models": [
       {
+        "name": "DeepSeek V3.1",
+        "inputPrice": 1.2,
+        "outputPrice": 1.2
+      },
+      {
         "name": "GPT OSS 20B 128k",
         "inputPrice": 0.05,
         "outputPrice": 0.2
@@ -1986,6 +2001,11 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "DeepSeek V3.1",
+        "inputPrice": 0.32,
+        "outputPrice": 1.15
+      },
       {
         "name": "GPT OSS 20B 128k",
         "inputPrice": 0.04,
@@ -2699,6 +2719,11 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "DeepSeek V3.1",
+        "inputPrice": 0.55,
+        "outputPrice": 1.66
+      },
       {
         "name": "GPT OSS 20B 128k",
         "inputPrice": 0.05,
