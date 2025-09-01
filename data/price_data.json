@@ -600,6 +600,11 @@
     "uri": "https://x.ai/api",
     "models": [
       {
+        "name": "grok-code-fast-1",
+        "inputPrice": 0.2,
+        "outputPrice": 1.5
+      },
+      {
         "name": "grok-4 <= 128K",
         "inputPrice": 3,
         "outputPrice": 15
@@ -874,14 +879,39 @@
     "uri": "https://docs.z.ai/guides/overview/pricing#agents-%26-pricing",
     "models": [
       {
-        "name": "GLM 4.5",
+        "name": "GLM-4.5",
         "inputPrice": 0.6,
         "outputPrice": 2.2
       },
       {
-        "name": "GLM 4.5 Air",
+        "name": "GLM-4.5V",
+        "inputPrice": 0.6,
+        "outputPrice": 1.8
+      },
+      {
+        "name": "GLM-4.5-X",
+        "inputPrice": 2.2,
+        "outputPrice": 8.9
+      },
+      {
+        "name": "GLM-4.5-Air",
         "inputPrice": 0.2,
         "outputPrice": 1.1
+      },
+      {
+        "name": "GLM-4.5-AirX",
+        "inputPrice": 1.1,
+        "outputPrice": 4.5
+      },
+      {
+        "name": "GLM-4-32B-0414-128K",
+        "inputPrice": 0.1,
+        "outputPrice": 0.1
+      },
+      {
+        "name": "GLM-4.5-Flash",
+        "inputPrice": 0,
+        "outputPrice": 0
       }
     ]
   },
