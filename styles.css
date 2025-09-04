@@ -268,12 +268,6 @@ h2 {
     filter: brightness(1.1);
 }
 
-.datapoint.pareto {
-    stroke: #000;
-    stroke-width: 2px;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
-}
-
 #modelCount {
     text-align: center;
     font-size: 14px;
@@ -290,6 +284,24 @@ h2 {
     fill: #000;
     font-weight: bold;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Axis tick/label colors (light theme) controlled via CSS */
+.axis, .tick text {
+    fill: #000;
+}
+
+/* Axis domain and tick line thickness */
+.axis path.domain {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+.axis line {
+    stroke: #000;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
 }
 
 /* Grid lines */
@@ -582,13 +594,26 @@ h2 {
     border-color: #3498db;
 }
 
-.ratio-display {
-    font-size: 14px;
+/* Reset ratio button variant */
+.preset-button.reset-button {
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    font-weight: bold;
     color: #333;
-    background: rgba(255,255,255,0.8);
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+}
+.preset-button.reset-button:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+}
+
+.ratio-display {
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+    background: none;
+    padding: 0;
+    border: none;
+    margin-left: 16px;
 }
 
 .token-controls label {
@@ -617,6 +642,7 @@ h2 {
     border-radius: 4px;
     background-color: #fff;
     -moz-appearance: textfield; /* Hide arrows in Firefox */
+    appearance: textfield; /* Standard property */
 }
 
 .token-controls input[type="number"]:focus {
@@ -666,12 +692,12 @@ h2 {
 /* Dark Mode Styles from PR */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #0d1117;
-        color: #e6edf3;
+        background-color: #1a1a1a;
+        color: #c9d1d9;
     }
 
     h2, h3, #main-title, #main-subtitle, #modelCount {
-        color: #e6edf3;
+        color: #f0f6fc;
     }
 
     #main-subtitle, #chart-info, .chart-notes {
@@ -684,16 +710,23 @@ h2 {
     }
 
     .axis, .tick text, .axis-label, .model-label {
-        fill: #8b949e !important;
+        fill: #a0a0a0 !important;
+        font-weight: 500;
+    }
+
+    /* Axis lines in dark mode */
+    .axis path.domain,
+    .axis line {
+        stroke: #a0a0a0;
     }
 
     .grid line {
         stroke: #30363d;
+        stroke-opacity: 0.5;
     }
 
     .legend-item,
     .preset-button,
-    .ratio-display,
     .reset-button {
         background-color: rgba(255, 255, 255, 0.08);
         border-color: #30363d;
@@ -710,7 +743,14 @@ h2 {
         border-color: #1f6feb;
         color: #fff;
     }
-    
+
+    .ratio-display {
+        background-color: transparent;
+        border-color: transparent;
+        color: #8b949e;
+        font-style: italic;
+    }
+
     .tooltip {
         background-color: rgba(255,255,255,0.95);
         color: #000;
@@ -762,7 +802,7 @@ h2 {
         color: #e6edf3;
         border-color: #30363d;
     }
-    
+
     .token-controls label:hover {
         background-color: rgba(255,255,255,0.12);
     }
@@ -780,12 +820,12 @@ h2 {
 }
 
 body.dark-mode {
-    background-color: #0d1117;
-    color: #e6edf3;
+    background-color: #1a1a1a;
+    color: #c9d1d9;
 }
 
 body.dark-mode h2, body.dark-mode h3, body.dark-mode #main-title, body.dark-mode #main-subtitle, body.dark-mode #modelCount {
-    color: #e6edf3;
+    color: #f0f6fc;
 }
 
 body.dark-mode #main-subtitle, body.dark-mode #chart-info, body.dark-mode .chart-notes {
@@ -798,16 +838,23 @@ body.dark-mode .chart-container {
 }
 
 body.dark-mode .axis, body.dark-mode .tick text, body.dark-mode .axis-label, body.dark-mode .model-label {
-    fill: #8b949e !important;
+    fill: #a0a0a0 !important;
+    font-weight: 500;
+}
+
+/* Axis lines when explicit dark mode class is set */
+body.dark-mode .axis path.domain,
+body.dark-mode .axis line {
+    stroke: #a0a0a0;
 }
 
 body.dark-mode .grid line {
     stroke: #30363d;
+    stroke-opacity: 0.5;
 }
 
 body.dark-mode .legend-item,
 body.dark-mode .preset-button,
-body.dark-mode .ratio-display,
 body.dark-mode .reset-button {
     background-color: rgba(255, 255, 255, 0.08);
     border-color: #30363d;
@@ -823,6 +870,13 @@ body.dark-mode .preset-button.active {
     background-color: #1f6feb;
     border-color: #1f6feb;
     color: #fff;
+}
+
+body.dark-mode .ratio-display {
+    background-color: transparent;
+    border-color: transparent;
+    color: #8b949e;
+    font-style: italic;
 }
 
 body.dark-mode .tooltip {
