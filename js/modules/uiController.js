@@ -33,12 +33,17 @@ export class UIController {
             return parseFloat(fixed).toString();
         };
 
+        // Detect if price shown is ratio-weighted by checking presence of input/output_price
+        const priceNote = (typeof model.input_price === 'number' && typeof model.output_price === 'number')
+            ? `@ ${document.getElementById('current-ratio')?.textContent || 'ratio'}`
+            : '';
+
         let tooltipHTML = `
             <strong>${model.model}</strong><br/>
             <br/>ELO: ${model.elo}<br/>
             Votes: ${model.votes || 'N/A'}<br/>
-            Price: $${formatPrice(model.price)}/M tokens<br/>
-            Cheapest provider: ${model.cheapest_provider}<br>
+            Price: $${formatPrice(model.price)}/M tokens ${priceNote}<br/>
+            Cheapest provider: ${model.cheapest_provider || 'N/A'}<br>
             Organization: ${model.organization || 'N/A'}<br>
         `;
 
@@ -69,7 +74,7 @@ export class UIController {
 
         // Add a title and explanation for the legend
         const legendHeader = legendContainer.append("div").attr("class", "legend-header");
-        legendHeader.append("h3").text("Filter by organization");
+        legendHeader.append("h3").text("Filter by organization").attr('id', 'legend-title');
         legendHeader.append("p").text("Click an organization (the company that created the model) to show/hide its models.");
 
         organizations.forEach(organization => {
@@ -78,6 +83,9 @@ export class UIController {
                 .append("div")
                 .attr("class", "legend-item")
                 .attr("tabindex", 0) // keyboard focusable
+                .attr('role', 'button')
+                .attr('aria-pressed', isActive ? 'true' : 'false')
+                .attr('aria-label', `Toggle organization ${organization}`)
                 .classed("disabled", !isActive)
                 .on("click", function() {
                     // Determine new state from DOM (robust against double-clicks)
@@ -88,6 +96,9 @@ export class UIController {
                             isChecked: currentlyDisabled // we will enable if it was disabled
                         }
                     }));
+                    // Update aria-pressed immediately for SR feedback
+                    const nowActive = currentlyDisabled;
+                    d3.select(this).attr('aria-pressed', nowActive ? 'true' : 'false');
                 })
                 .on("keydown", function(event) {
                     if (event.key === 'Enter' || event.key === ' ') {
@@ -113,6 +124,8 @@ export class UIController {
                 .append("div")
                 .attr("class", "legend-item reset-button")
                 .attr("tabindex", 0)
+                .attr('role', 'button')
+                .attr('aria-label', 'Reset organization selections')
                 .on("click", function() {
                     document.dispatchEvent(new CustomEvent('resetOrganizations'));
                 })
@@ -263,9 +276,21 @@ export class UIController {
                 toggle.classList.add('expanded');
             }
 
+            // Ensure IDs and ARIA attributes for accessibility
+            if (!content.id) {
+                content.id = 'explanation-content';
+            }
+            toggle.setAttribute('role', 'button');
+            toggle.setAttribute('aria-controls', content.id);
+            toggle.setAttribute('aria-expanded', content.classList.contains('collapsed') ? 'false' : 'true');
+            content.setAttribute('aria-hidden', content.classList.contains('collapsed') ? 'true' : 'false');
+
             toggle.addEventListener('click', () => {
                 content.classList.toggle('collapsed');
                 toggle.classList.toggle('expanded');
+                const isCollapsed = content.classList.contains('collapsed');
+                toggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                content.setAttribute('aria-hidden', isCollapsed ? 'true' : 'false');
             });
         }
     }

@@ -14,6 +14,7 @@ export class ChartRenderer {
         this.sortedParetoFrontier = [];
         this.paretoIndexLookup = new Map();
         this.paretoLabelInfo = new Map();
+        this.isDarkMode = false;
         this.config = {
             RESPONSIVE: {
                 MOBILE_BREAKPOINT: 600,
@@ -40,10 +41,7 @@ export class ChartRenderer {
                         hover: { desktop: 9, mobile: 8 },
                     },
                 },
-                COLORS: {
-                    PARETO_STROKE: "#000",
-                    PARETO_LINE: "#000",
-                },
+                COLORS: {},
             },
             ANIMATION: {
                 HOVER_DURATION: 150,
@@ -140,7 +138,6 @@ export class ChartRenderer {
             .call(xAxis)
             .selectAll("text")
             .style("text-anchor", "end")
-            .style("fill", "#000")
             .attr("dx", "-.8em")
             .attr("dy", ".15em")
             .attr("transform", "rotate(-45)");
@@ -152,10 +149,8 @@ export class ChartRenderer {
 
         this.svg.append("g")
             .attr("class", "y-axis axis")
-            .style("color", "#000")
             .call(yAxis)
-            .selectAll("text")
-            .style("fill", "#000");
+            .selectAll("text");
 
         this.addAxisLabels();
         this.addGridLines(scales);
@@ -171,7 +166,6 @@ export class ChartRenderer {
             .attr("class", "x-axis-title axis-label")
             .attr("x", width / 2)
             .attr("y", height + (isMobile ? 40 : 55))
-            .attr("fill", "#000")
             .attr("text-anchor", "middle")
             .attr("font-weight", "bold")
             .attr("font-size", isMobile ? "10px" : "12px")
@@ -182,7 +176,6 @@ export class ChartRenderer {
             .attr("transform", "rotate(-90)")
             .attr("y", -45)
             .attr("x", -height / 2)
-            .attr("fill", "#000")
             .attr("text-anchor", "middle")
             .attr("font-weight", "bold")
             .attr("font-size", isMobile ? "10px" : "12px")
@@ -250,13 +243,17 @@ export class ChartRenderer {
                 const isPareto = this.isParetoOptimal(d.model);
                 return isPareto ? "datapoint pareto" : "datapoint";
             })
+            .attr("tabindex", 0)
             .attr("cx", d => xScale(d.price))
             .attr("cy", d => yScale(d.elo))
             .attr("r", d => this.getPointRadius(d))
             .attr("fill", d => this.colorScale ? this.colorScale(d.organization) : "#666")
             .attr("stroke", d => {
                 const isPareto = this.isParetoOptimal(d.model);
-                return isPareto ? this.config.CHART.COLORS.PARETO_STROKE : "#fff";
+                if (isPareto) {
+                    return this.isDarkMode ? '#fafafa' : '#000';
+                }
+                return '#fff';
             })
             .attr("stroke-width", d => {
                 const isPareto = this.isParetoOptimal(d.model);
@@ -265,7 +262,13 @@ export class ChartRenderer {
             .attr("opacity", 0.8)
             .on("mouseover", (event, d) => this.handleMouseOver(event, d))
             .on("mouseout", (event, d) => this.handleMouseOut(event, d))
-            .on("click", (event, d) => this.handleClick(event, d));
+            .on("click", (event, d) => this.handleClick(event, d))
+            .on("keydown", (event, d) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    this.handleClick(event, d);
+                }
+            });
     }
 
     /**
@@ -398,7 +401,6 @@ export class ChartRenderer {
                 }
                 return d.model;
             })
-            .attr("fill", "#000")
             .style("font-weight", d => this.isParetoOptimal(d.model) ? "bold" : "normal")
             .style("opacity", d => this.isParetoOptimal(d.model) ? 1 : 0.7);
     }
@@ -420,8 +422,9 @@ export class ChartRenderer {
 
         this.svg.append("path")
             .datum(sortedParetoFrontier)
+            .attr("class", "pareto-path")
             .attr("fill", "none")
-            .attr("stroke", this.config.CHART.COLORS.PARETO_LINE)
+            .attr("stroke", this.isDarkMode ? '#fafafa' : '#000')
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", "5,5")
             .attr("d", lineGenerator);
@@ -430,7 +433,7 @@ export class ChartRenderer {
     /**
      * Main render method for the chart
      */
-    async render(data = [], paretoFrontier = []) {
+    async render(data = [], paretoFrontier = [], isDarkMode = false) {
         if (!this.container.node()) {
             console.error("Chart container not found.");
             return;
@@ -438,6 +441,7 @@ export class ChartRenderer {
 
         this.currentData = data;
         this.currentParetoFrontier = paretoFrontier;
+        this.isDarkMode = isDarkMode;
 
         // Sort pareto frontier by price to determine neighbors for label placement
         if (paretoFrontier.length > 0) {

@@ -58,13 +58,20 @@ export class LLMApp {
      */
     async init() {
         try {
+            // Load provider pricing catalog first for dynamic provider attribution (if available)
+            if (typeof this.dataProcessor.loadPriceData === 'function') {
+                await this.dataProcessor.loadPriceData();
+            }
             const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
             this.chartRenderer.setupColorScale(allOrganizations);
             this.activeOrganizations = new Set(allOrganizations);
-            await this.loadAndDisplayData();
+
+            this.setupThemeToggle(); // Set theme preference FIRST
+
+            await this.loadAndDisplayData(); // Then load data and render
+
             this.setupEventListeners();
             this.uiController.setupCollapsibleSections();
-            this.setupThemeToggle();
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.uiController.showError('Failed to load application data');
@@ -75,6 +82,7 @@ export class LLMApp {
      * Load and display the data
      */
     async loadAndDisplayData() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
         const validData = this.dataProcessor.getValidData(
             this.modelData,
             this.activeOrganizations,
@@ -86,7 +94,7 @@ export class LLMApp {
         // Compute Pareto once
         const paretoData = this.dataProcessor.calculateParetoFrontier(validData);
 
-        await this.renderChart(validData, paretoData);
+        await this.renderChart(validData, paretoData, isDarkMode);
         this.updateLegendAndParetoInfo(validData, paretoData);
     }
 
@@ -144,6 +152,26 @@ export class LLMApp {
                 this.updateRatioDisplayAndPresets();
             });
         });
+
+        // Add a Reset Ratio button if missing
+        const presetButtonsContainer = document.querySelector('.token-controls .preset-buttons');
+        if (presetButtonsContainer && !presetButtonsContainer.querySelector('.ratio-reset')) {
+            const resetBtn = document.createElement('button');
+            resetBtn.className = 'preset-button reset-button ratio-reset';
+            resetBtn.type = 'button';
+            resetBtn.textContent = 'Reset ratio';
+            resetBtn.title = 'Reset prompt/output ratio to 3:1 (750/250)';
+            resetBtn.setAttribute('aria-label', 'Reset prompt/output ratio to default 3 to 1');
+            resetBtn.addEventListener('click', () => {
+                this.promptTokens = 750;
+                this.outputTokens = 250;
+                if (this.inputTokenEl) this.inputTokenEl.value = 750;
+                if (this.outputTokenEl) this.outputTokenEl.value = 250;
+                this.refreshChart();
+                this.updateRatioDisplayAndPresets();
+            });
+            presetButtonsContainer.appendChild(resetBtn);
+        }
     }
 
     /**
@@ -181,6 +209,7 @@ export class LLMApp {
      * Refresh the chart with current data
      */
     async refreshChart() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
         const validData = this.dataProcessor.getValidData(
             this.modelData,
             this.activeOrganizations,
@@ -189,7 +218,7 @@ export class LLMApp {
             this.outputTokens
         );
         const paretoData = this.dataProcessor.calculateParetoFrontier(validData);
-        await this.renderChart(validData, paretoData);
+        await this.renderChart(validData, paretoData, isDarkMode);
         this.updateLegendAndParetoInfo(validData, paretoData);
         this.updateRatioDisplayAndPresets();
     }
@@ -197,9 +226,9 @@ export class LLMApp {
     /**
      * Render the chart with processed data
      */
-    async renderChart(data, paretoData) {
+    async renderChart(data, paretoData, isDarkMode) {
         try {
-            await this.chartRenderer.render(data, paretoData);
+            await this.chartRenderer.render(data, paretoData, isDarkMode);
 
         } catch (error) {
             console.error('Error rendering chart:', error);
@@ -264,12 +293,18 @@ export class LLMApp {
             } else {
                 body.classList.remove('dark-mode');
             }
+            if (themeToggleButton) {
+                themeToggleButton.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+                themeToggleButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+                themeToggleButton.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+            }
         };
 
         const toggleTheme = () => {
             const currentTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
             localStorage.setItem('theme', currentTheme);
             applyTheme(currentTheme);
+            this.refreshChart();
         };
 
         themeToggleButton.addEventListener('click', toggleTheme);
