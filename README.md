@@ -49,7 +49,6 @@ and open http://localhost:8000 in your browser.
 │   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (manual via Pydoll)
 │   └── generate_synthesized_data.py # Main data processing & synthesis utility
 └── js/
-    ├── loader.js                   # Dynamic module loader with global namespace
     ├── app.js                      # Main application orchestrator
     └── modules/
         ├── dataProcessor.js        # Data filtering & Pareto frontier calculations
