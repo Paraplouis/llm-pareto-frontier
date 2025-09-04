@@ -5,6 +5,7 @@ body {
     padding: 20px;
     background-color: #f8f9fa;
     line-height: 1.6;
+    color-scheme: light dark;
 }
 
 .chart-container {
@@ -641,4 +642,252 @@ h2 {
         width: 70px;
         font-size: 12px;
     }
+}
+
+.theme-toggle-button {
+    position: absolute;
+    top: 1rem;
+    right: 4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    color: #333;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle-button:hover {
+    color: #000;
+}
+
+/* Dark Mode Styles from PR */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #0d1117;
+        color: #e6edf3;
+    }
+
+    h2, h3, #main-title, #main-subtitle, #modelCount {
+        color: #e6edf3;
+    }
+
+    #main-subtitle, #chart-info, .chart-notes {
+        color: #8b949e;
+    }
+
+    .chart-container {
+        background-color: #161b22;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .axis, .tick text, .axis-label, .model-label {
+        fill: #8b949e !important;
+    }
+
+    .grid line {
+        stroke: #30363d;
+    }
+
+    .legend-item,
+    .preset-button,
+    .ratio-display,
+    .reset-button {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: #30363d;
+        color: #e6edf3;
+    }
+
+    .legend-item:hover,
+    .preset-button:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .preset-button.active {
+        background-color: #1f6feb;
+        border-color: #1f6feb;
+        color: #fff;
+    }
+    
+    .tooltip {
+        background-color: rgba(255,255,255,0.95);
+        color: #000;
+    }
+
+    .github-icon, .theme-toggle-button {
+        color: #e6edf3;
+    }
+
+    .github-icon:hover, .theme-toggle-button:hover {
+        color: #ffffff;
+    }
+
+    .explanation {
+        background-color: #161b22;
+        border-color: #30363d;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .explanation-toggle {
+        background-color: rgba(255,255,255,0.05);
+    }
+
+    .explanation-toggle:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+    .explanation h2,
+    .explanation h3,
+    .explanation p {
+        color: #e6edf3;
+    }
+
+    .explanation a {
+        color: #58a6ff;
+    }
+
+    .pareto-model {
+        background-color: #1a1d1f;
+        border-color: #1a1d1f;
+        color: #e6edf3;
+    }
+    .pareto-model:hover {
+        background-color: #122d18;
+    }
+
+    .token-controls label {
+        background-color: rgba(255,255,255,0.08);
+        color: #e6edf3;
+        border-color: #30363d;
+    }
+    
+    .token-controls label:hover {
+        background-color: rgba(255,255,255,0.12);
+    }
+
+    .token-controls input[type="number"] {
+        background-color: #0d1117;
+        color: #e6edf3;
+        border-color: #30363d;
+    }
+
+    .token-controls input[type="number"]:focus {
+        border-color: #1f6feb;
+        box-shadow: 0 0 0 2px rgba(31,111,235,0.4);
+    }
+}
+
+body.dark-mode {
+    background-color: #0d1117;
+    color: #e6edf3;
+}
+
+body.dark-mode h2, body.dark-mode h3, body.dark-mode #main-title, body.dark-mode #main-subtitle, body.dark-mode #modelCount {
+    color: #e6edf3;
+}
+
+body.dark-mode #main-subtitle, body.dark-mode #chart-info, body.dark-mode .chart-notes {
+    color: #8b949e;
+}
+
+body.dark-mode .chart-container {
+    background-color: #161b22;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .axis, body.dark-mode .tick text, body.dark-mode .axis-label, body.dark-mode .model-label {
+    fill: #8b949e !important;
+}
+
+body.dark-mode .grid line {
+    stroke: #30363d;
+}
+
+body.dark-mode .legend-item,
+body.dark-mode .preset-button,
+body.dark-mode .ratio-display,
+body.dark-mode .reset-button {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: #30363d;
+    color: #e6edf3;
+}
+
+body.dark-mode .legend-item:hover,
+body.dark-mode .preset-button:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .preset-button.active {
+    background-color: #1f6feb;
+    border-color: #1f6feb;
+    color: #fff;
+}
+
+body.dark-mode .tooltip {
+    background-color: rgba(255,255,255,0.95);
+    color: #000;
+}
+
+body.dark-mode .github-icon, body.dark-mode .theme-toggle-button {
+    color: #e6edf3;
+}
+
+body.dark-mode .github-icon:hover, body.dark-mode .theme-toggle-button:hover {
+    color: #ffffff;
+}
+
+body.dark-mode .explanation {
+    background-color: #161b22;
+    border-color: #30363d;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .explanation-toggle {
+    background-color: rgba(255,255,255,0.05);
+}
+
+body.dark-mode .explanation-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .explanation h2,
+body.dark-mode .explanation h3,
+body.dark-mode .explanation p {
+    color: #e6edf3;
+}
+
+body.dark-mode .explanation a {
+    color: #58a6ff;
+}
+
+body.dark-mode .pareto-model {
+    background-color: #1a1d1f;
+    border-color: #1a1d1f;
+    color: #e6edf3;
+}
+body.dark-mode .pareto-model:hover {
+    background-color: #122d18;
+}
+
+body.dark-mode .token-controls label {
+    background-color: rgba(255,255,255,0.08);
+    color: #e6edf3;
+    border-color: #30363d;
+}
+
+body.dark-mode .token-controls label:hover {
+    background-color: rgba(255,255,255,0.12);
+}
+
+body.dark-mode .token-controls input[type="number"] {
+    background-color: #0d1117;
+    color: #e6edf3;
+    border-color: #30363d;
+}
+
+body.dark-mode .token-controls input[type="number"]:focus {
+    border-color: #1f6feb;
+    box-shadow: 0 0 0 2px rgba(31,111,235,0.4);
 }

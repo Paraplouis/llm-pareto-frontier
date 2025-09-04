@@ -64,6 +64,7 @@ export class LLMApp {
             await this.loadAndDisplayData();
             this.setupEventListeners();
             this.uiController.setupCollapsibleSections();
+            this.setupThemeToggle();
         } catch (error) {
             console.error('Failed to initialize app:', error);
             this.uiController.showError('Failed to load application data');
@@ -248,5 +249,39 @@ export class LLMApp {
             const isActive = simpIn === curIn && simpOut === curOut;
             btn.classList.toggle('active', isActive);
         });
+    }
+
+    /**
+     * Setup theme toggle
+     */
+    setupThemeToggle() {
+        const themeToggleButton = document.querySelector('.theme-toggle-button');
+        const body = document.body;
+
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        };
+
+        const toggleTheme = () => {
+            const currentTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme(currentTheme);
+        };
+
+        themeToggleButton.addEventListener('click', toggleTheme);
+
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else {
+            // Check for OS preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
     }
 }
