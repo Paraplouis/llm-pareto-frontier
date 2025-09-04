@@ -1,3 +1,6 @@
+[![Deploy Pages on data changes](https://github.com/Paraplouis/llm-pareto-frontier/actions/workflows/daily-refresh.yml/badge.svg)](https://github.com/Paraplouis/llm-pareto-frontier/actions/workflows/daily-refresh.yml)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Paraplouis/llm-pareto-frontier)
+
 # LLM Pareto frontier
 
 ![llm-pareto-frontier](/screenshot.png)
