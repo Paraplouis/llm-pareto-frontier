@@ -146,8 +146,9 @@ class PriceMatcher:
     ) -> float:
         """Calculate bonus for model family matches"""
         bonus = 0
+        MODEL_FAMILIES = ["claude", "codellama", "command", "deepseek", "gemma", "gemini", "gpt", "grok", "llama", "mistral", "mixtral", "qwen"]
 
-        for family in ModelNameFormatter.MODEL_FAMILIES:
+        for family in MODEL_FAMILIES:
             if family in model_lower and family in price_model_lower:
                 bonus += 0.3
 
@@ -163,50 +164,6 @@ class PriceMatcher:
                 break
 
         return bonus
-
-
-class ModelNameFormatter:
-    """Formats model names for display using dynamic rules."""
-
-    ACRONYMS = {"ai", "dpo", "gpu", "it", "llm", "moe", "eu", "uk", "us", "vqa"}
-    MODEL_FAMILIES = ["claude", "codellama", "command", "deepseek", "gemma", "gemini", "gpt", "grok", "llama", "mistral", "mixtral", "qwen"]
-
-    @staticmethod
-    def format_name(name: str, file_date: str) -> str:
-        """
-        Dynamically formats a model name using rules for capitalization, dates, and families.
-        """
-        # Normalize and split into words
-        normalized = ModelNameNormalizer.normalize(name)
-        words = re.split(r'[\s_-]+', normalized)
-
-        # Capitalize intelligently
-        formatted_words = []
-        for word in words:
-            if word.lower() in ModelNameFormatter.ACRONYMS:
-                formatted_words.append(word.upper())
-            elif word.lower() in ModelNameFormatter.MODEL_FAMILIES:
-                formatted_words.append(word.capitalize())
-            elif re.match(r'\d+(\.\d+)?', word):  # Versions like 3.1
-                formatted_words.append(word)
-            else:
-                formatted_words.append(word.capitalize())
-
-        formatted_name = " ".join(formatted_words)
-
-        # Detect YYYYMMDD or partial dates
-        current_year = date.today().year
-        date_match = re.search(r'(\d{4})(\d{2})(\d{2})', name)  # For YYYYMMDD
-        if date_match:
-            year, month, day = date_match.groups()
-            formatted_name += f" ({year}-{month}-{day})"
-        else:
-            partial_date = re.search(r'(\d{2})(\d{2})', name)  # For MMDD, prepend current year
-            if partial_date:
-                month, day = partial_date.groups()
-                formatted_name += f" ({current_year}-{month}-{day})"
-
-        return formatted_name
 
 
 class DataSynthesizer:
@@ -326,10 +283,6 @@ class DataSynthesizer:
         if elo < self.min_elo:
             return None
 
-        # Format model name for display
-        file_date = model.get("file_date", "")
-        formatted_name = ModelNameFormatter.format_name(model_name, file_date)
-
         # Attempt to find a price match
         price_info = price_matcher.find_match(model_name)
 
@@ -338,7 +291,7 @@ class DataSynthesizer:
                 return None  # Skip free models if excluded
 
             model_data = ModelData(
-                model=formatted_name,
+                model=model_name,
                 elo=elo,
                 input_price=price_info.input_price,
                 output_price=price_info.output_price,

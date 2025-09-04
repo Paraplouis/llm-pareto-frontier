@@ -124,7 +124,10 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
                     return "", ""
 
                 table_html = await tab.execute_script("return document.querySelector('table')?.outerHTML || ''")
-                last_updated = await tab.execute_script("const n=[...document.querySelectorAll('*')].find(x=>/Last Updated/i.test(x.textContent||''));return n? (n.nextElementSibling?.textContent||n.textContent||''):'';")
+                last_updated = await tab.execute_script("""
+                    const el = Array.from(document.querySelectorAll('p, div, span')).find(el => el.textContent.includes('Last Updated'));
+                    return el ? el.textContent : '';
+                """)
                 return str(table_html or ""), str(last_updated or "")
 
         html, date_raw = asyncio.run(_run_pydoll(base_url))
@@ -184,7 +187,7 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
         last_updated_date = m_iso.group(1)
     else:
         # Try human-readable pattern inside the (possibly truncated) HTML or the date_raw captured
-        raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html, flags=re.I)
+        raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html + ' ' + date_raw, flags=re.I)
         raw = raw_match.group(1) if raw_match else date_raw
         if raw:
             for fmt in ("%b %d, %Y", "%B %d, %Y"):
