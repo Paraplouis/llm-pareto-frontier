@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -o pipefail
 
 TMP_DOWNLOAD_FILE=$(mktemp)
 TMP_JS_FILE=$(mktemp)
@@ -30,21 +31,29 @@ fi
 
 # Process the downloaded file
 echo "${SUB}↳ Converting TypeScript to JSON..."
-# Use sed to transform the TypeScript file into executable JavaScript
+# Prefer extracting only the mockData array region to avoid ESM imports
 sed -n '/export const mockData:.*= \[/,$p' "$TMP_DOWNLOAD_FILE" | \
     sed '1s/.*export const mockData:.*= \[/let mockData = \[/' > "$TMP_JS_FILE"
 
-# Check if the processing was successful
+# Validate extraction
 if [ ! -s "$TMP_JS_FILE" ]; then
     echo "❌ Failed during pricing data conversion. Source format may have changed."
     cat "$TMP_DOWNLOAD_FILE"
     exit 1
 fi
-echo "${SUB}✅ Successfully fetched pricing data, saved to data/price_data.json"
 
 echo "console.log(JSON.stringify(mockData));" >> "$TMP_JS_FILE"
-# Process the data and redirect output to price_data.json
-node "$TMP_JS_FILE" | jq '.' > data/price_data.json
+
+# Produce JSON (jq also validates)
+node "$TMP_JS_FILE" | jq -e '.' > data/price_data.json
+
+# Final guard to ensure file was written
+if [ ! -s "data/price_data.json" ]; then
+    echo "❌ price_data.json is empty after conversion."
+    exit 1
+fi
+
+echo "${SUB}✅ Successfully fetched pricing data, saved to data/price_data.json"
 
 # ==============================================================================
 # STEP 2: SCRAPE LATEST LM ARENA RANKING DATA
