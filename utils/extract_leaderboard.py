@@ -39,7 +39,7 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
     """
 
     base_url = "https://lmarena.ai/leaderboard/text/overall-no-style-control"
-    html = ""
+    json_data_str = ""
     date_raw = ""
 
     print("  ↳ Launching Chromium via Pydoll (visible)…")
@@ -123,51 +123,77 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
                 if not table_found:
                     return "", ""
 
-                table_html = await tab.execute_script("return document.querySelector('table')?.outerHTML || ''")
+                # EXTRACT DATA using a robust script instead of relying on pandas
+                json_data = await tab.execute_script("""
+                    const table = document.querySelector('table');
+                    if (!table) return null;
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+                    const data = rows.map(row => {
+                        const cells = Array.from(row.querySelectorAll('td'));
+                        if (cells.length < 7) return null;
+
+                        const modelCell = cells[2];
+                        const modelLink = modelCell.querySelector('a');
+                        const modelName = modelLink ? (modelLink.title || modelLink.textContent.trim()) : modelCell.textContent.trim();
+
+                        return {
+                            'Model': modelName,
+                            'Score': cells[3].textContent.trim(),
+                            'Votes': cells[5].textContent.trim(),
+                            'organization': cells[6].textContent.trim(),
+                        };
+                    }).filter(Boolean);
+                    return JSON.stringify(data);
+                """)
+
                 last_updated = await tab.execute_script("""
                     const el = Array.from(document.querySelectorAll('p, div, span')).find(el => el.textContent.includes('Last Updated'));
                     return el ? el.textContent : '';
                 """)
-                return str(table_html or ""), str(last_updated or "")
 
-        html, date_raw = asyncio.run(_run_pydoll(base_url))
-        if not html:
+                json_result_val = ""
+                if isinstance(json_data, dict) and json_data.get('result', {}).get('result', {}).get('type') == 'string':
+                    json_result_val = json_data['result']['result'].get('value', '[]')
+                else:
+                    json_result_val = str(json_data or '[]')
+
+                last_updated_val = ""
+                if isinstance(last_updated, dict) and last_updated.get('result', {}).get('result', {}).get('type') == 'string':
+                    last_updated_val = last_updated['result']['result'].get('value', '')
+                else:
+                    last_updated_val = str(last_updated or "")
+
+                return json_result_val, last_updated_val
+
+        json_data_str, date_raw = asyncio.run(_run_pydoll(base_url))
+        if not json_data_str:
             print("    ❌ Pydoll did not capture the table.")
     except Exception as e:
         print(f"    ❌ Pydoll error: {e}")
         return None, None
 
-    # Parse all tables on the page. The first one is the overall leaderboard.
-    if not html:
-        print("    ❌ Empty HTML content after manual capture.")
-        return None, None
-    tables = pd.read_html(io.StringIO(html))
-    if not tables:
-        print("    ❌ pandas.read_html found no tables in the page.")
+    # Parse the JSON data captured from the browser
+    try:
+        records = json.loads(json_data_str)
+        if not records:
+            print("    ❌ No model data was extracted from the page.")
+            return None, None
+        df_pd = pd.DataFrame(records)
+    except json.JSONDecodeError:
+        print("    ❌ Failed to parse JSON data from the browser.")
         return None, None
 
-    df_pd = tables[0]
 
     # Clean and standardise column names we care about
-    expected_cols = {c.lower(): c for c in df_pd.columns}
-    if "arena score" in expected_cols:
-        score_col = expected_cols["arena score"]
-    elif "score" in expected_cols:
-        score_col = expected_cols["score"]
-    else:
-        score_col = df_pd.columns[1]  # fallback to 2nd col
-    votes_col = expected_cols.get("votes", None)
-    org_col = expected_cols.get("organization", None)
+    # This section is simplified as JSON extraction provides clean columns
+    if "Score" not in df_pd.columns:
+        # Simple fallback for score if name is different
+        score_col_cand = [c for c in df_pd.columns if "score" in c.lower()]
+        if score_col_cand:
+            df_pd = df_pd.rename(columns={score_col_cand[0]: "Score"})
+        else:
+            df_pd['Score'] = 0 # Cannot proceed without score
 
-    df_pd["Model"] = df_pd["Model"].apply(_clean_html)
-
-    rename_map = {score_col: "Score"}
-    if votes_col:
-        rename_map[votes_col] = "Votes"
-    if org_col:
-        rename_map[org_col] = "organization"
-
-    df_pd = df_pd.rename(columns=rename_map)
 
     if "Votes" in df_pd.columns:
         df_pd["Votes"] = (
@@ -182,12 +208,13 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
     # Extract the "Last updated" date.
     last_updated_date: str | None = None
 
-    m_iso = re.search(r"last updated[\s:]*([0-9]{4}-[0-9]{2}-[0-9]{2})", html, flags=re.I)
+    html_for_date_search = f"last updated: {date_raw}" # Use raw date string for parsing
+    m_iso = re.search(r"last updated[\s:]*([0-9]{4}-[0-9]{2}-[0-9]{2})", html_for_date_search, flags=re.I)
     if m_iso:
         last_updated_date = m_iso.group(1)
     else:
         # Try human-readable pattern inside the (possibly truncated) HTML or the date_raw captured
-        raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html + ' ' + date_raw, flags=re.I)
+        raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html_for_date_search, flags=re.I)
         raw = raw_match.group(1) if raw_match else date_raw
         if raw:
             for fmt in ("%b %d, %Y", "%B %d, %Y"):

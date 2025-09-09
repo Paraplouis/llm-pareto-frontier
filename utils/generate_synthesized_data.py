@@ -192,9 +192,6 @@ class DataSynthesizer:
             matching_debug = []
 
             for model in rank_data:
-                if model["Score"] < self.min_elo:
-                    continue
-
                 result = self._process_model(model, price_matcher)
                 if result:
                     model_data, debug_info = result
