@@ -94,14 +94,13 @@ class OrganizationNormalizer:
     """Utility class for normalizing organization names"""
 
     MAPPING = {
-        "deepseek ai": "deepseek",
-        "zhipu ai": "zhipu",
+        "DeepSeek AI": "DeepSeek",
+        "Zhipu AI": "Zhipu",
     }
 
     @staticmethod
     def normalize(name: str) -> str:
         """Normalize organization name"""
-        name = name.lower()
         return OrganizationNormalizer.MAPPING.get(name, name)
 
 
