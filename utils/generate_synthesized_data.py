@@ -90,6 +90,21 @@ class ModelNameNormalizer:
         return name
 
 
+class OrganizationNormalizer:
+    """Utility class for normalizing organization names"""
+
+    MAPPING = {
+        "deepseek ai": "deepseek",
+        "zhipu ai": "zhipu",
+    }
+
+    @staticmethod
+    def normalize(name: str) -> str:
+        """Normalize organization name"""
+        name = name.lower()
+        return OrganizationNormalizer.MAPPING.get(name, name)
+
+
 class PriceMatcher:
     """Class responsible for matching model names with pricing data"""
 
@@ -289,6 +304,7 @@ class DataSynthesizer:
         except Exception:
             votes = 0
         organization = model.get("organization", "Unknown")
+        organization = OrganizationNormalizer.normalize(organization)
 
         # Skip model if below min_elo
         if elo < self.min_elo:
