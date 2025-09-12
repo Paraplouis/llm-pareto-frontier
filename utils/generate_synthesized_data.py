@@ -51,6 +51,11 @@ class ModelNameNormalizer:
 
     SPECIAL_CASES = {
         r'\bchatgpt-4o\b': 'gpt-4o',
+        r'\bqwen3-max-preview\b': 'qwen-max-latest',
+        r'\bdbrx-instruct-preview\b': 'dbrx instruct',
+        r'\bsolar-10.7b-instruct-v1.0\b': 'upstage solar instruct v1 (11b)',
+        r'\bqwen3-32b\b': 'qwen 3-32b',
+        r'\bglm-4-plus\b': 'glm-4-32b-0414-128k'
     }
 
     @staticmethod
@@ -60,6 +65,14 @@ class ModelNameNormalizer:
 
         for pattern, replacement in ModelNameNormalizer.SPECIAL_CASES.items():
             name = re.sub(pattern, replacement, name, flags=re.IGNORECASE)
+
+        # General normalizations
+        name = re.sub(r"[\s-]instruct\b", "", name)
+        name = re.sub(r"[\s-]chat\b", "", name)
+        name = re.sub(r"[\s-]online\b", "", name)
+        name = re.sub(r"-(\d{4})$", "", name)  # remove year
+        name = re.sub(r"-(\d{6})$", "", name)  # remove date
+        name = re.sub(r"-(\d{8})$", "", name)  # remove date
 
         # Remove version dates and preview indicators
         name = re.sub(r"-\d{4}-\d{2}-\d{2}|-\d{4,}", "", name)
@@ -195,7 +208,8 @@ class DataSynthesizer:
                 result = self._process_model(model, price_matcher)
                 if result:
                     model_data, debug_info = result
-                    synthesized_data.append(model_data)
+                    if model_data:
+                        synthesized_data.append(model_data)
                     matching_debug.append(debug_info)
 
             # Save results
@@ -260,7 +274,7 @@ class DataSynthesizer:
 
     def _process_model(
         self, model: Dict[str, Any], price_matcher: PriceMatcher
-    ) -> Optional[Tuple[ModelData, MatchingDebugInfo]]:
+    ) -> Optional[Tuple[Optional[ModelData], MatchingDebugInfo]]:
         """
         Processes a single model record.
         It normalizes the model name, finds a price match, and returns
@@ -306,8 +320,15 @@ class DataSynthesizer:
             )
             return model_data, debug_info
 
-        # If no price match found, skip the model
-        return None
+        # If no price match found, record for debugging but skip synthesis
+        debug_info = MatchingDebugInfo(
+            rank_model=model_name,
+            matched_price_model="No match found",
+            price=0,
+            provider="N/A",
+            organization=organization
+        )
+        return None, debug_info
 
     def _save_results(
         self, synthesized_data: List[ModelData], matching_debug: List[MatchingDebugInfo], timestamp: str
