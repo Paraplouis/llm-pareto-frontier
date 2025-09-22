@@ -600,6 +600,26 @@
     "uri": "https://x.ai/api",
     "models": [
       {
+        "name": "grok-4-fast-non-reasoning  <= 128K",
+        "inputPrice": 0.2,
+        "outputPrice": 0.5
+      },
+      {
+        "name": "grok-4-fast-non-reasoning  > 128K",
+        "inputPrice": 0.6,
+        "outputPrice": 1.5
+      },
+      {
+        "name": "grok-4-fast-reasoning <= 128K",
+        "inputPrice": 0.2,
+        "outputPrice": 0.5
+      },
+      {
+        "name": "grok-4-fast-reasoning > 128K",
+        "inputPrice": 0.4,
+        "outputPrice": 1
+      },
+      {
         "name": "grok-code-fast-1",
         "inputPrice": 0.2,
         "outputPrice": 1.5
