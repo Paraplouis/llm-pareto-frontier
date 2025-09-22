@@ -136,9 +136,13 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
                         const modelLink = modelCell.querySelector('a');
                         const modelName = modelLink ? (modelLink.title || modelLink.textContent.trim()) : modelCell.textContent.trim();
 
+                        const scoreText = cells[3].textContent.trim();
+                        const scoreMatch = scoreText.match(/^\\d+/);
+                        const score = scoreMatch ? scoreMatch[0] : "0";
+
                         return {
                             'Model': modelName,
-                            'Score': cells[3].textContent.trim(),
+                            'Score': score,
                             'Votes': cells[5].textContent.trim(),
                             'organization': cells[6].textContent.trim(),
                         };
