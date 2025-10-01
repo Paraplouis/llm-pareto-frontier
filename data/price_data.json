@@ -4,6 +4,11 @@
     "uri": "https://openai.com/api/pricing/",
     "models": [
       {
+        "name": "gpt-5-codex",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
         "name": "gpt-5",
         "inputPrice": 1.25,
         "outputPrice": 10
@@ -165,6 +170,16 @@
     "uri": "https://www.anthropic.com/pricing",
     "models": [
       {
+        "name": "Claude Sonnet 4.5 <= 200K",
+        "inputPrice": 3,
+        "outputPrice": 15
+      },
+      {
+        "name": "Claude Sonnet 4.5 > 200K",
+        "inputPrice": 6,
+        "outputPrice": 22.5
+      },
+      {
         "name": "Claude Opus 4",
         "inputPrice": 15,
         "outputPrice": 75
@@ -177,7 +192,7 @@
       {
         "name": "Claude Sonnet 4 > 200K",
         "inputPrice": 6,
-        "outputPrice": 22
+        "outputPrice": 22.5
       },
       {
         "name": "Claude Sonnet 3.7",
@@ -670,6 +685,11 @@
     "provider": "DeepSeek",
     "uri": "https://platform.deepseek.com/api-docs/pricing/",
     "models": [
+      {
+        "name": "DeepSeek V3.2-Exp",
+        "inputPrice": 0.28,
+        "outputPrice": 0.42
+      },
       {
         "name": "DeepSeek V2",
         "inputPrice": 0.14,
