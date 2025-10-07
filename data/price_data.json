@@ -4,6 +4,11 @@
     "uri": "https://openai.com/api/pricing/",
     "models": [
       {
+        "name": "gpt-5-pro",
+        "inputPrice": 15,
+        "outputPrice": 120
+      },
+      {
         "name": "gpt-5-codex",
         "inputPrice": 1.25,
         "outputPrice": 10

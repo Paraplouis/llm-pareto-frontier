@@ -1,40 +1,52 @@
 {
-  "last_updated": "2025-09-30",
+  "last_updated": "2025-10-03",
   "models": [
     {
       "Model": "gemini-2.5-pro",
-      "Score": "1467",
-      "Votes": "49935",
+      "Score": "1466",
+      "Votes": "51068",
       "organization": "Google"
     },
     {
+      "Model": "glm-4.6",
+      "Score": "1443",
+      "Votes": "2045",
+      "organization": "Z.ai"
+    },
+    {
       "Model": "qwen3-max-preview",
-      "Score": "1439",
-      "Votes": "14944",
+      "Score": "1440",
+      "Votes": "15682",
       "organization": "Alibaba"
+    },
+    {
+      "Model": "claude-sonnet-4-5-20250929-thinking-32k",
+      "Score": "1431",
+      "Votes": "2306",
+      "organization": "Anthropic"
     },
     {
       "Model": "mistral-medium-2508",
-      "Score": "1429",
-      "Votes": "20136",
+      "Score": "1431",
+      "Votes": "21097",
       "organization": "Mistral"
     },
     {
-      "Model": "qwen3-vl-235b-a22b-instruct",
-      "Score": "1428",
-      "Votes": "3324",
-      "organization": "Alibaba"
+      "Model": "chatgpt-4o-latest-20250326",
+      "Score": "1430",
+      "Votes": "37006",
+      "organization": "OpenAI"
     },
     {
-      "Model": "chatgpt-4o-latest-20250326",
-      "Score": "1429",
-      "Votes": "36400",
-      "organization": "OpenAI"
+      "Model": "qwen3-vl-235b-a22b-instruct",
+      "Score": "1426",
+      "Votes": "3950",
+      "organization": "Alibaba"
     },
     {
       "Model": "glm-4.5",
       "Score": "1426",
-      "Votes": "19883",
+      "Votes": "20602",
       "organization": "Z.ai"
     },
     {
@@ -46,61 +58,61 @@
     {
       "Model": "grok-3-preview-02-24",
       "Score": "1425",
-      "Votes": "34405",
+      "Votes": "34399",
       "organization": "xAI"
     },
     {
       "Model": "longcat-flash-chat",
       "Score": "1422",
-      "Votes": "9343",
+      "Votes": "9946",
       "organization": "Meituan"
     },
     {
       "Model": "grok-4-0709",
       "Score": "1422",
-      "Votes": "26365",
+      "Votes": "27155",
       "organization": "xAI"
     },
     {
       "Model": "claude-opus-4-1-20250805-thinking-16k",
       "Score": "1420",
-      "Votes": "18126",
+      "Votes": "18881",
       "organization": "Anthropic"
     },
     {
       "Model": "qwen3-next-80b-a3b-instruct",
-      "Score": "1419",
-      "Votes": "9458",
+      "Score": "1420",
+      "Votes": "10238",
       "organization": "Alibaba"
     },
     {
       "Model": "deepseek-v3.1-terminus",
       "Score": "1419",
-      "Votes": "3835",
+      "Votes": "3834",
       "organization": "DeepSeek AI"
+    },
+    {
+      "Model": "claude-sonnet-4-5-20250929",
+      "Score": "1419",
+      "Votes": "3214",
+      "organization": "Anthropic"
     },
     {
       "Model": "deepseek-v3.1-terminus-thinking",
       "Score": "1418",
-      "Votes": "3594",
+      "Votes": "3588",
       "organization": "DeepSeek AI"
-    },
-    {
-      "Model": "grok-4-fast",
-      "Score": "1415",
-      "Votes": "4676",
-      "organization": "xAI"
     },
     {
       "Model": "deepseek-v3.1",
       "Score": "1418",
-      "Votes": "15627",
+      "Votes": "15620",
       "organization": "DeepSeek"
     },
     {
       "Model": "o3-2025-04-16",
       "Score": "1418",
-      "Votes": "48220",
+      "Votes": "49098",
       "organization": "OpenAI"
     },
     {
@@ -110,57 +122,63 @@
       "organization": "OpenAI"
     },
     {
+      "Model": "qwen3-235b-a22b-instruct-2507",
+      "Score": "1417",
+      "Votes": "26731",
+      "organization": "Alibaba"
+    },
+    {
       "Model": "deepseek-v3.1-thinking",
       "Score": "1416",
-      "Votes": "12291",
+      "Votes": "12282",
       "organization": "DeepSeek"
     },
     {
-      "Model": "gemini-2.5-flash-preview-09-2025",
-      "Score": "1412",
-      "Votes": "3444",
-      "organization": "Google"
-    },
-    {
-      "Model": "qwen3-235b-a22b-instruct-2507",
-      "Score": "1416",
-      "Votes": "25774",
-      "organization": "Alibaba"
+      "Model": "grok-4-fast",
+      "Score": "1413",
+      "Votes": "5285",
+      "organization": "xAI"
     },
     {
       "Model": "qwen3-235b-a22b-thinking-2507",
       "Score": "1414",
-      "Votes": "9495",
+      "Votes": "9490",
       "organization": "Alibaba"
     },
     {
       "Model": "qwen3-max-2025-09-23",
-      "Score": "1409",
-      "Votes": "3599",
+      "Score": "1411",
+      "Votes": "4339",
       "organization": "Alibaba"
     },
     {
-      "Model": "gemini-2.5-flash",
-      "Score": "1413",
-      "Votes": "49807",
+      "Model": "gemini-2.5-flash-preview-09-2025",
+      "Score": "1411",
+      "Votes": "4199",
       "organization": "Google"
     },
     {
       "Model": "claude-opus-4-1-20250805",
-      "Score": "1412",
-      "Votes": "28727",
+      "Score": "1411",
+      "Votes": "29856",
       "organization": "Anthropic"
     },
     {
+      "Model": "gemini-2.5-flash",
+      "Score": "1412",
+      "Votes": "50794",
+      "organization": "Google"
+    },
+    {
       "Model": "gpt-5-high",
-      "Score": "1410",
-      "Votes": "20189",
+      "Score": "1411",
+      "Votes": "20902",
       "organization": "OpenAI"
     },
     {
       "Model": "gpt-5-chat",
       "Score": "1408",
-      "Votes": "18271",
+      "Votes": "19090",
       "organization": "OpenAI"
     },
     {
@@ -170,51 +188,51 @@
       "organization": "Tencent"
     },
     {
-      "Model": "qwen3-vl-235b-a22b-thinking",
-      "Score": "1395",
-      "Votes": "3177",
-      "organization": "Alibaba"
-    },
-    {
       "Model": "mai-1-preview",
       "Score": "1397",
-      "Votes": "12219",
+      "Votes": "12793",
       "organization": "Microsoft AI"
     },
     {
+      "Model": "qwen3-vl-235b-a22b-thinking",
+      "Score": "1395",
+      "Votes": "3712",
+      "organization": "Alibaba"
+    },
+    {
       "Model": "qwen3-235b-a22b-no-thinking",
-      "Score": "1392",
-      "Votes": "37527",
+      "Score": "1391",
+      "Votes": "38121",
+      "organization": "Alibaba"
+    },
+    {
+      "Model": "qwen3-30b-a3b-instruct-2507",
+      "Score": "1386",
+      "Votes": "19470",
       "organization": "Alibaba"
     },
     {
       "Model": "gemini-2.5-flash-lite-preview-09-2025",
-      "Score": "1383",
-      "Votes": "3447",
+      "Score": "1381",
+      "Votes": "4246",
       "organization": "Google"
-    },
-    {
-      "Model": "qwen3-30b-a3b-instruct-2507",
-      "Score": "1385",
-      "Votes": "18706",
-      "organization": "Alibaba"
     },
     {
       "Model": "glm-4.5-air",
       "Score": "1383",
-      "Votes": "18899",
+      "Votes": "19610",
       "organization": "Z.ai"
     },
     {
       "Model": "gpt-4.1-2025-04-14",
-      "Score": "1381",
-      "Votes": "38897",
+      "Score": "1382",
+      "Votes": "39707",
       "organization": "OpenAI"
     },
     {
       "Model": "kimi-k2-0905-preview",
       "Score": "1379",
-      "Votes": "10943",
+      "Votes": "10935",
       "organization": "Moonshot"
     },
     {
@@ -226,20 +244,26 @@
     {
       "Model": "gpt-5-mini-high",
       "Score": "1375",
-      "Votes": "15526",
+      "Votes": "16132",
       "organization": "OpenAI"
     },
     {
       "Model": "deepseek-v3-0324",
       "Score": "1375",
-      "Votes": "41437",
+      "Votes": "42219",
       "organization": "DeepSeek"
     },
     {
       "Model": "claude-opus-4-20250514-thinking-16k",
       "Score": "1373",
-      "Votes": "32409",
+      "Votes": "33229",
       "organization": "Anthropic"
+    },
+    {
+      "Model": "qwen3-next-80b-a3b-thinking",
+      "Score": "1372",
+      "Votes": "9116",
+      "organization": "Alibaba"
     },
     {
       "Model": "deepseek-r1",
@@ -248,39 +272,33 @@
       "organization": "DeepSeek"
     },
     {
-      "Model": "qwen3-next-80b-a3b-thinking",
-      "Score": "1370",
-      "Votes": "8414",
-      "organization": "Alibaba"
-    },
-    {
       "Model": "kimi-k2-0711-preview",
       "Score": "1371",
-      "Votes": "28727",
+      "Votes": "28732",
       "organization": "Moonshot"
     },
     {
       "Model": "mistral-medium-2505",
       "Score": "1368",
-      "Votes": "32501",
+      "Votes": "33083",
       "organization": "Mistral"
-    },
-    {
-      "Model": "grok-3-mini-high",
-      "Score": "1367",
-      "Votes": "15812",
-      "organization": "xAI"
     },
     {
       "Model": "qwen3-235b-a22b",
       "Score": "1367",
-      "Votes": "25189",
+      "Votes": "25727",
       "organization": "Alibaba"
+    },
+    {
+      "Model": "grok-3-mini-high",
+      "Score": "1367",
+      "Votes": "16248",
+      "organization": "xAI"
     },
     {
       "Model": "qwen2.5-max",
       "Score": "1366",
-      "Votes": "33678",
+      "Votes": "33676",
       "organization": "Alibaba"
     },
     {
@@ -292,49 +310,37 @@
     {
       "Model": "claude-opus-4-20250514",
       "Score": "1364",
-      "Votes": "40196",
+      "Votes": "40955",
       "organization": "Anthropic"
     },
     {
       "Model": "grok-3-mini-beta",
-      "Score": "1364",
-      "Votes": "21880",
+      "Score": "1363",
+      "Votes": "22324",
       "organization": "xAI"
+    },
+    {
+      "Model": "gpt-oss-120b",
+      "Score": "1355",
+      "Votes": "18789",
+      "organization": "OpenAI"
     },
     {
       "Model": "gemma-3-27b-it",
       "Score": "1356",
-      "Votes": "41647",
+      "Votes": "42372",
       "organization": "Google"
-    },
-    {
-      "Model": "step-3",
-      "Score": "1351",
-      "Votes": "4521",
-      "organization": "StepFun"
-    },
-    {
-      "Model": "gemini-2.0-flash-001",
-      "Score": "1355",
-      "Votes": "43110",
-      "organization": "Google"
-    },
-    {
-      "Model": "o4-mini-2025-04-16",
-      "Score": "1355",
-      "Votes": "38557",
-      "organization": "OpenAI"
     },
     {
       "Model": "qwen3-coder-480b-a35b-instruct",
       "Score": "1354",
-      "Votes": "21065",
+      "Votes": "21683",
       "organization": "Alibaba"
     },
     {
-      "Model": "gpt-oss-120b",
+      "Model": "o4-mini-2025-04-16",
       "Score": "1354",
-      "Votes": "18031",
+      "Votes": "39311",
       "organization": "OpenAI"
     },
     {
@@ -345,15 +351,21 @@
     },
     {
       "Model": "minimax-m1",
-      "Score": "1350",
-      "Votes": "29187",
+      "Score": "1349",
+      "Votes": "29909",
       "organization": "MiniMax"
     },
     {
       "Model": "claude-sonnet-4-20250514-thinking-32k",
-      "Score": "1348",
-      "Votes": "31106",
+      "Score": "1349",
+      "Votes": "31713",
       "organization": "Anthropic"
+    },
+    {
+      "Model": "step-3",
+      "Score": "1349",
+      "Votes": "5050",
+      "organization": "StepFun"
     },
     {
       "Model": "qwen3-32b",
@@ -364,32 +376,38 @@
     {
       "Model": "nvidia-llama-3.3-nemotron-super-49b-v1.5",
       "Score": "1337",
-      "Votes": "3549",
+      "Votes": "3548",
       "organization": "Nvidia"
     },
     {
       "Model": "gpt-4.1-mini-2025-04-14",
       "Score": "1339",
-      "Votes": "38457",
+      "Votes": "39090",
       "organization": "OpenAI"
     },
     {
       "Model": "claude-sonnet-4-20250514",
-      "Score": "1339",
-      "Votes": "36502",
+      "Score": "1338",
+      "Votes": "37176",
       "organization": "Anthropic"
     },
     {
       "Model": "mistral-small-2506",
       "Score": "1338",
-      "Votes": "16132",
+      "Votes": "16805",
       "organization": "Mistral"
     },
     {
       "Model": "step-1o-turbo-202506",
       "Score": "1336",
-      "Votes": "9752",
+      "Votes": "9750",
       "organization": "StepFun"
+    },
+    {
+      "Model": "o3-mini-high",
+      "Score": "1336",
+      "Votes": "18735",
+      "organization": "OpenAI"
     },
     {
       "Model": "gemma-3-12b-it",
@@ -398,10 +416,10 @@
       "organization": "Google"
     },
     {
-      "Model": "o3-mini-high",
-      "Score": "1336",
-      "Votes": "18735",
-      "organization": "OpenAI"
+      "Model": "glm-4.5v",
+      "Score": "1332",
+      "Votes": "3295",
+      "organization": "Z.ai"
     },
     {
       "Model": "deepseek-v3",
@@ -416,21 +434,9 @@
       "organization": "Zhipu"
     },
     {
-      "Model": "glm-4.5v",
-      "Score": "1329",
-      "Votes": "2671",
-      "organization": "Z.ai"
-    },
-    {
-      "Model": "qwen-plus-0125",
-      "Score": "1326",
-      "Votes": "5861",
-      "organization": "Alibaba"
-    },
-    {
       "Model": "qwq-32b",
       "Score": "1330",
-      "Votes": "24570",
+      "Votes": "25118",
       "organization": "Alibaba"
     },
     {
@@ -440,16 +446,16 @@
       "organization": "Google"
     },
     {
-      "Model": "command-a-03-2025",
-      "Score": "1327",
-      "Votes": "44355",
-      "organization": "Cohere"
+      "Model": "qwen-plus-0125",
+      "Score": "1326",
+      "Votes": "5861",
+      "organization": "Alibaba"
     },
     {
-      "Model": "gpt-5-nano-high",
-      "Score": "1323",
-      "Votes": "6263",
-      "organization": "OpenAI"
+      "Model": "command-a-03-2025",
+      "Score": "1327",
+      "Votes": "45172",
+      "organization": "Cohere"
     },
     {
       "Model": "llama-3.1-nemotron-ultra-253b-v1",
@@ -466,8 +472,14 @@
     {
       "Model": "amazon-nova-experimental-chat-05-14",
       "Score": "1323",
-      "Votes": "19376",
+      "Votes": "19692",
       "organization": "Amazon"
+    },
+    {
+      "Model": "gpt-5-nano-high",
+      "Score": "1321",
+      "Votes": "6793",
+      "organization": "OpenAI"
     },
     {
       "Model": "step-2-16k-exp-202412",
@@ -478,14 +490,20 @@
     {
       "Model": "o3-mini",
       "Score": "1320",
-      "Votes": "56900",
+      "Votes": "57484",
       "organization": "OpenAI"
     },
     {
-      "Model": "gemini-1.5-pro-002",
+      "Model": "Gemini-1.5-Pro-002",
       "Score": "1319",
       "Votes": "56012",
       "organization": "Google"
+    },
+    {
+      "Model": "hunyuan-turbo-0110",
+      "Score": "1311",
+      "Votes": "2322",
+      "organization": "Tencent"
     },
     {
       "Model": "o1-mini",
@@ -496,20 +514,14 @@
     {
       "Model": "qwen3-30b-a3b",
       "Score": "1317",
-      "Votes": "25357",
+      "Votes": "25917",
       "organization": "Alibaba"
     },
     {
       "Model": "claude-3-7-sonnet-20250219-thinking-32k",
-      "Score": "1316",
-      "Votes": "37702",
+      "Score": "1315",
+      "Votes": "38343",
       "organization": "Anthropic"
-    },
-    {
-      "Model": "hunyuan-turbo-0110",
-      "Score": "1311",
-      "Votes": "2322",
-      "organization": "Tencent"
     },
     {
       "Model": "llama-3.3-nemotron-49b-super-v1",
@@ -520,7 +532,7 @@
     {
       "Model": "gemma-3n-e4b-it",
       "Score": "1307",
-      "Votes": "23768",
+      "Votes": "23761",
       "organization": "Google"
     },
     {
@@ -542,22 +554,10 @@
       "organization": "OpenAI"
     },
     {
-      "Model": "claude-3-7-sonnet-20250219",
-      "Score": "1300",
-      "Votes": "42538",
-      "organization": "Anthropic"
-    },
-    {
       "Model": "qwen2.5-plus-1127",
       "Score": "1299",
       "Votes": "10252",
       "organization": "Alibaba"
-    },
-    {
-      "Model": "gpt-oss-20b",
-      "Score": "1295",
-      "Votes": "8701",
-      "organization": "OpenAI"
     },
     {
       "Model": "deepseek-v2.5-1210",
@@ -566,10 +566,16 @@
       "organization": "DeepSeek"
     },
     {
-      "Model": "claude-3-5-sonnet-20241022",
+      "Model": "Claude 3.5 Sonnet (10/22)",
       "Score": "1298",
-      "Votes": "87548",
+      "Votes": "88190",
       "organization": "Anthropic"
+    },
+    {
+      "Model": "gpt-oss-20b",
+      "Score": "1293",
+      "Votes": "9300",
+      "organization": "OpenAI"
     },
     {
       "Model": "gemma-3-4b-it",
@@ -598,17 +604,17 @@
     {
       "Model": "llama-4-maverick-17b-128e-instruct",
       "Score": "1288",
-      "Votes": "39126",
+      "Votes": "39766",
       "organization": "Meta"
     },
     {
-      "Model": "gemini-1.5-flash-002",
+      "Model": "Gemini-1.5-Flash-002",
       "Score": "1287",
       "Votes": "35180",
       "organization": "Google"
     },
     {
-      "Model": "gpt-4o-mini-2024-07-18",
+      "Model": "GPT-4o-mini (07/18)",
       "Score": "1287",
       "Votes": "69301",
       "organization": "OpenAI"
@@ -620,16 +626,16 @@
       "organization": "OpenAI"
     },
     {
-      "Model": "llama-3.1-nemotron-70b-instruct",
-      "Score": "1283",
-      "Votes": "7216",
-      "organization": "Nvidia"
-    },
-    {
       "Model": "llama-3.1-405b-instruct-bf16",
       "Score": "1284",
       "Votes": "41932",
       "organization": "Meta"
+    },
+    {
+      "Model": "llama-3.1-nemotron-70b-instruct",
+      "Score": "1283",
+      "Votes": "7216",
+      "organization": "Nvidia"
     },
     {
       "Model": "qwen-max-0919",
@@ -638,7 +644,7 @@
       "organization": "Alibaba"
     },
     {
-      "Model": "gpt-4o-2024-08-06",
+      "Model": "GPT-4o (08/06)",
       "Score": "1283",
       "Votes": "45787",
       "organization": "OpenAI"
@@ -652,7 +658,7 @@
     {
       "Model": "llama-4-scout-17b-16e-instruct",
       "Score": "1280",
-      "Votes": "29209",
+      "Votes": "29809",
       "organization": "Meta"
     },
     {
@@ -662,7 +668,7 @@
       "organization": "xAI"
     },
     {
-      "Model": "claude-3-5-sonnet-20240620",
+      "Model": "Claude 3.5 Sonnet (06/20)",
       "Score": "1281",
       "Votes": "82864",
       "organization": "Anthropic"
@@ -675,20 +681,20 @@
     },
     {
       "Model": "hunyuan-standard-2025-02-10",
-      "Score": "1274",
+      "Score": "1275",
       "Votes": "3920",
       "organization": "Tencent"
     },
     {
       "Model": "mistral-small-3.1-24b-instruct-2503",
       "Score": "1274",
-      "Votes": "28776",
+      "Votes": "29513",
       "organization": "Mistral"
     },
     {
       "Model": "llama-3.3-70b-instruct",
       "Score": "1275",
-      "Votes": "53632",
+      "Votes": "54258",
       "organization": "Meta"
     },
     {
@@ -712,7 +718,7 @@
     {
       "Model": "hunyuan-large-vision",
       "Score": "1265",
-      "Votes": "5665",
+      "Votes": "5664",
       "organization": "Tencent"
     },
     {
@@ -753,7 +759,7 @@
     },
     {
       "Model": "llama-3.1-tulu-3-70b",
-      "Score": "1255",
+      "Score": "1256",
       "Votes": "2881",
       "organization": "Ai2"
     },
@@ -764,7 +770,7 @@
       "organization": "Anthropic"
     },
     {
-      "Model": "llama-3.1-70b-instruct",
+      "Model": "Meta-Llama-3.1-70B-Instruct",
       "Score": "1262",
       "Votes": "56003",
       "organization": "Meta"
@@ -776,34 +782,34 @@
       "organization": "Amazon"
     },
     {
-      "Model": "claude-3-5-haiku-20241022",
-      "Score": "1255",
-      "Votes": "69251",
-      "organization": "Anthropic"
-    },
-    {
       "Model": "magistral-medium-2506",
-      "Score": "1250",
-      "Votes": "10435",
+      "Score": "1252",
+      "Votes": "10878",
       "organization": "Mistral"
     },
     {
-      "Model": "reka-core-20240904",
-      "Score": "1248",
-      "Votes": "7380",
-      "organization": "Reka AI"
+      "Model": "claude-3-5-haiku-20241022",
+      "Score": "1255",
+      "Votes": "69847",
+      "organization": "Anthropic"
     },
     {
-      "Model": "gemini-1.5-flash-001",
-      "Score": "1239",
-      "Votes": "63418",
-      "organization": "Google"
+      "Model": "reka-core-20240904",
+      "Score": "1249",
+      "Votes": "7380",
+      "organization": "Reka AI"
     },
     {
       "Model": "jamba-1.5-large",
       "Score": "1238",
       "Votes": "8730",
       "organization": "AI21 Labs"
+    },
+    {
+      "Model": "gemini-1.5-flash-001",
+      "Score": "1240",
+      "Votes": "63418",
+      "organization": "Google"
     },
     {
       "Model": "mistral-small-24b-instruct-2501",
@@ -945,7 +951,7 @@
     },
     {
       "Model": "claude-3-haiku-20240307",
-      "Score": "1195",
+      "Score": "1196",
       "Votes": "118626",
       "organization": "Anthropic"
     },
@@ -1047,13 +1053,13 @@
     },
     {
       "Model": "command-r",
-      "Score": "1164",
+      "Score": "1165",
       "Votes": "54710",
       "organization": "Cohere"
     },
     {
       "Model": "mixtral-8x22b-instruct-v0.1",
-      "Score": "1162",
+      "Score": "1163",
       "Votes": "52214",
       "organization": "Mistral"
     },
@@ -1065,7 +1071,7 @@
     },
     {
       "Model": "granite-3.1-8b-instruct",
-      "Score": "1151",
+      "Score": "1152",
       "Votes": "3142",
       "organization": "IBM"
     },
@@ -1106,20 +1112,20 @@
       "organization": "Google"
     },
     {
+      "Model": "starling-lm-7b-beta",
+      "Score": "1134",
+      "Votes": "16190",
+      "organization": "Nexusflow"
+    },
+    {
       "Model": "granite-3.1-2b-instruct",
       "Score": "1130",
       "Votes": "3235",
       "organization": "IBM"
     },
     {
-      "Model": "starling-lm-7b-beta",
-      "Score": "1133",
-      "Votes": "16190",
-      "organization": "Nexusflow"
-    },
-    {
       "Model": "mixtral-8x7b-instruct-v0.1",
-      "Score": "1132",
+      "Score": "1133",
       "Votes": "74303",
       "organization": "Mistral"
     },
@@ -1149,7 +1155,7 @@
     },
     {
       "Model": "wizardlm-70b",
-      "Score": "1120",
+      "Score": "1121",
       "Votes": "8270",
       "organization": "Microsoft"
     },
@@ -1203,13 +1209,13 @@
     },
     {
       "Model": "vicuna-33b",
-      "Score": "1106",
+      "Score": "1107",
       "Votes": "22613",
       "organization": "LMSYS"
     },
     {
       "Model": "llama2-70b-steerlm-chat",
-      "Score": "1099",
+      "Score": "1100",
       "Votes": "3605",
       "organization": "Nvidia"
     },
@@ -1239,7 +1245,7 @@
     },
     {
       "Model": "openhermes-2.5-mistral-7b",
-      "Score": "1094",
+      "Score": "1095",
       "Votes": "5026",
       "organization": "NousResearch"
     },
@@ -1263,7 +1269,7 @@
     },
     {
       "Model": "dolphin-2.2.1-mistral-7b",
-      "Score": "1081",
+      "Score": "1082",
       "Votes": "1685",
       "organization": "Cognitive Computations"
     },
@@ -1317,7 +1323,7 @@
     },
     {
       "Model": "codellama-34b-instruct",
-      "Score": "1066",
+      "Score": "1067",
       "Votes": "7417",
       "organization": "Meta"
     },
@@ -1340,12 +1346,6 @@
       "organization": "TII"
     },
     {
-      "Model": "vicuna-13b",
-      "Score": "1059",
-      "Votes": "19539",
-      "organization": "LMSYS"
-    },
-    {
       "Model": "gemma-7b-it",
       "Score": "1057",
       "Votes": "9034",
@@ -1356,6 +1356,12 @@
       "Score": "1055",
       "Votes": "2955",
       "organization": "UW"
+    },
+    {
+      "Model": "vicuna-13b",
+      "Score": "1059",
+      "Votes": "19539",
+      "organization": "LMSYS"
     },
     {
       "Model": "llama-3.2-1b-instruct",
@@ -1377,7 +1383,7 @@
     },
     {
       "Model": "llama-2-7b-chat",
-      "Score": "1054",
+      "Score": "1055",
       "Votes": "14272",
       "organization": "Meta"
     },
@@ -1401,31 +1407,31 @@
     },
     {
       "Model": "vicuna-7b",
-      "Score": "1032",
+      "Score": "1033",
       "Votes": "6972",
       "organization": "LMSYS"
     },
     {
       "Model": "palm-2",
-      "Score": "1028",
+      "Score": "1029",
       "Votes": "8634",
       "organization": "Google"
     },
     {
       "Model": "mistral-7b-instruct",
-      "Score": "1025",
+      "Score": "1026",
       "Votes": "9042",
       "organization": "Mistral"
     },
     {
       "Model": "gemma-1.1-2b-it",
-      "Score": "1024",
+      "Score": "1025",
       "Votes": "11035",
       "organization": "Google"
     },
     {
       "Model": "gemma-2b-it",
-      "Score": "1003",
+      "Score": "1004",
       "Votes": "4817",
       "organization": "Google"
     },
@@ -1443,7 +1449,7 @@
     },
     {
       "Model": "chatglm3-6b",
-      "Score": "973",
+      "Score": "974",
       "Votes": "4692",
       "organization": "Tsinghua"
     },
@@ -1461,7 +1467,7 @@
     },
     {
       "Model": "RWKV-4-Raven-14B",
-      "Score": "950",
+      "Score": "951",
       "Votes": "4898",
       "organization": "RWKV"
     },
@@ -1473,7 +1479,7 @@
     },
     {
       "Model": "alpaca-13b",
-      "Score": "934",
+      "Score": "935",
       "Votes": "5828",
       "organization": "Stanford"
     },
@@ -1497,7 +1503,7 @@
     },
     {
       "Model": "stablelm-tuned-alpha-7b",
-      "Score": "868",
+      "Score": "869",
       "Votes": "3325",
       "organization": "Stability AI"
     },
@@ -1509,7 +1515,7 @@
     },
     {
       "Model": "llama-13b",
-      "Score": "834",
+      "Score": "835",
       "Votes": "2441",
       "organization": "Meta"
     }
