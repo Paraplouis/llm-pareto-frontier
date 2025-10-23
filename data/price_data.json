@@ -175,6 +175,11 @@
     "uri": "https://www.anthropic.com/pricing",
     "models": [
       {
+        "name": "Claude Haiku 4.5",
+        "inputPrice": 1,
+        "outputPrice": 5
+      },
+      {
         "name": "Claude Sonnet 4.5 <= 200K",
         "inputPrice": 3,
         "outputPrice": 15
@@ -2076,6 +2081,11 @@
     "provider": "DeepInfra",
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
+      {
+        "name": "olmOCR-2-7B-1025",
+        "inputPrice": 0.14,
+        "outputPrice": 0.8
+      },
       {
         "name": "DeepSeek V3.1",
         "inputPrice": 0.32,
