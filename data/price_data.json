@@ -14,6 +14,16 @@
         "outputPrice": 10
       },
       {
+        "name": "gpt-5.1-codex",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
+        "name": "gpt-5.1",
+        "inputPrice": 1.25,
+        "outputPrice": 10
+      },
+      {
         "name": "gpt-5",
         "inputPrice": 1.25,
         "outputPrice": 10
@@ -27,6 +37,11 @@
         "name": "gpt-5-nano",
         "inputPrice": 0.05,
         "outputPrice": 0.4
+      },
+      {
+        "name": "gpt-5.1-chat-latest",
+        "inputPrice": 1.25,
+        "outputPrice": 10
       },
       {
         "name": "gpt-5-chat-latest",
@@ -390,6 +405,16 @@
     "provider": "Google",
     "uri": "https://ai.google.dev/pricing?hl=en",
     "models": [
+      {
+        "name": "gemini-3-pro-preview <= 200K",
+        "inputPrice": 2,
+        "outputPrice": 12
+      },
+      {
+        "name": "gemini-3-pro-preview > 200K",
+        "inputPrice": 4,
+        "outputPrice": 18
+      },
       {
         "name": "Gemini 2.5 Pro <= 200K",
         "inputPrice": 1.25,
@@ -868,6 +893,16 @@
     "uri": "https://platform.moonshot.ai",
     "models": [
       {
+        "name": "kimi-k2-thinking",
+        "inputPrice": 0.6,
+        "outputPrice": 2.5
+      },
+      {
+        "name": "kimi-k2-thinking-turbo",
+        "inputPrice": 1.15,
+        "outputPrice": 8
+      },
+      {
         "name": "kimi-k2-0711-preview",
         "inputPrice": 0.6,
         "outputPrice": 2.5
@@ -925,9 +960,25 @@
     ]
   },
   {
+    "provider": "MiniMax",
+    "uri": "https://platform.moonshot.ai",
+    "models": [
+      {
+        "name": "MiniMax-M2",
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
+      }
+    ]
+  },
+  {
     "provider": "Z AI",
     "uri": "https://docs.z.ai/guides/overview/pricing#agents-%26-pricing",
     "models": [
+      {
+        "name": "GLM-4.6",
+        "inputPrice": 0.6,
+        "outputPrice": 2.2
+      },
       {
         "name": "GLM-4.5",
         "inputPrice": 0.6,
@@ -995,6 +1046,16 @@
     "provider": "Chutes",
     "uri": "https://chutes.ai/app",
     "models": [
+      {
+        "name": "kimi-k2-thinking",
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
+      },
+      {
+        "name": "MiniMax-M2",
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
+      },
       {
         "name": "DeepSeek V3.1",
         "inputPrice": 0.2,
@@ -2804,6 +2865,16 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "kimi-k2-thinking",
+        "inputPrice": 0.6,
+        "outputPrice": 2.5
+      },
+      {
+        "name": "MiniMax-M2",
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
+      },
       {
         "name": "DeepSeek V3.1",
         "inputPrice": 0.55,
