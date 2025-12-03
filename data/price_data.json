@@ -19,6 +19,11 @@
         "outputPrice": 10
       },
       {
+        "name": "gpt-5.1-codex-mini",
+        "inputPrice": 0.25,
+        "outputPrice": 2
+      },
+      {
         "name": "gpt-5.1",
         "inputPrice": 1.25,
         "outputPrice": 10
@@ -650,14 +655,34 @@
     "uri": "https://x.ai/api",
     "models": [
       {
+        "name": "grok-4-1-fast-non-reasoning  <= 128K",
+        "inputPrice": 0.2,
+        "outputPrice": 0.5
+      },
+      {
+        "name": "grok-4-1-fast-non-reasoning  > 128K",
+        "inputPrice": 0.4,
+        "outputPrice": 1
+      },
+      {
+        "name": "grok-4-1-fast-reasoning <= 128K",
+        "inputPrice": 0.2,
+        "outputPrice": 0.5
+      },
+      {
+        "name": "grok-4-1-fast-reasoning > 128K",
+        "inputPrice": 0.4,
+        "outputPrice": 1
+      },
+      {
         "name": "grok-4-fast-non-reasoning  <= 128K",
         "inputPrice": 0.2,
         "outputPrice": 0.5
       },
       {
         "name": "grok-4-fast-non-reasoning  > 128K",
-        "inputPrice": 0.6,
-        "outputPrice": 1.5
+        "inputPrice": 0.4,
+        "outputPrice": 1
       },
       {
         "name": "grok-4-fast-reasoning <= 128K",
@@ -720,6 +745,16 @@
     "provider": "DeepSeek",
     "uri": "https://platform.deepseek.com/api-docs/pricing/",
     "models": [
+      {
+        "name": "DeepSeek V3.2",
+        "inputPrice": 0.28,
+        "outputPrice": 0.42
+      },
+      {
+        "name": "DeepSeek V3.2-Speciale",
+        "inputPrice": 0.28,
+        "outputPrice": 0.42
+      },
       {
         "name": "DeepSeek V3.2-Exp",
         "inputPrice": 0.28,
@@ -1796,6 +1831,11 @@
     "uri": "https://fireworks.ai/pricing",
     "models": [
       {
+        "name": "DeepSeek V3.2",
+        "inputPrice": 1.2,
+        "outputPrice": 1.2
+      },
+      {
         "name": "DeepSeek V3.1",
         "inputPrice": 1.2,
         "outputPrice": 1.2
@@ -2865,6 +2905,16 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "DeepSeek V3.2",
+        "inputPrice": 0.28,
+        "outputPrice": 0.42
+      },
+      {
+        "name": "DeepSeek V3.2-Speciale",
+        "inputPrice": 0.28,
+        "outputPrice": 0.42
+      },
       {
         "name": "kimi-k2-thinking",
         "inputPrice": 0.6,
