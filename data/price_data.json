@@ -261,7 +261,7 @@
         "outputPrice": 0.14
       },
       {
-        "name": "Amazon Nova Lite\t",
+        "name": "Amazon Nova Lite",
         "inputPrice": 0.06,
         "outputPrice": 0.24
       },
@@ -271,12 +271,17 @@
         "outputPrice": 3.2
       },
       {
+        "name": "Amazon Nova Premier",
+        "inputPrice": 2.5,
+        "outputPrice": 12.5
+      },
+      {
         "name": "Amazon Nova Micro Batch",
         "inputPrice": 0.0175,
         "outputPrice": 0.07
       },
       {
-        "name": "Amazon Nova Lite Batch\t",
+        "name": "Amazon Nova Lite Batch",
         "inputPrice": 0.03,
         "outputPrice": 0.12
       },
@@ -284,6 +289,21 @@
         "name": "Amazon Nova Pro Batch",
         "inputPrice": 0.4,
         "outputPrice": 1.6
+      },
+      {
+        "name": "Amazon Nova 2 Lite",
+        "inputPrice": 0.3,
+        "outputPrice": 2.5
+      },
+      {
+        "name": "Amazon Nova 2 Omni",
+        "inputPrice": 0.3,
+        "outputPrice": 2.5
+      },
+      {
+        "name": "Amazon Nova 2 Pro",
+        "inputPrice": 1.25,
+        "outputPrice": 10
       }
     ]
   },
