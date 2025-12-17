@@ -4,6 +4,21 @@
     "uri": "https://openai.com/api/pricing/",
     "models": [
       {
+        "name": "gpt-5.2",
+        "inputPrice": 1.75,
+        "outputPrice": 14
+      },
+      {
+        "name": "gpt-5.2-chat-latest",
+        "inputPrice": 1.75,
+        "outputPrice": 14
+      },
+      {
+        "name": "gpt-5.2-pro",
+        "inputPrice": 21,
+        "outputPrice": 168
+      },
+      {
         "name": "gpt-5-pro",
         "inputPrice": 15,
         "outputPrice": 120
@@ -194,6 +209,11 @@
     "provider": "Anthropic",
     "uri": "https://www.anthropic.com/pricing",
     "models": [
+      {
+        "name": "Claude Opus 4.5",
+        "inputPrice": 5,
+        "outputPrice": 25
+      },
       {
         "name": "Claude Haiku 4.5",
         "inputPrice": 1,
@@ -562,6 +582,16 @@
     "provider": "Mistral",
     "uri": "https://docs.mistral.ai/platform/pricing",
     "models": [
+      {
+        "name": "Mistral Devstral 2",
+        "inputPrice": 0.4,
+        "outputPrice": 2
+      },
+      {
+        "name": "Mistral Devstral Small 2",
+        "inputPrice": 0.1,
+        "outputPrice": 0.3
+      },
       {
         "name": "Magistral Medium",
         "inputPrice": 2,
@@ -1029,6 +1059,16 @@
     "provider": "Z AI",
     "uri": "https://docs.z.ai/guides/overview/pricing#agents-%26-pricing",
     "models": [
+      {
+        "name": "GLM 4.6V",
+        "inputPrice": 0.6,
+        "outputPrice": 0.9
+      },
+      {
+        "name": "GLM 4.6V-Flash",
+        "inputPrice": 0,
+        "outputPrice": 0
+      },
       {
         "name": "GLM-4.6",
         "inputPrice": 0.6,
@@ -2203,6 +2243,11 @@
     "uri": "https://deepinfra.com/models/text-generation/",
     "models": [
       {
+        "name": "GLM 4.6V",
+        "inputPrice": 0.3,
+        "outputPrice": 0.9
+      },
+      {
         "name": "olmOCR-2-7B-1025",
         "inputPrice": 0.14,
         "outputPrice": 0.8
@@ -2925,6 +2970,11 @@
     "provider": "Novita AI",
     "uri": "https://novita.ai/model-api/pricing",
     "models": [
+      {
+        "name": "GLM 4.6v",
+        "inputPrice": 0.3,
+        "outputPrice": 0.9
+      },
       {
         "name": "DeepSeek V3.2",
         "inputPrice": 0.28,
