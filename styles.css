@@ -130,6 +130,34 @@ h2 {
     color: #666;
 }
 
+.legend-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.legend-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.legend-button:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.legend-button:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
 .legend-item.disabled {
     opacity: 0.5;
     background-color: #f0f0f0;
@@ -727,14 +755,16 @@ h2 {
 
     .legend-item,
     .preset-button,
-    .reset-button {
+    .reset-button,
+    .legend-button {
         background-color: rgba(255, 255, 255, 0.08);
         border-color: #30363d;
         color: #e6edf3;
     }
 
     .legend-item:hover,
-    .preset-button:hover {
+    .preset-button:hover,
+    .legend-button:hover {
         background-color: rgba(255, 255, 255, 0.12);
     }
 
@@ -855,14 +885,16 @@ body.dark-mode .grid line {
 
 body.dark-mode .legend-item,
 body.dark-mode .preset-button,
-body.dark-mode .reset-button {
+body.dark-mode .reset-button,
+body.dark-mode .legend-button {
     background-color: rgba(255, 255, 255, 0.08);
     border-color: #30363d;
     color: #e6edf3;
 }
 
 body.dark-mode .legend-item:hover,
-body.dark-mode .preset-button:hover {
+body.dark-mode .preset-button:hover,
+body.dark-mode .legend-button:hover {
     background-color: rgba(255, 255, 255, 0.12);
 }
 
