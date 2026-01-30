@@ -75,7 +75,28 @@ export class UIController {
         // Add a title and explanation for the legend
         const legendHeader = legendContainer.append("div").attr("class", "legend-header");
         legendHeader.append("h3").text("Filter by organization").attr('id', 'legend-title');
-        legendHeader.append("p").text("Click an organization (the company that created the model) to show/hide its models.");
+        legendHeader.append("p").text("Click an organization to show/hide its models. Option-click to show only that organization.");
+
+        // Add Select All / Deselect All buttons
+        const buttonRow = legendHeader.append("div").attr("class", "legend-buttons");
+
+        buttonRow.append("button")
+            .attr("class", "legend-button select-all-btn")
+            .attr("type", "button")
+            .attr("aria-label", "Select all organizations")
+            .text("Select all")
+            .on("click", () => {
+                document.dispatchEvent(new CustomEvent('selectAllOrganizations'));
+            });
+
+        buttonRow.append("button")
+            .attr("class", "legend-button deselect-all-btn")
+            .attr("type", "button")
+            .attr("aria-label", "Deselect all organizations")
+            .text("Deselect all")
+            .on("click", () => {
+                document.dispatchEvent(new CustomEvent('deselectAllOrganizations'));
+            });
 
         organizations.forEach(organization => {
             const isActive = activeOrganizations.has(organization);
@@ -87,7 +108,14 @@ export class UIController {
                 .attr('aria-pressed', isActive ? 'true' : 'false')
                 .attr('aria-label', `Toggle organization ${organization}`)
                 .classed("disabled", !isActive)
-                .on("click", function() {
+                .on("click", function(event) {
+                    // Option/Alt-click: select only this organization
+                    if (event.altKey) {
+                        document.dispatchEvent(new CustomEvent('selectOnlyOrganization', {
+                            detail: { organization: organization }
+                        }));
+                        return;
+                    }
                     // Determine new state from DOM (robust against double-clicks)
                     const currentlyDisabled = d3.select(this).classed('disabled');
                     document.dispatchEvent(new CustomEvent('organizationToggle', {

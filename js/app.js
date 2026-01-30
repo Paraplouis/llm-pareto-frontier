@@ -51,6 +51,9 @@ export class LLMApp {
         this.handleResize = this.handleResize.bind(this);
         this.handleOrganizationToggle = this.handleOrganizationToggle.bind(this);
         this.handleResetOrganizations = this.handleResetOrganizations.bind(this);
+        this.handleSelectAllOrganizations = this.handleSelectAllOrganizations.bind(this);
+        this.handleDeselectAllOrganizations = this.handleDeselectAllOrganizations.bind(this);
+        this.handleSelectOnlyOrganization = this.handleSelectOnlyOrganization.bind(this);
     }
 
     /**
@@ -118,6 +121,11 @@ export class LLMApp {
 
         // Reset organizations event handler
         document.addEventListener('resetOrganizations', this.handleResetOrganizations);
+
+        // Select all / Deselect all / Select only handlers
+        document.addEventListener('selectAllOrganizations', this.handleSelectAllOrganizations);
+        document.addEventListener('deselectAllOrganizations', this.handleDeselectAllOrganizations);
+        document.addEventListener('selectOnlyOrganization', this.handleSelectOnlyOrganization);
 
         // Token input handlers
         if (this.inputTokenEl) {
@@ -202,6 +210,32 @@ export class LLMApp {
     handleResetOrganizations() {
         const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
         this.activeOrganizations = new Set(allOrganizations);
+        this.refreshChart();
+    }
+
+    /**
+     * Handle select all organizations event
+     */
+    handleSelectAllOrganizations() {
+        const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
+        this.activeOrganizations = new Set(allOrganizations);
+        this.refreshChart();
+    }
+
+    /**
+     * Handle deselect all organizations event
+     */
+    handleDeselectAllOrganizations() {
+        this.activeOrganizations = new Set();
+        this.refreshChart();
+    }
+
+    /**
+     * Handle select only one organization event (option-click)
+     */
+    handleSelectOnlyOrganization(event) {
+        const { organization } = event.detail;
+        this.activeOrganizations = new Set([organization]);
         this.refreshChart();
     }
 

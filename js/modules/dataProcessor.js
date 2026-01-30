@@ -265,8 +265,8 @@ export class DataProcessor {
             model.model
         );
 
-        // Apply organization filter if activeOrganizations set is provided and not empty
-        if (activeOrganizations && activeOrganizations.size > 0) {
+        // Apply organization filter if activeOrganizations set is provided
+        if (activeOrganizations) {
             filteredData = filteredData.filter(model =>
                 activeOrganizations.has(model.organization)
             );
