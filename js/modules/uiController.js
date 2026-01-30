@@ -75,7 +75,7 @@ export class UIController {
         // Add a title and explanation for the legend
         const legendHeader = legendContainer.append("div").attr("class", "legend-header");
         legendHeader.append("h3").text("Filter by organization").attr('id', 'legend-title');
-        legendHeader.append("p").text("Click an organization to show/hide its models. Option-click to show only that organization.");
+        legendHeader.append("p").text("Click an organization to show/hide its models. Alt/Option-click to show only that organization.");
 
         // Add Select All / Deselect All buttons
         const buttonRow = legendHeader.append("div").attr("class", "legend-buttons");
@@ -146,26 +146,6 @@ export class UIController {
                 .text(organization);
         });
 
-        // Add a "Reset" button at the end of the legend
-        if (organizations.length > 0) {
-            const resetItem = legendContainer
-                .append("div")
-                .attr("class", "legend-item reset-button")
-                .attr("tabindex", 0)
-                .attr('role', 'button')
-                .attr('aria-label', 'Reset organization selections')
-                .on("click", function() {
-                    document.dispatchEvent(new CustomEvent('resetOrganizations'));
-                })
-                .on("keydown", function(event) {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        d3.select(this).dispatch('click');
-                    }
-                });
-
-            resetItem.append("span").text("Reset Selections");
-        }
     }
 
     /**

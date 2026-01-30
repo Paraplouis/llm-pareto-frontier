@@ -453,6 +453,15 @@ export class ChartRenderer {
         }
 
         this.container.selectAll("*").remove();
+
+        // Show empty state when there is no data to display
+        if (data.length === 0) {
+            this.container.append("div")
+                .attr("class", "chart-empty-state")
+                .text("No models to display. Select at least one organization.");
+            return;
+        }
+
         this.dimensions = this.calculateDimensions();
 
         this.svg = this.container

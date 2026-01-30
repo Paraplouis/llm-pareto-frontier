@@ -717,138 +717,6 @@ h2 {
     color: #000;
 }
 
-/* Dark Mode Styles from PR */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1a1a1a;
-        color: #c9d1d9;
-    }
-
-    h2, h3, #main-title, #main-subtitle, #modelCount {
-        color: #f0f6fc;
-    }
-
-    #main-subtitle, #chart-info, .chart-notes {
-        color: #8b949e;
-    }
-
-    .chart-container {
-        background-color: #161b22;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .axis, .tick text, .axis-label, .model-label {
-        fill: #a0a0a0 !important;
-        font-weight: 500;
-    }
-
-    /* Axis lines in dark mode */
-    .axis path.domain,
-    .axis line {
-        stroke: #a0a0a0;
-    }
-
-    .grid line {
-        stroke: #30363d;
-        stroke-opacity: 0.5;
-    }
-
-    .legend-item,
-    .preset-button,
-    .reset-button,
-    .legend-button {
-        background-color: rgba(255, 255, 255, 0.08);
-        border-color: #30363d;
-        color: #e6edf3;
-    }
-
-    .legend-item:hover,
-    .preset-button:hover,
-    .legend-button:hover {
-        background-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .preset-button.active {
-        background-color: #1f6feb;
-        border-color: #1f6feb;
-        color: #fff;
-    }
-
-    .ratio-display {
-        background-color: transparent;
-        border-color: transparent;
-        color: #8b949e;
-        font-style: italic;
-    }
-
-    .tooltip {
-        background-color: rgba(255,255,255,0.95);
-        color: #000;
-    }
-
-    .github-icon, .theme-toggle-button {
-        color: #e6edf3;
-    }
-
-    .github-icon:hover, .theme-toggle-button:hover {
-        color: #ffffff;
-    }
-
-    .explanation {
-        background-color: #161b22;
-        border-color: #30363d;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    }
-
-    .explanation-toggle {
-        background-color: rgba(255,255,255,0.05);
-    }
-
-    .explanation-toggle:hover {
-        background-color: rgba(255,255,255,0.1);
-    }
-
-    .explanation h2,
-    .explanation h3,
-    .explanation p {
-        color: #e6edf3;
-    }
-
-    .explanation a {
-        color: #58a6ff;
-    }
-
-    .pareto-model {
-        background-color: #1a1d1f;
-        border-color: #1a1d1f;
-        color: #e6edf3;
-    }
-    .pareto-model:hover {
-        background-color: #122d18;
-    }
-
-    .token-controls label {
-        background-color: rgba(255,255,255,0.08);
-        color: #e6edf3;
-        border-color: #30363d;
-    }
-
-    .token-controls label:hover {
-        background-color: rgba(255,255,255,0.12);
-    }
-
-    .token-controls input[type="number"] {
-        background-color: #0d1117;
-        color: #e6edf3;
-        border-color: #30363d;
-    }
-
-    .token-controls input[type="number"]:focus {
-        border-color: #1f6feb;
-        box-shadow: 0 0 0 2px rgba(31,111,235,0.4);
-    }
-}
-
 body.dark-mode {
     background-color: #1a1a1a;
     color: #c9d1d9;
@@ -976,4 +844,20 @@ body.dark-mode .token-controls input[type="number"] {
 body.dark-mode .token-controls input[type="number"]:focus {
     border-color: #1f6feb;
     box-shadow: 0 0 0 2px rgba(31,111,235,0.4);
+}
+
+/* Empty state message when no organizations are selected */
+.chart-empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+    padding: 2rem;
+}
+
+body.dark-mode .chart-empty-state {
+    color: #8b949e;
 }

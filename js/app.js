@@ -50,10 +50,16 @@ export class LLMApp {
         // Bind event handlers
         this.handleResize = this.handleResize.bind(this);
         this.handleOrganizationToggle = this.handleOrganizationToggle.bind(this);
-        this.handleResetOrganizations = this.handleResetOrganizations.bind(this);
         this.handleSelectAllOrganizations = this.handleSelectAllOrganizations.bind(this);
         this.handleDeselectAllOrganizations = this.handleDeselectAllOrganizations.bind(this);
         this.handleSelectOnlyOrganization = this.handleSelectOnlyOrganization.bind(this);
+
+        // Store bound references for anonymous listeners so destroy() can remove them
+        this._handleModelHover = (event) => {
+            const { model, x, y, isPareto } = event.detail;
+            this.uiController.showTooltip(model, x, y, isPareto);
+        };
+        this._handleModelUnhover = () => this.uiController.hideTooltip();
     }
 
     /**
@@ -109,18 +115,11 @@ export class LLMApp {
         window.addEventListener('resize', this.handleResize);
 
         // Tooltip event handlers
-        document.addEventListener('modelHover', (event) => {
-            const { model, x, y, isPareto } = event.detail;
-            this.uiController.showTooltip(model, x, y, isPareto);
-        });
-
-        document.addEventListener('modelUnhover', () => this.uiController.hideTooltip());
+        document.addEventListener('modelHover', this._handleModelHover);
+        document.addEventListener('modelUnhover', this._handleModelUnhover);
 
         // Organization toggle event handler
         document.addEventListener('organizationToggle', this.handleOrganizationToggle);
-
-        // Reset organizations event handler
-        document.addEventListener('resetOrganizations', this.handleResetOrganizations);
 
         // Select all / Deselect all / Select only handlers
         document.addEventListener('selectAllOrganizations', this.handleSelectAllOrganizations);
@@ -205,15 +204,6 @@ export class LLMApp {
     }
 
     /**
-     * Handle reset organizations event
-     */
-    handleResetOrganizations() {
-        const allOrganizations = this.dataProcessor.getUniqueOrganizations(this.modelData);
-        this.activeOrganizations = new Set(allOrganizations);
-        this.refreshChart();
-    }
-
-    /**
      * Handle select all organizations event
      */
     handleSelectAllOrganizations() {
@@ -251,7 +241,9 @@ export class LLMApp {
             this.promptTokens,
             this.outputTokens
         );
-        const paretoData = this.dataProcessor.calculateParetoFrontier(validData);
+        const paretoData = validData.length > 0
+            ? this.dataProcessor.calculateParetoFrontier(validData)
+            : [];
         await this.renderChart(validData, paretoData, isDarkMode);
         this.updateLegendAndParetoInfo(validData, paretoData);
         this.updateRatioDisplayAndPresets();
@@ -315,6 +307,21 @@ export class LLMApp {
     }
 
     /**
+     * Remove all event listeners registered by the app.
+     * Call this if the app instance needs to be torn down.
+     */
+    destroy() {
+        window.removeEventListener('resize', this.handleResize);
+        document.removeEventListener('organizationToggle', this.handleOrganizationToggle);
+        document.removeEventListener('selectAllOrganizations', this.handleSelectAllOrganizations);
+        document.removeEventListener('deselectAllOrganizations', this.handleDeselectAllOrganizations);
+        document.removeEventListener('selectOnlyOrganization', this.handleSelectOnlyOrganization);
+        document.removeEventListener('modelHover', this._handleModelHover);
+        document.removeEventListener('modelUnhover', this._handleModelUnhover);
+        clearTimeout(this.resizeTimeout);
+    }
+
+    /**
      * Setup theme toggle
      */
     setupThemeToggle() {
@@ -343,14 +350,16 @@ export class LLMApp {
 
         themeToggleButton.addEventListener('click', toggleTheme);
 
-        // Check for saved theme in localStorage
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            applyTheme(savedTheme);
-        } else {
-            // Check for OS preference
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            applyTheme(prefersDark ? 'dark' : 'light');
-        }
+        // Always follow the OS / browser preference on page load.
+        // localStorage only keeps the toggle override within a session.
+        const darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
+        applyTheme(darkMQ.matches ? 'dark' : 'light');
+
+        // React to live OS preference changes (e.g. user toggles system dark mode)
+        darkMQ.addEventListener('change', (e) => {
+            localStorage.removeItem('theme');
+            applyTheme(e.matches ? 'dark' : 'light');
+            this.refreshChart();
+        });
     }
 }
