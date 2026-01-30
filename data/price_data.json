@@ -983,6 +983,11 @@
     "uri": "https://platform.moonshot.ai",
     "models": [
       {
+        "name": "kimi-k2.5",
+        "inputPrice": 0.6,
+        "outputPrice": 3
+      },
+      {
         "name": "kimi-k2-thinking",
         "inputPrice": 0.6,
         "outputPrice": 2.5
@@ -1910,6 +1915,11 @@
     "provider": "Fireworks",
     "uri": "https://fireworks.ai/pricing",
     "models": [
+      {
+        "name": "kimi-k2.5",
+        "inputPrice": 1.2,
+        "outputPrice": 1.2
+      },
       {
         "name": "DeepSeek V3.2",
         "inputPrice": 1.2,

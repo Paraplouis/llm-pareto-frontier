@@ -21,6 +21,13 @@
     "organization": "Google"
   },
   {
+    "rank_model": "ernie-5.0-0110",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Baidu"
+  },
+  {
     "rank_model": "gemini-3-flash (thinking-minimal)",
     "matched_price_model": "gemini-3-flash-preview",
     "price": 0.5,
@@ -33,6 +40,13 @@
     "price": 0.2,
     "provider": "XAI",
     "organization": "xAI"
+  },
+  {
+    "rank_model": "kimi-k2.5-thinking",
+    "matched_price_model": "kimi-k2.5",
+    "price": 0.6,
+    "provider": "Moonshot AI",
+    "organization": "Moonshot"
   },
   {
     "rank_model": "gpt-5.1-high",
@@ -49,20 +63,6 @@
     "organization": "Anthropic"
   },
   {
-    "rank_model": "ernie-5.0-preview-1103",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "Baidu"
-  },
-  {
-    "rank_model": "claude-opus-4-5-20251101-thinking-32k",
-    "matched_price_model": "Claude Opus 4",
-    "price": 15,
-    "provider": "Anthropic",
-    "organization": "Anthropic"
-  },
-  {
     "rank_model": "grok-4.1",
     "matched_price_model": "grok-4-1-fast-reasoning <= 128K",
     "price": 0.2,
@@ -75,6 +75,13 @@
     "price": 0,
     "provider": "N/A",
     "organization": "Baidu"
+  },
+  {
+    "rank_model": "claude-opus-4-5-20251101-thinking-32k",
+    "matched_price_model": "Claude Opus 4",
+    "price": 15,
+    "provider": "Anthropic",
+    "organization": "Anthropic"
   },
   {
     "rank_model": "glm-4.6",
@@ -105,6 +112,13 @@
     "organization": "Mistral"
   },
   {
+    "rank_model": "claude-sonnet-4-5-20250929",
+    "matched_price_model": "Claude Sonnet 4",
+    "price": 3.3,
+    "provider": "DeepInfra",
+    "organization": "Anthropic"
+  },
+  {
     "rank_model": "mistral-medium-2508",
     "matched_price_model": "Mistral Medium 3",
     "price": 0.4,
@@ -126,14 +140,14 @@
     "organization": "Z.ai"
   },
   {
-    "rank_model": "claude-sonnet-4-5-20250929-thinking-32k",
-    "matched_price_model": "Claude Sonnet 4",
-    "price": 3.3,
-    "provider": "DeepInfra",
-    "organization": "Anthropic"
+    "rank_model": "ernie-5.0-preview-1022",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Baidu"
   },
   {
-    "rank_model": "claude-sonnet-4-5-20250929",
+    "rank_model": "claude-sonnet-4-5-20250929-thinking-32k",
     "matched_price_model": "Claude Sonnet 4",
     "price": 3.3,
     "provider": "DeepInfra",
@@ -161,11 +175,18 @@
     "organization": "DeepSeek"
   },
   {
-    "rank_model": "gpt-5.2",
-    "matched_price_model": "gpt-5.2",
-    "price": 1.75,
-    "provider": "OpenAI",
-    "organization": "OpenAI"
+    "rank_model": "deepseek-v3.2-exp-thinking",
+    "matched_price_model": "DeepSeek V3.2",
+    "price": 0.28,
+    "provider": "DeepSeek",
+    "organization": "DeepSeek"
+  },
+  {
+    "rank_model": "amazon-nova-experimental-chat-12-10",
+    "matched_price_model": "Amazon Nova Micro",
+    "price": 0.035,
+    "provider": "Amazon",
+    "organization": "Amazon"
   },
   {
     "rank_model": "longcat-flash-chat",
@@ -175,7 +196,21 @@
     "organization": "Meituan"
   },
   {
-    "rank_model": "deepseek-v3.2-exp-thinking",
+    "rank_model": "qwen3-vl-235b-a22b-instruct",
+    "matched_price_model": "Qwen 3 235B A22B",
+    "price": 0.2,
+    "provider": "Together.AI",
+    "organization": "Alibaba"
+  },
+  {
+    "rank_model": "deepseek-v3.2",
+    "matched_price_model": "DeepSeek V3.2",
+    "price": 0.28,
+    "provider": "DeepSeek",
+    "organization": "DeepSeek"
+  },
+  {
+    "rank_model": "deepseek-v3.1",
     "matched_price_model": "DeepSeek V3.2",
     "price": 0.28,
     "provider": "DeepSeek",
@@ -189,14 +224,7 @@
     "organization": "OpenAI"
   },
   {
-    "rank_model": "deepseek-v3.2",
-    "matched_price_model": "DeepSeek V3.2",
-    "price": 0.28,
-    "provider": "DeepSeek",
-    "organization": "DeepSeek"
-  },
-  {
-    "rank_model": "qwen3-vl-235b-a22b-instruct",
+    "rank_model": "qwen3-235b-a22b-instruct-2507",
     "matched_price_model": "Qwen 3 235B A22B",
     "price": 0.2,
     "provider": "Together.AI",
@@ -210,25 +238,11 @@
     "organization": "Anthropic"
   },
   {
-    "rank_model": "deepseek-v3.1",
-    "matched_price_model": "DeepSeek V3.2",
-    "price": 0.28,
-    "provider": "DeepSeek",
-    "organization": "DeepSeek"
-  },
-  {
-    "rank_model": "deepseek-v3.1-terminus",
-    "matched_price_model": "DeepSeek V3.2",
-    "price": 0.28,
-    "provider": "DeepSeek",
-    "organization": "DeepSeek"
-  },
-  {
-    "rank_model": "qwen3-235b-a22b-instruct-2507",
-    "matched_price_model": "Qwen 3 235B A22B",
-    "price": 0.2,
-    "provider": "Together.AI",
-    "organization": "Alibaba"
+    "rank_model": "amazon-nova-experimental-chat-11-10",
+    "matched_price_model": "Amazon Nova Micro",
+    "price": 0.035,
+    "provider": "Amazon",
+    "organization": "Amazon"
   },
   {
     "rank_model": "qwen3-next-80b-a3b-instruct",
@@ -238,14 +252,14 @@
     "organization": "Alibaba"
   },
   {
-    "rank_model": "gpt-5.2-high",
-    "matched_price_model": "gpt-5.2",
-    "price": 1.75,
-    "provider": "OpenAI",
-    "organization": "OpenAI"
+    "rank_model": "deepseek-v3.2-thinking",
+    "matched_price_model": "DeepSeek V3.2",
+    "price": 0.28,
+    "provider": "DeepSeek",
+    "organization": "DeepSeek"
   },
   {
-    "rank_model": "deepseek-v3.2-thinking",
+    "rank_model": "deepseek-v3.1-terminus",
     "matched_price_model": "DeepSeek V3.2",
     "price": 0.28,
     "provider": "DeepSeek",
@@ -266,18 +280,25 @@
     "organization": "OpenAI"
   },
   {
+    "rank_model": "gpt-5.2-high",
+    "matched_price_model": "gpt-5.2",
+    "price": 1.75,
+    "provider": "OpenAI",
+    "organization": "OpenAI"
+  },
+  {
+    "rank_model": "gpt-5.2",
+    "matched_price_model": "gpt-5.2",
+    "price": 1.75,
+    "provider": "OpenAI",
+    "organization": "OpenAI"
+  },
+  {
     "rank_model": "deepseek-v3.1-thinking",
     "matched_price_model": "DeepSeek V3.2",
     "price": 0.28,
     "provider": "DeepSeek",
     "organization": "DeepSeek"
-  },
-  {
-    "rank_model": "amazon-nova-experimental-chat-11-10",
-    "matched_price_model": "Amazon Nova Micro",
-    "price": 0.035,
-    "provider": "Amazon",
-    "organization": "Amazon"
   },
   {
     "rank_model": "gemini-2.5-flash",
@@ -287,11 +308,11 @@
     "organization": "Google"
   },
   {
-    "rank_model": "kimi-k2-thinking-turbo",
-    "matched_price_model": "kimi-k2-thinking-turbo",
-    "price": 1.15,
-    "provider": "Moonshot AI",
-    "organization": "Moonshot"
+    "rank_model": "claude-opus-4-1-20250805",
+    "matched_price_model": "Claude Opus 4",
+    "price": 15,
+    "provider": "Anthropic",
+    "organization": "Anthropic"
   },
   {
     "rank_model": "qwen3-max-2025-09-23",
@@ -301,11 +322,11 @@
     "organization": "Alibaba"
   },
   {
-    "rank_model": "claude-opus-4-1-20250805",
-    "matched_price_model": "Claude Opus 4",
-    "price": 15,
-    "provider": "Anthropic",
-    "organization": "Anthropic"
+    "rank_model": "kimi-k2-thinking-turbo",
+    "matched_price_model": "kimi-k2-thinking-turbo",
+    "price": 1.15,
+    "provider": "Moonshot AI",
+    "organization": "Moonshot"
   },
   {
     "rank_model": "qwen3-235b-a22b-thinking-2507",
@@ -315,6 +336,13 @@
     "organization": "Alibaba"
   },
   {
+    "rank_model": "grok-4-fast-chat",
+    "matched_price_model": "grok-4-fast-reasoning <= 128K",
+    "price": 0.2,
+    "provider": "XAI",
+    "organization": "xAI"
+  },
+  {
     "rank_model": "o3-2025-04-16",
     "matched_price_model": "o3",
     "price": 2,
@@ -322,11 +350,11 @@
     "organization": "OpenAI"
   },
   {
-    "rank_model": "grok-4-1-fast-reasoning",
-    "matched_price_model": "grok-4-1-fast-reasoning <= 128K",
-    "price": 0.2,
-    "provider": "XAI",
-    "organization": "xAI"
+    "rank_model": "mimo-v2-flash (non-thinking)",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Xiaomi"
   },
   {
     "rank_model": "grok-4-0709",
@@ -336,18 +364,11 @@
     "organization": "xAI"
   },
   {
-    "rank_model": "grok-4-fast-chat",
-    "matched_price_model": "grok-4-fast-reasoning <= 128K",
+    "rank_model": "grok-4-1-fast-reasoning",
+    "matched_price_model": "grok-4-1-fast-reasoning <= 128K",
     "price": 0.2,
     "provider": "XAI",
     "organization": "xAI"
-  },
-  {
-    "rank_model": "mimo-v2-flash (non-thinking)",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "Xiaomi"
   },
   {
     "rank_model": "gemini-2.5-flash-preview-09-2025",
@@ -476,11 +497,11 @@
     "organization": "Tencent"
   },
   {
-    "rank_model": "gpt-5-mini-high",
-    "matched_price_model": "gpt-5-mini",
-    "price": 0.25,
-    "provider": "OpenAI",
-    "organization": "OpenAI"
+    "rank_model": "glm-4.6v",
+    "matched_price_model": "GLM 4.6V",
+    "price": 0.3,
+    "provider": "Z AI",
+    "organization": "Z.ai"
   },
   {
     "rank_model": "claude-opus-4-20250514-thinking-16k",
@@ -488,6 +509,13 @@
     "price": 15,
     "provider": "Anthropic",
     "organization": "Anthropic"
+  },
+  {
+    "rank_model": "gpt-5-mini-high",
+    "matched_price_model": "gpt-5-mini",
+    "price": 0.25,
+    "provider": "OpenAI",
+    "organization": "OpenAI"
   },
   {
     "rank_model": "deepseek-r1",
@@ -518,13 +546,6 @@
     "organization": "Mistral"
   },
   {
-    "rank_model": "grok-3-mini-high",
-    "matched_price_model": "grok-3-mini",
-    "price": 0.3,
-    "provider": "XAI",
-    "organization": "xAI"
-  },
-  {
     "rank_model": "qwen3-next-80b-a3b-thinking",
     "matched_price_model": "No match found",
     "price": 0,
@@ -532,11 +553,11 @@
     "organization": "Alibaba"
   },
   {
-    "rank_model": "qwen3-235b-a22b",
-    "matched_price_model": "Qwen 3 235B A22B",
-    "price": 0.2,
-    "provider": "Together.AI",
-    "organization": "Alibaba"
+    "rank_model": "grok-3-mini-high",
+    "matched_price_model": "grok-3-mini",
+    "price": 0.3,
+    "provider": "XAI",
+    "organization": "xAI"
   },
   {
     "rank_model": "qwen2.5-max",
@@ -546,13 +567,6 @@
     "organization": "Alibaba"
   },
   {
-    "rank_model": "amazon-nova-experimental-chat-10-09",
-    "matched_price_model": "Amazon Nova Micro",
-    "price": 0.035,
-    "provider": "Amazon",
-    "organization": "Amazon"
-  },
-  {
     "rank_model": "o1-2024-12-17",
     "matched_price_model": "o1",
     "price": 15,
@@ -560,11 +574,25 @@
     "organization": "OpenAI"
   },
   {
+    "rank_model": "qwen3-235b-a22b",
+    "matched_price_model": "Qwen 3 235B A22B",
+    "price": 0.2,
+    "provider": "Together.AI",
+    "organization": "Alibaba"
+  },
+  {
     "rank_model": "gpt-oss-120b",
     "matched_price_model": "GPT OSS 120B 128k",
     "price": 0.09,
     "provider": "DeepInfra",
     "organization": "OpenAI"
+  },
+  {
+    "rank_model": "amazon-nova-experimental-chat-10-09",
+    "matched_price_model": "Amazon Nova Micro",
+    "price": 0.035,
+    "provider": "Amazon",
+    "organization": "Amazon"
   },
   {
     "rank_model": "claude-opus-4-20250514",
@@ -602,18 +630,18 @@
     "organization": "Google"
   },
   {
-    "rank_model": "qwen3-coder-480b-a35b-instruct",
-    "matched_price_model": "Qwen 3 Coder 480B A35B",
-    "price": 0.3,
-    "provider": "Chutes",
-    "organization": "Alibaba"
-  },
-  {
     "rank_model": "intellect-3",
     "matched_price_model": "No match found",
     "price": 0,
     "provider": "N/A",
     "organization": "Prime Intellect"
+  },
+  {
+    "rank_model": "qwen3-coder-480b-a35b-instruct",
+    "matched_price_model": "Qwen 3 Coder 480B A35B",
+    "price": 0.3,
+    "provider": "Chutes",
+    "organization": "Alibaba"
   },
   {
     "rank_model": "gemini-2.0-flash-001",
@@ -623,16 +651,16 @@
     "organization": "Google"
   },
   {
-    "rank_model": "o4-mini-2025-04-16",
-    "matched_price_model": "o4-mini",
-    "price": 1.1,
+    "rank_model": "o1-preview",
+    "matched_price_model": "o1",
+    "price": 15,
     "provider": "OpenAI",
     "organization": "OpenAI"
   },
   {
-    "rank_model": "o1-preview",
-    "matched_price_model": "o1",
-    "price": 15,
+    "rank_model": "o4-mini-2025-04-16",
+    "matched_price_model": "o4-mini",
+    "price": 1.1,
     "provider": "OpenAI",
     "organization": "OpenAI"
   },
@@ -644,6 +672,13 @@
     "organization": "Nvidia"
   },
   {
+    "rank_model": "claude-sonnet-4-20250514-thinking-32k",
+    "matched_price_model": "Claude Sonnet 4",
+    "price": 3.3,
+    "provider": "DeepInfra",
+    "organization": "Anthropic"
+  },
+  {
     "rank_model": "step-3",
     "matched_price_model": "No match found",
     "price": 0,
@@ -651,11 +686,11 @@
     "organization": "StepFun"
   },
   {
-    "rank_model": "claude-sonnet-4-20250514-thinking-32k",
-    "matched_price_model": "Claude Sonnet 4",
-    "price": 3.3,
-    "provider": "DeepInfra",
-    "organization": "Anthropic"
+    "rank_model": "glm-4.7-flash",
+    "matched_price_model": "GLM-4.7",
+    "price": 0.6,
+    "provider": "Z AI",
+    "organization": "Z.ai"
   },
   {
     "rank_model": "minimax-m1",
@@ -672,13 +707,6 @@
     "organization": "MiniMax"
   },
   {
-    "rank_model": "gpt-4.1-mini-2025-04-14",
-    "matched_price_model": "gpt-4.1-mini",
-    "price": 0.4,
-    "provider": "OpenAI",
-    "organization": "OpenAI"
-  },
-  {
     "rank_model": "qwen3-32b",
     "matched_price_model": "Qwen 3-32B",
     "price": 0.7,
@@ -686,11 +714,11 @@
     "organization": "Alibaba"
   },
   {
-    "rank_model": "mistral-small-2506",
-    "matched_price_model": "Mistral Small 2501",
-    "price": 0.1,
-    "provider": "Mistral",
-    "organization": "Mistral"
+    "rank_model": "gpt-4.1-mini-2025-04-14",
+    "matched_price_model": "gpt-4.1-mini",
+    "price": 0.4,
+    "provider": "OpenAI",
+    "organization": "OpenAI"
   },
   {
     "rank_model": "claude-sonnet-4-20250514",
@@ -700,11 +728,11 @@
     "organization": "Anthropic"
   },
   {
-    "rank_model": "nvidia-llama-3.3-nemotron-super-49b-v1.5",
-    "matched_price_model": "nvidia/Llama-3.1-Nemotron-70B-Instruct",
-    "price": 0.23,
-    "provider": "DeepInfra",
-    "organization": "Nvidia"
+    "rank_model": "mistral-small-2506",
+    "matched_price_model": "Mistral Small 2501",
+    "price": 0.1,
+    "provider": "Mistral",
+    "organization": "Mistral"
   },
   {
     "rank_model": "o3-mini-high",
@@ -719,6 +747,13 @@
     "price": 0,
     "provider": "N/A",
     "organization": "StepFun"
+  },
+  {
+    "rank_model": "nvidia-llama-3.3-nemotron-super-49b-v1.5",
+    "matched_price_model": "nvidia/Llama-3.1-Nemotron-70B-Instruct",
+    "price": 0.23,
+    "provider": "DeepInfra",
+    "organization": "Nvidia"
   },
   {
     "rank_model": "glm-4.5v",
@@ -784,25 +819,18 @@
     "organization": "StepFun"
   },
   {
+    "rank_model": "hunyuan-turbos-20250226",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Tencent"
+  },
+  {
     "rank_model": "gpt-5-nano-high",
     "matched_price_model": "gpt-5-nano",
     "price": 0.05,
     "provider": "OpenAI",
     "organization": "OpenAI"
-  },
-  {
-    "rank_model": "o3-mini",
-    "matched_price_model": "o3-mini",
-    "price": 1.1,
-    "provider": "OpenAI",
-    "organization": "OpenAI"
-  },
-  {
-    "rank_model": "gemini-1.5-pro-002",
-    "matched_price_model": "Gemini 1.5 Pro <= 128K",
-    "price": 1.25,
-    "provider": "Google",
-    "organization": "Google"
   },
   {
     "rank_model": "llama-3.1-nemotron-ultra-253b-v1",
@@ -812,15 +840,15 @@
     "organization": "Nvidia"
   },
   {
-    "rank_model": "hunyuan-turbos-20250226",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "Tencent"
+    "rank_model": "gemini-1.5-pro-002",
+    "matched_price_model": "Gemini 1.5 Pro <= 128K",
+    "price": 1.25,
+    "provider": "Google",
+    "organization": "Google"
   },
   {
-    "rank_model": "o1-mini",
-    "matched_price_model": "o1-mini",
+    "rank_model": "o3-mini",
+    "matched_price_model": "o3-mini",
     "price": 1.1,
     "provider": "OpenAI",
     "organization": "OpenAI"
@@ -831,6 +859,13 @@
     "price": 0.2,
     "provider": "Qwen",
     "organization": "Alibaba"
+  },
+  {
+    "rank_model": "o1-mini",
+    "matched_price_model": "o1-mini",
+    "price": 1.1,
+    "provider": "OpenAI",
+    "organization": "OpenAI"
   },
   {
     "rank_model": "claude-3-7-sonnet-20250219-thinking-32k",
@@ -866,6 +901,13 @@
     "price": 2,
     "provider": "XAI",
     "organization": "xAI"
+  },
+  {
+    "rank_model": "olmo-3.1-32b-instruct",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Allen AI"
   },
   {
     "rank_model": "yi-lightning",
@@ -931,13 +973,6 @@
     "organization": "Zhipu"
   },
   {
-    "rank_model": "gpt-oss-20b",
-    "matched_price_model": "GPT OSS 20B 128k",
-    "price": 0.04,
-    "provider": "DeepInfra",
-    "organization": "OpenAI"
-  },
-  {
     "rank_model": "hunyuan-large-2025-02-10",
     "matched_price_model": "No match found",
     "price": 0,
@@ -952,11 +987,11 @@
     "organization": "Google"
   },
   {
-    "rank_model": "mercury",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "Inception AI"
+    "rank_model": "gpt-oss-20b",
+    "matched_price_model": "GPT OSS 20B 128k",
+    "price": 0.04,
+    "provider": "DeepInfra",
+    "organization": "OpenAI"
   },
   {
     "rank_model": "gpt-4o-mini-2024-07-18",
@@ -964,6 +999,13 @@
     "price": 0.15,
     "provider": "OpenAI",
     "organization": "OpenAI"
+  },
+  {
+    "rank_model": "mercury",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Inception AI"
   },
   {
     "rank_model": "gpt-4.1-nano-2025-04-14",
@@ -980,18 +1022,18 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "gpt-4o-2024-08-06",
-    "matched_price_model": "gpt-4o",
-    "price": 2.5,
-    "provider": "OpenAI",
-    "organization": "OpenAI"
-  },
-  {
     "rank_model": "llama-3.1-nemotron-70b-instruct",
     "matched_price_model": "Llama 3.1 Nemotron 70B Instruct HF",
     "price": 0.88,
     "provider": "Together.AI",
     "organization": "Nvidia"
+  },
+  {
+    "rank_model": "gpt-4o-2024-08-06",
+    "matched_price_model": "gpt-4o",
+    "price": 2.5,
+    "provider": "OpenAI",
+    "organization": "OpenAI"
   },
   {
     "rank_model": "qwen-max-0919",
@@ -1008,18 +1050,18 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "grok-2-mini-2024-08-13",
-    "matched_price_model": "grok-2-1212",
-    "price": 2,
-    "provider": "XAI",
-    "organization": "xAI"
-  },
-  {
     "rank_model": "claude-3-5-sonnet-20240620",
     "matched_price_model": "Claude Sonnet 3.5",
     "price": 3,
     "provider": "Anthropic",
     "organization": "Anthropic"
+  },
+  {
+    "rank_model": "grok-2-mini-2024-08-13",
+    "matched_price_model": "grok-2-1212",
+    "price": 2,
+    "provider": "XAI",
+    "organization": "xAI"
   },
   {
     "rank_model": "gemini-advanced-0514",
@@ -1064,6 +1106,13 @@
     "organization": "DeepSeek"
   },
   {
+    "rank_model": "olmo-3.1-32b-think",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Allen AI"
+  },
+  {
     "rank_model": "qwen2.5-72b-instruct",
     "matched_price_model": "Qwen 2.5-72B-Instruct",
     "price": 0.23,
@@ -1073,13 +1122,6 @@
   {
     "rank_model": "mistral-large-2407",
     "matched_price_model": "Mistral Large 2407",
-    "price": 2,
-    "provider": "Mistral",
-    "organization": "Mistral"
-  },
-  {
-    "rank_model": "mistral-large-2411",
-    "matched_price_model": "Mistral Large 2411",
     "price": 2,
     "provider": "Mistral",
     "organization": "Mistral"
@@ -1097,6 +1139,13 @@
     "price": 0,
     "provider": "N/A",
     "organization": "NexusFlow"
+  },
+  {
+    "rank_model": "mistral-large-2411",
+    "matched_price_model": "Mistral Large 2411",
+    "price": 2,
+    "provider": "Mistral",
+    "organization": "Mistral"
   },
   {
     "rank_model": "gpt-4-1106-preview",
@@ -1232,18 +1281,18 @@
     "organization": "Princeton"
   },
   {
-    "rank_model": "gemini-1.5-flash-8b-001",
-    "matched_price_model": "Gemini 1.5 Flash 8B <= 128K",
-    "price": 0.0375,
-    "provider": "Google",
-    "organization": "Google"
-  },
-  {
     "rank_model": "glm-4-0520",
     "matched_price_model": "GLM-4.7",
     "price": 0.6,
     "provider": "Z AI",
     "organization": "Zhipu"
+  },
+  {
+    "rank_model": "gemini-1.5-flash-8b-001",
+    "matched_price_model": "Gemini 1.5 Flash 8B <= 128K",
+    "price": 0.0375,
+    "provider": "Google",
+    "organization": "Google"
   },
   {
     "rank_model": "nemotron-4-340b-instruct",
@@ -1267,18 +1316,18 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "reka-flash-20240904",
-    "matched_price_model": "Reka Flash",
-    "price": 0.2,
-    "provider": "Reka",
-    "organization": "Reka AI"
-  },
-  {
     "rank_model": "claude-3-sonnet-20240229",
     "matched_price_model": "Claude Sonnet 3.7",
     "price": 3,
     "provider": "Anthropic",
     "organization": "Anthropic"
+  },
+  {
+    "rank_model": "reka-flash-20240904",
+    "matched_price_model": "Reka Flash",
+    "price": 0.2,
+    "provider": "Reka",
+    "organization": "Reka AI"
   },
   {
     "rank_model": "olmo-2-0325-32b-instruct",
@@ -1351,18 +1400,18 @@
     "organization": "Ai2"
   },
   {
-    "rank_model": "ministral-8b-2410",
-    "matched_price_model": "Mistral Ministral 8B",
-    "price": 0.1,
-    "provider": "Mistral",
-    "organization": "Mistral"
-  },
-  {
     "rank_model": "deepseek-coder-v2",
     "matched_price_model": "DeepSeek Coder V2 Lite Instruct FP8 (fast)",
     "price": 0.08,
     "provider": "Nebius AI Studio",
     "organization": "DeepSeek"
+  },
+  {
+    "rank_model": "ministral-8b-2410",
+    "matched_price_model": "Mistral Ministral 8B",
+    "price": 0.1,
+    "provider": "Mistral",
+    "organization": "Mistral"
   },
   {
     "rank_model": "command-r-08-2024",
@@ -1386,18 +1435,18 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "c4ai-aya-expanse-8b",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "Cohere"
-  },
-  {
     "rank_model": "gpt-4-0613",
     "matched_price_model": "GPT-4 Turbo",
     "price": 10,
     "provider": "OpenAI",
     "organization": "OpenAI"
+  },
+  {
+    "rank_model": "c4ai-aya-expanse-8b",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Cohere"
   },
   {
     "rank_model": "mistral-large-2402",
@@ -1463,18 +1512,18 @@
     "organization": "Cohere"
   },
   {
-    "rank_model": "qwq-32b-preview",
-    "matched_price_model": "QwQ-32B-Preview",
-    "price": 0.1,
-    "provider": "SambaNova Cloud",
-    "organization": "Alibaba"
-  },
-  {
     "rank_model": "mixtral-8x22b-instruct-v0.1",
     "matched_price_model": "Mixtral-8x22B Instruct v0.1",
     "price": 1.2,
     "provider": "Together.AI",
     "organization": "Mistral"
+  },
+  {
+    "rank_model": "qwq-32b-preview",
+    "matched_price_model": "QwQ-32B-Preview",
+    "price": 0.1,
+    "provider": "SambaNova Cloud",
+    "organization": "Alibaba"
   },
   {
     "rank_model": "internlm2_5-20b-chat",
@@ -1512,18 +1561,18 @@
     "organization": "HuggingFace"
   },
   {
-    "rank_model": "qwen1.5-32b-chat",
-    "matched_price_model": "Qwen 2.5-32B-Instruct",
-    "price": 0.7,
-    "provider": "Qwen",
-    "organization": "Alibaba"
-  },
-  {
     "rank_model": "phi-3-medium-4k-instruct",
     "matched_price_model": "No match found",
     "price": 0,
     "provider": "N/A",
     "organization": "Microsoft"
+  },
+  {
+    "rank_model": "qwen1.5-32b-chat",
+    "matched_price_model": "Qwen 2.5-32B-Instruct",
+    "price": 0.7,
+    "provider": "Qwen",
+    "organization": "Alibaba"
   },
   {
     "rank_model": "starling-lm-7b-beta",
@@ -1547,6 +1596,13 @@
     "organization": "Google"
   },
   {
+    "rank_model": "yi-34b-chat",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "01 AI"
+  },
+  {
     "rank_model": "granite-3.1-2b-instruct",
     "matched_price_model": "granite-3-1-2b-instruct",
     "price": 0.1,
@@ -1559,13 +1615,6 @@
     "price": 0.35,
     "provider": "Qwen",
     "organization": "Alibaba"
-  },
-  {
-    "rank_model": "yi-34b-chat",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "01 AI"
   },
   {
     "rank_model": "gpt-3.5-turbo-0125",
@@ -1666,13 +1715,6 @@
     "organization": "Nvidia"
   },
   {
-    "rank_model": "granite-3.0-8b-instruct",
-    "matched_price_model": "granite-3-1-8b-instruct",
-    "price": 0.2,
-    "provider": "IBM Watsonx",
-    "organization": "IBM"
-  },
-  {
     "rank_model": "openchat-3.5",
     "matched_price_model": "openchat/openchat_3.5",
     "price": 0.055,
@@ -1680,11 +1722,11 @@
     "organization": "OpenChat"
   },
   {
-    "rank_model": "gemma-1.1-7b-it",
-    "matched_price_model": "Gemma 7B 8k Instruct",
-    "price": 0.07,
-    "provider": "Groq",
-    "organization": "Google"
+    "rank_model": "granite-3.0-8b-instruct",
+    "matched_price_model": "granite-3-1-8b-instruct",
+    "price": 0.2,
+    "provider": "IBM Watsonx",
+    "organization": "IBM"
   },
   {
     "rank_model": "gpt-3.5-turbo-1106",
@@ -1692,6 +1734,13 @@
     "price": 0.5,
     "provider": "OpenAI",
     "organization": "OpenAI"
+  },
+  {
+    "rank_model": "gemma-1.1-7b-it",
+    "matched_price_model": "Gemma 7B 8k Instruct",
+    "price": 0.07,
+    "provider": "Groq",
+    "organization": "Google"
   },
   {
     "rank_model": "openhermes-2.5-mistral-7b",
@@ -1715,18 +1764,18 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "solar-10.7b-instruct-v1.0",
-    "matched_price_model": "Upstage SOLAR Instruct v1 (11B)",
-    "price": 0.3,
-    "provider": "Together.AI",
-    "organization": "Upstage AI"
-  },
-  {
     "rank_model": "qwen1.5-7b-chat",
     "matched_price_model": "Qwen 2.5-7B-Instruct",
     "price": 0.175,
     "provider": "Qwen",
     "organization": "Alibaba"
+  },
+  {
+    "rank_model": "solar-10.7b-instruct-v1.0",
+    "matched_price_model": "Upstage SOLAR Instruct v1 (11B)",
+    "price": 0.3,
+    "provider": "Together.AI",
+    "organization": "Upstage AI"
   },
   {
     "rank_model": "dolphin-2.2.1-mistral-7b",
@@ -1736,18 +1785,18 @@
     "organization": "Cognitive Computations"
   },
   {
-    "rank_model": "granite-3.0-2b-instruct",
-    "matched_price_model": "granite-3-1-2b-instruct",
-    "price": 0.1,
-    "provider": "IBM Watsonx",
-    "organization": "IBM"
-  },
-  {
     "rank_model": "phi-3-mini-4k-instruct-june-2024",
     "matched_price_model": "Microsoft/Phi 3 mini 4k instruct (fast)",
     "price": 0.13,
     "provider": "Nebius AI Studio",
     "organization": "Microsoft"
+  },
+  {
+    "rank_model": "granite-3.0-2b-instruct",
+    "matched_price_model": "granite-3-1-2b-instruct",
+    "price": 0.1,
+    "provider": "IBM Watsonx",
+    "organization": "IBM"
   },
   {
     "rank_model": "wizardlm-13b",
@@ -1827,13 +1876,6 @@
     "organization": "TII"
   },
   {
-    "rank_model": "guanaco-33b",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "UW"
-  },
-  {
     "rank_model": "llama-2-7b-chat",
     "matched_price_model": "LLaMA-2 Chat (7B)",
     "price": 0.2,
@@ -1841,11 +1883,11 @@
     "organization": "Meta"
   },
   {
-    "rank_model": "phi-3-mini-128k-instruct",
+    "rank_model": "guanaco-33b",
     "matched_price_model": "No match found",
     "price": 0,
     "provider": "N/A",
-    "organization": "Microsoft"
+    "organization": "UW"
   },
   {
     "rank_model": "qwen-14b-chat",
@@ -1853,6 +1895,13 @@
     "price": 0.35,
     "provider": "Qwen",
     "organization": "Alibaba"
+  },
+  {
+    "rank_model": "phi-3-mini-128k-instruct",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "Microsoft"
   },
   {
     "rank_model": "smollm2-1.7b-instruct",
@@ -1869,18 +1918,18 @@
     "organization": "Together AI"
   },
   {
-    "rank_model": "vicuna-7b",
-    "matched_price_model": "No match found",
-    "price": 0,
-    "provider": "N/A",
-    "organization": "LMSYS"
-  },
-  {
     "rank_model": "olmo-7b-instruct",
     "matched_price_model": "No match found",
     "price": 0,
     "provider": "N/A",
     "organization": "Allen AI"
+  },
+  {
+    "rank_model": "vicuna-7b",
+    "matched_price_model": "No match found",
+    "price": 0,
+    "provider": "N/A",
+    "organization": "LMSYS"
   },
   {
     "rank_model": "palm-2",
