@@ -348,7 +348,9 @@ export class LLMApp {
             this.refreshChart();
         };
 
-        themeToggleButton.addEventListener('click', toggleTheme);
+        if (themeToggleButton) {
+            themeToggleButton.addEventListener('click', toggleTheme);
+        }
 
         // Always follow the OS / browser preference on page load.
         // localStorage only keeps the toggle override within a session.

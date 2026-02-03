@@ -38,20 +38,31 @@ export class UIController {
             ? `@ ${document.getElementById('current-ratio')?.textContent || 'ratio'}`
             : '';
 
-        let tooltipHTML = `
-            <strong>${model.model}</strong><br/>
-            <br/>ELO: ${model.elo}<br/>
-            Votes: ${model.votes || 'N/A'}<br/>
-            Price: $${formatPrice(model.price)}/M tokens ${priceNote}<br/>
-            Cheapest provider: ${model.cheapest_provider || 'N/A'}<br>
-            Organization: ${model.organization || 'N/A'}<br>
-        `;
+        const strong = document.createElement('strong');
+        strong.textContent = model.model;
+        tooltip.node().appendChild(strong);
+
+        const lines = [
+            '',
+            `ELO: ${model.elo}`,
+            `Votes: ${model.votes || 'N/A'}`,
+            `Price: $${formatPrice(model.price)}/M tokens ${priceNote}`,
+            `Cheapest provider: ${model.cheapest_provider || 'N/A'}`,
+            `Organization: ${model.organization || 'N/A'}`,
+        ];
+        lines.forEach(line => {
+            tooltip.node().appendChild(document.createElement('br'));
+            if (line) tooltip.node().appendChild(document.createTextNode(line));
+        });
 
         if (isPareto) {
-            tooltipHTML += `<br/><span style="color: #ff4444; font-weight: bold;">Pareto Optimal</span>`;
+            tooltip.node().appendChild(document.createElement('br'));
+            const span = document.createElement('span');
+            span.style.color = '#ff4444';
+            span.style.fontWeight = 'bold';
+            span.textContent = 'Pareto Optimal';
+            tooltip.node().appendChild(span);
         }
-
-        tooltip.html(tooltipHTML);
     }
 
     /**

@@ -9,6 +9,12 @@
         <meta name="description" content="Interactive visualization of LM Arena ELO scores vs cheapest provider API costs for input tokens, showing the Pareto frontier of 100+ language models.">
         <meta name="keywords" content="LLM, language models, Pareto frontier, cost efficiency, performance, AI">
         <meta name="color-scheme" content="light dark">
+        <meta property="og:title" content="The LLM Pareto frontier">
+        <meta property="og:description" content="Interactive visualization of LM Arena ELO scores vs API costs, showing the Pareto frontier of 100+ language models.">
+        <meta property="og:image" content="screenshot.png">
+        <meta property="og:url" content="https://paraplouis.github.io/llm-pareto-frontier/">
+        <meta property="og:type" content="website">
+        <meta name="twitter:card" content="summary_large_image">
         <script src="js/vendor/d3.v7.min.js"></script>
     </head>
     <body>
@@ -68,9 +74,6 @@
 
             <div id="chart" class="chart-container">
                 <div class="loading">Initializing chart...</div>
-                <div class="chart-notes">
-                    * Price shown recomputes dynamically based on your prompt/output token settings.
-                </div>
             </div>
 
             <div id="legend" class="legend"></div>
@@ -93,10 +96,7 @@
         <!-- Load data first -->
         <script type="module">
             import { LLMApp } from './js/app.js';
-            document.addEventListener('DOMContentLoaded', () => {
-                const app = new LLMApp();
-                app.init();
-            });
+            new LLMApp().init();
         </script>
     </body>
 </html>

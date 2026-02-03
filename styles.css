@@ -216,18 +216,6 @@ h2 {
     }
 }
 
-.chart-notes {
-    position: absolute;
-    bottom: 25px; /* Positioned above the x-axis labels */
-    left: 0;
-    right: 0;
-    font-size: 12px;
-    color: #777;
-    text-align: center;
-    font-style: italic;
-    pointer-events: none; /* Make sure it doesn't interfere with chart interactions */
-}
-
 .pareto-note {
     margin-top: 20px;
     padding: 15px;
@@ -726,7 +714,7 @@ body.dark-mode h2, body.dark-mode h3, body.dark-mode #main-title, body.dark-mode
     color: #f0f6fc;
 }
 
-body.dark-mode #main-subtitle, body.dark-mode #chart-info, body.dark-mode .chart-notes {
+body.dark-mode #main-subtitle, body.dark-mode #chart-info {
     color: #8b949e;
 }
 
@@ -736,7 +724,7 @@ body.dark-mode .chart-container {
 }
 
 body.dark-mode .axis, body.dark-mode .tick text, body.dark-mode .axis-label, body.dark-mode .model-label {
-    fill: #a0a0a0 !important;
+    fill: #a0a0a0;
     font-weight: 500;
 }
 
