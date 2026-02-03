@@ -97,11 +97,12 @@ export class ChartRenderer {
         const defaultX = this.config.CHART.SCALES.X_DOMAIN;
         const defaultY = this.config.CHART.SCALES.Y_DOMAIN;
 
-        const xMin = priceValues.length ? Math.min(...priceValues) * 0.9 : defaultX[0];
-        const xMax = priceValues.length ? Math.max(...priceValues) * 1.1 : defaultX[1];
+        // Use d3.min/max instead of Math.min/max spread to avoid call-stack overflow on large arrays
+        const xMin = priceValues.length ? d3.min(priceValues) * 0.9 : defaultX[0];
+        const xMax = priceValues.length ? d3.max(priceValues) * 1.1 : defaultX[1];
 
-        const yMin = eloValues.length ? Math.min(...eloValues) - 20 : defaultY[0];
-        const yMax = eloValues.length ? Math.max(...eloValues) + 20 : defaultY[1];
+        const yMin = eloValues.length ? d3.min(eloValues) - 20 : defaultY[0];
+        const yMax = eloValues.length ? d3.max(eloValues) + 20 : defaultY[1];
 
         const xScale = d3.scaleLog()
             .domain([Math.max(0.01, xMin), xMax])

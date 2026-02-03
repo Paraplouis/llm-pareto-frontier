@@ -313,7 +313,7 @@ class DataSynthesizer:
         price_info = price_matcher.find_match(model_name)
 
         if price_info:
-            if self.exclude_free and price_info.input_price == 0:
+            if self.exclude_free and price_info.input_price == 0 and price_info.output_price == 0:
                 return None  # Skip free models if excluded
 
             model_data = ModelData(

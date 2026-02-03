@@ -1,13 +1,10 @@
-import polars as pl
 import json
 from pathlib import Path
 import re
-import pandas as pd
-import io
 import sys
 import os
 import shutil
-from typing import Tuple
+from typing import Tuple, Optional, List, Dict
 from datetime import date, datetime
 from pydoll.browser import Chrome as PydollChrome  # type: ignore
 from pydoll.browser.options import ChromiumOptions as PydollOptions  # type: ignore
@@ -26,7 +23,7 @@ def _find_date_in_config(component, search_string="last updated"):
     return None
 
 
-def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
+def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict]], Optional[str]]:
     """Manually assisted download of the leaderboard from lmarena.ai (Pydoll only).
 
     Opens a visible Chromium window via Pydoll. Perform any required interactions
@@ -34,8 +31,7 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
     script polls for the table and captures it automatically once visible.
 
     Returns:
-        Tuple[pl.DataFrame, str]: DataFrame with columns [Model, Score, Votes, organization] and
-        date string in the page footer (YYYY-MM-DD)
+        Tuple of (list of dicts with keys [Model, Score, Votes, organization], date string YYYY-MM-DD)
     """
 
     base_url = "https://lmarena.ai/leaderboard/text/overall-no-style-control"
@@ -182,42 +178,34 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
         if not records:
             print("    ❌ No model data was extracted from the page.")
             return None, None
-        df_pd = pd.DataFrame(records)
     except json.JSONDecodeError:
         print("    ❌ Failed to parse JSON data from the browser.")
         return None, None
 
-
-    # Clean and standardise column names we care about
-    # This section is simplified as JSON extraction provides clean columns
-    if "Score" not in df_pd.columns:
-        # Simple fallback for score if name is different
-        score_col_cand = [c for c in df_pd.columns if "score" in c.lower()]
-        if score_col_cand:
-            df_pd = df_pd.rename(columns={score_col_cand[0]: "Score"})
-        else:
-            df_pd['Score'] = 0 # Cannot proceed without score
-
-
-    if "Votes" in df_pd.columns:
-        df_pd["Votes"] = (
-            df_pd["Votes"]
-            .astype(str)
-            .str.replace(r"[^\d]", "", regex=True)   # drop NB-spaces, commas, etc.
-        )
-
-    keep_cols = [c for c in ["Model", "Score", "Votes", "organization"] if c in df_pd.columns]
-    df = pl.from_pandas(df_pd[keep_cols])
+    # Clean and standardise using plain dicts (no pandas/polars)
+    keep_keys = {"Model", "Score", "Votes", "organization"}
+    cleaned = []
+    for rec in records:
+        # Normalise Score key
+        if "Score" not in rec:
+            score_key = next((k for k in rec if "score" in k.lower()), None)
+            if score_key:
+                rec["Score"] = rec.pop(score_key)
+            else:
+                rec["Score"] = "0"
+        # Clean Votes: strip non-digit characters
+        if "Votes" in rec:
+            rec["Votes"] = re.sub(r"[^\d]", "", str(rec["Votes"]))
+        cleaned.append({k: v for k, v in rec.items() if k in keep_keys})
 
     # Extract the "Last updated" date.
     last_updated_date: str | None = None
 
-    html_for_date_search = f"last updated: {date_raw}" # Use raw date string for parsing
+    html_for_date_search = f"last updated: {date_raw}"
     m_iso = re.search(r"last updated[\s:]*([0-9]{4}-[0-9]{2}-[0-9]{2})", html_for_date_search, flags=re.I)
     if m_iso:
         last_updated_date = m_iso.group(1)
     else:
-        # Try human-readable pattern inside the (possibly truncated) HTML or the date_raw captured
         raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html_for_date_search, flags=re.I)
         raw = raw_match.group(1) if raw_match else date_raw
         if raw:
@@ -232,7 +220,7 @@ def fetch_latest_leaderboard_df() -> Tuple[pl.DataFrame, str]:
         last_updated_date = date.today().isoformat()
 
     print("  ↳ Leaderboard data loaded and parsed…")
-    return df, last_updated_date
+    return cleaned, last_updated_date
 
 
 if __name__ == '__main__':
@@ -240,9 +228,7 @@ if __name__ == '__main__':
     if leaderboard_df is not None:
         output_path = Path(__file__).parent.parent / "data" / "rank_data.json"
 
-        records = leaderboard_df.to_dicts()
-
-        output_data = {"last_updated": file_date, "models": records}
+        output_data = {"last_updated": file_date, "models": leaderboard_df}
 
         with open(output_path, "w", encoding='utf-8') as f:
             json.dump(output_data, f, indent=2, ensure_ascii=False)

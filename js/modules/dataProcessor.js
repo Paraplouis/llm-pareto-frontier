@@ -8,7 +8,9 @@ export class DataProcessor {
         this.priceLookupMap = new Map(); // key: provider model lowercased -> { inputPrice, outputPrice, provider, originalName }
         this.priceItems = []; // array of entries for iteration
         this.isPriceLoaded = false;
-        this.priceCache = new Map(); // key: `${modelName.toLowerCase()}|${in}:${out}` -> {provider, inputPrice, outputPrice}
+        // Bounded cache: cleared when exceeding 10 000 entries.
+        // In practice the cache is bounded by (models × ratio combinations tried).
+        this.priceCache = new Map();
     }
 
     /**
@@ -53,8 +55,17 @@ export class DataProcessor {
     normalizeModelName(name) {
         if (!name) return '';
         let n = String(name).toLowerCase();
-        // Special cases
+        // Special cases (kept in sync with Python ModelNameNormalizer.SPECIAL_CASES)
         n = n.replace(/\bchatgpt-4o\b/gi, 'gpt-4o');
+        n = n.replace(/\bqwen3-max-preview\b/gi, 'qwen-max-latest');
+        n = n.replace(/\bdbrx-instruct-preview\b/gi, 'dbrx instruct');
+        n = n.replace(/\bsolar-10\.7b-instruct-v1\.0\b/gi, 'upstage solar instruct v1 (11b)');
+        n = n.replace(/\bqwen3-32b\b/gi, 'qwen 3-32b');
+        n = n.replace(/\bglm-4-plus\b/gi, 'glm-4-32b-0414-128k');
+        // General normalizations (kept in sync with Python)
+        n = n.replace(/[\s-]instruct\b/g, '');
+        n = n.replace(/[\s-]chat\b/g, '');
+        n = n.replace(/[\s-]online\b/g, '');
         // Remove version dates and preview indicators
         n = n.replace(/-\d{4}-\d{2}-\d{2}|-\d{4,}/g, '');
         n = n.replace(/-\d{2}-\d{2}/g, '');
@@ -107,6 +118,9 @@ export class DataProcessor {
 
         const cacheKey = `${modelName.toLowerCase()}|${promptTokens}:${outputTokens}|${excludeFree ? 'xfree' : 'all'}`;
         if (this.priceCache.has(cacheKey)) return this.priceCache.get(cacheKey);
+
+        // Evict cache when it grows too large to prevent unbounded memory usage
+        if (this.priceCache.size > 10000) this.priceCache.clear();
 
         const total = Math.max(0, (promptTokens || 0)) + Math.max(0, (outputTokens || 0));
         const inputRatio = total > 0 ? (promptTokens || 0) / total : 1;
