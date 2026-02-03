@@ -12,6 +12,12 @@ GREEN_BOLD="\033[1;92m"
 RESET="\033[0m"
 
 # ==============================================================================
+# PRE-FLIGHT: CHECK DEPENDENCIES
+# ==============================================================================
+command -v node >/dev/null 2>&1 || { echo "❌ node is required for price data conversion"; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "❌ jq is required for price data conversion"; exit 1; }
+
+# ==============================================================================
 # STEP 1: UPDATE PRICING DATA
 # ==============================================================================
 echo "📊 Fetching latest pricing data..."
@@ -59,8 +65,6 @@ echo "${SUB}✅ Successfully fetched pricing data, saved to data/price_data.json
 # STEP 2: SCRAPE LATEST LM ARENA RANKING DATA
 # ==============================================================================
 echo -e "\n🏆 Scraping latest LM Arena rankings from lmarena.ai (manual)..."
-command -v node >/dev/null 2>&1 || { echo "❌ node is required for price data conversion"; exit 1; }
-command -v jq >/dev/null 2>&1 || { echo "❌ jq is required for price data conversion"; exit 1; }
 python3 utils/extract_leaderboard.py
 if [ $? -ne 0 ]; then
     echo "❌ Failed to scrape LM Arena data. Please check the scraper script."
@@ -82,12 +86,5 @@ if [ $? -ne 0 ]; then
     echo "❌ Data synthesis failed. Check generate_synthesized_data.py script"
     exit 1
 fi
-
-# ==============================================================================
-# STEP 4: UPDATE LAST UPDATED DATE IN HTML
-# ==============================================================================
-echo -e "\n📝 Updating HTML title..."
-CURRENT_DATE=$(date +"%B %Y")
-sed -i "s/Updated [A-Za-z]* [0-9]*/Updated $CURRENT_DATE/g" index.html
 
 echo -e "\n${GREEN_BOLD}✅ DATA REFRESH COMPLETE!${RESET}"

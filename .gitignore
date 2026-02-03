@@ -1,3 +1,5 @@
 .venv/
 __pycache__/
 .DS_Store
+data/rank_data.json
+data/price_matching_debug.json
