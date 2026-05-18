@@ -42,6 +42,27 @@ def test_convert_hf_row_applies_model_organization_override():
     assert extract_leaderboard._convert_hf_row(row)["organization"] == "Dolphin"
 
 
+def test_visible_priced_models_have_blank_organization_overrides():
+    for model_name, organization in {
+        "intellect-3": "Prime Intellect",
+        "trinity-large-thinking": "Arcee AI",
+        "trinity-large-preview": "Arcee AI",
+        "jamba-1.5-large": "AI21 Labs",
+        "gemma-2-9b-it-simpo": "Princeton NLP",
+        "reka-flash-20240904": "Reka",
+        "openhermes-2.5-mistral-7b": "Teknium",
+    }.items():
+        row = {
+            "model_name": model_name,
+            "organization": "",
+            "rating": 1200.0,
+            "vote_count": 1000.0,
+            "category": "overall",
+        }
+
+        assert extract_leaderboard._convert_hf_row(row)["organization"] == organization
+
+
 def test_fetch_latest_leaderboard_stops_after_overall_category(monkeypatch):
     pages = {
         0: {

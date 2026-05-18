@@ -47,6 +47,13 @@ ORGANIZATION_NAMES = {
 
 MODEL_ORGANIZATION_OVERRIDES = {
     "dolphin-2.2.1-mistral-7b": "Dolphin",
+    "gemma-2-9b-it-simpo": "Princeton NLP",
+    "intellect-3": "Prime Intellect",
+    "jamba-1.5-large": "AI21 Labs",
+    "openhermes-2.5-mistral-7b": "Teknium",
+    "reka-flash-20240904": "Reka",
+    "trinity-large-preview": "Arcee AI",
+    "trinity-large-thinking": "Arcee AI",
 }
 
 
