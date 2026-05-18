@@ -14,12 +14,12 @@ Available at https://paraplouis.github.io/llm-pareto-frontier/
 
 ## 🔄 Updates and Deployment
 
-- Data refresh is manual: run `./refresh.sh` locally, solve Cloudflare in the opened Chromium window, and commit the updated files in `data/`.
+- Data refresh is manual: run `./refresh.sh` locally and commit the updated files in `data/`. Rankings come from the official LM Arena Hugging Face dataset; pricing comes from OpenRouter.
 - GitHub Pages deploys automatically on pushes that change files under `data/**`.
 
 ### 🛠️ Usage
 
-Python dependencies for data processing and scraping:
+The refresh scripts use `curl` and the Python standard library; `requirements.txt` is intentionally empty except for a note:
 ```bash
 pip install -r requirements.txt
 ```
@@ -35,7 +35,7 @@ and open http://localhost:8000 in your browser.
 ```
 ├── index.html                      # Main entry point
 ├── styles.css                      # Application styles & responsive design
-├── requirements.txt                # Python dependencies for data processing & scraping
+├── requirements.txt                # No runtime refresh dependencies; kept for tooling compatibility
 ├── refresh.sh                      # Manual refresh script for data updates
 ├── screenshot.png                  # Project screenshot for documentation
 ├── .github/
@@ -46,7 +46,8 @@ and open http://localhost:8000 in your browser.
 │   ├── rank_data.json              # Raw ranking data from LM Arena
 │   └── price_data.json             # Raw pricing data
 ├── utils/
-│   ├── extract_leaderboard.py      # Web scraper for LM Arena rankings (manual via Pydoll)
+│   ├── extract_leaderboard.py      # Fetches LM Arena rankings from Hugging Face dataset server
+│   ├── generate_openrouter_price_data.py # Generates pricing data from OpenRouter
 │   └── generate_synthesized_data.py # Main data processing & synthesis utility
 └── js/
     ├── app.js                      # Main application orchestrator
@@ -60,7 +61,7 @@ and open http://localhost:8000 in your browser.
 
 Contributions are welcome! I'm interested in evolving this project in these directions:
 
-- **Enforce data reliability**: more pricing data sources and better model name matching
+- **Enforce data reliability**: better OpenRouter matching and model name normalization
 - **Real price estimation**: implement formulas to estimate actual costs beyond static input pricing
 - **Filtering** by parameter count (total/active), open-source status, ...
 - **Multi-dimensional frontiers** across different performance metrics
@@ -71,6 +72,6 @@ Contributions are welcome! I'm interested in evolving this project in these dire
 
 This project builds upon the work of several projects. Special thanks to:
 
-- The **LM Arena team** for creating and maintaining the [LM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall).
-- **Lincoln Gachagua** for his work on the [LLM Pricing Calculator](https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator) based on **Philipp Schmid**'s [original version](https://huggingface.co/spaces/philschmid/llm-pricing-calculator).
+- The **LM Arena team** for creating and maintaining the [LM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall) and official [leaderboard dataset](https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset).
+- **OpenRouter** for publishing model pricing through its public models API.
 - **Winston Bosan** for the [original implementation](https://github.com/winston-bosan/llm-pareto-frontier) that inspired me to continue the project.
