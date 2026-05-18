@@ -7,7 +7,6 @@ This repository is a static D3 visualization with Python data utilities. The app
 ## Build, Test, and Development Commands
 
 - `python -m http.server`: serve the site locally at `http://localhost:8000`.
-- `python -m pip install -r requirements.txt`: install data-refresh dependencies when present.
 - `./refresh.sh`: fetch OpenRouter pricing, fetch LM Arena rankings from Hugging Face, and regenerate synthesized data.
 - `python -m pytest`: run Python tests for `utils/`.
 - `node --test tests/test_dataProcessor.mjs`: run the Node unit tests for data-processing logic.

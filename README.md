@@ -19,10 +19,7 @@ Available at https://paraplouis.github.io/llm-pareto-frontier/
 
 ### 🛠️ Usage
 
-The refresh scripts use `curl` and the Python standard library; `requirements.txt` is intentionally empty except for a note:
-```bash
-pip install -r requirements.txt
-```
+The refresh scripts use `curl` and the Python standard library; no Python package install is required.
 
 To run the project locally, run:
 ```bash
@@ -35,7 +32,6 @@ and open http://localhost:8000 in your browser.
 ```
 ├── index.html                      # Main entry point
 ├── styles.css                      # Application styles & responsive design
-├── requirements.txt                # No runtime refresh dependencies; kept for tooling compatibility
 ├── refresh.sh                      # Manual refresh script for data updates
 ├── screenshot.png                  # Project screenshot for documentation
 ├── .github/
