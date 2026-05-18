@@ -96,6 +96,12 @@ class OrganizationNormalizer:
     MAPPING = {
         "DeepSeek AI": "DeepSeek",
         "Zhipu AI": "Zhipu",
+        "Allenai": "Allen AI",
+        "Ibm": "IBM",
+        "Inception Ai": "Inception AI",
+        "Microsoft Ai": "Microsoft AI",
+        "Stepfun": "StepFun",
+        "Zai": "Z.ai",
     }
 
     @staticmethod
@@ -294,13 +300,17 @@ class DataSynthesizer:
         It normalizes the model name, finds a price match, and returns
         structured data for the model and for debugging.
         """
-        model_name = model["Model"]
-        elo = int(model["Score"])
+        try:
+            model_name = model["Model"]
+            elo = int(model["Score"])
+        except (KeyError, ValueError, TypeError) as e:
+            print(f"    ⚠ Skipping malformed model record: {e} — {model}")
+            return None
         votes_raw = model.get("Votes", 0)
         try:
             # Ensure votes is an integer; handle strings with commas or NBSPs
             votes = int(re.sub(r"[^0-9]", "", str(votes_raw))) if str(votes_raw) else 0
-        except Exception:
+        except (ValueError, TypeError):
             votes = 0
         organization = model.get("organization", "Unknown")
         organization = OrganizationNormalizer.normalize(organization)

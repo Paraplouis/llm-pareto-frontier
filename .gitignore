@@ -1,5 +1,7 @@
 .venv/
 __pycache__/
 .DS_Store
+node_modules/
 data/rank_data.json
+data/openrouter_raw.json
 data/price_matching_debug.json

@@ -1,239 +1,173 @@
 import json
-from pathlib import Path
-import re
 import sys
-import os
-import shutil
-from typing import Tuple, Optional, List, Dict
-from datetime import date, datetime
-from pydoll.browser import Chrome as PydollChrome  # type: ignore
-from pydoll.browser.options import ChromiumOptions as PydollOptions  # type: ignore
-
-# Pydoll and HTTP fallback removed for manual-only flow
-
-def _clean_html(html_string: str) -> str:
-    """Removes HTML tags from a string."""
-    if not isinstance(html_string, str):
-        return html_string
-    return re.sub(r'<.*?>', '', html_string)
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import urlencode
+from urllib.request import urlopen
 
 
-def _find_date_in_config(component, search_string="last updated"):
-    # Deprecated: kept only for backwards compatibility if needed elsewhere
-    return None
+DATASET_ROWS_URL = "https://datasets-server.huggingface.co/rows"
+DATASET_ID = "lmarena-ai/leaderboard-dataset"
+CONFIG = "text"
+SPLIT = "latest"
+CATEGORY = "overall"
+PAGE_SIZE = 100
+
+ORGANIZATION_NAMES = {
+    "": "N/A",
+    "01.ai": "01.AI",
+    "ai21": "AI21 Labs",
+    "alibaba": "Alibaba",
+    "allenai": "Allen AI",
+    "ant group": "Ant Group",
+    "amazon": "Amazon",
+    "anthropic": "Anthropic",
+    "baidu": "Baidu",
+    "bytedance": "ByteDance",
+    "cohere": "Cohere",
+    "deepseek": "DeepSeek",
+    "google": "Google",
+    "ibm": "IBM",
+    "inception ai": "Inception AI",
+    "meta": "Meta",
+    "microsoft": "Microsoft",
+    "microsoft ai": "Microsoft AI",
+    "minimax": "MiniMax",
+    "mistral": "Mistral",
+    "moonshot": "Moonshot",
+    "nvidia": "Nvidia",
+    "openai": "OpenAI",
+    "reka": "Reka",
+    "stepfun": "StepFun",
+    "xai": "xAI",
+    "z.ai": "Z.ai",
+    "zai": "Z.ai",
+    "zhipu": "Zhipu",
+}
+
+MODEL_ORGANIZATION_OVERRIDES = {
+    "dolphin-2.2.1-mistral-7b": "Dolphin",
+}
 
 
-def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict]], Optional[str]]:
-    """Manually assisted download of the leaderboard from lmarena.ai (Pydoll only).
+def _organization_display_name(value: Any, model_name: str = "") -> str:
+    """Convert dataset organization ids to display names used by the UI."""
+    key = str(value or "").strip().lower()
+    if key:
+        return ORGANIZATION_NAMES.get(key, key.replace("-", " ").title())
+    return MODEL_ORGANIZATION_OVERRIDES.get(model_name.lower(), "N/A")
 
-    Opens a visible Chromium window via Pydoll. Perform any required interactions
-    yourself (solve Cloudflare/Turnstile challenge, remove style control). The
-    script polls for the table and captures it automatically once visible.
+
+def _fetch_rows_page(offset: int, length: int = PAGE_SIZE) -> Dict[str, Any]:
+    """Fetch one page from Hugging Face's dataset server."""
+    query = urlencode(
+        {
+            "dataset": DATASET_ID,
+            "config": CONFIG,
+            "split": SPLIT,
+            "offset": offset,
+            "length": length,
+        }
+    )
+    with urlopen(f"{DATASET_ROWS_URL}?{query}", timeout=30) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def _convert_hf_row(row: Dict[str, Any]) -> Optional[Dict[str, str]]:
+    """Convert a Hugging Face leaderboard row into the repo's rank_data schema."""
+    if row.get("category") != CATEGORY:
+        return None
+
+    model_name = str(row.get("model_name") or "").strip()
+    rating = row.get("rating")
+    if not model_name or rating is None:
+        return None
+
+    try:
+        score = str(int(round(float(rating))))
+    except (TypeError, ValueError):
+        return None
+
+    try:
+        votes = str(int(float(row.get("vote_count") or 0)))
+    except (TypeError, ValueError):
+        votes = "0"
+
+    return {
+        "Model": model_name,
+        "Score": score,
+        "Votes": votes,
+        "organization": _organization_display_name(row.get("organization"), model_name),
+    }
+
+
+def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict[str, str]]], Optional[str]]:
+    """Download the current Text Arena overall leaderboard from Hugging Face.
 
     Returns:
-        Tuple of (list of dicts with keys [Model, Score, Votes, organization], date string YYYY-MM-DD)
+        Tuple of (records with keys [Model, Score, Votes, organization], date string YYYY-MM-DD).
     """
+    print("  ↳ Fetching LM Arena text leaderboard from Hugging Face dataset server...")
 
-    base_url = "https://lmarena.ai/leaderboard/text/overall-no-style-control"
-    json_data_str = ""
-    date_raw = ""
+    records: List[Dict[str, str]] = []
+    publish_dates: List[str] = []
+    offset = 0
+    total_rows: Optional[int] = None
+    seen_overall = False
 
-    print("  ↳ Launching Chromium via Pydoll (visible)…")
-    try:
-        import asyncio
-
-        def _find_chromium_binary() -> tuple[str | None, list[str]]:
-            tried: list[str] = []
-
-            # 1) Look on PATH for common names
-            for name in (
-                "thorium-browser",
-                "thorium",
-                "google-chrome-stable",
-                "google-chrome",
-                "chromium",
-                "chromium-browser",
-            ):
-                path = shutil.which(name)
-                if path:
-                    return path, tried
-                tried.append(name)
-
-            # 2) Known absolute paths
-            for cand in (
-                "/usr/bin/thorium-browser",
-                "/opt/chromium.org/thorium/thorium-browser",
-                "/usr/bin/google-chrome-stable",
-                "/usr/bin/google-chrome",
-                "/usr/bin/chromium",
-                "/usr/bin/chromium-browser",
-                "/snap/bin/chromium",
-                "/opt/google/chrome/chrome",
-            ):
-                if os.path.exists(cand):
-                    return cand, tried
-                tried.append(cand)
-
-            return None, tried
-
-        async def _run_pydoll(url: str) -> tuple[str, str]:
-            options = PydollOptions()
-            binary_override, tried = _find_chromium_binary()
-            if binary_override:
-                options.binary_location = binary_override
-            else:
-                raise RuntimeError("No valid Chromium/Chrome/Thorium binary found. Tried: " + ", ".join(tried))
-            options.add_argument('--disable-dev-shm-usage')
-            options.start_timeout = 20
-
-            manual_wait_secs = 60
-
-            async with PydollChrome(options=options) as browser:
-                tab = await browser.start()
-                bypass_ctx = getattr(tab, 'expect_and_bypass_cloudflare_captcha', None)
-                if callable(bypass_ctx):
-                    async with bypass_ctx():
-                        await tab.go_to(url)
-                else:
-                    await tab.go_to(url)
-
-                print("\nIf a Cloudflare/Turnstile challenge appears, solve it in the opened window.")
-                print("Once solved, the script will detect the table automatically (waiting up to 60s).")
-
-                # Manual mode: no auto-click loop; user resolves challenge directly
-                table_found = False
-                for _ in range(manual_wait_secs):
-                    try:
-                        try:
-                            await tab.query("iframe[src*='leaderboard/text']")
-                            await tab.switch_to_frame("iframe[src*='leaderboard/text']")
-                        except Exception:
-                            pass
-                        node = await tab.find(tag_name='table', timeout=1, raise_exc=False)
-                        if node is not None:
-                            table_found = True
-                            break
-                    except Exception:
-                        pass
-
-                if not table_found:
-                    return "", ""
-
-                # EXTRACT DATA using a robust script instead of relying on pandas
-                json_data = await tab.execute_script("""
-                    const table = document.querySelector('table');
-                    if (!table) return null;
-                    const rows = Array.from(table.querySelectorAll('tbody tr'));
-                    const data = rows.map(row => {
-                        const cells = Array.from(row.querySelectorAll('td'));
-                        if (cells.length < 7) return null;
-
-                        const modelCell = cells[2];
-                        const modelLink = modelCell.querySelector('a');
-                        const modelName = modelLink ? (modelLink.title || modelLink.textContent.trim()) : modelCell.textContent.trim();
-
-                        const scoreText = cells[3].textContent.trim();
-                        const scoreMatch = scoreText.match(/^\\d+/);
-                        const score = scoreMatch ? scoreMatch[0] : "0";
-
-                        return {
-                            'Model': modelName,
-                            'Score': score,
-                            'Votes': cells[5].textContent.trim(),
-                            'organization': cells[6].textContent.trim(),
-                        };
-                    }).filter(Boolean);
-                    return JSON.stringify(data);
-                """)
-
-                last_updated = await tab.execute_script("""
-                    const el = Array.from(document.querySelectorAll('p, div, span')).find(el => el.textContent.includes('Last Updated'));
-                    return el ? el.textContent : '';
-                """)
-
-                json_result_val = ""
-                if isinstance(json_data, dict) and json_data.get('result', {}).get('result', {}).get('type') == 'string':
-                    json_result_val = json_data['result']['result'].get('value', '[]')
-                else:
-                    json_result_val = str(json_data or '[]')
-
-                last_updated_val = ""
-                if isinstance(last_updated, dict) and last_updated.get('result', {}).get('result', {}).get('type') == 'string':
-                    last_updated_val = last_updated['result']['result'].get('value', '')
-                else:
-                    last_updated_val = str(last_updated or "")
-
-                return json_result_val, last_updated_val
-
-        json_data_str, date_raw = asyncio.run(_run_pydoll(base_url))
-        if not json_data_str:
-            print("    ❌ Pydoll did not capture the table.")
-    except Exception as e:
-        print(f"    ❌ Pydoll error: {e}")
-        return None, None
-
-    # Parse the JSON data captured from the browser
-    try:
-        records = json.loads(json_data_str)
-        if not records:
-            print("    ❌ No model data was extracted from the page.")
+    while total_rows is None or offset < total_rows:
+        try:
+            payload = _fetch_rows_page(offset)
+        except Exception as e:
+            print(f"  ❌ Failed to fetch leaderboard rows at offset {offset}: {e}")
             return None, None
-    except json.JSONDecodeError:
-        print("    ❌ Failed to parse JSON data from the browser.")
+
+        rows = payload.get("rows", [])
+        total_rows = int(payload.get("num_rows_total") or 0)
+        if not rows:
+            break
+
+        stop_after_page = False
+        for item in rows:
+            row = item.get("row", {})
+            if row.get("category") != CATEGORY:
+                if seen_overall:
+                    stop_after_page = True
+                    break
+                continue
+
+            seen_overall = True
+            converted = _convert_hf_row(row)
+            if converted:
+                records.append(converted)
+                published = row.get("leaderboard_publish_date")
+                if published:
+                    publish_dates.append(str(published)[:10])
+
+        if stop_after_page:
+            break
+
+        offset += len(rows)
+
+    if not records:
+        print("  ❌ No overall leaderboard rows found in Hugging Face dataset response.")
         return None, None
 
-    # Clean and standardise using plain dicts (no pandas/polars)
-    keep_keys = {"Model", "Score", "Votes", "organization"}
-    cleaned = []
-    for rec in records:
-        # Normalise Score key
-        if "Score" not in rec:
-            score_key = next((k for k in rec if "score" in k.lower()), None)
-            if score_key:
-                rec["Score"] = rec.pop(score_key)
-            else:
-                rec["Score"] = "0"
-        # Clean Votes: strip non-digit characters
-        if "Votes" in rec:
-            rec["Votes"] = re.sub(r"[^\d]", "", str(rec["Votes"]))
-        cleaned.append({k: v for k, v in rec.items() if k in keep_keys})
-
-    # Extract the "Last updated" date.
-    last_updated_date: str | None = None
-
-    html_for_date_search = f"last updated: {date_raw}"
-    m_iso = re.search(r"last updated[\s:]*([0-9]{4}-[0-9]{2}-[0-9]{2})", html_for_date_search, flags=re.I)
-    if m_iso:
-        last_updated_date = m_iso.group(1)
-    else:
-        raw_match = re.search(r"last updated[\s:]*([A-Za-z]{3,9}[\s\xa0]+\d{1,2},[\s\xa0]+\d{4})", html_for_date_search, flags=re.I)
-        raw = raw_match.group(1) if raw_match else date_raw
-        if raw:
-            for fmt in ("%b %d, %Y", "%B %d, %Y"):
-                try:
-                    last_updated_date = datetime.strptime(raw.strip(), fmt).strftime("%Y-%m-%d")
-                    break
-                except ValueError:
-                    continue
-
-    if not last_updated_date:
-        last_updated_date = date.today().isoformat()
-
-    print("  ↳ Leaderboard data loaded and parsed…")
-    return cleaned, last_updated_date
+    last_updated = max(publish_dates) if publish_dates else None
+    print(f"  ↳ Loaded {len(records)} overall leaderboard rows (updated: {last_updated})")
+    return records, last_updated
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     leaderboard_df, file_date = fetch_latest_leaderboard_df()
-    if leaderboard_df is not None:
+    if leaderboard_df is not None and file_date is not None:
         output_path = Path(__file__).parent.parent / "data" / "rank_data.json"
-
         output_data = {"last_updated": file_date, "models": leaderboard_df}
 
-        with open(output_path, "w", encoding='utf-8') as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             json.dump(output_data, f, indent=2, ensure_ascii=False)
 
-        print("  ✅ Successfully scraped LM Arena data, saved to data/rank_data.json")
+        print("  ✅ Successfully saved LM Arena data to data/rank_data.json")
     else:
         print("  ❌ Failed to extract data.")
         print("\n❌ DATA REFRESH FAILED")

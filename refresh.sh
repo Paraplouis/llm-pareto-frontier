@@ -3,10 +3,6 @@
 set -e
 set -o pipefail
 
-TMP_DOWNLOAD_FILE=$(mktemp)
-TMP_JS_FILE=$(mktemp)
-trap 'rm -f "$TMP_JS_FILE" "$TMP_DOWNLOAD_FILE"' EXIT # Remove temp files on exit
-
 # ANSI color codes for styling
 GREEN_BOLD="\033[1;92m"
 RESET="\033[0m"
@@ -14,66 +10,42 @@ RESET="\033[0m"
 # ==============================================================================
 # PRE-FLIGHT: CHECK DEPENDENCIES
 # ==============================================================================
-command -v node >/dev/null 2>&1 || { echo "❌ node is required for price data conversion"; exit 1; }
-command -v jq >/dev/null 2>&1 || { echo "❌ jq is required for price data conversion"; exit 1; }
+command -v curl >/dev/null 2>&1 || { echo "❌ curl is required for data refresh"; exit 1; }
+command -v python3 >/dev/null 2>&1 || { echo "❌ python3 is required for data extraction and synthesis"; exit 1; }
+
+PYTHON3="${BASH_SOURCE%/*}/.venv/bin/python3"
+if [ ! -f "$PYTHON3" ]; then
+    PYTHON3="python3"
+fi
 
 # ==============================================================================
-# STEP 1: UPDATE PRICING DATA
+# STEP 1: UPDATE OPENROUTER PRICING DATA
 # ==============================================================================
-echo "📊 Fetching latest pricing data..."
-
-PRICE_DATA_URL="https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator/resolve/main/src/lib/data.ts"
+echo "📊 Fetching latest OpenRouter pricing data..."
 
 SUB="  " # two-space indent for sub-steps
+OPENROUTER_URL="https://openrouter.ai/api/v1/models"
+OPENROUTER_FILE="data/openrouter_raw.json"
 
-echo "${SUB}↳ Downloading pricing data from LLM Pricing Calculator Space on Hugging Face..."
-curl -sL "$PRICE_DATA_URL" -o "$TMP_DOWNLOAD_FILE"
-
-# Check if download was successful
-if [ ! -s "$TMP_DOWNLOAD_FILE" ]; then
-    echo "❌ Failed: downloaded file is empty. Check the URL or network connection."
+echo "${SUB}↳ Downloading model data from OpenRouter API..."
+if ! curl -sL --max-time 30 "$OPENROUTER_URL" -o "$OPENROUTER_FILE" || [ ! -s "$OPENROUTER_FILE" ]; then
+    echo "❌ OpenRouter download failed."
     exit 1
 fi
-
-# Process the downloaded file
-echo "${SUB}↳ Converting TypeScript to JSON..."
-# Prefer extracting only the mockData array region to avoid ESM imports
-sed -n '/export const mockData:.*= \[/,$p' "$TMP_DOWNLOAD_FILE" | \
-    sed '1s/.*export const mockData:.*= \[/let mockData = \[/' > "$TMP_JS_FILE"
-
-# Validate extraction
-if [ ! -s "$TMP_JS_FILE" ]; then
-    echo "❌ Failed during pricing data conversion. Source format may have changed."
-    cat "$TMP_DOWNLOAD_FILE"
-    exit 1
-fi
-
-echo "console.log(JSON.stringify(mockData));" >> "$TMP_JS_FILE"
-
-# Produce JSON (jq also validates)
-node "$TMP_JS_FILE" | jq -e '.' > data/price_data.json
-
-# Final guard to ensure file was written
-if [ ! -s "data/price_data.json" ]; then
-    echo "❌ price_data.json is empty after conversion."
-    exit 1
-fi
-
-echo "${SUB}✅ Successfully fetched pricing data, saved to data/price_data.json"
+$PYTHON3 utils/generate_openrouter_price_data.py "$OPENROUTER_FILE"
 
 # ==============================================================================
-# STEP 2: SCRAPE LATEST LM ARENA RANKING DATA
+# STEP 2: FETCH LATEST LM ARENA RANKING DATA
 # ==============================================================================
-echo -e "\n🏆 Scraping latest LM Arena rankings from lmarena.ai (manual)..."
-python3 utils/extract_leaderboard.py
+echo -e "\n🏆 Fetching latest LM Arena rankings from Hugging Face..."
+$PYTHON3 utils/extract_leaderboard.py
 if [ $? -ne 0 ]; then
-    echo "❌ Failed to scrape LM Arena data. Please check the scraper script."
+    echo "❌ Failed to fetch LM Arena data. Please check the extraction script."
     exit 1
 fi
 
-# Verify the scraped data was created
 if [ ! -f "data/rank_data.json" ]; then
-    echo "❌ rank_data.json not found after scraping. Please check the scraper output."
+    echo "❌ rank_data.json not found after extraction. Please check the script output."
     exit 1
 fi
 
@@ -81,7 +53,7 @@ fi
 # STEP 3: GENERATE SYNTHESIZED DATA
 # ==============================================================================
 echo -e "\n🔧 Generating synthesized data..."
-python3 utils/generate_synthesized_data.py
+$PYTHON3 utils/generate_synthesized_data.py
 if [ $? -ne 0 ]; then
     echo "❌ Data synthesis failed. Check generate_synthesized_data.py script"
     exit 1
