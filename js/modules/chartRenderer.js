@@ -297,7 +297,7 @@ export class ChartRenderer {
      * Handle mouse out event for data points
      */
     handleMouseOut(event, d) {
-        d3.select(event.target)
+        d3.select(event.currentTarget)
             .transition()
             .duration(this.config.ANIMATION.HOVER_DURATION)
             .attr("r", this.getPointRadius(d))
@@ -310,9 +310,6 @@ export class ChartRenderer {
      * Handle click event for data points
      */
     handleClick(event, d) {
-        document.dispatchEvent(new CustomEvent('modelClick', {
-            detail: { model: d }
-        }));
     }
 
     /**

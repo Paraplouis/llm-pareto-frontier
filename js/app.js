@@ -143,10 +143,11 @@ export class LLMApp {
             });
         }
 
-        // Preset ratio buttons
+        // Preset ratio buttons — store handlers for destroy()
+        this._presetHandlers = [];
         const presetButtons = document.querySelectorAll('.preset-button');
         presetButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
+            const handler = () => {
                 const prompt = parseInt(btn.dataset.prompt || 0, 10);
                 const output = parseInt(btn.dataset.output || 0, 10);
                 this.promptTokens = prompt;
@@ -157,7 +158,9 @@ export class LLMApp {
 
                 this.refreshChart();
                 this.updateRatioDisplayAndPresets();
-            });
+            };
+            btn.addEventListener('click', handler);
+            this._presetHandlers.push({ btn, handler });
         });
 
         // Add a Reset Ratio button if missing
@@ -318,6 +321,9 @@ export class LLMApp {
         document.removeEventListener('selectOnlyOrganization', this.handleSelectOnlyOrganization);
         document.removeEventListener('modelHover', this._handleModelHover);
         document.removeEventListener('modelUnhover', this._handleModelUnhover);
+        if (this._presetHandlers) {
+            this._presetHandlers.forEach(({ btn, handler }) => btn.removeEventListener('click', handler));
+        }
         clearTimeout(this.resizeTimeout);
     }
 

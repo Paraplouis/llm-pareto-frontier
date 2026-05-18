@@ -179,12 +179,12 @@ export class UIController {
 
         const paretoContent = paretoMount;
 
-        paretoContent.append('h2').html('Pareto frontier models');
+        paretoContent.append('h2').text('Pareto frontier models');
 
-        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The models circled in black ⚫ are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
-        paretoContent.append('p').attr('class', 'pareto-explanation-detail').html('The black dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
+        paretoContent.append('p').attr('class', 'pareto-explanation-detail').text('The models circled in black \u26AB are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
+        paretoContent.append('p').attr('class', 'pareto-explanation-detail').text('The black dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
 
-        paretoContent.append('p').html('Below is a list of all models on the Pareto frontier, sorted by ELO score descending :');
+        paretoContent.append('p').text('Below is a list of all models on the Pareto frontier, sorted by ELO score descending:');
 
         const modelsContainer = paretoContent
             .append("div")
@@ -211,7 +211,16 @@ export class UIController {
                 .style("display", "block")
                 .style("font-size", "11px")
                 .style("color", "#666")
-                .html(`Organization: ${model.organization}<br>Cheapest provider: ${model.cheapest_provider}<br>ELO: ${model.elo}<br>Cost: $${formatPrice(model.price)}/M tokens`);
+                .each(function() {
+                    const span = d3.select(this);
+                    span.append('span').text(`Organization: ${model.organization}`);
+                    span.append('br');
+                    span.append('span').text(`Cheapest provider: ${model.cheapest_provider}`);
+                    span.append('br');
+                    span.append('span').text(`ELO: ${model.elo}`);
+                    span.append('br');
+                    span.append('span').text(`Cost: $${formatPrice(model.price)}/M tokens`);
+                });
         });
     }
 
@@ -231,7 +240,10 @@ export class UIController {
     showLoading() {
         const chartContainer = document.getElementById("chart");
         if (chartContainer) {
-            chartContainer.innerHTML = '<div class="loading">Initializing chart...</div>';
+            const loading = document.createElement('div');
+            loading.className = 'loading';
+            loading.textContent = 'Initializing chart...';
+            chartContainer.replaceChildren(loading);
         }
     }
 
@@ -241,7 +253,10 @@ export class UIController {
     showError(message) {
         const chartContainer = document.getElementById("chart");
         if (chartContainer) {
-            chartContainer.innerHTML = `<div class="error">Error: ${message}</div>`;
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = `Error: ${message}`;
+            chartContainer.replaceChildren(errorDiv);
         }
     }
 
@@ -273,12 +288,15 @@ export class UIController {
                 detailsText = `(${details.join(', ')})`;
             }
 
-            let innerHTML = mainText;
+            chartInfoElement.textContent = '';
+            chartInfoElement.appendChild(document.createTextNode(mainText));
             if (detailsText) {
-                innerHTML += `<br><span class="chart-info-details">${detailsText}</span>`;
+                chartInfoElement.appendChild(document.createElement('br'));
+                const detailSpan = document.createElement('span');
+                detailSpan.className = 'chart-info-details';
+                detailSpan.textContent = detailsText;
+                chartInfoElement.appendChild(detailSpan);
             }
-
-            chartInfoElement.innerHTML = innerHTML;
         }
     }
 

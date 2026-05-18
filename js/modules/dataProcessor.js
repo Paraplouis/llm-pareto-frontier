@@ -153,7 +153,7 @@ export class DataProcessor {
                     best = { key, inputPrice, outputPrice, provider, originalName, score };
                 }
             }
-            if (best && best.score > 0.6) candidates.push(best);
+            if (best && best.score > 0.5) candidates.push(best);
         }
 
         if (candidates.length === 0) return null;

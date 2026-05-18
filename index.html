@@ -15,11 +15,11 @@
         <meta property="og:url" content="https://paraplouis.github.io/llm-pareto-frontier/">
         <meta property="og:type" content="website">
         <meta name="twitter:card" content="summary_large_image">
-        <script src="js/vendor/d3.v7.min.js"></script>
+        <script src="js/vendor/d3.v7.min.js" defer></script>
     </head>
     <body>
-        <button class="theme-toggle-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button class="theme-toggle-button" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
         </button>
@@ -41,6 +41,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                aria-hidden="true"
             >
                 <path
                     d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
@@ -57,18 +58,18 @@
 
             <!-- Prompt/Output token controls with presets -->
             <div class="token-controls">
-                <label>Prompt tokens (input):
+                <label for="input-tokens">Prompt tokens (input):
                     <input type="number" id="input-tokens" value="750" min="0" step="50" />
                 </label>
-                <label>Output tokens:
+                <label for="output-tokens">Output tokens:
                     <input type="number" id="output-tokens" value="250" min="0" step="50" />
                 </label>
 
                 <div class="preset-buttons">
-                    <button class="preset-button" data-prompt="1000" data-output="0">1&nbsp;:&nbsp;0</button>
-                    <button class="preset-button" data-prompt="750" data-output="250">3&nbsp;:&nbsp;1</button>
-                    <button class="preset-button" data-prompt="500" data-output="500">1&nbsp;:&nbsp;1</button>
-                    <button class="preset-button" data-prompt="1000" data-output="500">2&nbsp;:&nbsp;1</button>
+                    <button type="button" class="preset-button" data-prompt="1000" data-output="0">1&nbsp;:&nbsp;0</button>
+                    <button type="button" class="preset-button" data-prompt="750" data-output="250">3&nbsp;:&nbsp;1</button>
+                    <button type="button" class="preset-button" data-prompt="500" data-output="500">1&nbsp;:&nbsp;1</button>
+                    <button type="button" class="preset-button" data-prompt="1000" data-output="500">2&nbsp;:&nbsp;1</button>
                 </div>
             </div>
 
@@ -84,10 +85,10 @@
                     <p>The cost of LLMs is steadily falling, and their quality is rising. This chart helps you navigate the trade-offs.</p>
 
                     <h3>Quality (Elo Score)</h3>
-                    <p>We use the ELO score (without <em>style control</em>) from the <a href="https://lmarena.ai/leaderboard/text" target="_blank" rel="noopener noreferrer">LM Arena leaderboard</a> as a proxy for quality. It's like a chess Elo rating, but for LLMs, based on thousands of human votes.</p>
+                    <p>We use the ELO score (without <em>style control</em>) from the official <a href="https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset" target="_blank" rel="noopener noreferrer">LM Arena leaderboard dataset</a> as a proxy for quality. It's like a chess Elo rating, but for LLMs, based on thousands of human votes.</p>
 
                     <h3>Cost ($/MTok)</h3>
-                    <p>The price is calculated from both <em>input</em> and <em>output</em> token rates (per&nbsp;million) based on the prompt/output split you choose above (default&nbsp;<strong>3:1</strong>). Data comes from the <a href="https://huggingface.co/spaces/Presidentlin/llm-pricing-calculator" target="_blank" rel="noopener noreferrer">LLM&nbsp;Pricing&nbsp;Calculator</a>. Historically this chart used input-only pricing as a proxy for cost—equivalent to a <strong>1:0</strong> ratio—which you can still reproduce via the preset buttons.</p>
+                    <p>The price is calculated from both <em>input</em> and <em>output</em> token rates (per&nbsp;million) based on the prompt/output split you choose above (default&nbsp;<strong>3:1</strong>). Pricing data comes from the <a href="https://openrouter.ai" target="_blank" rel="noopener noreferrer">OpenRouter</a> models API. Historically this chart used input-only pricing as a proxy for cost—equivalent to a <strong>1:0</strong> ratio—which you can still reproduce via the preset buttons.</p>
                 </div>
             </div>
 

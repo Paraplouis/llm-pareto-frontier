@@ -724,7 +724,7 @@ body.dark-mode .chart-container {
 }
 
 body.dark-mode .axis, body.dark-mode .tick text, body.dark-mode .axis-label, body.dark-mode .model-label {
-    fill: #a0a0a0;
+    fill: #c9d1d9;
     font-weight: 500;
 }
 
