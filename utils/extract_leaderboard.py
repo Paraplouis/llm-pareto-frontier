@@ -8,7 +8,7 @@ from urllib.request import urlopen
 
 DATASET_ROWS_URL = "https://datasets-server.huggingface.co/rows"
 DATASET_ID = "lmarena-ai/leaderboard-dataset"
-CONFIG = "text"
+CONFIG = "text_style_control"
 SPLIT = "latest"
 CATEGORY = "overall"
 PAGE_SIZE = 100
@@ -109,12 +109,12 @@ def _convert_hf_row(row: Dict[str, Any]) -> Optional[Dict[str, str]]:
 
 
 def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict[str, str]]], Optional[str]]:
-    """Download the current Text Arena overall leaderboard from Hugging Face.
+    """Download the current Text Arena (style-controlled) overall leaderboard from Hugging Face.
 
     Returns:
         Tuple of (records with keys [Model, Score, Votes, organization], date string YYYY-MM-DD).
     """
-    print("  ↳ Fetching LM Arena text leaderboard from Hugging Face dataset server...")
+    print("  ↳ Fetching LM Arena text (style control) leaderboard from Hugging Face dataset server...")
 
     records: List[Dict[str, str]] = []
     publish_dates: List[str] = []
