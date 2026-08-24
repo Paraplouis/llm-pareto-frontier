@@ -1,28 +1,57 @@
-name: Deploy Pages on data changes
-run-name: ${{ github.actor }} updated data 📦→🌐
+name: Refresh data and deploy Pages
+run-name: Refresh data and deploy Pages
 on:
   push:
     branches:
       - main
     paths:
       - 'data/**'
+  schedule:
+    # Run after the daily LM Arena publication and away from the busy top of hour.
+    - cron: '17 14 * * *'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  deploy:
+  refresh-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          # Manual runs may be launched from another ref; only update the default branch.
+          ref: main
+      - name: Set up Python
+        if: github.event_name != 'push'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Refresh leaderboard and pricing data
+        if: github.event_name != 'push'
+        run: ./refresh.sh
+      - name: Commit refreshed data
+        if: github.event_name != 'push'
+        run: |
+          git add -- data/price_data.json data/synthesized_data.js
+          if git diff --cached --quiet; then
+            echo "Data is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): automated refresh [skip ci]"
+          git push origin HEAD:main
+      # Deploy from this checkout because GITHUB_TOKEN pushes do not start another workflow.
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Prepare web assets
