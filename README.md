@@ -1,4 +1,4 @@
-[![Deploy Pages on data changes](https://github.com/Paraplouis/llm-pareto-frontier/actions/workflows/daily-refresh.yml/badge.svg)](https://github.com/Paraplouis/llm-pareto-frontier/actions/workflows/daily-refresh.yml)
+[![Refresh data and deploy Pages](https://github.com/Paraplouis/llm-pareto-frontier/actions/workflows/daily-refresh.yml/badge.svg)](https://github.com/Paraplouis/llm-pareto-frontier/actions/workflows/daily-refresh.yml)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Paraplouis/llm-pareto-frontier)
 
 # LLM Pareto frontier
@@ -14,8 +14,9 @@ Available at https://paraplouis.github.io/llm-pareto-frontier/
 
 ## 🔄 Updates and Deployment
 
-- Data refresh is manual: run `./refresh.sh` locally and commit the updated files in `data/`. Rankings come from the official LM Arena Hugging Face dataset; pricing comes from OpenRouter.
-- GitHub Pages deploys automatically on pushes that change files under `data/**`.
+- GitHub Actions refreshes the data every day at 14:17 UTC. Rankings come from the official LM Arena Hugging Face dataset; pricing comes from OpenRouter.
+- When the generated outputs change, the workflow commits them to `main` and deploys the refreshed site in the same run. Pushes that change files under `data/**` also deploy automatically.
+- To refresh locally, run `./refresh.sh` and commit the updated files in `data/`. The workflow can also be started manually from the Actions tab.
 
 ### 🛠️ Usage
 
@@ -32,11 +33,11 @@ and open http://localhost:8000 in your browser.
 ```
 ├── index.html                      # Main entry point
 ├── styles.css                      # Application styles & responsive design
-├── refresh.sh                      # Manual refresh script for data updates
+├── refresh.sh                      # Refresh script used locally and by GitHub Actions
 ├── screenshot.png                  # Project screenshot for documentation
 ├── .github/
 │   └── workflows/
-│       └── daily-refresh.yml       # Deploy Pages on data/** changes
+│       └── daily-refresh.yml       # Daily data refresh and Pages deployment
 ├── data/
 │   ├── synthesized_data.js         # Final LLM model data (auto-updated)
 │   ├── rank_data.json              # Raw ranking data from LM Arena
