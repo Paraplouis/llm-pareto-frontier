@@ -31,8 +31,8 @@
     "models": [
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.4,
-        "outputPrice": 3.0
+        "inputPrice": 0.425,
+        "outputPrice": 2.55
       },
       {
         "name": "qwen3.8-2.4t-a95b",
@@ -612,18 +612,18 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.0658,
-        "outputPrice": 0.1316
+        "inputPrice": 0.0616,
+        "outputPrice": 0.1232
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.5222,
-        "outputPrice": 1.0443
+        "inputPrice": 0.5728,
+        "outputPrice": 1.1456
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.056,
-        "outputPrice": 0.112
+        "inputPrice": 0.0826,
+        "outputPrice": 0.1652
       },
       {
         "name": "deepseek-v3.2",
@@ -1053,8 +1053,8 @@
       },
       {
         "name": "minimax-m2.7",
-        "inputPrice": 0.24,
-        "outputPrice": 0.96
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "minimax-m2.5",
@@ -1101,6 +1101,11 @@
         "name": "mistral-small-2603",
         "inputPrice": 0.15,
         "outputPrice": 0.6
+      },
+      {
+        "name": "devstral-2512",
+        "inputPrice": 0.44,
+        "outputPrice": 2.2
       },
       {
         "name": "ministral-14b-2512",
@@ -2011,7 +2016,7 @@
       },
       {
         "name": "inkling",
-        "inputPrice": 1.0,
+        "inputPrice": 0.95,
         "outputPrice": 4.05
       },
       {
@@ -2086,8 +2091,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.966,
-        "outputPrice": 3.036
+        "inputPrice": 1.19,
+        "outputPrice": 3.74
       },
       {
         "name": "glm-5.2:batch",
@@ -2096,8 +2101,8 @@
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 0.966,
-        "outputPrice": 3.036
+        "inputPrice": 1.26,
+        "outputPrice": 3.96
       },
       {
         "name": "glm-5v-turbo",
@@ -2219,8 +2224,8 @@
     "models": [
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.04,
-        "outputPrice": 0.08
+        "inputPrice": 0.035,
+        "outputPrice": 0.1
       }
     ]
   },
@@ -2246,8 +2251,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 2.6,
-        "outputPrice": 13.0
+        "inputPrice": 2.8,
+        "outputPrice": 14.0
       }
     ]
   },
