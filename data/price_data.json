@@ -206,7 +206,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.1,
+        "inputPrice": 0.09,
         "outputPrice": 1.1
       },
       {
@@ -490,8 +490,8 @@
     "models": [
       {
         "name": "trinity-large-thinking",
-        "inputPrice": 0.22,
-        "outputPrice": 0.85
+        "inputPrice": 0.25,
+        "outputPrice": 0.8
       }
     ]
   },
@@ -611,8 +611,8 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.045,
-        "outputPrice": 0.09
+        "inputPrice": 0.065,
+        "outputPrice": 0.18
       },
       {
         "name": "deepseek-v4-flash-0731:batch",
@@ -621,13 +621,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.5693,
-        "outputPrice": 1.1387
+        "inputPrice": 0.4173,
+        "outputPrice": 0.8345
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0829,
-        "outputPrice": 0.1658
+        "inputPrice": 0.0787,
+        "outputPrice": 0.1574
       },
       {
         "name": "deepseek-v3.2",
@@ -1123,8 +1123,8 @@
       },
       {
         "name": "devstral-2512",
-        "inputPrice": 0.44,
-        "outputPrice": 2.2
+        "inputPrice": 0.4,
+        "outputPrice": 2.0
       },
       {
         "name": "ministral-14b-2512",
@@ -1890,7 +1890,7 @@
       },
       {
         "name": "inkling",
-        "inputPrice": 0.95,
+        "inputPrice": 1.0,
         "outputPrice": 4.05
       },
       {
@@ -1980,8 +1980,8 @@
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 1.26,
-        "outputPrice": 3.96
+        "inputPrice": 0.966,
+        "outputPrice": 3.036
       },
       {
         "name": "glm-5v-turbo",
@@ -2104,7 +2104,7 @@
       {
         "name": "deepseek-v4-flash-latest",
         "inputPrice": 0.03,
-        "outputPrice": 0.1
+        "outputPrice": 0.16
       }
     ]
   },
