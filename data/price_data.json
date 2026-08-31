@@ -46,8 +46,8 @@
       },
       {
         "name": "qwen3.8-2.4t-a95b:batch",
-        "inputPrice": 2.5,
-        "outputPrice": 6.25
+        "inputPrice": 2.0,
+        "outputPrice": 6.0
       },
       {
         "name": "qwen3.8-max",
@@ -621,13 +621,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.4173,
-        "outputPrice": 0.8345
+        "inputPrice": 1.0308,
+        "outputPrice": 2.0616
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0787,
-        "outputPrice": 0.1574
+        "inputPrice": 0.0809,
+        "outputPrice": 0.1618
       },
       {
         "name": "deepseek-v3.2",
@@ -921,11 +921,6 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
-        "name": "kat-coder-air-v2.5",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
-      },
-      {
         "name": "kat-coder-pro-v2.5",
         "inputPrice": 0.74,
         "outputPrice": 2.96
@@ -996,7 +991,7 @@
       {
         "name": "llama-4-maverick",
         "inputPrice": 0.2,
-        "outputPrice": 0.8
+        "outputPrice": 0.696
       },
       {
         "name": "llama-4-scout",
@@ -1254,8 +1249,8 @@
       },
       {
         "name": "kimi-k2.5",
-        "inputPrice": 0.6,
-        "outputPrice": 3.0
+        "inputPrice": 0.45,
+        "outputPrice": 2.25
       },
       {
         "name": "kimi-k2-thinking",
@@ -1373,9 +1368,19 @@
         "outputPrice": 1.2
       },
       {
+        "name": "gpt-5.6-luna-pro:batch",
+        "inputPrice": 0.1,
+        "outputPrice": 0.6
+      },
+      {
         "name": "gpt-5.6-luna",
         "inputPrice": 0.2,
         "outputPrice": 1.2
+      },
+      {
+        "name": "gpt-5.6-luna:batch",
+        "inputPrice": 0.1,
+        "outputPrice": 0.6
       },
       {
         "name": "gpt-5.6-terra-pro",
@@ -1383,9 +1388,19 @@
         "outputPrice": 12.0
       },
       {
+        "name": "gpt-5.6-terra-pro:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 6.0
+      },
+      {
         "name": "gpt-5.6-terra",
         "inputPrice": 2.0,
         "outputPrice": 12.0
+      },
+      {
+        "name": "gpt-5.6-terra:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 6.0
       },
       {
         "name": "gpt-5.6-sol-pro",
@@ -1393,9 +1408,19 @@
         "outputPrice": 10.0
       },
       {
+        "name": "gpt-5.6-sol-pro:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
+      {
         "name": "gpt-5.6-sol",
         "inputPrice": 2.0,
         "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-5.6-sol:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
       },
       {
         "name": "gpt-chat-latest",
@@ -1408,9 +1433,19 @@
         "outputPrice": 180.0
       },
       {
+        "name": "gpt-5.5-pro:batch",
+        "inputPrice": 15.0,
+        "outputPrice": 90.0
+      },
+      {
         "name": "gpt-5.5",
         "inputPrice": 5.0,
         "outputPrice": 30.0
+      },
+      {
+        "name": "gpt-5.5:batch",
+        "inputPrice": 2.5,
+        "outputPrice": 15.0
       },
       {
         "name": "gpt-5.4-image-2",
@@ -1423,9 +1458,19 @@
         "outputPrice": 1.25
       },
       {
+        "name": "gpt-5.4-nano:batch",
+        "inputPrice": 0.1,
+        "outputPrice": 0.625
+      },
+      {
         "name": "gpt-5.4-mini",
         "inputPrice": 0.75,
         "outputPrice": 4.5
+      },
+      {
+        "name": "gpt-5.4-mini:batch",
+        "inputPrice": 0.375,
+        "outputPrice": 2.25
       },
       {
         "name": "gpt-5.4-pro",
@@ -1433,9 +1478,19 @@
         "outputPrice": 180.0
       },
       {
+        "name": "gpt-5.4-pro:batch",
+        "inputPrice": 15.0,
+        "outputPrice": 90.0
+      },
+      {
         "name": "gpt-5.4",
         "inputPrice": 2.5,
         "outputPrice": 15.0
+      },
+      {
+        "name": "gpt-5.4:batch",
+        "inputPrice": 1.25,
+        "outputPrice": 7.5
       },
       {
         "name": "gpt-5.3-codex",
@@ -1468,9 +1523,19 @@
         "outputPrice": 168.0
       },
       {
+        "name": "gpt-5.2-pro:batch",
+        "inputPrice": 10.5,
+        "outputPrice": 84.0
+      },
+      {
         "name": "gpt-5.2",
         "inputPrice": 1.75,
         "outputPrice": 14.0
+      },
+      {
+        "name": "gpt-5.2:batch",
+        "inputPrice": 0.875,
+        "outputPrice": 7.0
       },
       {
         "name": "gpt-5.1-codex-max",
@@ -1481,6 +1546,11 @@
         "name": "gpt-5.1",
         "inputPrice": 1.25,
         "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-5.1:batch",
+        "inputPrice": 0.625,
+        "outputPrice": 5.0
       },
       {
         "name": "gpt-5.1-codex",
@@ -1513,9 +1583,19 @@
         "outputPrice": 120.0
       },
       {
+        "name": "gpt-5-pro:batch",
+        "inputPrice": 7.5,
+        "outputPrice": 60.0
+      },
+      {
         "name": "gpt-5",
         "inputPrice": 1.25,
         "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-5:batch",
+        "inputPrice": 0.625,
+        "outputPrice": 5.0
       },
       {
         "name": "gpt-5-mini",
@@ -1523,9 +1603,19 @@
         "outputPrice": 2.0
       },
       {
+        "name": "gpt-5-mini:batch",
+        "inputPrice": 0.125,
+        "outputPrice": 1.0
+      },
+      {
         "name": "gpt-5-nano",
         "inputPrice": 0.05,
         "outputPrice": 0.4
+      },
+      {
+        "name": "gpt-5-nano:batch",
+        "inputPrice": 0.025,
+        "outputPrice": 0.2
       },
       {
         "name": "gpt-oss-120b",
@@ -1563,9 +1653,19 @@
         "outputPrice": 8.0
       },
       {
+        "name": "o3:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 4.0
+      },
+      {
         "name": "o4-mini",
         "inputPrice": 1.1,
         "outputPrice": 4.4
+      },
+      {
+        "name": "o4-mini:batch",
+        "inputPrice": 0.55,
+        "outputPrice": 2.2
       },
       {
         "name": "gpt-4.1",
@@ -1573,14 +1673,29 @@
         "outputPrice": 8.0
       },
       {
+        "name": "gpt-4.1:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 4.0
+      },
+      {
         "name": "gpt-4.1-mini",
         "inputPrice": 0.4,
         "outputPrice": 1.6
       },
       {
+        "name": "gpt-4.1-mini:batch",
+        "inputPrice": 0.2,
+        "outputPrice": 0.8
+      },
+      {
         "name": "gpt-4.1-nano",
         "inputPrice": 0.1,
         "outputPrice": 0.4
+      },
+      {
+        "name": "gpt-4.1-nano:batch",
+        "inputPrice": 0.05,
+        "outputPrice": 0.2
       },
       {
         "name": "o1-pro",
@@ -1596,6 +1711,11 @@
         "name": "o3-mini",
         "inputPrice": 1.1,
         "outputPrice": 4.4
+      },
+      {
+        "name": "o3-mini:batch",
+        "inputPrice": 0.55,
+        "outputPrice": 2.2
       },
       {
         "name": "o1",
@@ -1623,6 +1743,11 @@
         "outputPrice": 0.6
       },
       {
+        "name": "gpt-4o-mini:batch",
+        "inputPrice": 0.075,
+        "outputPrice": 0.3
+      },
+      {
         "name": "gpt-4o",
         "inputPrice": 2.5,
         "outputPrice": 10.0
@@ -1633,9 +1758,19 @@
         "outputPrice": 15.0
       },
       {
+        "name": "gpt-4o:batch",
+        "inputPrice": 1.25,
+        "outputPrice": 5.0
+      },
+      {
         "name": "gpt-4-turbo",
         "inputPrice": 10.0,
         "outputPrice": 30.0
+      },
+      {
+        "name": "gpt-4-turbo:batch",
+        "inputPrice": 5.0,
+        "outputPrice": 15.0
       },
       {
         "name": "gpt-3.5-turbo-0613",
@@ -1661,6 +1796,11 @@
         "name": "gpt-3.5-turbo",
         "inputPrice": 0.5,
         "outputPrice": 1.5
+      },
+      {
+        "name": "gpt-3.5-turbo:batch",
+        "inputPrice": 0.25,
+        "outputPrice": 0.75
       },
       {
         "name": "gpt-4",
@@ -2103,7 +2243,7 @@
     "models": [
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.03,
+        "inputPrice": 0.05,
         "outputPrice": 0.16
       }
     ]
