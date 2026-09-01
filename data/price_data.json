@@ -46,8 +46,8 @@
       },
       {
         "name": "qwen3.8-2.4t-a95b:batch",
-        "inputPrice": 2.0,
-        "outputPrice": 6.0
+        "inputPrice": 2.5,
+        "outputPrice": 6.25
       },
       {
         "name": "qwen3.8-max",
@@ -206,7 +206,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.09,
+        "inputPrice": 0.1,
         "outputPrice": 1.1
       },
       {
@@ -333,7 +333,7 @@
     "models": [
       {
         "name": "magnum-v4-72b",
-        "inputPrice": 3.0,
+        "inputPrice": 2.5,
         "outputPrice": 5.0
       }
     ]
@@ -342,11 +342,6 @@
     "provider": "Anthropic",
     "uri": "https://openrouter.ai",
     "models": [
-      {
-        "name": "claude-opus-5-fast",
-        "inputPrice": 10.0,
-        "outputPrice": 50.0
-      },
       {
         "name": "claude-opus-5",
         "inputPrice": 5.0,
@@ -378,11 +373,6 @@
         "outputPrice": 25.0
       },
       {
-        "name": "claude-opus-4.8-fast",
-        "inputPrice": 10.0,
-        "outputPrice": 50.0
-      },
-      {
         "name": "claude-opus-4.8",
         "inputPrice": 5.0,
         "outputPrice": 25.0
@@ -391,11 +381,6 @@
         "name": "claude-opus-4.8:batch",
         "inputPrice": 2.5,
         "outputPrice": 12.5
-      },
-      {
-        "name": "claude-opus-4.7-fast",
-        "inputPrice": 30.0,
-        "outputPrice": 150.0
       },
       {
         "name": "claude-opus-4.7",
@@ -621,13 +606,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 1.0308,
-        "outputPrice": 2.0616
+        "inputPrice": 1.6,
+        "outputPrice": 3.2
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0809,
-        "outputPrice": 0.1618
+        "inputPrice": 0.0748,
+        "outputPrice": 0.1495
       },
       {
         "name": "deepseek-v3.2",
@@ -883,6 +868,11 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "granite-4.2-8b",
+        "inputPrice": 0.1,
+        "outputPrice": 0.15
+      },
+      {
         "name": "granite-4.1-8b",
         "inputPrice": 0.05,
         "outputPrice": 0.1
@@ -898,6 +888,11 @@
     "provider": "Inception",
     "uri": "https://openrouter.ai",
     "models": [
+      {
+        "name": "mercury-2.5-preview",
+        "inputPrice": 0.04,
+        "outputPrice": 0.15
+      },
       {
         "name": "mercury-2",
         "inputPrice": 0.25,
@@ -938,7 +933,7 @@
     "models": [
       {
         "name": "weaver",
-        "inputPrice": 0.5,
+        "inputPrice": 0.4,
         "outputPrice": 0.75
       }
     ]
@@ -995,8 +990,8 @@
       },
       {
         "name": "llama-4-scout",
-        "inputPrice": 0.11,
-        "outputPrice": 0.34
+        "inputPrice": 0.1,
+        "outputPrice": 0.3
       },
       {
         "name": "llama-3.3-70b-instruct",
@@ -1112,11 +1107,6 @@
         "outputPrice": 0.6
       },
       {
-        "name": "mistral-small-2603:batch",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
-      },
-      {
         "name": "devstral-2512",
         "inputPrice": 0.4,
         "outputPrice": 2.0
@@ -1132,22 +1122,12 @@
         "outputPrice": 0.15
       },
       {
-        "name": "ministral-8b-2512:batch",
-        "inputPrice": 0.15,
-        "outputPrice": 0.15
-      },
-      {
         "name": "ministral-3b-2512",
         "inputPrice": 0.1,
         "outputPrice": 0.1
       },
       {
         "name": "mistral-large-2512",
-        "inputPrice": 0.5,
-        "outputPrice": 1.5
-      },
-      {
-        "name": "mistral-large-2512:batch",
         "inputPrice": 0.5,
         "outputPrice": 1.5
       },
@@ -1162,17 +1142,7 @@
         "outputPrice": 2.0
       },
       {
-        "name": "mistral-medium-3.1:batch",
-        "inputPrice": 0.4,
-        "outputPrice": 2.0
-      },
-      {
         "name": "codestral-2508",
-        "inputPrice": 0.3,
-        "outputPrice": 0.9
-      },
-      {
-        "name": "codestral-2508:batch",
         "inputPrice": 0.3,
         "outputPrice": 0.9
       },
@@ -2244,7 +2214,7 @@
       {
         "name": "deepseek-v4-flash-latest",
         "inputPrice": 0.05,
-        "outputPrice": 0.16
+        "outputPrice": 0.1
       }
     ]
   },
