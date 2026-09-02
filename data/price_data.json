@@ -46,8 +46,8 @@
       },
       {
         "name": "qwen3.8-2.4t-a95b:batch",
-        "inputPrice": 2.5,
-        "outputPrice": 6.25
+        "inputPrice": 2.0,
+        "outputPrice": 6.0
       },
       {
         "name": "qwen3.8-max",
@@ -343,6 +343,16 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "claude-fable-5.1",
+        "inputPrice": 10.0,
+        "outputPrice": 50.0
+      },
+      {
+        "name": "claude-fable-5.1:batch",
+        "inputPrice": 5.0,
+        "outputPrice": 25.0
+      },
+      {
         "name": "claude-opus-5",
         "inputPrice": 5.0,
         "outputPrice": 25.0
@@ -606,13 +616,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 1.6,
-        "outputPrice": 3.2
+        "inputPrice": 1.0308,
+        "outputPrice": 2.0616
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0748,
-        "outputPrice": 0.1495
+        "inputPrice": 0.0855,
+        "outputPrice": 0.1711
       },
       {
         "name": "deepseek-v3.2",
@@ -631,8 +641,8 @@
       },
       {
         "name": "deepseek-chat-v3.1",
-        "inputPrice": 0.55,
-        "outputPrice": 1.65
+        "inputPrice": 0.25,
+        "outputPrice": 0.95
       },
       {
         "name": "deepseek-r1-0528",
@@ -666,14 +676,24 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "gemini-3.8-flash",
+        "inputPrice": 0.75,
+        "outputPrice": 3.75
+      },
+      {
+        "name": "gemini-3.8-flash:batch",
+        "inputPrice": 0.375,
+        "outputPrice": 1.875
+      },
+      {
         "name": "gemini-3.7-flash",
         "inputPrice": 0.75,
         "outputPrice": 3.75
       },
       {
         "name": "gemini-3.7-flash:batch",
-        "inputPrice": 0.1875,
-        "outputPrice": 0.9375
+        "inputPrice": 0.375,
+        "outputPrice": 1.875
       },
       {
         "name": "gemini-3.6-flash",
@@ -1266,8 +1286,8 @@
       },
       {
         "name": "nemotron-3-ultra-550b-a55b",
-        "inputPrice": 0.5,
-        "outputPrice": 2.2
+        "inputPrice": 0.625,
+        "outputPrice": 3.125
       },
       {
         "name": "nemotron-3-ultra-550b-a55b:batch",
@@ -2085,8 +2105,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 1.19,
-        "outputPrice": 3.74
+        "inputPrice": 0.966,
+        "outputPrice": 3.036
       },
       {
         "name": "glm-5.1",
@@ -2214,7 +2234,7 @@
       {
         "name": "deepseek-v4-flash-latest",
         "inputPrice": 0.05,
-        "outputPrice": 0.1
+        "outputPrice": 0.16
       }
     ]
   },
@@ -2277,9 +2297,14 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "glm-flash-latest",
+        "inputPrice": 0.075,
+        "outputPrice": 0.25
+      },
+      {
         "name": "glm-latest",
-        "inputPrice": 1.1875,
-        "outputPrice": 4.18
+        "inputPrice": 1.15,
+        "outputPrice": 3.5
       }
     ]
   }
