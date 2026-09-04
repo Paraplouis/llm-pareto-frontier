@@ -91,8 +91,8 @@
       },
       {
         "name": "qwen3.6-27b",
-        "inputPrice": 0.6,
-        "outputPrice": 3.6
+        "inputPrice": 0.3,
+        "outputPrice": 2.0
       },
       {
         "name": "qwen3.6-plus",
@@ -111,8 +111,8 @@
       },
       {
         "name": "qwen3.5-35b-a3b",
-        "inputPrice": 0.25,
-        "outputPrice": 1.25
+        "inputPrice": 0.08,
+        "outputPrice": 0.75
       },
       {
         "name": "qwen3.5-27b",
@@ -596,8 +596,8 @@
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.66,
-        "outputPrice": 1.98
+        "inputPrice": 0.5795,
+        "outputPrice": 1.7384
       },
       {
         "name": "deepseek-v4-pro-0813:batch",
@@ -616,13 +616,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 1.0343,
-        "outputPrice": 2.0685
+        "inputPrice": 1.0019,
+        "outputPrice": 2.0038
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0825,
-        "outputPrice": 0.1649
+        "inputPrice": 0.0881,
+        "outputPrice": 0.1761
       },
       {
         "name": "deepseek-v3.2",
@@ -641,8 +641,8 @@
       },
       {
         "name": "deepseek-chat-v3.1",
-        "inputPrice": 0.25,
-        "outputPrice": 0.95
+        "inputPrice": 0.55,
+        "outputPrice": 1.65
       },
       {
         "name": "deepseek-r1-0528",
@@ -891,11 +891,6 @@
         "name": "granite-4.2-8b",
         "inputPrice": 0.1,
         "outputPrice": 0.15
-      },
-      {
-        "name": "granite-4.1-8b",
-        "inputPrice": 0.05,
-        "outputPrice": 0.1
       },
       {
         "name": "granite-4.0-h-micro",
@@ -1300,9 +1295,14 @@
         "outputPrice": 0.2
       },
       {
+        "name": "nemotron-3.5-content-safety",
+        "inputPrice": 0.2,
+        "outputPrice": 0.2
+      },
+      {
         "name": "nemotron-3-ultra-550b-a55b",
-        "inputPrice": 0.6,
-        "outputPrice": 2.4
+        "inputPrice": 0.625,
+        "outputPrice": 3.125
       },
       {
         "name": "nemotron-3-super-120b-a12b",
@@ -2046,7 +2046,7 @@
     "models": [
       {
         "name": "remm-slerp-l2-13b",
-        "inputPrice": 0.45,
+        "inputPrice": 0.35,
         "outputPrice": 0.65
       }
     ]
@@ -2200,6 +2200,11 @@
         "outputPrice": 2.5
       },
       {
+        "name": "grok-4.3:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 2.0
+      },
+      {
         "name": "grok-4.20-multi-agent",
         "inputPrice": 1.25,
         "outputPrice": 2.5
@@ -2244,7 +2249,7 @@
       {
         "name": "deepseek-v4-flash-latest",
         "inputPrice": 0.05,
-        "outputPrice": 0.16
+        "outputPrice": 0.1
       }
     ]
   },
@@ -2313,8 +2318,8 @@
       },
       {
         "name": "glm-latest",
-        "inputPrice": 1.134,
-        "outputPrice": 3.564
+        "inputPrice": 1.15,
+        "outputPrice": 3.5
       }
     ]
   }
