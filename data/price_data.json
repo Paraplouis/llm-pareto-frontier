@@ -136,8 +136,8 @@
       },
       {
         "name": "qwen3.5-397b-a17b",
-        "inputPrice": 0.55,
-        "outputPrice": 3.5
+        "inputPrice": 0.39,
+        "outputPrice": 2.34
       },
       {
         "name": "qwen3-max-thinking",
@@ -596,8 +596,8 @@
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.5795,
-        "outputPrice": 1.7384
+        "inputPrice": 0.66,
+        "outputPrice": 1.98
       },
       {
         "name": "deepseek-v4-pro-0813:batch",
@@ -606,8 +606,8 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.05,
-        "outputPrice": 0.1
+        "inputPrice": 0.14,
+        "outputPrice": 0.28
       },
       {
         "name": "deepseek-v4-flash-0731:batch",
@@ -616,13 +616,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.6572,
-        "outputPrice": 1.3144
+        "inputPrice": 0.9553,
+        "outputPrice": 1.9105
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0799,
-        "outputPrice": 0.1599
+        "inputPrice": 0.0886,
+        "outputPrice": 0.1772
       },
       {
         "name": "deepseek-v3.2",
@@ -2175,8 +2175,8 @@
       },
       {
         "name": "glm-4.6",
-        "inputPrice": 0.55,
-        "outputPrice": 2.2
+        "inputPrice": 0.43,
+        "outputPrice": 1.75
       },
       {
         "name": "glm-4.5v",
@@ -2268,8 +2268,8 @@
     "models": [
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.045,
-        "outputPrice": 0.09
+        "inputPrice": 0.05,
+        "outputPrice": 0.16
       }
     ]
   },
@@ -2333,13 +2333,13 @@
     "models": [
       {
         "name": "glm-flash-latest",
-        "inputPrice": 0.075,
-        "outputPrice": 0.25
+        "inputPrice": 0.0713,
+        "outputPrice": 0.2375
       },
       {
         "name": "glm-latest",
-        "inputPrice": 1.17,
-        "outputPrice": 3.96
+        "inputPrice": 1.12,
+        "outputPrice": 3.52
       }
     ]
   }
