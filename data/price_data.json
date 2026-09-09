@@ -206,7 +206,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.1,
+        "inputPrice": 0.09,
         "outputPrice": 1.1
       },
       {
@@ -241,8 +241,8 @@
       },
       {
         "name": "qwen3-235b-a22b-2507",
-        "inputPrice": 0.09,
-        "outputPrice": 0.55
+        "inputPrice": 0.22,
+        "outputPrice": 0.88
       },
       {
         "name": "qwen3-30b-a3b",
@@ -621,13 +621,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.9532,
-        "outputPrice": 1.9063
+        "inputPrice": 0.87,
+        "outputPrice": 1.74
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0855,
-        "outputPrice": 0.1711
+        "inputPrice": 0.084,
+        "outputPrice": 0.168
       },
       {
         "name": "deepseek-v3.2",
@@ -894,8 +894,8 @@
     "models": [
       {
         "name": "granite-4.2-8b",
-        "inputPrice": 0.1,
-        "outputPrice": 0.15
+        "inputPrice": 0.06,
+        "outputPrice": 0.25
       },
       {
         "name": "granite-4.0-h-micro",
@@ -909,7 +909,7 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
-        "name": "mercury-2.5-preview",
+        "name": "mercury-2.5",
         "inputPrice": 0.04,
         "outputPrice": 0.15
       },
@@ -1325,11 +1325,6 @@
     "provider": "Nous Research",
     "uri": "https://openrouter.ai",
     "models": [
-      {
-        "name": "hermes-4-70b",
-        "inputPrice": 0.13,
-        "outputPrice": 0.4
-      },
       {
         "name": "hermes-4-405b",
         "inputPrice": 1.0,
@@ -2129,8 +2124,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.966,
-        "outputPrice": 3.036
+        "inputPrice": 0.28,
+        "outputPrice": 0.88
       },
       {
         "name": "glm-5.2:batch",
@@ -2174,8 +2169,8 @@
       },
       {
         "name": "glm-4.6",
-        "inputPrice": 0.55,
-        "outputPrice": 2.2
+        "inputPrice": 0.43,
+        "outputPrice": 1.75
       },
       {
         "name": "glm-4.5v",
@@ -2294,8 +2289,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 2.5,
-        "outputPrice": 14.0
+        "inputPrice": 2.4,
+        "outputPrice": 12.0
       }
     ]
   },
