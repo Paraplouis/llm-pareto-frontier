@@ -226,8 +226,8 @@
       },
       {
         "name": "qwen3-30b-a3b-instruct-2507",
-        "inputPrice": 0.0481,
-        "outputPrice": 0.193
+        "inputPrice": 0.09,
+        "outputPrice": 0.3
       },
       {
         "name": "qwen3-235b-a22b-thinking-2507",
@@ -626,13 +626,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.87,
-        "outputPrice": 1.74
+        "inputPrice": 0.8599,
+        "outputPrice": 1.7198
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0871,
-        "outputPrice": 0.1742
+        "inputPrice": 0.086,
+        "outputPrice": 0.1719
       },
       {
         "name": "deepseek-v3.2",
@@ -661,8 +661,8 @@
       },
       {
         "name": "deepseek-chat-v3-0324",
-        "inputPrice": 0.29,
-        "outputPrice": 1.14
+        "inputPrice": 0.25,
+        "outputPrice": 1.0
       },
       {
         "name": "deepseek-r1-distill-llama-70b",
@@ -929,6 +929,11 @@
     "provider": "Inclusionai",
     "uri": "https://openrouter.ai",
     "models": [
+      {
+        "name": "ling-3.0-flash-vl",
+        "inputPrice": 0.06,
+        "outputPrice": 0.18
+      },
       {
         "name": "ling-3.0-flash-fin",
         "inputPrice": 0.06,
@@ -1264,8 +1269,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 3.0,
-        "outputPrice": 15.0
+        "inputPrice": 2.34,
+        "outputPrice": 11.7
       },
       {
         "name": "kimi-k3:batch",
@@ -1938,6 +1943,16 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "fugu-ultra-v2",
+        "inputPrice": 5.0,
+        "outputPrice": 30.0
+      },
+      {
+        "name": "fugu-max",
+        "inputPrice": 2.0,
+        "outputPrice": 6.0
+      },
+      {
         "name": "sakana-namazu",
         "inputPrice": 0.95,
         "outputPrice": 4.0
@@ -2091,8 +2106,8 @@
     "models": [
       {
         "name": "solar-pro4",
-        "inputPrice": 0.03,
-        "outputPrice": 0.12
+        "inputPrice": 0.09,
+        "outputPrice": 0.36
       },
       {
         "name": "solar-pro-3",
@@ -2154,8 +2169,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.28,
-        "outputPrice": 0.88
+        "inputPrice": 0.6,
+        "outputPrice": 2.0
       },
       {
         "name": "glm-5.2:batch",
@@ -2319,8 +2334,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 2.4,
-        "outputPrice": 12.0
+        "inputPrice": 2.34,
+        "outputPrice": 11.7
       }
     ]
   },
@@ -2329,14 +2344,29 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "gpt-astra-latest",
+        "inputPrice": 10.0,
+        "outputPrice": 50.0
+      },
+      {
+        "name": "gpt-sol-latest",
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-terra-latest",
+        "inputPrice": 2.0,
+        "outputPrice": 12.0
+      },
+      {
+        "name": "gpt-luna-latest",
+        "inputPrice": 0.2,
+        "outputPrice": 1.2
+      },
+      {
         "name": "gpt-mini-latest",
         "inputPrice": 0.75,
         "outputPrice": 4.5
-      },
-      {
-        "name": "gpt-latest",
-        "inputPrice": 2.0,
-        "outputPrice": 10.0
       }
     ]
   },
@@ -2362,8 +2392,8 @@
       },
       {
         "name": "glm-latest",
-        "inputPrice": 0.7,
-        "outputPrice": 2.2
+        "inputPrice": 0.8727,
+        "outputPrice": 3.36
       }
     ]
   }
