@@ -41,8 +41,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.42,
-        "outputPrice": 3.0
+        "inputPrice": 0.214,
+        "outputPrice": 2.55
       },
       {
         "name": "qwen3.8-2.4t-a95b",
@@ -241,8 +241,8 @@
       },
       {
         "name": "qwen3-235b-a22b-2507",
-        "inputPrice": 0.22,
-        "outputPrice": 0.88
+        "inputPrice": 0.0875,
+        "outputPrice": 0.35
       },
       {
         "name": "qwen3-30b-a3b",
@@ -616,8 +616,8 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.065,
-        "outputPrice": 0.18
+        "inputPrice": 0.04,
+        "outputPrice": 0.08
       },
       {
         "name": "deepseek-v4-flash-0731:batch",
@@ -626,13 +626,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.8599,
-        "outputPrice": 1.7198
+        "inputPrice": 1.6,
+        "outputPrice": 3.2
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.086,
-        "outputPrice": 0.1719
+        "inputPrice": 0.0659,
+        "outputPrice": 0.1319
       },
       {
         "name": "deepseek-v3.2",
@@ -947,6 +947,22 @@
     ]
   },
   {
+    "provider": "Inference Net",
+    "uri": "https://openrouter.ai",
+    "models": [
+      {
+        "name": "schematron-v2-turbo",
+        "inputPrice": 0.03,
+        "outputPrice": 0.15
+      },
+      {
+        "name": "schematron-v2-small",
+        "inputPrice": 0.05,
+        "outputPrice": 0.23
+      }
+    ]
+  },
+  {
     "provider": "Kwaipilot",
     "uri": "https://openrouter.ai",
     "models": [
@@ -1055,8 +1071,8 @@
       },
       {
         "name": "llama-3.1-70b-instruct",
-        "inputPrice": 0.4,
-        "outputPrice": 0.4
+        "inputPrice": 0.72,
+        "outputPrice": 0.72
       },
       {
         "name": "llama-3.1-8b-instruct",
@@ -1269,8 +1285,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 2.34,
-        "outputPrice": 11.7
+        "inputPrice": 2.6481,
+        "outputPrice": 13.2827
       },
       {
         "name": "kimi-k3:batch",
@@ -2307,8 +2323,8 @@
     "models": [
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.05,
-        "outputPrice": 0.16
+        "inputPrice": 0.03,
+        "outputPrice": 0.07
       }
     ]
   },
@@ -2334,8 +2350,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 2.34,
-        "outputPrice": 11.7
+        "inputPrice": 2.125,
+        "outputPrice": 11.9
       }
     ]
   },
