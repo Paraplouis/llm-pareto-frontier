@@ -171,8 +171,8 @@
       },
       {
         "name": "qwen3-vl-30b-a3b-instruct",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.13,
+        "outputPrice": 0.52
       },
       {
         "name": "qwen3-vl-235b-a22b-thinking",
@@ -631,8 +631,8 @@
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.084,
-        "outputPrice": 0.168
+        "inputPrice": 0.0855,
+        "outputPrice": 0.1711
       },
       {
         "name": "deepseek-v3.2",
@@ -771,11 +771,6 @@
         "outputPrice": 0.34
       },
       {
-        "name": "gemma-4-31b-it:batch",
-        "inputPrice": 0.39,
-        "outputPrice": 0.97
-      },
-      {
         "name": "gemini-3.1-flash-lite-preview",
         "inputPrice": 0.25,
         "outputPrice": 1.5
@@ -883,8 +878,8 @@
     "models": [
       {
         "name": "mythomax-l2-13b",
-        "inputPrice": 0.06,
-        "outputPrice": 0.06
+        "inputPrice": 0.08,
+        "outputPrice": 0.11
       }
     ]
   },
@@ -1133,7 +1128,7 @@
       },
       {
         "name": "minimax-m1",
-        "inputPrice": 0.55,
+        "inputPrice": 0.4,
         "outputPrice": 2.2
       },
       {
@@ -1229,8 +1224,8 @@
       },
       {
         "name": "mistral-small-3.2-24b-instruct",
-        "inputPrice": 0.075,
-        "outputPrice": 0.2
+        "inputPrice": 0.0938,
+        "outputPrice": 0.25
       },
       {
         "name": "mistral-medium-3",
@@ -1280,8 +1275,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 2.6481,
-        "outputPrice": 13.2827
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
       },
       {
         "name": "kimi-k3:batch",
@@ -1290,8 +1285,8 @@
       },
       {
         "name": "kimi-k2.7-code",
-        "inputPrice": 0.71,
-        "outputPrice": 3.5
+        "inputPrice": 0.7062,
+        "outputPrice": 3.21
       },
       {
         "name": "kimi-k2.6",
@@ -1352,8 +1347,8 @@
       },
       {
         "name": "nemotron-3-ultra-550b-a55b",
-        "inputPrice": 0.6,
-        "outputPrice": 2.4
+        "inputPrice": 0.625,
+        "outputPrice": 3.125
       },
       {
         "name": "nemotron-3-super-120b-a12b",
@@ -1681,11 +1676,6 @@
         "name": "gpt-oss-20b",
         "inputPrice": 0.03,
         "outputPrice": 0.13
-      },
-      {
-        "name": "gpt-oss-20b:batch",
-        "inputPrice": 0.05,
-        "outputPrice": 0.2
       },
       {
         "name": "o3-pro",
@@ -2079,11 +2069,6 @@
         "outputPrice": 1.2
       },
       {
-        "name": "inkling-small:batch",
-        "inputPrice": 0.5,
-        "outputPrice": 1.2
-      },
-      {
         "name": "inkling",
         "inputPrice": 1.0,
         "outputPrice": 4.05
@@ -2155,8 +2140,8 @@
     "models": [
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.075,
-        "outputPrice": 0.25
+        "inputPrice": 0.09,
+        "outputPrice": 0.3
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2350,8 +2335,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 2.1,
-        "outputPrice": 10.95
+        "inputPrice": 2.0,
+        "outputPrice": 11.2
       }
     ]
   },
