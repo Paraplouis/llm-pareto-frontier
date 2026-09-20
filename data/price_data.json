@@ -41,7 +41,7 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.214,
+        "inputPrice": 0.2,
         "outputPrice": 2.55
       },
       {
@@ -111,8 +111,8 @@
       },
       {
         "name": "qwen3.5-35b-a3b",
-        "inputPrice": 0.1625,
-        "outputPrice": 1.3
+        "inputPrice": 0.3125,
+        "outputPrice": 1.25
       },
       {
         "name": "qwen3.5-27b",
@@ -606,8 +606,8 @@
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.5782,
-        "outputPrice": 1.7345
+        "inputPrice": 0.5372,
+        "outputPrice": 1.6117
       },
       {
         "name": "deepseek-v4-pro-0813:batch",
@@ -631,8 +631,8 @@
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0414,
-        "outputPrice": 0.0829
+        "inputPrice": 0.0356,
+        "outputPrice": 0.0711
       },
       {
         "name": "deepseek-v3.2",
@@ -1011,8 +1011,8 @@
       },
       {
         "name": "muse-glimmer-30b",
-        "inputPrice": 0.35,
-        "outputPrice": 1.5
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "muse-glimmer-30b:batch",
@@ -2182,8 +2182,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.5544,
-        "outputPrice": 1.7424
+        "inputPrice": 0.6496,
+        "outputPrice": 2.0416
       },
       {
         "name": "glm-5.2:batch",
@@ -2320,8 +2320,8 @@
     "models": [
       {
         "name": "deepseek-pro-latest",
-        "inputPrice": 0.5782,
-        "outputPrice": 1.7345
+        "inputPrice": 0.5372,
+        "outputPrice": 1.6117
       },
       {
         "name": "deepseek-flash-latest",
@@ -2415,8 +2415,8 @@
       },
       {
         "name": "glm-latest",
-        "inputPrice": 0.8918,
-        "outputPrice": 2.8028
+        "inputPrice": 0.8316,
+        "outputPrice": 2.6136
       }
     ]
   }
