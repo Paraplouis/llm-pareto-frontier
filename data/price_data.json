@@ -40,6 +40,11 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "qwen3.8-max-prime",
+        "inputPrice": 4.0,
+        "outputPrice": 12.0
+      },
+      {
         "name": "qwen3.8-omni-flash",
         "inputPrice": 0.15,
         "outputPrice": 0.47
@@ -211,7 +216,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.09,
+        "inputPrice": 0.1,
         "outputPrice": 1.1
       },
       {
@@ -231,8 +236,8 @@
       },
       {
         "name": "qwen3-30b-a3b-instruct-2507",
-        "inputPrice": 0.0481,
-        "outputPrice": 0.193
+        "inputPrice": 0.1,
+        "outputPrice": 0.3
       },
       {
         "name": "qwen3-235b-a22b-thinking-2507",
@@ -606,8 +611,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.1,
-        "outputPrice": 0.5
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -626,18 +631,18 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.04,
-        "outputPrice": 0.64
+        "inputPrice": 0.03,
+        "outputPrice": 0.32
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.9481,
-        "outputPrice": 1.8963
+        "inputPrice": 0.8923,
+        "outputPrice": 1.7845
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0825,
-        "outputPrice": 0.1649
+        "inputPrice": 0.0763,
+        "outputPrice": 0.1526
       },
       {
         "name": "deepseek-v3.2",
@@ -683,6 +688,17 @@
         "name": "deepseek-chat",
         "inputPrice": 0.32,
         "outputPrice": 0.89
+      }
+    ]
+  },
+  {
+    "provider": "Fireworks",
+    "uri": "https://openrouter.ai",
+    "models": [
+      {
+        "name": "ember-1",
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
       }
     ]
   },
@@ -1113,8 +1129,8 @@
       },
       {
         "name": "minimax-m2",
-        "inputPrice": 0.255,
-        "outputPrice": 1.02
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "minimax-m1",
@@ -1265,7 +1281,7 @@
       },
       {
         "name": "kimi-k2.7-code",
-        "inputPrice": 0.7062,
+        "inputPrice": 0.6562,
         "outputPrice": 3.3
       },
       {
@@ -1339,22 +1355,6 @@
         "name": "nemotron-3-nano-30b-a3b",
         "inputPrice": 0.05,
         "outputPrice": 0.2
-      }
-    ]
-  },
-  {
-    "provider": "Nex Agi",
-    "uri": "https://openrouter.ai",
-    "models": [
-      {
-        "name": "nex-n2.5-mini",
-        "inputPrice": 0.025,
-        "outputPrice": 0.1
-      },
-      {
-        "name": "nex-n2.5-pro",
-        "inputPrice": 0.075,
-        "outputPrice": 0.25
       }
     ]
   },
@@ -1702,6 +1702,11 @@
         "name": "gpt-oss-120b",
         "inputPrice": 0.15,
         "outputPrice": 0.6
+      },
+      {
+        "name": "gpt-oss-120b:batch",
+        "inputPrice": 0.0296,
+        "outputPrice": 0.136
       },
       {
         "name": "gpt-oss-20b",
@@ -2212,6 +2217,11 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "glm-5.3-prime",
+        "inputPrice": 2.8,
+        "outputPrice": 8.8
+      },
+      {
         "name": "glm-5.3-flashx",
         "inputPrice": 0.37,
         "outputPrice": 1.25
@@ -2228,8 +2238,8 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.84,
-        "outputPrice": 2.64
+        "inputPrice": 1.4,
+        "outputPrice": 4.4
       },
       {
         "name": "glm-5.3:batch",
@@ -2376,18 +2386,18 @@
     "models": [
       {
         "name": "deepseek-pro-latest",
-        "inputPrice": 0.4,
-        "outputPrice": 1.1999
+        "inputPrice": 0.3894,
+        "outputPrice": 1.1682
       },
       {
         "name": "deepseek-flash-latest",
-        "inputPrice": 0.1,
-        "outputPrice": 0.5
+        "inputPrice": 0.04,
+        "outputPrice": 1.0
       },
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.038,
-        "outputPrice": 0.55
+        "inputPrice": 0.03,
+        "outputPrice": 0.32
       }
     ]
   },
@@ -2413,8 +2423,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 1.4989,
-        "outputPrice": 10.758
+        "inputPrice": 1.35,
+        "outputPrice": 11.5
       }
     ]
   },
@@ -2466,8 +2476,8 @@
     "models": [
       {
         "name": "glm-flash-latest",
-        "inputPrice": 0.075,
-        "outputPrice": 0.25
+        "inputPrice": 0.045,
+        "outputPrice": 0.14
       },
       {
         "name": "glm-latest",
