@@ -616,8 +616,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.02,
-        "outputPrice": 0.6
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -631,12 +631,12 @@
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.66,
-        "outputPrice": 1.98
+        "inputPrice": 0.22,
+        "outputPrice": 4.2
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.0171,
+        "inputPrice": 0.0188,
         "outputPrice": 1.28
       },
       {
@@ -661,7 +661,7 @@
       },
       {
         "name": "deepseek-v3.1-terminus",
-        "inputPrice": 0.3,
+        "inputPrice": 0.27,
         "outputPrice": 1.0
       },
       {
@@ -947,8 +947,8 @@
       },
       {
         "name": "ling-3.0-flash-fin",
-        "inputPrice": 0.06,
-        "outputPrice": 0.18
+        "inputPrice": 0.042,
+        "outputPrice": 0.1232
       },
       {
         "name": "ling-3.0-flash",
@@ -1281,8 +1281,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 2.7,
-        "outputPrice": 13.5
+        "inputPrice": 0.99,
+        "outputPrice": 13.0
       },
       {
         "name": "kimi-k3:batch",
@@ -1296,8 +1296,8 @@
       },
       {
         "name": "kimi-k2.6",
-        "inputPrice": 0.4341,
-        "outputPrice": 1.828
+        "inputPrice": 0.95,
+        "outputPrice": 4.0
       },
       {
         "name": "kimi-k2.5",
@@ -1343,8 +1343,8 @@
     "models": [
       {
         "name": "nemotron-3.5-lightning",
-        "inputPrice": 0.06,
-        "outputPrice": 0.16
+        "inputPrice": 0.0595,
+        "outputPrice": 0.17
       },
       {
         "name": "nemotron-3.5-content-safety",
@@ -1353,8 +1353,8 @@
       },
       {
         "name": "nemotron-3-ultra-550b-a55b",
-        "inputPrice": 0.6,
-        "outputPrice": 2.4
+        "inputPrice": 0.5,
+        "outputPrice": 2.2
       },
       {
         "name": "nemotron-3-super-120b-a12b",
@@ -2299,8 +2299,8 @@
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 0.9646,
-        "outputPrice": 3.0316
+        "inputPrice": 1.4,
+        "outputPrice": 4.4
       },
       {
         "name": "glm-5v-turbo",
@@ -2432,8 +2432,8 @@
     "models": [
       {
         "name": "deepseek-pro-latest",
-        "inputPrice": 0.132,
-        "outputPrice": 0.396
+        "inputPrice": 0.22,
+        "outputPrice": 4.2
       },
       {
         "name": "deepseek-flash-latest",
@@ -2442,8 +2442,8 @@
       },
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.0128,
-        "outputPrice": 1.2
+        "inputPrice": 0.0188,
+        "outputPrice": 1.28
       }
     ]
   },
@@ -2469,8 +2469,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 1.39,
-        "outputPrice": 13.0
+        "inputPrice": 0.75,
+        "outputPrice": 11.357
       }
     ]
   },
@@ -2522,8 +2522,8 @@
     "models": [
       {
         "name": "glm-flash-latest",
-        "inputPrice": 0.0262,
-        "outputPrice": 0.6
+        "inputPrice": 0.035,
+        "outputPrice": 0.5
       },
       {
         "name": "glm-latest",
