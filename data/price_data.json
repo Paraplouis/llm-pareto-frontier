@@ -107,7 +107,7 @@
       {
         "name": "qwen3.6-27b",
         "inputPrice": 0.32,
-        "outputPrice": 3.2
+        "outputPrice": 3.25
       },
       {
         "name": "qwen3.6-plus",
@@ -616,8 +616,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.003,
-        "outputPrice": 2.4
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -631,8 +631,8 @@
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.85,
-        "outputPrice": 5.0
+        "inputPrice": 0.66,
+        "outputPrice": 1.98
       },
       {
         "name": "deepseek-v4-flash-0731",
@@ -646,12 +646,12 @@
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0224,
+        "inputPrice": 0.03,
         "outputPrice": 1.28
       },
       {
         "name": "deepseek-v3.2",
-        "inputPrice": 0.28,
+        "inputPrice": 0.259,
         "outputPrice": 0.42
       },
       {
@@ -661,7 +661,7 @@
       },
       {
         "name": "deepseek-v3.1-terminus",
-        "inputPrice": 0.27,
+        "inputPrice": 0.3,
         "outputPrice": 1.0
       },
       {
@@ -676,8 +676,8 @@
       },
       {
         "name": "deepseek-chat-v3-0324",
-        "inputPrice": 0.25,
-        "outputPrice": 1.0
+        "inputPrice": 0.29,
+        "outputPrice": 1.14
       },
       {
         "name": "deepseek-r1",
@@ -783,8 +783,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.0675,
-        "outputPrice": 0.225
+        "inputPrice": 0.0765,
+        "outputPrice": 0.255
       },
       {
         "name": "gemma-4-31b-it",
@@ -1281,8 +1281,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 0.72,
-        "outputPrice": 13.0
+        "inputPrice": 1.29,
+        "outputPrice": 14.0
       },
       {
         "name": "kimi-k3:batch",
@@ -1343,8 +1343,8 @@
     "models": [
       {
         "name": "nemotron-3.5-lightning",
-        "inputPrice": 0.0595,
-        "outputPrice": 0.17
+        "inputPrice": 0.06,
+        "outputPrice": 0.16
       },
       {
         "name": "nemotron-3.5-content-safety",
@@ -1521,8 +1521,8 @@
       },
       {
         "name": "gpt-5.6-sol-pro",
-        "inputPrice": 4.0,
-        "outputPrice": 20.0
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
       },
       {
         "name": "gpt-5.6-sol-pro:batch",
@@ -2284,8 +2284,8 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 1.4,
-        "outputPrice": 4.4
+        "inputPrice": 0.07,
+        "outputPrice": 7.0
       },
       {
         "name": "glm-5.3:batch",
@@ -2294,8 +2294,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.0792,
-        "outputPrice": 8.0
+        "inputPrice": 0.032,
+        "outputPrice": 12.0
       },
       {
         "name": "glm-5.1",
@@ -2469,7 +2469,7 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 0.6688,
+        "inputPrice": 0.7884,
         "outputPrice": 13.0
       }
     ]
@@ -2527,8 +2527,8 @@
       },
       {
         "name": "glm-latest",
-        "inputPrice": 0.08,
-        "outputPrice": 4.4
+        "inputPrice": 0.03,
+        "outputPrice": 12.0
       }
     ]
   }
