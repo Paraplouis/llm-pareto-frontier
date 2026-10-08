@@ -106,8 +106,8 @@
       },
       {
         "name": "qwen3.6-27b",
-        "inputPrice": 0.32,
-        "outputPrice": 3.25
+        "inputPrice": 0.3,
+        "outputPrice": 2.0
       },
       {
         "name": "qwen3.6-plus",
@@ -121,13 +121,13 @@
       },
       {
         "name": "qwen3.5-35b-a3b",
-        "inputPrice": 0.08,
-        "outputPrice": 0.75
+        "inputPrice": 0.15,
+        "outputPrice": 1.0
       },
       {
         "name": "qwen3.5-27b",
-        "inputPrice": 0.195,
-        "outputPrice": 1.56
+        "inputPrice": 0.26,
+        "outputPrice": 2.6
       },
       {
         "name": "qwen3.5-122b-a10b",
@@ -216,7 +216,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.1,
+        "inputPrice": 0.09,
         "outputPrice": 1.1
       },
       {
@@ -352,6 +352,16 @@
     "provider": "Anthropic",
     "uri": "https://openrouter.ai",
     "models": [
+      {
+        "name": "claude-haiku-5.5",
+        "inputPrice": 0.1,
+        "outputPrice": 0.5
+      },
+      {
+        "name": "claude-haiku-5.5:batch",
+        "inputPrice": 0.05,
+        "outputPrice": 0.25
+      },
       {
         "name": "claude-sonnet-5.5",
         "inputPrice": 2.0,
@@ -511,17 +521,6 @@
     ]
   },
   {
-    "provider": "Baidu",
-    "uri": "https://openrouter.ai",
-    "models": [
-      {
-        "name": "ernie-4.5-vl-424b-a47b",
-        "inputPrice": 0.42,
-        "outputPrice": 1.25
-      }
-    ]
-  },
-  {
     "provider": "ByteDance",
     "uri": "https://openrouter.ai",
     "models": [
@@ -616,7 +615,7 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.0373,
+        "inputPrice": 0.3,
         "outputPrice": 1.2
       },
       {
@@ -636,22 +635,22 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.0053,
+        "inputPrice": 0.0079,
         "outputPrice": 1.28
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.2088,
-        "outputPrice": 0.4176
+        "inputPrice": 0.2873,
+        "outputPrice": 0.5745
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0002,
+        "inputPrice": 0.0173,
         "outputPrice": 1.28
       },
       {
         "name": "deepseek-v3.2",
-        "inputPrice": 0.28,
+        "inputPrice": 0.259,
         "outputPrice": 0.42
       },
       {
@@ -951,6 +950,11 @@
         "outputPrice": 0.0616
       },
       {
+        "name": "ling-3.0-flash-sante",
+        "inputPrice": 0.042,
+        "outputPrice": 0.1232
+      },
+      {
         "name": "ling-3.0-flash-fin",
         "inputPrice": 0.042,
         "outputPrice": 0.1232
@@ -975,17 +979,6 @@
         "name": "schematron-v2-small",
         "inputPrice": 0.05,
         "outputPrice": 0.23
-      }
-    ]
-  },
-  {
-    "provider": "Kwaipilot",
-    "uri": "https://openrouter.ai",
-    "models": [
-      {
-        "name": "kat-coder-pro-v2.5",
-        "inputPrice": 0.74,
-        "outputPrice": 2.96
       }
     ]
   },
@@ -1062,8 +1055,8 @@
       },
       {
         "name": "llama-3.3-70b-instruct",
-        "inputPrice": 0.22,
-        "outputPrice": 0.5
+        "inputPrice": 0.1,
+        "outputPrice": 0.32
       },
       {
         "name": "llama-3.2-1b-instruct",
@@ -1291,8 +1284,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 0.69,
-        "outputPrice": 15.0
+        "inputPrice": 0.82,
+        "outputPrice": 13.5
       },
       {
         "name": "kimi-k3:batch",
@@ -1306,8 +1299,8 @@
       },
       {
         "name": "kimi-k2.6",
-        "inputPrice": 0.95,
-        "outputPrice": 4.0
+        "inputPrice": 0.4348,
+        "outputPrice": 2.45
       },
       {
         "name": "kimi-k2.5",
@@ -1353,8 +1346,8 @@
     "models": [
       {
         "name": "nemotron-3.5-lightning",
-        "inputPrice": 0.06,
-        "outputPrice": 0.16
+        "inputPrice": 0.049,
+        "outputPrice": 0.14
       },
       {
         "name": "nemotron-3.5-content-safety",
@@ -1373,8 +1366,8 @@
       },
       {
         "name": "nemotron-3-nano-30b-a3b",
-        "inputPrice": 0.05,
-        "outputPrice": 0.2
+        "inputPrice": 0.06,
+        "outputPrice": 0.24
       }
     ]
   },
@@ -1425,9 +1418,19 @@
         "outputPrice": 10.0
       },
       {
+        "name": "gpt-6.1-sol-pro:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
+      {
         "name": "gpt-6.1-sol",
         "inputPrice": 2.0,
         "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-6.1-sol:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
       },
       {
         "name": "gpt-6-luna-pro",
@@ -2089,6 +2092,11 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "step-5-preview",
+        "inputPrice": 1.0,
+        "outputPrice": 2.7
+      },
+      {
         "name": "step-3.7-flash",
         "inputPrice": 0.2,
         "outputPrice": 1.15
@@ -2173,7 +2181,7 @@
       },
       {
         "name": "inkling",
-        "inputPrice": 0.95,
+        "inputPrice": 1.0,
         "outputPrice": 4.05
       }
     ]
@@ -2294,8 +2302,8 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.07,
-        "outputPrice": 7.0
+        "inputPrice": 0.08,
+        "outputPrice": 3.39
       },
       {
         "name": "glm-5.3:batch",
@@ -2304,13 +2312,13 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.152,
-        "outputPrice": 12.0
+        "inputPrice": 0.07,
+        "outputPrice": 4.3
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 1.4,
-        "outputPrice": 4.4
+        "inputPrice": 0.966,
+        "outputPrice": 3.036
       },
       {
         "name": "glm-5v-turbo",
@@ -2421,8 +2429,8 @@
       },
       {
         "name": "claude-haiku-latest",
-        "inputPrice": 1.0,
-        "outputPrice": 5.0
+        "inputPrice": 0.1,
+        "outputPrice": 0.5
       },
       {
         "name": "claude-sonnet-latest",
@@ -2442,18 +2450,18 @@
     "models": [
       {
         "name": "deepseek-pro-latest",
-        "inputPrice": 0.2514,
-        "outputPrice": 4.2
+        "inputPrice": 0.1271,
+        "outputPrice": 8.0
       },
       {
         "name": "deepseek-flash-latest",
-        "inputPrice": 0.0373,
-        "outputPrice": 1.2
+        "inputPrice": 0.0283,
+        "outputPrice": 0.8
       },
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.0053,
-        "outputPrice": 1.28
+        "inputPrice": 0.0063,
+        "outputPrice": 0.5436
       }
     ]
   },
@@ -2479,7 +2487,7 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 0.68,
+        "inputPrice": 0.81,
         "outputPrice": 13.0
       }
     ]
@@ -2532,12 +2540,12 @@
     "models": [
       {
         "name": "glm-flash-latest",
-        "inputPrice": 0.0244,
-        "outputPrice": 0.5
+        "inputPrice": 0.032,
+        "outputPrice": 2.8552
       },
       {
         "name": "glm-latest",
-        "inputPrice": 0.03,
+        "inputPrice": 0.06,
         "outputPrice": 12.0
       }
     ]
