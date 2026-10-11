@@ -61,8 +61,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.425,
-        "outputPrice": 2.55
+        "inputPrice": 0.04,
+        "outputPrice": 2.3
       },
       {
         "name": "qwen3.8-2.4t-a95b",
@@ -96,8 +96,8 @@
       },
       {
         "name": "qwen3.6-35b-a3b",
-        "inputPrice": 0.15,
-        "outputPrice": 1.0
+        "inputPrice": 0.1,
+        "outputPrice": 0.95
       },
       {
         "name": "qwen3.6-27b",
@@ -581,7 +581,7 @@
       {
         "name": "deepseek-v4-flash-0731",
         "inputPrice": 0.018,
-        "outputPrice": 1.28
+        "outputPrice": 0.64
       },
       {
         "name": "deepseek-v4-pro",
@@ -1229,8 +1229,8 @@
     "models": [
       {
         "name": "kimi-k3",
-        "inputPrice": 0.3,
-        "outputPrice": 14.9
+        "inputPrice": 0.8,
+        "outputPrice": 13.5
       },
       {
         "name": "kimi-k3:batch",
@@ -1244,8 +1244,8 @@
       },
       {
         "name": "kimi-k2.6",
-        "inputPrice": 0.4344,
-        "outputPrice": 2.45
+        "inputPrice": 0.65,
+        "outputPrice": 3.41
       },
       {
         "name": "kimi-k2.5",
@@ -1301,8 +1301,8 @@
       },
       {
         "name": "nemotron-3-ultra-550b-a55b",
-        "inputPrice": 0.5,
-        "outputPrice": 2.2
+        "inputPrice": 0.6,
+        "outputPrice": 2.4
       },
       {
         "name": "nemotron-3-super-120b-a12b",
@@ -2247,7 +2247,7 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.039,
+        "inputPrice": 0.07,
         "outputPrice": 4.8
       },
       {
@@ -2400,13 +2400,13 @@
       },
       {
         "name": "deepseek-flash-latest",
-        "inputPrice": 0.0001,
-        "outputPrice": 0.6
+        "inputPrice": 0.0348,
+        "outputPrice": 0.1392
       },
       {
         "name": "deepseek-v4-flash-latest",
         "inputPrice": 0.018,
-        "outputPrice": 1.28
+        "outputPrice": 0.64
       }
     ]
   },
@@ -2432,7 +2432,7 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 0.3,
+        "inputPrice": 0.75,
         "outputPrice": 14.9
       }
     ]
@@ -2490,7 +2490,7 @@
       },
       {
         "name": "glm-latest",
-        "inputPrice": 0.039,
+        "inputPrice": 0.07,
         "outputPrice": 4.8
       }
     ]
