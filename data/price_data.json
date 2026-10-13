@@ -116,8 +116,8 @@
       },
       {
         "name": "qwen3.5-35b-a3b",
-        "inputPrice": 0.08,
-        "outputPrice": 0.75
+        "inputPrice": 0.15,
+        "outputPrice": 1.0
       },
       {
         "name": "qwen3.5-27b",
@@ -560,8 +560,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.0441,
+        "outputPrice": 0.765
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -585,13 +585,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.4124,
-        "outputPrice": 0.8248
+        "inputPrice": 0.419,
+        "outputPrice": 0.838
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.03,
-        "outputPrice": 1.28
+        "inputPrice": 0.091,
+        "outputPrice": 0.182
       },
       {
         "name": "deepseek-v3.2",
@@ -650,6 +650,16 @@
     "provider": "Google",
     "uri": "https://openrouter.ai",
     "models": [
+      {
+        "name": "gemini-4-argon",
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
+      },
+      {
+        "name": "gemini-4-argon:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
       {
         "name": "gemini-nano-banana-2.1",
         "inputPrice": 1.5,
@@ -890,19 +900,14 @@
     "uri": "https://openrouter.ai",
     "models": [
       {
+        "name": "ling-3.1-flash",
+        "inputPrice": 0.075,
+        "outputPrice": 0.225
+      },
+      {
         "name": "ling-3.0-flash-vl",
-        "inputPrice": 0.021,
-        "outputPrice": 0.0616
-      },
-      {
-        "name": "ling-3.0-flash-sante",
-        "inputPrice": 0.042,
-        "outputPrice": 0.1232
-      },
-      {
-        "name": "ling-3.0-flash-fin",
-        "inputPrice": 0.042,
-        "outputPrice": 0.1232
+        "inputPrice": 0.06,
+        "outputPrice": 0.18
       },
       {
         "name": "ling-3.0-flash",
@@ -924,6 +929,17 @@
         "name": "schematron-v2-small",
         "inputPrice": 0.05,
         "outputPrice": 0.23
+      }
+    ]
+  },
+  {
+    "provider": "Liquid",
+    "uri": "https://openrouter.ai",
+    "models": [
+      {
+        "name": "lfm-2.5-24b-a2b",
+        "inputPrice": 0.05,
+        "outputPrice": 0.7
       }
     ]
   },
@@ -1005,8 +1021,8 @@
       },
       {
         "name": "llama-3.3-70b-instruct",
-        "inputPrice": 0.22,
-        "outputPrice": 0.5
+        "inputPrice": 0.59,
+        "outputPrice": 0.79
       },
       {
         "name": "llama-3.2-1b-instruct",
@@ -1057,8 +1073,8 @@
       },
       {
         "name": "minimax-m2.7",
-        "inputPrice": 0.21,
-        "outputPrice": 0.84
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "minimax-m2.5",
@@ -1699,8 +1715,8 @@
       },
       {
         "name": "gpt-oss-120b",
-        "inputPrice": 0.037,
-        "outputPrice": 0.17
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
       },
       {
         "name": "gpt-oss-120b:batch",
@@ -2242,8 +2258,8 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.15,
-        "outputPrice": 0.5
+        "inputPrice": 0.0261,
+        "outputPrice": 0.9
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2405,13 +2421,13 @@
       },
       {
         "name": "deepseek-flash-latest",
-        "inputPrice": 0.024,
-        "outputPrice": 1.188
+        "inputPrice": 0.0441,
+        "outputPrice": 0.765
       },
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.0128,
-        "outputPrice": 0.768
+        "inputPrice": 0.0144,
+        "outputPrice": 0.576
       }
     ]
   },
@@ -2437,8 +2453,8 @@
     "models": [
       {
         "name": "kimi-latest",
-        "inputPrice": 0.73,
-        "outputPrice": 10.0
+        "inputPrice": 0.72,
+        "outputPrice": 24.0
       }
     ]
   },
@@ -2490,7 +2506,7 @@
     "models": [
       {
         "name": "glm-flash-latest",
-        "inputPrice": 0.032,
+        "inputPrice": 0.0261,
         "outputPrice": 0.9
       },
       {
