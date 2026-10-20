@@ -61,8 +61,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.24,
-        "outputPrice": 2.2
+        "inputPrice": 0.04,
+        "outputPrice": 1.35
       },
       {
         "name": "qwen3.8-2.4t-a95b",
@@ -101,8 +101,8 @@
       },
       {
         "name": "qwen3.6-35b-a3b",
-        "inputPrice": 0.15,
-        "outputPrice": 1.0
+        "inputPrice": 0.1,
+        "outputPrice": 0.95
       },
       {
         "name": "qwen3.6-27b",
@@ -121,7 +121,7 @@
       },
       {
         "name": "qwen3.5-35b-a3b",
-        "inputPrice": 0.15,
+        "inputPrice": 0.14,
         "outputPrice": 1.0
       },
       {
@@ -146,8 +146,8 @@
       },
       {
         "name": "qwen3.5-397b-a17b",
-        "inputPrice": 0.5,
-        "outputPrice": 3.6
+        "inputPrice": 0.39,
+        "outputPrice": 2.34
       },
       {
         "name": "qwen3-coder-next",
@@ -186,7 +186,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.09,
+        "inputPrice": 0.1,
         "outputPrice": 1.1
       },
       {
@@ -565,8 +565,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.0304,
-        "outputPrice": 0.08
+        "inputPrice": 0.0283,
+        "outputPrice": 0.12
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -590,8 +590,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.387,
-        "outputPrice": 0.774
+        "inputPrice": 0.3802,
+        "outputPrice": 0.7604
       },
       {
         "name": "deepseek-v4-flash",
@@ -630,8 +630,8 @@
       },
       {
         "name": "deepseek-chat",
-        "inputPrice": 0.32,
-        "outputPrice": 0.89
+        "inputPrice": 0.2574,
+        "outputPrice": 1.0287
       }
     ]
   },
@@ -753,8 +753,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.0765,
-        "outputPrice": 0.255
+        "inputPrice": 0.09,
+        "outputPrice": 0.3
       },
       {
         "name": "gemma-4-31b-it",
@@ -822,19 +822,9 @@
         "outputPrice": 2.5
       },
       {
-        "name": "gemini-2.5-flash:batch",
-        "inputPrice": 0.15,
-        "outputPrice": 1.25
-      },
-      {
         "name": "gemini-2.5-pro",
         "inputPrice": 1.25,
         "outputPrice": 10.0
-      },
-      {
-        "name": "gemini-2.5-pro:batch",
-        "inputPrice": 0.625,
-        "outputPrice": 5.0
       },
       {
         "name": "gemini-2.5-pro-preview",
@@ -843,8 +833,8 @@
       },
       {
         "name": "gemma-3-4b-it",
-        "inputPrice": 0.05,
-        "outputPrice": 0.1
+        "inputPrice": 0.04,
+        "outputPrice": 0.05
       },
       {
         "name": "gemma-3-12b-it",
@@ -1130,8 +1120,8 @@
     "models": [
       {
         "name": "mistral-large-4-0",
-        "inputPrice": 0.68,
-        "outputPrice": 2.09
+        "inputPrice": 1.36,
+        "outputPrice": 4.18
       },
       {
         "name": "mistral-medium-3-5",
@@ -1344,8 +1334,8 @@
     "models": [
       {
         "name": "nemotron-3.5-super-vl",
-        "inputPrice": 0.1,
-        "outputPrice": 0.4
+        "inputPrice": 0.15,
+        "outputPrice": 0.5
       },
       {
         "name": "nemotron-3.5-lightning",
@@ -2017,8 +2007,8 @@
     "models": [
       {
         "name": "beam-1.0-501b-a23b",
-        "inputPrice": 1.0,
-        "outputPrice": 3.0
+        "inputPrice": 0.3,
+        "outputPrice": 1.0
       }
     ]
   },
@@ -2233,8 +2223,8 @@
       },
       {
         "name": "solar-pro4",
-        "inputPrice": 0.09,
-        "outputPrice": 0.36
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
       },
       {
         "name": "solar-pro-3",
@@ -2302,7 +2292,7 @@
       {
         "name": "glm-5.3-flash",
         "inputPrice": 0.048,
-        "outputPrice": 0.16
+        "outputPrice": 0.12
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2464,12 +2454,12 @@
       },
       {
         "name": "deepseek-flash-latest",
-        "inputPrice": 0.038,
-        "outputPrice": 0.6
+        "inputPrice": 0.07,
+        "outputPrice": 0.5
       },
       {
         "name": "deepseek-v4-flash-latest",
-        "inputPrice": 0.0069,
+        "inputPrice": 0.0039,
         "outputPrice": 0.12
       }
     ]
@@ -2497,7 +2487,7 @@
       {
         "name": "kimi-latest",
         "inputPrice": 0.238,
-        "outputPrice": 16.0
+        "outputPrice": 24.0
       }
     ]
   },
@@ -2561,12 +2551,12 @@
       {
         "name": "glm-flash-latest",
         "inputPrice": 0.048,
-        "outputPrice": 0.16
+        "outputPrice": 0.12
       },
       {
         "name": "glm-latest",
-        "inputPrice": 0.055,
-        "outputPrice": 6.0
+        "inputPrice": 0.079,
+        "outputPrice": 1.4
       }
     ]
   }
