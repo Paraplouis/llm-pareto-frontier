@@ -3,98 +3,174 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The LLM Pareto frontier</title>
+        <title>The Pareto Frontier — a daily market sheet for language models</title>
+        <link rel="preload" href="fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="stylesheet" href="styles.css" />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
-        <meta name="description" content="Interactive visualization of LM Arena ELO scores vs cheapest provider API costs for input tokens, showing the Pareto frontier of 100+ language models.">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 fill=%22%23f4f0e6%22/><path d=%22M4 26h7v-9h7v-6h6V5h4%22 fill=%22none%22 stroke=%22%23d4380d%22 stroke-width=%223%22/></svg>">
+        <meta name="description" content="A daily market sheet for language models: LM Arena ELO scores against OpenRouter API prices, and the Pareto frontier of the best score at each price.">
         <meta name="keywords" content="LLM, language models, Pareto frontier, cost efficiency, performance, AI">
         <meta name="color-scheme" content="light dark">
-        <meta property="og:title" content="The LLM Pareto frontier">
-        <meta property="og:description" content="Interactive visualization of LM Arena ELO scores vs API costs, showing the Pareto frontier of 100+ language models.">
+        <meta property="og:title" content="The Pareto Frontier">
+        <meta property="og:description" content="A daily market sheet for language models: LM Arena ELO scores against OpenRouter API prices.">
         <meta property="og:image" content="screenshot.png">
         <meta property="og:url" content="https://paraplouis.github.io/llm-pareto-frontier/">
         <meta property="og:type" content="website">
         <meta name="twitter:card" content="summary_large_image">
+        <script>
+            try {
+                const theme = localStorage.getItem('theme');
+                if (theme) document.documentElement.dataset.theme = theme;
+            } catch {}
+        </script>
         <script src="js/vendor/d3.v7.min.js" defer></script>
     </head>
     <body>
-        <button class="theme-toggle-button" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-        </button>
-        <a
-            href="https://github.com/Paraplouis/llm-pareto-frontier"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="github-icon"
-            aria-label="View source on GitHub"
-            title="View source on GitHub"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-            >
-                <path
-                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                ></path>
-            </svg>
-        </a>
-        <div class="container">
-            <h1 id="main-title">The LLM Pareto frontier</h1>
-            <h2 id="main-subtitle">ELO scores vs API costs</h2>
-
-            <!-- Token controls will be rendered after chart-info -->
-
-            <div id="chart-info" class="chart-info"></div>
-
-            <!-- Prompt/Output token controls with presets -->
-            <div class="token-controls">
-                <label for="input-tokens">Prompt tokens (input):
-                    <input type="number" id="input-tokens" value="750" min="0" step="50" />
-                </label>
-                <label for="output-tokens">Output tokens:
-                    <input type="number" id="output-tokens" value="250" min="0" step="50" />
-                </label>
-
-                <div class="preset-buttons">
-                    <button type="button" class="preset-button" data-prompt="1000" data-output="0">1&nbsp;:&nbsp;0</button>
-                    <button type="button" class="preset-button" data-prompt="750" data-output="250">3&nbsp;:&nbsp;1</button>
-                    <button type="button" class="preset-button" data-prompt="500" data-output="500">1&nbsp;:&nbsp;1</button>
-                    <button type="button" class="preset-button" data-prompt="1000" data-output="500">2&nbsp;:&nbsp;1</button>
+        <div class="sheet">
+            <header class="masthead">
+                <div class="masthead-strip">
+                    <span id="edition" class="edition"></span>
+                    <span class="masthead-sources">LM Arena × OpenRouter</span>
+                    <nav class="masthead-actions" aria-label="Page">
+                        <button class="text-button theme-toggle-button" type="button">Night</button>
+                        <a class="text-button" href="https://github.com/Paraplouis/llm-pareto-frontier" target="_blank" rel="noopener noreferrer">Source ↗</a>
+                    </nav>
                 </div>
-            </div>
+                <h1 class="title">The Pareto <em>Frontier</em></h1>
+                <p class="dek">A daily market sheet for language models: what each point of quality costs.</p>
+            </header>
 
-            <div id="chart" class="chart-container">
-                <div class="loading">Initializing chart...</div>
-            </div>
+            <section class="lede-block" aria-label="Summary">
+                <p id="lede" class="lede"></p>
+                <dl id="ticker" class="ticker"></dl>
+            </section>
 
-            <div id="legend" class="legend"></div>
-
-            <div class="explanation">
-                <h2 class="explanation-toggle">How to read this chart? <span class="toggle-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span></h2>
-                <div class="explanation-content collapsed">
-                    <p>The cost of LLMs is steadily falling, and their quality is rising. This chart helps you navigate the trade-offs.</p>
-
-                    <h3>Quality (Elo Score)</h3>
-                    <p>We use the ELO score (with <em>style control</em>) from the official <a href="https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset" target="_blank" rel="noopener noreferrer">LM Arena leaderboard dataset</a> as a proxy for quality. It's like a chess Elo rating, but for LLMs, based on thousands of human votes.</p>
-
-                    <h3>Cost ($/MTok)</h3>
-                    <p>The price is calculated from both <em>input</em> and <em>output</em> token rates (per&nbsp;million) based on the prompt/output split you choose above (default&nbsp;<strong>3:1</strong>). Pricing data comes from the <a href="https://openrouter.ai" target="_blank" rel="noopener noreferrer">OpenRouter</a> models API. Historically this chart used input-only pricing as a proxy for cost—equivalent to a <strong>1:0</strong> ratio—which you can still reproduce via the preset buttons.</p>
+            <section class="controls" aria-label="Chart controls">
+                <div class="control">
+                    <span class="control-label" id="token-mix-label">Token mix in:out</span>
+                    <div class="token-mix">
+                        <div class="segmented" role="group" aria-labelledby="token-mix-label">
+                            <button type="button" class="preset-button" data-prompt="1000" data-output="0">1:0</button>
+                            <button type="button" class="preset-button" data-prompt="750" data-output="250">3:1</button>
+                            <button type="button" class="preset-button" data-prompt="1000" data-output="500">2:1</button>
+                            <button type="button" class="preset-button" data-prompt="500" data-output="500">1:1</button>
+                        </div>
+                        <span class="token-inputs">
+                            <label class="token-input">
+                                <span class="visually-hidden">Input tokens</span>
+                                <input type="number" id="input-tokens" min="0" step="50" inputmode="numeric" />
+                            </label>
+                            <span class="token-separator" aria-hidden="true">:</span>
+                            <label class="token-input">
+                                <span class="visually-hidden">Output tokens</span>
+                                <input type="number" id="output-tokens" min="0" step="50" inputmode="numeric" />
+                            </label>
+                        </span>
+                    </div>
                 </div>
-            </div>
 
+                <div class="control">
+                    <span class="control-label">Organizations</span>
+                    <details class="org-filter">
+                        <summary class="field-button"><span id="org-filter-summary">All</span></summary>
+                        <div class="org-filter-panel">
+                            <div class="org-filter-actions">
+                                <button type="button" class="text-button" id="org-select-all">All</button>
+                                <button type="button" class="text-button" id="org-select-none">None</button>
+                            </div>
+                            <ul id="org-filter-list" class="org-filter-list"></ul>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="control control-grow">
+                    <label class="control-label" for="model-search">Find a model</label>
+                    <input type="search" id="model-search" class="field-input" placeholder="claude, gemini flash…" autocomplete="off" />
+                </div>
+            </section>
+
+            <main class="spread">
+                <figure class="figure" aria-labelledby="chart-title">
+                    <div class="section-head">
+                        <span class="section-number">Fig. 1</span>
+                        <h2 id="chart-title" class="section-title">Quality against price</h2>
+                        <ul class="chart-legend" aria-label="Legend">
+                            <li><span class="legend-swatch legend-frontier" aria-hidden="true"></span>Frontier</li>
+                            <li><span class="legend-swatch legend-model" aria-hidden="true"></span>Other models</li>
+                            <li id="legend-match" hidden><span class="legend-swatch legend-match" aria-hidden="true"></span>Search match</li>
+                        </ul>
+                    </div>
+                    <div id="chart" class="chart">
+                        <div class="chart-message">Loading chart…</div>
+                    </div>
+                    <figcaption id="chart-summary" class="caption"></figcaption>
+                </figure>
+
+                <aside class="steps" aria-labelledby="frontier-title">
+                    <div class="section-head">
+                        <span class="section-number">§ 2</span>
+                        <h2 id="frontier-title" class="section-title">The frontier, step by step</h2>
+                    </div>
+                    <p class="section-intro">From the cheapest to the best: each step is the best ELO score at its price, and what it adds over the previous step and over the cheapest one.</p>
+                    <ol id="frontier-list" class="frontier-list"></ol>
+                </aside>
+            </main>
+
+            <section class="board" aria-labelledby="table-title">
+                <div class="section-head">
+                    <span class="section-number">§ 3</span>
+                    <h2 id="table-title" class="section-title">The full sheet</h2>
+                    <p id="table-summary" class="section-meta"></p>
+                </div>
+                <div class="table-scroll">
+                    <table id="model-table" class="model-table">
+                        <thead>
+                            <tr>
+                                <th scope="col"><button type="button" class="sort-button" data-sort="model">Model</button></th>
+                                <th scope="col"><button type="button" class="sort-button" data-sort="organization">Organization</button></th>
+                                <th scope="col" class="numeric"><button type="button" class="sort-button" data-sort="elo">ELO</button></th>
+                                <th scope="col" class="numeric"><button type="button" class="sort-button" data-sort="gap" title="ELO points below the best model at the same price or less">Gap</button></th>
+                                <th scope="col" class="numeric"><button type="button" class="sort-button" data-sort="votes">Votes</button></th>
+                                <th scope="col" class="numeric"><button type="button" class="sort-button" data-sort="price">$/MTok</button></th>
+                                <th scope="col" class="numeric"><button type="button" class="sort-button" data-sort="input_price">Input</button></th>
+                                <th scope="col" class="numeric"><button type="button" class="sort-button" data-sort="output_price">Output</button></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="method" aria-labelledby="method-title">
+                <div class="section-head">
+                    <span class="section-number">§ 4</span>
+                    <h2 id="method-title" class="section-title">Method</h2>
+                </div>
+                <div class="method-columns">
+                    <div>
+                        <h3>Quality</h3>
+                        <p>Each model's ELO score, with <em>style control</em>, comes from the official <a href="https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset" target="_blank" rel="noopener noreferrer">LM Arena leaderboard dataset</a>. Like a chess rating, it is built from blind votes between pairs of models: a 100-point lead means winning about 64% of head-to-head votes.</p>
+                    </div>
+                    <div>
+                        <h3>Price</h3>
+                        <p>The price per million tokens blends the input and output rates listed by the <a href="https://openrouter.ai" target="_blank" rel="noopener noreferrer">OpenRouter</a> models API, weighted by the token mix above. A ranked model gets a price only from an entry naming the same model and version. Use <strong>1:0</strong> to compare input prices alone.</p>
+                    </div>
+                    <div>
+                        <h3>Frontier</h3>
+                        <p>A model is on the frontier when no other model is both cheaper and better ranked. The stepped line gives the best score you can buy at each price; the <em>gap</em> column says how far below that line a model sits.</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="colophon">
+                <span>Set in Newsreader and IBM Plex Mono.</span>
+                <span>Refreshed daily at 14:17 UTC from LM Arena and OpenRouter.</span>
+                <span>Built on <a href="https://github.com/winston-bosan/llm-pareto-frontier" target="_blank" rel="noopener noreferrer">Winston Bosan's original</a>.</span>
+            </footer>
         </div>
 
-        <!-- Load data first -->
+        <div id="tooltip" class="tooltip" role="status" hidden></div>
+
         <script type="module">
             import { LLMApp } from './js/app.js';
             new LLMApp().init();

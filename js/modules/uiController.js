@@ -1,334 +1,394 @@
 /**
- * UI controller module for LLM Pareto Frontier
- * Handles user interface interactions, tooltips, and statistics display
+ * Page controls, lede, frontier steps, model table, and tooltip.
+ * Model names and metadata come from external data, so they are written with textContent only.
  */
+import { eloGap, valuePick, winProbability } from './dataProcessor.js';
+
+const priceFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 3 });
+const countFormat = new Intl.NumberFormat('en-US');
+const shareFormat = new Intl.NumberFormat('en-US', { style: 'percent', maximumSignificantDigits: 2 });
+const multipleFormat = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 2 });
+const formatPrice = (value) => priceFormat.format(value);
+const formatModels = (count) => `${count} ${count === 1 ? 'model' : 'models'}`;
+
+const DESCENDING_FIRST = new Set(['elo', 'votes']);
+// The lede names the cheapest frontier model within this many ELO points of the leader.
+const VALUE_GAP = 50;
+
+const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+
+// An empty mix is priced on input alone, like 1:0 (see visibleModels).
+function reducedRatio(prompt, output) {
+    if (prompt + output === 0) return '1:0';
+    const divisor = gcd(prompt, output);
+    return `${prompt / divisor}:${output / divisor}`;
+}
+
+function element(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+}
+
 export class UIController {
-    constructor() {
-        this.colorScale = null;
+    constructor({ onTokensChange, onOrganizationsChange, onSearchChange, onModelFocus }) {
+        this.onTokensChange = onTokensChange;
+        this.onOrganizationsChange = onOrganizationsChange;
+        this.onSearchChange = onSearchChange;
+        this.onModelFocus = onModelFocus;
+
+        this.inputTokens = document.getElementById('input-tokens');
+        this.outputTokens = document.getElementById('output-tokens');
+        this.presetButtons = [...document.querySelectorAll('.preset-button')];
+        this.orgFilter = document.querySelector('.org-filter');
+        this.orgList = document.getElementById('org-filter-list');
+        this.orgSummary = document.getElementById('org-filter-summary');
+        this.frontierList = document.getElementById('frontier-list');
+        this.tableBody = document.querySelector('#model-table tbody');
+        this.sortButtons = [...document.querySelectorAll('.sort-button')];
+        this.tooltip = document.getElementById('tooltip');
+        this.matchLegend = document.getElementById('legend-match');
+        this.lede = document.getElementById('lede');
+        this.ticker = document.getElementById('ticker');
+
+        this.sortKey = 'elo';
+        this.sortDescending = true;
     }
 
-    /**
-     * Set the color scale for consistent provider colors
-     */
-    setColorScale(colorScale) {
-        this.colorScale = colorScale;
+    init({ organizationCounts, promptTokens, outputTokens, dataLastUpdated, minElo }) {
+        this.setupThemeToggle();
+        this.setupTokenControls(promptTokens, outputTokens);
+        this.setupOrganizationFilter(organizationCounts);
+        this.setupSearch();
+        this.setupTableSorting();
+
+        document.getElementById('edition').textContent = `Edition of ${dataLastUpdated}`;
+        this.minElo = minElo;
     }
 
-
-    /**
-     * Show tooltip with model information
-     */
-    showTooltip(model, x, y, isPareto = false) {
-        d3.selectAll('.tooltip').remove();
-
-        const tooltip = d3.select('body')
-            .append('div')
-            .attr('class', 'tooltip')
-            .style('left', (x + 10) + 'px')
-            .style('top', (y - 10) + 'px');
-
-        const formatPrice = (p) => {
-            // cap to 4 decimals and strip trailing zeros
-            const fixed = Number(p).toFixed(4);
-            return parseFloat(fixed).toString();
+    setupThemeToggle() {
+        const button = document.querySelector('.theme-toggle-button');
+        const root = document.documentElement;
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const isDark = () => (root.dataset.theme ?? (systemDark.matches ? 'dark' : 'light')) === 'dark';
+        const syncLabel = () => {
+            button.textContent = isDark() ? 'Day' : 'Night';
+            button.setAttribute('aria-label', isDark() ? 'Switch to light mode' : 'Switch to dark mode');
         };
 
-        // Detect if price shown is ratio-weighted by checking presence of input/output_price
-        const priceNote = (typeof model.input_price === 'number' && typeof model.output_price === 'number')
-            ? `@ ${document.getElementById('current-ratio')?.textContent || 'ratio'}`
-            : '';
+        button.addEventListener('click', () => {
+            const theme = isDark() ? 'light' : 'dark';
+            root.dataset.theme = theme;
+            try {
+                localStorage.setItem('theme', theme);
+            } catch {
+                // Storage can be unavailable in private windows; the toggle still applies to this page.
+            }
+            syncLabel();
+        });
+        systemDark.addEventListener('change', syncLabel);
+        syncLabel();
+    }
 
-        const strong = document.createElement('strong');
-        strong.textContent = model.model;
-        tooltip.node().appendChild(strong);
+    setupTokenControls(promptTokens, outputTokens) {
+        const apply = (prompt, output) => {
+            this.inputTokens.value = prompt;
+            this.outputTokens.value = output;
+            this.syncPresets(prompt, output);
+            this.onTokensChange(prompt, output);
+        };
+        const readInputs = () => {
+            const prompt = Math.max(0, parseInt(this.inputTokens.value, 10) || 0);
+            const output = Math.max(0, parseInt(this.outputTokens.value, 10) || 0);
+            this.syncPresets(prompt, output);
+            this.onTokensChange(prompt, output);
+        };
 
-        const lines = [
-            '',
-            `ELO: ${model.elo}`,
-            `Votes: ${model.votes || 'N/A'}`,
-            `Price: $${formatPrice(model.price)}/M tokens ${priceNote}`,
-            `Cheapest provider: ${model.cheapest_provider || 'N/A'}`,
-            `Organization: ${model.organization || 'N/A'}`,
-        ];
-        lines.forEach(line => {
-            tooltip.node().appendChild(document.createElement('br'));
-            if (line) tooltip.node().appendChild(document.createTextNode(line));
+        this.presetButtons.forEach(button => {
+            button.addEventListener('click', () => apply(Number(button.dataset.prompt), Number(button.dataset.output)));
+        });
+        this.inputTokens.addEventListener('input', readInputs);
+        this.outputTokens.addEventListener('input', readInputs);
+
+        this.inputTokens.value = promptTokens;
+        this.outputTokens.value = outputTokens;
+        this.syncPresets(promptTokens, outputTokens);
+    }
+
+    syncPresets(prompt, output) {
+        const ratio = reducedRatio(prompt, output);
+        this.presetButtons.forEach(button => {
+            const isActive = reducedRatio(Number(button.dataset.prompt), Number(button.dataset.output)) === ratio;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', String(isActive));
+        });
+        this.ratioLabel = ratio;
+    }
+
+    setupOrganizationFilter(organizationCounts) {
+        this.organizations = [...organizationCounts.keys()];
+        this.orgCheckboxes = new Map();
+
+        organizationCounts.forEach((count, organization) => {
+            const item = element('li', 'org-option');
+            const label = element('label');
+            const checkbox = element('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = true;
+            checkbox.addEventListener('change', () => this.emitOrganizations());
+            label.append(checkbox, element('span', null, organization), element('span', 'org-count', count));
+
+            const only = element('button', 'org-only', 'Only');
+            only.type = 'button';
+            only.setAttribute('aria-label', `Show only ${organization}`);
+            only.addEventListener('click', () => this.setOrganizations(new Set([organization])));
+
+            item.append(label, only);
+            this.orgList.append(item);
+            this.orgCheckboxes.set(organization, checkbox);
         });
 
-        if (isPareto) {
-            tooltip.node().appendChild(document.createElement('br'));
-            const span = document.createElement('span');
-            span.style.color = '#ff4444';
-            span.style.fontWeight = 'bold';
-            span.textContent = 'Pareto Optimal';
-            tooltip.node().appendChild(span);
-        }
-    }
+        document.getElementById('org-select-all').addEventListener('click', () => this.setOrganizations(new Set(this.organizations)));
+        document.getElementById('org-select-none').addEventListener('click', () => this.setOrganizations(new Set()));
 
-    /**
-     * Hide tooltip
-     */
-    hideTooltip() {
-        d3.selectAll('.tooltip').remove();
-    }
-
-    /**
-     * Update provider legend with clickable items for toggling visibility.
-     * @param {Array<string>} organizations - Array of all unique organization names.
-     * @param {Set<string>} activeOrganizations - Set of currently active organization names.
-     */
-    updateLegend(organizations, activeOrganizations) {
-        const legendContainer = d3.select("#legend");
-        if (legendContainer.empty()) return;
-
-        legendContainer.html(""); // Clear existing legend
-
-        // Add a title and explanation for the legend
-        const legendHeader = legendContainer.append("div").attr("class", "legend-header");
-        legendHeader.append("h3").text("Filter by organization").attr('id', 'legend-title');
-        legendHeader.append("p").text("Click an organization to show/hide its models. Alt/Option-click to show only that organization.");
-
-        // Add Select All / Deselect All buttons
-        const buttonRow = legendHeader.append("div").attr("class", "legend-buttons");
-
-        buttonRow.append("button")
-            .attr("class", "legend-button select-all-btn")
-            .attr("type", "button")
-            .attr("aria-label", "Select all organizations")
-            .text("Select all")
-            .on("click", () => {
-                document.dispatchEvent(new CustomEvent('selectAllOrganizations'));
-            });
-
-        buttonRow.append("button")
-            .attr("class", "legend-button deselect-all-btn")
-            .attr("type", "button")
-            .attr("aria-label", "Deselect all organizations")
-            .text("Deselect all")
-            .on("click", () => {
-                document.dispatchEvent(new CustomEvent('deselectAllOrganizations'));
-            });
-
-        organizations.forEach(organization => {
-            const isActive = activeOrganizations.has(organization);
-            const legendItem = legendContainer
-                .append("div")
-                .attr("class", "legend-item")
-                .attr("tabindex", 0) // keyboard focusable
-                .attr('role', 'button')
-                .attr('aria-pressed', isActive ? 'true' : 'false')
-                .attr('aria-label', `Toggle organization ${organization}`)
-                .classed("disabled", !isActive)
-                .on("click", function(event) {
-                    // Option/Alt-click: select only this organization
-                    if (event.altKey) {
-                        document.dispatchEvent(new CustomEvent('selectOnlyOrganization', {
-                            detail: { organization: organization }
-                        }));
-                        return;
-                    }
-                    // Determine new state from DOM (robust against double-clicks)
-                    const currentlyDisabled = d3.select(this).classed('disabled');
-                    document.dispatchEvent(new CustomEvent('organizationToggle', {
-                        detail: {
-                            organization: organization,
-                            isChecked: currentlyDisabled // we will enable if it was disabled
-                        }
-                    }));
-                    // Update aria-pressed immediately for SR feedback
-                    const nowActive = currentlyDisabled;
-                    d3.select(this).attr('aria-pressed', nowActive ? 'true' : 'false');
-                })
-                .on("keydown", function(event) {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        // Trigger click handler for keyboard
-                        d3.select(this).dispatch('click');
-                    }
-                });
-
-            legendItem
-                .append("div")
-                .attr("class", "legend-color")
-                .style("background-color", this.colorScale ? this.colorScale(organization) : "#ccc");
-
-            legendItem
-                .append("span")
-                .text(organization);
+        document.addEventListener('click', (event) => {
+            if (this.orgFilter.open && !this.orgFilter.contains(event.target)) this.orgFilter.open = false;
         });
-
+        this.orgFilter.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                this.orgFilter.open = false;
+                this.orgFilter.querySelector('summary').focus();
+            }
+        });
+        this.updateOrganizationSummary();
     }
 
-    /**
-     * Update Pareto frontier information
-     */
-    updateParetoInfo(paretoData) {
-        const explanationContainer = d3.select(".explanation");
+    setOrganizations(selected) {
+        this.orgCheckboxes.forEach((checkbox, organization) => {
+            checkbox.checked = selected.has(organization);
+        });
+        this.emitOrganizations();
+    }
 
-        // Replace content idempotently
-        let paretoMount = explanationContainer.select("#pareto-frontier-content");
-        if (!paretoMount.node()) {
-            paretoMount = explanationContainer.append("div").attr("id", "pareto-frontier-content");
-        } else {
-            paretoMount.html("");
-        }
+    emitOrganizations() {
+        const selected = new Set(this.organizations.filter(organization => this.orgCheckboxes.get(organization).checked));
+        this.updateOrganizationSummary(selected);
+        this.onOrganizationsChange(selected);
+    }
 
-        if (!paretoData || paretoData.length === 0) {
+    updateOrganizationSummary(selected = new Set(this.organizations)) {
+        let summary = `${selected.size} selected`;
+        if (selected.size === this.organizations.length) summary = `All (${selected.size})`;
+        else if (selected.size === 0) summary = 'None';
+        else if (selected.size === 1) summary = [...selected][0];
+        this.orgSummary.textContent = summary;
+    }
+
+    setupSearch() {
+        const search = document.getElementById('model-search');
+        search.addEventListener('input', () => this.onSearchChange(search.value));
+    }
+
+    setupTableSorting() {
+        this.sortButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const key = button.dataset.sort;
+                this.sortDescending = key === this.sortKey ? !this.sortDescending : DESCENDING_FIRST.has(key);
+                this.sortKey = key;
+                this.renderTableRows();
+            });
+        });
+    }
+
+    updateSummaries({ visibleCount, frontierCount, matchCount, query }) {
+        this.matchLegend.hidden = matchCount === 0;
+        document.getElementById('chart-summary').textContent =
+            `${formatModels(visibleCount)} · ${frontierCount} on the frontier · prices blended at ${this.ratioLabel} input:output · `
+            + `ELO ≥ ${this.minElo} · log price scale`;
+
+        const tableSummary = query.trim()
+            ? `${matchCount} of ${formatModels(visibleCount)} match “${query.trim()}”`
+            : `${formatModels(visibleCount)}, click a column to sort`;
+        document.getElementById('table-summary').textContent = tableSummary;
+    }
+
+    renderHeadline(frontier, visibleCount) {
+        if (frontier.length === 0) {
+            this.lede.textContent = 'No model matches the current filters.';
+            this.renderTicker([['Models priced', '0'], ['On the frontier', '0'], ['Entry price', '—'], ['Top score', '—']]);
             return;
         }
 
-        const paretoContent = paretoMount;
+        const { leader, value } = valuePick(frontier, VALUE_GAP);
+        const entry = frontier.at(-1);
+        this.lede.replaceChildren(element('strong', null, leader.model), ` leads the board at ${leader.elo}`);
+        if (value === leader) {
+            this.lede.append(`, and no cheaper model comes within ${VALUE_GAP} points.`);
+        } else {
+            const deficit = leader.elo - value.elo;
+            this.lede.append(
+                '. ',
+                element('strong', null, value.model),
+                ` trails by ${deficit} points, so the leader wins ${shareFormat.format(winProbability(deficit))} of their head-to-head votes, at `,
+                element('span', 'figure-value', shareFormat.format(value.price / leader.price)),
+                ' of the leader’s price.',
+            );
+        }
 
-        paretoContent.append('h2').text('Pareto frontier models');
+        this.renderTicker([
+            ['Models priced', countFormat.format(visibleCount)],
+            ['On the frontier', String(frontier.length)],
+            ['Entry price', formatPrice(entry.price), '/MTok'],
+            ['Top score', String(leader.elo), ` at ${formatPrice(leader.price)}`],
+        ]);
+    }
 
-        paretoContent.append('p').attr('class', 'pareto-explanation-detail').text('The models circled in black \u26AB are "pareto optimal". This means no other model is both cheaper and higher quality. These are generally the most efficient models to consider.');
-        paretoContent.append('p').attr('class', 'pareto-explanation-detail').text('The black dotted line connects these optimal models, illustrating the Pareto frontier. Ultimately, this line represents the best possible performance you can achieve for a given cost.');
+    renderTicker(cells) {
+        this.ticker.replaceChildren(...cells.map(([term, value, unit]) => {
+            const cell = element('div');
+            const description = element('dd', null, value);
+            if (unit) description.append(element('small', null, unit));
+            cell.append(element('dt', null, term), description);
+            return cell;
+        }));
+    }
 
-        paretoContent.append('p').text('Below is a list of all models on the Pareto frontier, sorted by ELO score descending:');
+    renderFrontier(frontier) {
+        const byPrice = [...frontier].sort((a, b) => a.price - b.price);
+        if (byPrice.length === 0) {
+            this.frontierList.replaceChildren(element('li', 'frontier-empty', 'Select at least one organization.'));
+            return;
+        }
 
-        const modelsContainer = paretoContent
-            .append("div")
-            .attr("class", "pareto-models");
+        this.frontierList.replaceChildren(...byPrice.map((model, index) => {
+            const item = element('li', 'frontier-item');
+            item.tabIndex = 0;
+            const name = element('span', 'frontier-name', model.model);
+            name.title = model.model;
+            const comparedTo = (rank) => {
+                const base = byPrice[rank - 1];
+                return `+${model.elo - base.elo} ELO for ×${multipleFormat.format(model.price / base.price)} the price of #${rank}`;
+            };
+            const step = element('span', 'frontier-step');
+            if (index === 0) step.append(element('span', null, 'Cheapest entry on the board'));
+            if (index >= 2) step.append(element('span', null, comparedTo(index)));
+            if (index >= 1) step.append(element('span', null, comparedTo(1)));
+            item.append(
+                element('span', 'frontier-rank', index + 1),
+                name,
+                element('span', 'frontier-elo', model.elo),
+                element('span', 'frontier-org', model.organization),
+                element('span', 'frontier-price', `${formatPrice(model.price)}/MTok`),
+                step,
+            );
+            const focus = () => {
+                item.classList.add('focused');
+                this.onModelFocus(model);
+            };
+            const blur = () => {
+                item.classList.remove('focused');
+                this.onModelFocus(null);
+            };
+            item.addEventListener('pointerenter', focus);
+            item.addEventListener('pointerleave', blur);
+            item.addEventListener('focus', focus);
+            item.addEventListener('blur', blur);
+            return item;
+        }));
+    }
 
-        // Sort a copy by ELO desc to avoid mutating upstream data
-        const sortedPareto = [...paretoData].sort((a, b) => b.elo - a.elo);
+    renderTable(models, frontier) {
+        this.tableModels = models;
+        this.tableFrontier = new Set(frontier);
+        this.tableGaps = new Map(models.map(model => [model, eloGap(model, frontier)]));
+        this.renderTableRows();
+    }
 
-        const formatPrice = (p) => {
-            const fixed = Number(p).toFixed(4);
-            return parseFloat(fixed).toString();
-        };
-
-        sortedPareto.forEach(model => {
-            const modelElement = modelsContainer
-                .append("div")
-                .attr("class", "pareto-model")
-                .style("border-left", `3px solid ${this.colorScale ? this.colorScale(model.organization) : "#ccc"}`);
-
-            modelElement.append("strong").text(model.model);
-
-            modelElement
-                .append("span")
-                .style("display", "block")
-                .style("font-size", "11px")
-                .style("color", "#666")
-                .each(function() {
-                    const span = d3.select(this);
-                    span.append('span').text(`Organization: ${model.organization}`);
-                    span.append('br');
-                    span.append('span').text(`Cheapest provider: ${model.cheapest_provider}`);
-                    span.append('br');
-                    span.append('span').text(`ELO: ${model.elo}`);
-                    span.append('br');
-                    span.append('span').text(`Cost: $${formatPrice(model.price)}/M tokens`);
-                });
+    renderTableRows() {
+        this.sortButtons.forEach(button => {
+            const header = button.closest('th');
+            if (button.dataset.sort === this.sortKey) {
+                header.setAttribute('aria-sort', this.sortDescending ? 'descending' : 'ascending');
+            } else {
+                header.removeAttribute('aria-sort');
+            }
         });
+
+        if (this.tableModels.length === 0) {
+            const row = element('tr');
+            const cell = element('td', 'table-empty', 'No models match the current filters.');
+            cell.colSpan = this.sortButtons.length;
+            row.append(cell);
+            this.tableBody.replaceChildren(row);
+            return;
+        }
+
+        const key = this.sortKey;
+        const value = key === 'gap' ? (model) => this.tableGaps.get(model) : (model) => model[key];
+        const compare = typeof value(this.tableModels[0]) === 'string'
+            ? (a, b) => value(a).localeCompare(value(b))
+            : (a, b) => value(a) - value(b);
+        const sorted = [...this.tableModels].sort(this.sortDescending ? (a, b) => compare(b, a) : compare);
+
+        this.tableBody.replaceChildren(...sorted.map(model => {
+            const row = element('tr', this.tableFrontier.has(model) ? 'frontier-row' : '');
+            const nameCell = element('td');
+            nameCell.append(element('span', 'model-cell', model.model));
+            const gap = this.tableGaps.get(model);
+            row.append(
+                nameCell,
+                element('td', 'secondary', model.organization),
+                element('td', 'numeric', model.elo),
+                element('td', 'numeric secondary', gap === 0 ? '—' : `−${gap}`),
+                element('td', 'numeric secondary', countFormat.format(model.votes)),
+                element('td', 'numeric', formatPrice(model.price)),
+                element('td', 'numeric secondary', formatPrice(model.input_price)),
+                element('td', 'numeric secondary', formatPrice(model.output_price)),
+            );
+            return row;
+        }));
     }
 
-    /**
-     * Clear loading state
-     */
-    clearLoading() {
-        const chartContainer = document.getElementById("chart");
-        if (chartContainer) {
-            d3.select("#chart").selectAll("*").remove();
+    showTooltip(model, clientX, clientY, { isFrontier, alternative }) {
+        const stats = element('dl', 'tooltip-stats');
+        [
+            ['ELO score', `${model.elo} (${countFormat.format(model.votes)} votes)`],
+            [`Blended at ${this.ratioLabel}`, `${formatPrice(model.price)}/MTok`],
+            ['Input', `${formatPrice(model.input_price)}/MTok`],
+            ['Output', `${formatPrice(model.output_price)}/MTok`],
+        ].forEach(([term, value]) => stats.append(element('dt', null, term), element('dd', null, value)));
+
+        const note = element('p', 'tooltip-note');
+        if (isFrontier) {
+            note.append(element('span', 'tooltip-badge', '◆ On the frontier'));
+        } else {
+            const saving = Math.round((1 - alternative.price / model.price) * 100);
+            const cost = saving > 0 ? `${saving}% cheaper` : 'same price';
+            note.append(
+                'Better value: ',
+                element('strong', null, alternative.model),
+                ` scores ${alternative.elo} at ${formatPrice(alternative.price)} (${cost}).`,
+            );
         }
+
+        this.tooltip.replaceChildren(
+            element('p', 'tooltip-title', model.model),
+            element('p', 'tooltip-subtitle', model.organization),
+            stats,
+            note,
+        );
+        this.tooltip.hidden = false;
+
+        const { width, height } = this.tooltip.getBoundingClientRect();
+        const gap = 14;
+        const left = clientX + gap + width > window.innerWidth - 8 ? clientX - gap - width : clientX + gap;
+        const top = Math.min(Math.max(8, clientY - height / 2), window.innerHeight - height - 8);
+        this.tooltip.style.left = `${Math.max(8, left)}px`;
+        this.tooltip.style.top = `${top}px`;
     }
 
-    /**
-     * Show loading state
-     */
-    showLoading() {
-        const chartContainer = document.getElementById("chart");
-        if (chartContainer) {
-            const loading = document.createElement('div');
-            loading.className = 'loading';
-            loading.textContent = 'Initializing chart...';
-            chartContainer.replaceChildren(loading);
-        }
-    }
-
-    /**
-     * Show error message
-     */
-    showError(message) {
-        const chartContainer = document.getElementById("chart");
-        if (chartContainer) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error';
-            errorDiv.textContent = `Error: ${message}`;
-            chartContainer.replaceChildren(errorDiv);
-        }
-    }
-
-    /**
-     * Update chart information display
-     */
-    updateChartInfo(modelCount, paretoCount, lastUpdated, minElo, excludeFree) {
-        const chartInfoElement = document.getElementById("chart-info");
-        if (chartInfoElement) {
-            const mainText = `Showing ${modelCount} models with ${paretoCount} Pareto optimal models`;
-
-            const details = [];
-            if (lastUpdated) {
-                const updateDate = new Date(lastUpdated);
-                const isoDate = updateDate.toISOString().split('T')[0];
-                details.push(`updated ${isoDate}`);
-            }
-
-            if (minElo) {
-                details.push(`min ELO: ${minElo}`);
-            }
-
-            if (excludeFree) {
-                details.push(`excluding free models`);
-            }
-
-            let detailsText = '';
-            if (details.length > 0) {
-                detailsText = `(${details.join(', ')})`;
-            }
-
-            chartInfoElement.textContent = '';
-            chartInfoElement.appendChild(document.createTextNode(mainText));
-            if (detailsText) {
-                chartInfoElement.appendChild(document.createElement('br'));
-                const detailSpan = document.createElement('span');
-                detailSpan.className = 'chart-info-details';
-                detailSpan.textContent = detailsText;
-                chartInfoElement.appendChild(detailSpan);
-            }
-        }
-    }
-
-    /**
-     * Sets up collapsible sections in the UI.
-     */
-    setupCollapsibleSections() {
-        const toggle = document.querySelector('.explanation-toggle');
-        const content = document.querySelector('.explanation-content');
-
-        if (toggle && content) {
-            // Set initial state
-            if (!content.classList.contains('collapsed')) {
-                toggle.classList.add('expanded');
-            }
-
-            // Ensure IDs and ARIA attributes for accessibility
-            if (!content.id) {
-                content.id = 'explanation-content';
-            }
-            toggle.setAttribute('role', 'button');
-            toggle.setAttribute('aria-controls', content.id);
-            toggle.setAttribute('aria-expanded', content.classList.contains('collapsed') ? 'false' : 'true');
-            content.setAttribute('aria-hidden', content.classList.contains('collapsed') ? 'true' : 'false');
-
-            toggle.addEventListener('click', () => {
-                content.classList.toggle('collapsed');
-                toggle.classList.toggle('expanded');
-                const isCollapsed = content.classList.contains('collapsed');
-                toggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-                content.setAttribute('aria-hidden', isCollapsed ? 'true' : 'false');
-            });
-        }
+    hideTooltip() {
+        this.tooltip.hidden = true;
     }
 }

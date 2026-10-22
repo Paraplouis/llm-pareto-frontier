@@ -58,9 +58,9 @@ jobs:
         run: |
           mkdir _site
           cp index.html styles.css screenshot.png _site/ 2>/dev/null || true
-          cp -r js _site/
+          cp -r js fonts _site/
           mkdir -p _site/data
-          cp data/synthesized_data.js data/price_data.json _site/data/
+          cp data/synthesized_data.js _site/data/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

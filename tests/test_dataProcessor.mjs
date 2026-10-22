@@ -1,101 +1,32 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-// Inline the class under test to avoid needing a browser/d3 environment.
-// This mirrors the logic in js/modules/dataProcessor.js exactly.
+import {
+    calculateParetoFrontier,
+    eloGap,
+    findCheaperAlternative,
+    searchModels,
+    valuePick,
+    visibleModels,
+    winProbability,
+} from '../js/modules/dataProcessor.js';
 
-class DataProcessor {
-    constructor() {
-        this.priceLookupMap = new Map();
-        this.priceItems = [];
-        this.isPriceLoaded = false;
-        this.priceCache = new Map();
-    }
+describe('visibleModels', () => {
+    const models = [
+        { model: 'Kept', elo: 1400, input_price: 2, output_price: 10, organization: 'A' },
+        { model: 'Hidden', elo: 1350, input_price: 1, output_price: 1, organization: 'B' },
+    ];
 
-    normalizeModelName(name) {
-        if (!name) return '';
-        let n = String(name).toLowerCase();
-        n = n.replace(/\bchatgpt-4o\b/gi, 'gpt-4o');
-        n = n.replace(/\bqwen3-max-preview\b/gi, 'qwen-max-latest');
-        n = n.replace(/\bdbrx-instruct-preview\b/gi, 'dbrx instruct');
-        n = n.replace(/\bsolar-10\.7b-instruct-v1\.0\b/gi, 'upstage solar instruct v1 (11b)');
-        n = n.replace(/\bqwen3-32b\b/gi, 'qwen 3-32b');
-        n = n.replace(/\bglm-4-plus\b/gi, 'glm-4-32b-0414-128k');
-        n = n.replace(/[\s-]instruct\b/g, '');
-        n = n.replace(/[\s-]chat\b/g, '');
-        n = n.replace(/[\s-]online\b/g, '');
-        n = n.replace(/-\d{4}-\d{2}-\d{2}|-\d{4,}/g, '');
-        n = n.replace(/-\d{2}-\d{2}/g, '');
-        n = n.replace(/preview.*|exp.*|latest.*|beta.*|v\d.*/g, '');
-        n = n.replace(/-bf16|-fp\d+|-instruct|-chat/gi, '');
-        n = n.replace(/(\d+)b-/g, '$1b ');
-        n = n.replace(/[-_\s]+/g, ' ').trim();
-        return n;
-    }
-
-    calculateParetoFrontier(data) {
-        if (!Array.isArray(data) || data.length === 0) return [];
-        const sortedByPrice = [...data].sort((a, b) => a.price - b.price);
-        const paretoOptimal = [];
-        let maxEloSoFar = -Infinity;
-        for (const model of sortedByPrice) {
-            if (model.elo > maxEloSoFar) {
-                paretoOptimal.push(model);
-                maxEloSoFar = model.elo;
-            }
-        }
-        return paretoOptimal.sort((a, b) => b.elo - a.elo);
-    }
-}
-
-const dp = new DataProcessor();
-
-// ---------- normalizeModelName ----------
-
-describe('normalizeModelName', () => {
-    it('maps chatgpt-4o to gpt-4o', () => {
-        assert.equal(dp.normalizeModelName('chatgpt-4o-2024-05-13'), 'gpt 4o');
+    it('keeps active organizations and blends prices by the token mix', () => {
+        const visible = visibleModels(models, new Set(['A']), 750, 250);
+        assert.deepEqual(visible.map(m => m.model), ['Kept']);
+        assert.equal(visible[0].price, 2 * 0.75 + 10 * 0.25);
     });
 
-    it('maps qwen3-max-preview', () => {
-        assert.equal(dp.normalizeModelName('qwen3-max-preview'), 'qwen max');
-    });
-
-    it('maps dbrx-instruct-preview', () => {
-        assert.equal(dp.normalizeModelName('dbrx-instruct-preview'), 'dbrx');
-    });
-
-    it('maps solar-10.7b-instruct-v1.0', () => {
-        const result = dp.normalizeModelName('solar-10.7b-instruct-v1.0');
-        assert.ok(result.includes('upstage') && result.includes('solar'), `Expected upstage solar in "${result}"`);
-    });
-
-    it('maps qwen3-32b', () => {
-        assert.equal(dp.normalizeModelName('qwen3-32b'), 'qwen 3 32b');
-    });
-
-    it('maps glm-4-plus', () => {
-        const result = dp.normalizeModelName('glm-4-plus');
-        assert.ok(result.includes('glm'), `Expected glm in "${result}"`);
-    });
-
-    it('removes -online suffix', () => {
-        const result = dp.normalizeModelName('command-r-online');
-        assert.ok(!result.includes('online'), `Unexpected online in "${result}"`);
-    });
-
-    it('removes date suffixes', () => {
-        assert.equal(dp.normalizeModelName('gpt-4o-2024-08-06'), 'gpt 4o');
-    });
-
-    it('handles empty/null input', () => {
-        assert.equal(dp.normalizeModelName(''), '');
-        assert.equal(dp.normalizeModelName(null), '');
-        assert.equal(dp.normalizeModelName(undefined), '');
+    it('uses the input price alone when there are no tokens', () => {
+        assert.equal(visibleModels(models, new Set(['A']), 0, 0)[0].price, 2);
     });
 });
-
-// ---------- calculateParetoFrontier ----------
 
 describe('calculateParetoFrontier', () => {
     it('returns correct Pareto set for known inputs', () => {
@@ -105,35 +36,97 @@ describe('calculateParetoFrontier', () => {
             { model: 'C', elo: 1200, price: 1 },
             { model: 'D', elo: 1100, price: 3 },  // dominated by C (cheaper) and B (higher elo)
         ];
-        const pareto = dp.calculateParetoFrontier(data);
+        const pareto = calculateParetoFrontier(data);
         const names = pareto.map(m => m.model);
         assert.deepEqual(names, ['A', 'B', 'C']);
     });
 
     it('returns empty array for empty input', () => {
-        assert.deepEqual(dp.calculateParetoFrontier([]), []);
+        assert.deepEqual(calculateParetoFrontier([]), []);
     });
 
     it('returns single model when only one provided', () => {
         const data = [{ model: 'X', elo: 1500, price: 5 }];
-        const pareto = dp.calculateParetoFrontier(data);
+        const pareto = calculateParetoFrontier(data);
         assert.equal(pareto.length, 1);
         assert.equal(pareto[0].model, 'X');
     });
 
-    it('handles tied prices correctly', () => {
+    it('keeps only the better model of a price tie, whatever the input order', () => {
         const data = [
-            { model: 'A', elo: 1400, price: 5 },
             { model: 'B', elo: 1300, price: 5 },
+            { model: 'A', elo: 1400, price: 5 },
         ];
-        const pareto = dp.calculateParetoFrontier(data);
-        // Only A should be Pareto (same price, higher ELO)
-        assert.equal(pareto.length, 1);
-        assert.equal(pareto[0].model, 'A');
+        assert.deepEqual(calculateParetoFrontier(data).map(m => m.model), ['A']);
+    });
+});
+
+describe('findCheaperAlternative', () => {
+    const cheap = { model: 'Cheap', elo: 1300, price: 1 };
+    const mid = { model: 'Mid', elo: 1400, price: 4 };
+    const top = { model: 'Top', elo: 1500, price: 20 };
+    const frontier = [top, mid, cheap];
+
+    it('returns null for a frontier model', () => {
+        assert.equal(findCheaperAlternative(mid, frontier), null);
     });
 
-    it('handles non-array input', () => {
-        assert.deepEqual(dp.calculateParetoFrontier(null), []);
-        assert.deepEqual(dp.calculateParetoFrontier('bad'), []);
+    it('returns the cheapest frontier model that scores at least as well', () => {
+        const dominated = { model: 'Dominated', elo: 1350, price: 10 };
+        assert.equal(findCheaperAlternative(dominated, frontier), mid);
+    });
+
+    it('accepts an equal score at a lower price', () => {
+        const dominated = { model: 'Dominated', elo: 1300, price: 3 };
+        assert.equal(findCheaperAlternative(dominated, frontier), cheap);
+    });
+});
+
+describe('searchModels', () => {
+    const models = [
+        { model: 'Gemini 3.8 Flash (High)' },
+        { model: 'Gemini 4 Argon (High)' },
+        { model: 'GLM-5.3-Flash' },
+    ];
+
+    it('requires every term, ignoring case and order', () => {
+        assert.deepEqual(searchModels(models, 'flash GEMINI').map(m => m.model), ['Gemini 3.8 Flash (High)']);
+    });
+
+    it('returns no match for a blank query', () => {
+        assert.deepEqual(searchModels(models, '   '), []);
+    });
+});
+
+describe('eloGap', () => {
+    const cheap = { model: 'Cheap', elo: 1300, price: 1 };
+    const top = { model: 'Top', elo: 1500, price: 20 };
+
+    it('measures the distance to the best model at the same price or less', () => {
+        assert.equal(eloGap({ model: 'Mid', elo: 1250, price: 10 }, [top, cheap]), 50);
+    });
+
+    it('is zero on the frontier', () => {
+        assert.equal(eloGap(top, [top, cheap]), 0);
+    });
+});
+
+describe('valuePick', () => {
+    const leader = { model: 'Leader', elo: 1520, price: 4 };
+    const close = { model: 'Close', elo: 1480, price: 0.4 };
+    const far = { model: 'Far', elo: 1400, price: 0.05 };
+
+    it('picks the cheapest frontier model within the gap of the leader', () => {
+        assert.deepEqual(valuePick([leader, close, far], 50), { leader, value: close });
+    });
+
+    it('falls back to the leader when nothing cheaper is close', () => {
+        assert.deepEqual(valuePick([leader, far], 50), { leader, value: leader });
+    });
+});
+
+describe('winProbability', () => {
+    it('gives about 57% for a 50-point lead', () => {
+        assert.equal(Math.round(winProbability(50) * 100), 57);
     });
 });

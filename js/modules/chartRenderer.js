@@ -1,483 +1,263 @@
 /**
- * Chart rendering module for LLM Pareto Frontier visualization
- * Uses D3.js for creating interactive scatter plots with Pareto frontier
+ * Scatter plot of ELO score against blended price, with the Pareto frontier drawn as a staircase.
+ * Colors come from CSS custom properties, so a theme switch needs no re-render.
  */
+const MARGIN = { top: 16, right: 20, bottom: 48, left: 56 };
+const COMPACT_WIDTH = 600;
+const PRICE_TICKS = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200];
+const DECADE_TICKS = [0.01, 0.1, 1, 10, 100];
+const DOT_RADIUS = { model: 3.5, frontier: 6 };
+const HOVER_DISTANCE = 32;
+const MAX_MATCH_LABELS = 12;
+const LABEL_GAP = 4;
+
+// Label slots as [horizontal side, vertical side]; the frontier staircase leaves a point's upper-left free.
+const FRONTIER_LABEL_SLOTS = [[-1, -1], [1, -1], [-1, 0], [1, 1], [-1, 1]];
+const MATCH_LABEL_SLOTS = [[1, 0], [-1, 0], [1, -1], [1, 1], [-1, -1]];
+
 export class ChartRenderer {
-    constructor() {
-        this.container = d3.select("#chart");
-        this.colorScale = null;
-        this.tooltip = null;
-        this.svg = null;
-        this.dimensions = null;
-        this.currentData = [];
-        this.currentParetoFrontier = [];
-        this.sortedParetoFrontier = [];
-        this.paretoIndexLookup = new Map();
-        this.paretoLabelInfo = new Map();
-        this.isDarkMode = false;
-        this.config = {
-            RESPONSIVE: {
-                MOBILE_BREAKPOINT: 600,
-            },
-            CHART: {
-                MARGIN: {
-                    top: 20,
-                    right: 80,
-                    bottom: 30,
-                    left: 60,
-                    mobile: {
-                        right: 40,
-                        left: 50,
-                    },
-                },
-                SCALES: {
-                    X_DOMAIN: [0.02, 100],
-                    Y_DOMAIN: [1000, 1500],
-                },
-                POINTS: {
-                    RADIUS: {
-                        normal: { desktop: 5, mobile: 4 },
-                        pareto: { desktop: 7, mobile: 6 },
-                        hover: { desktop: 9, mobile: 8 },
-                    },
-                },
-                COLORS: {},
-            },
-            ANIMATION: {
-                HOVER_DURATION: 150,
-            }
-        };
+    constructor(container, { onHover }) {
+        this.container = container;
+        this.onHover = onHover;
+        this.data = null;
+        this.frameRequest = null;
+        new ResizeObserver(() => this.scheduleDraw()).observe(container);
     }
 
-    /**
-     * Setup color scale for organizations
-     */
-    setupColorScale(organizations) {
-        // Use a larger categorical palette to avoid color collisions when organizations >10
-        const palette = [...d3.schemeTableau10, ...d3.schemeSet3];
-        this.colorScale = d3.scaleOrdinal()
-            .domain(organizations)
-            .range(palette);
+    render(data, frontier, matches) {
+        this.data = data;
+        this.frontier = new Set(frontier);
+        this.matches = new Set(matches);
+        this.draw();
     }
 
-    /**
-     * Calculate chart dimensions based on container size
-     */
-    calculateDimensions() {
-        const containerWidth = this.container.node().clientWidth;
-        const containerHeight = Math.max(400, window.innerHeight * 0.6);
-        const isMobile = containerWidth < this.config.RESPONSIVE.MOBILE_BREAKPOINT;
-
-        const margin = {
-            ...this.config.CHART.MARGIN,
-            right: isMobile ? this.config.CHART.MARGIN.mobile.right : this.config.CHART.MARGIN.right,
-            left: isMobile ? this.config.CHART.MARGIN.mobile.left : this.config.CHART.MARGIN.left
-        };
-
-        return {
-            containerWidth,
-            containerHeight,
-            width: containerWidth - margin.left - margin.right,
-            height: containerHeight - margin.top - margin.bottom,
-            margin,
-            isMobile
-        };
+    /** Highlight a model as if hovered, or clear the highlight with null. */
+    focus(model) {
+        if (this.plot) this.setHovered(model);
     }
 
-    /**
-     * Create scales for x (price) and y (ELO) axes
-     */
-    createScales() {
-        const { width, height } = this.dimensions;
-
-        // Dynamically derive domains from data; fall back to config defaults
-        const priceValues = (this.currentData || []).map(d => d.price).filter(p => p > 0);
-        const eloValues   = (this.currentData || []).map(d => d.elo);
-
-        const defaultX = this.config.CHART.SCALES.X_DOMAIN;
-        const defaultY = this.config.CHART.SCALES.Y_DOMAIN;
-
-        // Use d3.min/max instead of Math.min/max spread to avoid call-stack overflow on large arrays
-        const xMin = priceValues.length ? d3.min(priceValues) * 0.9 : defaultX[0];
-        const xMax = priceValues.length ? d3.max(priceValues) * 1.1 : defaultX[1];
-
-        const yMin = eloValues.length ? d3.min(eloValues) - 20 : defaultY[0];
-        const yMax = eloValues.length ? d3.max(eloValues) + 20 : defaultY[1];
-
-        const xScale = d3.scaleLog()
-            .domain([Math.max(0.01, xMin), xMax])
-            .range([0, width])
-            .clamp(true);
-
-        const yScale = d3.scaleLinear()
-            .domain([yMin, yMax])
-            .range([height, 0])
-            .clamp(true);
-
-        return { xScale, yScale };
-    }
-
-    /**
-     * Create and render chart axes
-     */
-    createAxes(scales) {
-        const { xScale, yScale } = scales;
-        const { width, height, isMobile } = this.dimensions;
-
-        const xAxis = d3.axisBottom(xScale)
-            .ticks(isMobile ? 4 : 6)
-            .tickSize(6)
-            .tickPadding(3)
-            .tickFormat(d => {
-                const formatted = d < 1 ? Number(d.toFixed(4)) : Number(d.toFixed(2));
-                return `$${formatted}`;
-            });
-
-        this.svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .attr("class", "x-axis axis")
-            .call(xAxis)
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-45)");
-
-        const yAxis = d3.axisLeft(yScale)
-            .ticks(height < 400 ? 5 : 8)
-            .tickSize(6)
-            .tickPadding(3);
-
-        this.svg.append("g")
-            .attr("class", "y-axis axis")
-            .call(yAxis)
-            .selectAll("text");
-
-        this.addAxisLabels();
-        this.addGridLines(scales);
-    }
-
-    /**
-     * Add axis labels
-     */
-    addAxisLabels() {
-        const { width, height, isMobile } = this.dimensions;
-
-        this.svg.append("text")
-            .attr("class", "x-axis-title axis-label")
-            .attr("x", width / 2)
-            .attr("y", height + (isMobile ? 40 : 55))
-            .attr("text-anchor", "middle")
-            .attr("font-weight", "bold")
-            .attr("font-size", isMobile ? "10px" : "12px")
-            .text("Price per million tokens ($)");
-
-        this.svg.append("text")
-            .attr("class", "y-axis-title axis-label")
-            .attr("transform", "rotate(-90)")
-            .attr("y", -45)
-            .attr("x", -height / 2)
-            .attr("text-anchor", "middle")
-            .attr("font-weight", "bold")
-            .attr("font-size", isMobile ? "10px" : "12px")
-            .text("LM Arena ELO score");
-    }
-
-    /**
-     * Add grid lines to chart
-     */
-    addGridLines(scales) {
-        const { xScale, yScale } = scales;
-        const { width, height } = this.dimensions;
-
-        this.svg.append("g")
-            .attr("class", "grid")
-            .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""));
-
-        this.svg.append("g")
-            .attr("class", "grid")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(xScale).tickSize(-height).tickFormat(""));
-    }
-
-    /**
-     * Check if a model is on the Pareto frontier
-     */
-    isParetoOptimal(modelName) {
-        return this.currentParetoFrontier.some(p => p.model === modelName);
-    }
-
-    /**
-     * Get point radius based on state and Pareto optimality
-     */
-    getPointRadius(d, state = 'normal') {
-        const { isMobile } = this.dimensions;
-        const device = isMobile ? 'mobile' : 'desktop';
-        const isPareto = this.isParetoOptimal(d.model);
-        const pointType = isPareto ? 'pareto' : 'normal';
-
-        if (state === 'hover') {
-            return this.config.CHART.POINTS.RADIUS.hover[device];
-        }
-
-        return this.config.CHART.POINTS.RADIUS[pointType][device];
-    }
-
-    /**
-     * Render data points on the chart
-     */
-    renderDataPoints(scales, data) {
-        const { xScale, yScale } = scales;
-
-        // Draw non-Pareto points first, Pareto points last for correct stacking order
-        const orderedData = [...data].sort((a, b) => {
-            const aPareto = this.isParetoOptimal(a.model) ? 1 : 0;
-            const bPareto = this.isParetoOptimal(b.model) ? 1 : 0;
-            return aPareto - bPareto; // non-Pareto (0) first, Pareto (1) last
-        });
-
-        this.svg.selectAll(".datapoint")
-            .data(orderedData)
-            .enter()
-            .append("circle")
-            .attr("class", d => {
-                const isPareto = this.isParetoOptimal(d.model);
-                return isPareto ? "datapoint pareto" : "datapoint";
-            })
-            .attr("tabindex", 0)
-            .attr("cx", d => xScale(d.price))
-            .attr("cy", d => yScale(d.elo))
-            .attr("r", d => this.getPointRadius(d))
-            .attr("fill", d => this.colorScale ? this.colorScale(d.organization) : "#666")
-            .attr("stroke", d => {
-                const isPareto = this.isParetoOptimal(d.model);
-                if (isPareto) {
-                    return this.isDarkMode ? '#fafafa' : '#000';
-                }
-                return '#fff';
-            })
-            .attr("stroke-width", d => {
-                const isPareto = this.isParetoOptimal(d.model);
-                return isPareto ? 2 : 1;
-            })
-            .attr("opacity", 0.8)
-            .on("mouseover", (event, d) => this.handleMouseOver(event, d))
-            .on("mouseout", (event, d) => this.handleMouseOut(event, d))
-            .on("click", (event, d) => this.handleClick(event, d))
-            .on("keydown", (event, d) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    this.handleClick(event, d);
-                }
-            });
-    }
-
-    /**
-     * Handle mouseover on a data point
-     */
-    handleMouseOver(event, d) {
-        d3.select(event.currentTarget)
-            .transition()
-            .duration(this.config.ANIMATION.HOVER_DURATION)
-            .attr("r", this.getPointRadius(d, 'hover'))
-            .attr("opacity", 1);
-
-        const hoverEvent = new CustomEvent('modelHover', {
-            detail: {
-                model: d,
-                x: event.pageX,
-                y: event.pageY,
-                isPareto: this.isParetoOptimal(d.model)
-            }
-        });
-        document.dispatchEvent(hoverEvent);
-    }
-
-    /**
-     * Handle mouse out event for data points
-     */
-    handleMouseOut(event, d) {
-        d3.select(event.currentTarget)
-            .transition()
-            .duration(this.config.ANIMATION.HOVER_DURATION)
-            .attr("r", this.getPointRadius(d))
-            .attr("opacity", 0.8);
-
-        document.dispatchEvent(new CustomEvent('modelUnhover'));
-    }
-
-    /**
-     * Handle click event for data points
-     */
-    handleClick(event, d) {
-    }
-
-    /**
-     * Pre-calculates positions for Pareto point labels to avoid collisions.
-     */
-    precomputeParetoLabels(scales) {
-        this.paretoLabelInfo.clear();
-        if (this.sortedParetoFrontier.length === 0) return;
-
-        const { xScale, yScale } = scales;
-        const { isMobile } = this.dimensions;
-
-        this.sortedParetoFrontier.forEach((p, i) => {
-            const p_left = i > 0 ? this.sortedParetoFrontier[i - 1] : null;
-            const p_right = i < this.sortedParetoFrontier.length - 1 ? this.sortedParetoFrontier[i + 1] : null;
-
-            // Default position: right of the point
-            let anchor = "start";
-            let x_offset = this.getPointRadius(p) + 5;
-            let y_offset = 3;
-
-            // If the point is on a convex part of the curve (a peak or elbow), move the label above it.
-            if (p_left && p_right) {
-                const x_p = xScale(p.price);
-                const y_p = yScale(p.elo);
-                const x_left = xScale(p_left.price);
-                const y_left = yScale(p_left.elo);
-                const x_right = xScale(p_right.price);
-                const y_right = yScale(p_right.elo);
-
-                if (x_right > x_left) {
-                    // Find the y-coordinate on the line segment connecting the neighbors
-                    const y_on_line = y_left + (y_right - y_left) * (x_p - x_left) / (x_right - x_left);
-
-                    // If the point's y is below the line on screen (higher ELO), it's a convex point.
-                    // Add a small tolerance to handle near-straight lines.
-                    if (y_p < y_on_line - 2) {
-                        anchor = "middle";
-                        x_offset = 0;
-                        y_offset = -this.getPointRadius(p) - 4;
-                    }
-                }
-            }
-
-            this.paretoLabelInfo.set(p.model, { anchor, x_offset, y_offset });
+    scheduleDraw() {
+        if (!this.data || this.frameRequest) return;
+        this.frameRequest = requestAnimationFrame(() => {
+            this.frameRequest = null;
+            this.draw();
         });
     }
 
-    /**
-     * Render model labels
-     */
-    renderLabels(scales, data) {
-        const { xScale, yScale } = scales;
-        const { isMobile } = this.dimensions;
+    draw() {
+        this.plot = null;
+        this.hovered = null;
+        this.onHover(null);
 
-        this.svg.selectAll(".model-label")
-            .data(data)
-            .enter()
-            .append("text")
-            .attr("class", "model-label")
-            .attr("text-anchor", d => {
-                if (this.isParetoOptimal(d.model) && this.paretoLabelInfo.has(d.model)) {
-                    return this.paretoLabelInfo.get(d.model).anchor;
-                }
-                return "start"; // Default for non-Pareto
-            })
-            .attr("x", d => {
-                const xBase = xScale(d.price);
-                if (this.isParetoOptimal(d.model) && this.paretoLabelInfo.has(d.model)) {
-                    return xBase + this.paretoLabelInfo.get(d.model).x_offset;
-                }
-                const baseOffset = isMobile ? 4 : 6;
-                return xBase + baseOffset;
-            })
-            .attr("y", d => {
-                const yBase = yScale(d.elo);
-                if (this.isParetoOptimal(d.model) && this.paretoLabelInfo.has(d.model)) {
-                    return yBase + this.paretoLabelInfo.get(d.model).y_offset;
-                }
-                return yBase + 3;
-            })
-            .text(d => {
-                if (isMobile) {
-                    const isPareto = this.isParetoOptimal(d.model);
-                    const dataIndex = data.indexOf(d);
-                    return isPareto || dataIndex < 5 ? d.model : "";
-                }
-                return d.model;
-            })
-            .style("font-weight", d => this.isParetoOptimal(d.model) ? "bold" : "normal")
-            .style("opacity", d => this.isParetoOptimal(d.model) ? 1 : 0.7);
-    }
-
-    /**
-     * Render Pareto frontier line
-     */
-    renderParetoLine(scales, paretoFrontier) {
-        if (!paretoFrontier || paretoFrontier.length === 0) return;
-
-        const { xScale, yScale } = scales;
-
-        const lineGenerator = d3.line()
-            .x(d => xScale(d.price))
-            .y(d => yScale(d.elo));
-
-        const sortedParetoFrontier = [...paretoFrontier]
-            .sort((a, b) => a.price - b.price);
-
-        this.svg.append("path")
-            .datum(sortedParetoFrontier)
-            .attr("class", "pareto-path")
-            .attr("fill", "none")
-            .attr("stroke", this.isDarkMode ? '#fafafa' : '#000')
-            .attr("stroke-width", 2)
-            .attr("stroke-dasharray", "5,5")
-            .attr("d", lineGenerator);
-    }
-
-    /**
-     * Main render method for the chart
-     */
-    async render(data = [], paretoFrontier = [], isDarkMode = false) {
-        if (!this.container.node()) {
-            console.error("Chart container not found.");
+        if (this.data.length === 0) {
+            const message = document.createElement('div');
+            message.className = 'chart-message';
+            message.textContent = 'No models match the current filters.';
+            this.container.replaceChildren(message);
             return;
         }
 
-        this.currentData = data;
-        this.currentParetoFrontier = paretoFrontier;
-        this.isDarkMode = isDarkMode;
+        const { clientWidth: width, clientHeight: height } = this.container;
+        const innerWidth = width - MARGIN.left - MARGIN.right;
+        const innerHeight = height - MARGIN.top - MARGIN.bottom;
+        const isCompact = width < COMPACT_WIDTH;
 
-        // Sort pareto frontier by price to determine neighbors for label placement
-        if (paretoFrontier.length > 0) {
-            this.sortedParetoFrontier = [...paretoFrontier].sort((a, b) => a.price - b.price);
-            this.paretoIndexLookup = new Map(this.sortedParetoFrontier.map((p, i) => [p.model, i]));
-        } else {
-            this.sortedParetoFrontier = [];
-            this.paretoIndexLookup.clear();
-        }
+        const [minPrice, maxPrice] = d3.extent(this.data, d => d.price);
+        const [minElo, maxElo] = d3.extent(this.data, d => d.elo);
+        this.x = d3.scaleLog().domain([minPrice / 1.3, maxPrice * 1.3]).range([0, innerWidth]);
+        this.y = d3.scaleLinear().domain([minElo - 10, maxElo + 20]).nice().range([innerHeight, 0]);
 
-        this.container.selectAll("*").remove();
+        const svg = d3.create('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('role', 'img')
+            .attr('aria-label', 'Scatter plot of LM Arena ELO score against blended price per million tokens');
+        svg.classed('has-matches', this.matches.size > 0);
+        this.svgNode = svg.node();
+        // Label placement measures text with getBBox, which needs the SVG in the document.
+        this.container.replaceChildren(this.svgNode);
+        this.plot = svg.append('g').attr('transform', `translate(${MARGIN.left},${MARGIN.top})`);
 
-        // Show empty state when there is no data to display
-        if (data.length === 0) {
-            this.container.append("div")
-                .attr("class", "chart-empty-state")
-                .text("No models to display. Select at least one organization.");
+        this.drawAxes(innerWidth, innerHeight, isCompact);
+        this.drawFrontier(innerWidth);
+        const ordered = this.drawDots();
+        this.drawLabels(innerWidth, innerHeight, isCompact);
+        this.drawHoverLayer(ordered, innerWidth, innerHeight);
+    }
+
+    drawAxes(innerWidth, innerHeight, isCompact) {
+        const [low, high] = this.x.domain();
+        const priceTicks = PRICE_TICKS.filter(t => t >= low && t <= high);
+        const decadeTicks = priceTicks.filter(t => DECADE_TICKS.includes(t));
+        let xTicks = isCompact && decadeTicks.length >= 3 ? decadeTicks : priceTicks;
+        if (xTicks.length < 2) xTicks = this.x.ticks(3);
+        const yTicks = this.y.ticks(isCompact ? 5 : 7);
+
+        this.plot.append('g').attr('class', 'grid').selectAll('line').data(yTicks).join('line')
+            .attr('x2', innerWidth)
+            .attr('y1', this.y)
+            .attr('y2', this.y);
+        this.plot.append('g').attr('class', 'grid').selectAll('line').data(xTicks).join('line')
+            .attr('x1', this.x)
+            .attr('x2', this.x)
+            .attr('y2', innerHeight);
+
+        this.plot.append('g')
+            .attr('class', 'axis')
+            .attr('transform', `translate(0,${innerHeight})`)
+            .call(d3.axisBottom(this.x).tickValues(xTicks).tickFormat(t => `$${t}`).tickSizeOuter(0).tickPadding(8));
+
+        this.plot.append('g')
+            .attr('class', 'axis')
+            .call(d3.axisLeft(this.y).tickValues(yTicks).tickFormat(d3.format('d')).tickSizeOuter(0).tickPadding(8));
+
+        this.plot.append('text')
+            .attr('class', 'axis-title')
+            .attr('x', innerWidth / 2)
+            .attr('y', innerHeight + 40)
+            .attr('text-anchor', 'middle')
+            .text(isCompact ? 'USD per million tokens, log' : 'Blended price per million tokens (USD, log scale)');
+
+        this.plot.append('text')
+            .attr('class', 'axis-title')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -innerHeight / 2)
+            .attr('y', -44)
+            .attr('text-anchor', 'middle')
+            .text('LM Arena ELO score');
+    }
+
+    drawFrontier(innerWidth) {
+        const steps = [...this.frontier].sort((a, b) => a.price - b.price);
+        const corners = steps.map(d => [this.x(d.price), this.y(d.elo)]);
+        corners.push([innerWidth, this.y(steps.at(-1).elo)]);
+        // Each step is a horizontal run then a rise; labels must stay off both.
+        this.frontierSegments = corners.slice(1).flatMap(([x, y], i) => {
+            const [previousX, previousY] = corners[i];
+            return [
+                { x: previousX, y: previousY - 2, width: x - previousX, height: 4 },
+                { x: x - 2, y, width: 4, height: previousY - y },
+            ];
+        });
+
+        this.plot.append('path')
+            .attr('class', 'frontier-line')
+            .attr('d', d3.line().curve(d3.curveStepAfter)(corners));
+    }
+
+    drawDots() {
+        const layer = d => (this.frontier.has(d) ? 2 : this.matches.has(d) ? 1 : 0);
+        const ordered = [...this.data].sort((a, b) => layer(a) - layer(b));
+
+        this.plot.append('g')
+            .selectAll('circle')
+            .data(ordered)
+            .join('circle')
+            .attr('class', d => {
+                const classes = ['dot'];
+                if (this.frontier.has(d)) classes.push('frontier');
+                if (this.matches.has(d)) classes.push('match');
+                return classes.join(' ');
+            })
+            .attr('cx', d => this.x(d.price))
+            .attr('cy', d => this.y(d.elo))
+            .attr('r', d => this.radius(d));
+
+        return ordered;
+    }
+
+    radius(model) {
+        return this.frontier.has(model) ? DOT_RADIUS.frontier : DOT_RADIUS.model;
+    }
+
+    drawLabels(innerWidth, innerHeight, isCompact) {
+        const matchesToLabel = [...this.matches]
+            .filter(d => !this.frontier.has(d))
+            .sort((a, b) => b.elo - a.elo)
+            .slice(0, MAX_MATCH_LABELS);
+        const layer = this.plot.append('g');
+        const annotation = layer.append('text')
+            .attr('class', 'annotation')
+            .attr('x', 10)
+            .attr('y', 22)
+            .text(isCompact ? 'Nothing beats the line.' : 'Up here, nothing: no model is cheaper and better ranked than the line.');
+        const placed = [annotation.node().getBBox(), ...this.frontierSegments];
+
+        const place = (model, className, label, slots, isRequired) => {
+            const text = layer.append('text').attr('class', className).text(label);
+            const px = this.x(model.price);
+            const py = this.y(model.elo);
+            const offset = this.radius(model) + LABEL_GAP;
+            const tryPlace = ([side, level]) => {
+                text.attr('x', px + side * offset)
+                    .attr('y', level === 0 ? py + 4 : py + level * offset + (level > 0 ? 8 : 0))
+                    .attr('text-anchor', side < 0 ? 'end' : 'start');
+                return text.node().getBBox();
+            };
+            const fits = (box) => box.x >= 0 && box.y >= 0
+                && box.x + box.width <= innerWidth && box.y + box.height <= innerHeight
+                && !placed.some(other => overlaps(box, other));
+            for (const slot of slots) {
+                const box = tryPlace(slot);
+                if (fits(box)) {
+                    placed.push(box);
+                    return;
+                }
+            }
+            if (isRequired) {
+                placed.push(tryPlace(slots[0]));
+            } else {
+                text.remove();
+            }
+        };
+
+        [...this.frontier]
+            .sort((a, b) => a.price - b.price)
+            .forEach((model, index) => place(model, 'label', isCompact ? index + 1 : model.model, FRONTIER_LABEL_SLOTS, true));
+        matchesToLabel.forEach(model => place(model, 'label match', model.model, MATCH_LABEL_SLOTS, false));
+    }
+
+    drawHoverLayer(ordered, innerWidth, innerHeight) {
+        this.hoverRing = this.plot.append('circle').attr('class', 'hover-ring').attr('visibility', 'hidden');
+        const delaunay = d3.Delaunay.from(ordered, d => this.x(d.price), d => this.y(d.elo));
+
+        const handlePointer = (event) => {
+            const [px, py] = d3.pointer(event);
+            const model = ordered[delaunay.find(px, py)];
+            const distance = Math.hypot(this.x(model.price) - px, this.y(model.elo) - py);
+            this.setHovered(distance <= HOVER_DISTANCE ? model : null);
+        };
+
+        this.plot.append('rect')
+            .attr('width', innerWidth)
+            .attr('height', innerHeight)
+            .attr('fill', 'transparent')
+            .on('pointermove pointerdown', handlePointer)
+            .on('pointerleave', () => this.setHovered(null));
+    }
+
+    setHovered(model) {
+        if (model === this.hovered) return;
+        this.hovered = model;
+        if (!model) {
+            this.hoverRing.attr('visibility', 'hidden');
+            this.onHover(null);
             return;
         }
 
-        this.dimensions = this.calculateDimensions();
+        const px = this.x(model.price);
+        const py = this.y(model.elo);
+        this.hoverRing
+            .attr('cx', px)
+            .attr('cy', py)
+            .attr('r', this.radius(model) + 4)
+            .attr('visibility', 'visible');
 
-        this.svg = this.container
-            .append("svg")
-            .attr("width", this.dimensions.containerWidth)
-            .attr("height", this.dimensions.containerHeight)
-            .style("overflow", "visible")
-            .append("g")
-            .attr("transform", `translate(${this.dimensions.margin.left},${this.dimensions.margin.top})`);
-
-        const scales = this.createScales();
-        this.createAxes(scales);
-
-        // Pre-calculate label positions for Pareto points
-        this.precomputeParetoLabels(scales);
-
-        this.renderDataPoints(scales, this.currentData);
-        this.renderLabels(scales, this.currentData);
-        this.renderParetoLine(scales, this.currentParetoFrontier);
+        const box = this.svgNode.getBoundingClientRect();
+        this.onHover(model, box.left + MARGIN.left + px, box.top + MARGIN.top + py);
     }
+}
+
+function overlaps(a, b) {
+    return a.x < b.x + b.width + 2 && b.x < a.x + a.width + 2 && a.y < b.y + b.height && b.y < a.y + a.height;
 }
