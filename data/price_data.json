@@ -564,13 +564,13 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.44,
-        "outputPrice": 1.32
+        "inputPrice": 0.0444,
+        "outputPrice": 0.1333
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.9553,
-        "outputPrice": 1.9105
+        "inputPrice": 0.4427,
+        "outputPrice": 0.8853
       },
       {
         "name": "deepseek-v4-flash",
@@ -1012,6 +1012,11 @@
   {
     "provider": "MiniMax",
     "models": [
+      {
+        "name": "minimax-m3.1-flash",
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
+      },
       {
         "name": "minimax-m3",
         "inputPrice": 0.3,
@@ -2034,8 +2039,8 @@
     "models": [
       {
         "name": "hy4-preview",
-        "inputPrice": 0.834,
-        "outputPrice": 2.501
+        "inputPrice": 0.7506,
+        "outputPrice": 2.2509
       },
       {
         "name": "hy-mt2-1.8b",
@@ -2054,8 +2059,8 @@
       },
       {
         "name": "hy3",
-        "inputPrice": 0.132,
-        "outputPrice": 0.528
+        "inputPrice": 0.0825,
+        "outputPrice": 0.33
       },
       {
         "name": "hy3-preview",
@@ -2224,8 +2229,8 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.079,
-        "outputPrice": 1.4
+        "inputPrice": 0.7,
+        "outputPrice": 2.2
       },
       {
         "name": "glm-5.3:batch",
