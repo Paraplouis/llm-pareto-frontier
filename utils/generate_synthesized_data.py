@@ -1,438 +1,163 @@
 import json
 import re
-import logging
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 from datetime import date
+from pathlib import Path
+from typing import Dict, FrozenSet, List, Optional
 
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+MIN_ELO = 1000
 
-logging.basicConfig(
-    level=logging.INFO, format="%(message)s"
-)
-logger = logging.getLogger(__name__)
+# Tokens that name a release channel or packaging rather than a different model.
+NAME_NOISE = {"a", "beta", "chat", "exp", "instruct", "it", "latest", "preview", "v"}
 
-@dataclass
-class ModelData:
-    """Data class for synthesized model information including pricing information"""
+# Ranked names whose OpenRouter entry carries a version suffix the ranking omits, or the reverse.
+PRICE_MODEL_OVERRIDES = {
+    "Amazon Nova 2 Lite": "nova-2-lite-v1",
+    "Mixtral 8x22B Instruct v0.1": "mixtral-8x22b-instruct",
+}
 
-    model: str
-    elo: int
-    input_price: float
-    output_price: float
-    cheapest_provider: str
-    votes: int
-    matched_price_model: str
-    organization: str
 
 @dataclass
 class PriceInfo:
-    """Data class for pricing information only"""
-
     input_price: float
     output_price: float
     provider: str
     original_name: str
 
 
-@dataclass
-class MatchingDebugInfo:
-    """Data class for debugging price matching between model names"""
+@dataclass(frozen=True)
+class NameKey:
+    """Tokens that identify a model: family, tier and version words, parameter sizes, and snapshot dates."""
 
-    rank_model: str
-    matched_price_model: str
-    price: float
-    provider: str
-    organization: str
+    words: FrozenSet[str]
+    sizes: FrozenSet[str]
+    snapshots: FrozenSet[str]
 
 
-class ModelNameNormalizer:
-    """Utility class for normalizing model names for better matching"""
-
-    SPECIAL_CASES = {
-        r'\bchatgpt-4o\b': 'gpt-4o',
-        r'\bqwen3-max-preview\b': 'qwen-max-latest',
-        r'\bdbrx-instruct-preview\b': 'dbrx instruct',
-        r'\bsolar-10.7b-instruct-v1.0\b': 'upstage solar instruct v1 (11b)',
-        r'\bqwen3-32b\b': 'qwen 3-32b',
-        r'\bglm-4-plus\b': 'glm-4-32b-0414-128k'
-    }
-
-    @staticmethod
-    def normalize(name: str) -> str:
-        """Normalize model name for better matching"""
-        name = name.lower()
-
-        for pattern, replacement in ModelNameNormalizer.SPECIAL_CASES.items():
-            name = re.sub(pattern, replacement, name, flags=re.IGNORECASE)
-
-        # General normalizations
-        name = re.sub(r"[\s-]instruct\b", "", name)
-        name = re.sub(r"[\s-]chat\b", "", name)
-        name = re.sub(r"[\s-]online\b", "", name)
-        name = re.sub(r"-(\d{4})$", "", name)  # remove year
-        name = re.sub(r"-(\d{6})$", "", name)  # remove date
-        name = re.sub(r"-(\d{8})$", "", name)  # remove date
-
-        # Remove version dates and preview indicators
-        name = re.sub(r"-\d{4}-\d{2}-\d{2}|-\d{4,}", "", name)
-        name = re.sub(r"-\d{2}-\d{2}", "", name)
-        name = re.sub(r"preview.*|exp.*|latest.*|beta.*|v\d.*", "", name)
-
-        # Remove quality/quantization indicators
-        name = re.sub(r"-bf16|-fp\d+|-instruct|-chat", "", name)
-
-        # Standardize model size indicators
-        name = re.sub(r"(\d+)b-", r"\1b ", name)
-
-        # Normalize separators
-        name = re.sub(r"[-_\s]+", " ", name).strip()
-        return name
+def name_key(name: str) -> NameKey:
+    """Reduce a model name to its identifying tokens; bracketed settings such as (High) are dropped, dates kept."""
+    name = name.lower().replace("+", " plus ")
+    bracketed = " ".join(re.findall(r"\((.*?)\)", name))
+    bracketed_dates = re.findall(r"(?<![\w.])(\d{4}-\d{2}-\d{2}|\d{2}-\d{2,4}|\d{4,}|0\d+)(?![\w.])", bracketed)
+    name = re.sub(r"\(.*?\)", " ", name) + " " + " ".join(bracketed_dates)
+    # Dates such as 2024-05-13, 09-2025 or 02-23 become one digit token.
+    name = re.sub(r"(?<!\d)(\d{4})-(\d{2})-(\d{2})(?!\d)|(?<!\d)(\d{2})-(\d{2,4})(?!\d)",
+                  lambda m: "".join(g for g in m.groups() if g), name)
+    # OpenRouter spells some versions with a hyphen, as in mistral-medium-3-5 or claude-3-5-sonnet.
+    name = re.sub(r"(?<!\d)(\d)-(\d)(?![\w.])", r"\1.\2", name)
+    words, sizes, snapshots = set(), set(), set()
+    for token in re.findall(r"\d+x\d+b|[a-z]+|\d+(?:\.\d+)*[a-z]*", name):
+        if token in NAME_NOISE or re.fullmatch(r"\d+k", token):
+            continue
+        if re.fullmatch(r"\d{4,}|0\d+", token):
+            snapshots.add(token)
+            continue
+        token = re.sub(r"(?:\.0)+(?=[a-z]*$)", "", token)
+        if re.fullmatch(r"\d+(?:\.\d+)?[be]|\d+x\d+b", token):
+            sizes.add(token)
+        else:
+            words.add(token)
+    return NameKey(frozenset(words), frozenset(sizes), frozenset(snapshots))
 
 
-class OrganizationNormalizer:
-    """Utility class for normalizing organization names"""
-
-    MAPPING = {
-        "DeepSeek AI": "DeepSeek",
-        "Zhipu AI": "Zhipu",
-        "Allenai": "Allen AI",
-        "Ibm": "IBM",
-        "Inception Ai": "Inception AI",
-        "Microsoft Ai": "Microsoft AI",
-        "Stepfun": "StepFun",
-        "Zai": "Z.ai",
-    }
-
-    @staticmethod
-    def normalize(name: str) -> str:
-        """Normalize organization name"""
-        return OrganizationNormalizer.MAPPING.get(name, name)
+def same_model(rank: NameKey, price: NameKey, author: str) -> bool:
+    """Same model when words agree apart from the author's own name, and sizes and snapshots agree where both give one."""
+    author_words = set(re.findall(r"[a-z]+", author.lower()))
+    sizes_agree = not rank.sizes or not price.sizes or rank.sizes == price.sizes
+    snapshots_agree = not rank.snapshots or not price.snapshots or rank.snapshots == price.snapshots
+    return rank.words - author_words == price.words - author_words and sizes_agree and snapshots_agree
 
 
 class PriceMatcher:
-    """Class responsible for matching model names with pricing data"""
-
     def __init__(self, price_lookup: Dict[str, PriceInfo]):
         self.price_lookup = price_lookup
+        self.price_keys = {price_model: name_key(price_model) for price_model in price_lookup}
 
     def find_match(self, model_name: str) -> Optional[PriceInfo]:
-        """Try to find the best price match for a model name"""
-        model_lower = model_name.lower()
-        model_normalized = ModelNameNormalizer.normalize(model_name)
-
-        # Direct match first
-        if model_lower in self.price_lookup:
-            return self.price_lookup[model_lower]
-
-        # Try normalized match
-        for price_model, info in self.price_lookup.items():
-            if ModelNameNormalizer.normalize(price_model) == model_normalized:
-                return info
-
-        # Enhanced fuzzy matching with better scoring
-        return self._fuzzy_match(model_lower, model_normalized)
-
-    def _fuzzy_match(
-        self, model_lower: str, model_normalized: str
-    ) -> Optional[PriceInfo]:
-        """Perform fuzzy matching with scoring"""
-        best_match = None
-        best_score = 0
-
-        for price_model, info in self.price_lookup.items():
-            score = self._calculate_similarity_score(
-                model_lower, model_normalized, price_model
-            )
-
-            if score > best_score:
-                best_score = score
-                best_match = info
-
-        return best_match if best_score > 0.5 else None  # Minimum threshold
-
-    def _calculate_similarity_score(
-        self, model_lower: str, model_normalized: str, price_model: str
-    ) -> float:
-        """Calculate similarity score between model names"""
-        model_parts = set(re.findall(r"\w+", model_normalized))
-        price_parts = set(
-            re.findall(r"\w+", ModelNameNormalizer.normalize(price_model))
-        )
-
-        overlap = len(model_parts & price_parts)
-        total_parts = len(model_parts | price_parts)
-
-        if overlap < 2 or total_parts == 0:
-            return 0
-
-        # Base similarity ratio
-        similarity = overlap / total_parts
-
-        # Family matching bonus
-        family_bonus = self._calculate_family_bonus(model_lower, price_model.lower())
-
-        return similarity + family_bonus
-
-    def _calculate_family_bonus(
-        self, model_lower: str, price_model_lower: str
-    ) -> float:
-        """Calculate bonus for model family matches"""
-        bonus = 0
-        MODEL_FAMILIES = ["claude", "codellama", "command", "deepseek", "gemma", "gemini", "gpt", "grok", "llama", "mistral", "mixtral", "qwen"]
-
-        for family in MODEL_FAMILIES:
-            if family in model_lower and family in price_model_lower:
-                bonus += 0.3
-
-                # Version matching bonus
-                model_version = re.search(r"(\d+\.?\d*)", model_lower)
-                price_version = re.search(r"(\d+\.?\d*)", price_model_lower)
-                if (
-                    model_version
-                    and price_version
-                    and model_version.group(1) == price_version.group(1)
-                ):
-                    bonus += 0.2
-                break
-
-        return bonus
-
-
-class DataSynthesizer:
-    """Main class for synthesizing LLM data"""
-
-    def __init__(self, min_elo: int = 1250, exclude_free: bool = True):
-        self.min_elo = min_elo
-        self.exclude_free = exclude_free
-        # Make data_dir relative to this script's parent directory
-        self.script_dir = Path(__file__).resolve().parent
-        self.data_dir = self.script_dir.parent / "data"
-        self.data_dir.mkdir(parents=True, exist_ok=True) # Ensure data directory exists
-
-    def generate(self) -> List[ModelData]:
-        """Generate synthesized data from rank and price data"""
-        try:
-            # Load data
-            rank_data, last_updated = self._load_rank_data()
-            price_lookup = self._load_price_data()
-
-            # Initialize components
-            price_matcher = PriceMatcher(price_lookup)
-
-            # Process data
-            synthesized_data = []
-            matching_debug = []
-
-            for model in rank_data:
-                result = self._process_model(model, price_matcher)
-                if result:
-                    model_data, debug_info = result
-                    if model_data:
-                        synthesized_data.append(model_data)
-                    matching_debug.append(debug_info)
-
-            # Save results
-            self._save_results(synthesized_data, matching_debug, last_updated)
-
-            return synthesized_data
-
-        except Exception as e:
-            logger.error(f"❌ Failed to generate synthesized data: {e}")
-            raise
-
-    def _load_rank_data(self) -> Tuple[List[Dict[str, Any]], str]:
-        """Load ranking data from JSON file"""
-        rank_file = self.data_dir / "rank_data.json"
-        try:
-            with open(rank_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-
-            last_updated = data.get("last_updated")
-            models = data.get("models", [])
-
-            logger.info(f"  ↳ Loaded {len(models)} models from ranking data (updated: {last_updated})")
-            return models, last_updated
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Ranking data file not found: {rank_file}")
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Invalid JSON in ranking data: {e}")
-
-    def _load_price_data(self) -> Dict[str, PriceInfo]:
-        """Load pricing data and create lookup dictionary"""
-        price_file = self.data_dir / "price_data.json"
-        try:
-            with open(price_file, "r", encoding="utf-8") as f:
-                price_data = json.load(f)
-
-            price_lookup = {}
-            for provider in price_data:
-                provider_name = provider["provider"]
-                for model in provider["models"]:
-                    model_name = model["name"].lower()
-                    current_price = model["inputPrice"]
-
-                    # If model already exists, keep the one with the lower price
-                    if (
-                        model_name not in price_lookup
-                        or current_price < price_lookup[model_name].input_price
-                    ):
-                        price_lookup[model_name] = PriceInfo(
-                            input_price=current_price,
-                            output_price=model.get("outputPrice", current_price),
-                            provider=provider_name,
-                            original_name=model["name"],
-                        )
-
-            logger.info(f"  ↳ Loaded {len(price_lookup)} models from pricing data (updated: {date.today().strftime('%Y-%m-%d')})")
-            return price_lookup
-
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Price data file not found: {price_file}")
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Invalid JSON in price data: {e}")
-
-    def _process_model(
-        self, model: Dict[str, Any], price_matcher: PriceMatcher
-    ) -> Optional[Tuple[Optional[ModelData], MatchingDebugInfo]]:
-        """
-        Processes a single model record.
-        It normalizes the model name, finds a price match, and returns
-        structured data for the model and for debugging.
-        """
-        try:
-            model_name = model["Model"]
-            elo = int(model["Score"])
-        except (KeyError, ValueError, TypeError) as e:
-            print(f"    ⚠ Skipping malformed model record: {e} — {model}")
-            return None
-        votes_raw = model.get("Votes", 0)
-        try:
-            # Ensure votes is an integer; handle strings with commas or NBSPs
-            votes = int(re.sub(r"[^0-9]", "", str(votes_raw))) if str(votes_raw) else 0
-        except (ValueError, TypeError):
-            votes = 0
-        organization = model.get("organization", "Unknown")
-        organization = OrganizationNormalizer.normalize(organization)
-
-        # Skip model if below min_elo
-        if elo < self.min_elo:
+        """Price of the same model, preferring the same snapshot, the exact name, the same sizes, then an undated entry."""
+        if model_name in PRICE_MODEL_OVERRIDES:
+            return self.price_lookup.get(PRICE_MODEL_OVERRIDES[model_name])
+        key = name_key(model_name)
+        candidates = [
+            price_model
+            for price_model, info in self.price_lookup.items()
+            if same_model(key, self.price_keys[price_model], info.provider)
+        ]
+        if not candidates:
             return None
 
-        # Attempt to find a price match
-        price_info = price_matcher.find_match(model_name)
+        exact = re.sub(r"\s*\(.*?\)", "", model_name).strip().lower().replace(" ", "-")
 
-        if price_info:
-            if self.exclude_free and price_info.input_price == 0 and price_info.output_price == 0:
-                return None  # Skip free models if excluded
-
-            model_data = ModelData(
-                model=model_name,
-                elo=elo,
-                input_price=price_info.input_price,
-                output_price=price_info.output_price,
-                cheapest_provider=price_info.provider,
-                votes=votes,
-                matched_price_model=price_info.original_name,
-                organization=organization
-            )
-            debug_info = MatchingDebugInfo(
-                rank_model=model_name,
-                matched_price_model=price_info.original_name,
-                price=price_info.input_price,
-                provider=price_info.provider,
-                organization=organization
-            )
-            return model_data, debug_info
-
-        # If no price match found, record for debugging but skip synthesis
-        debug_info = MatchingDebugInfo(
-            rank_model=model_name,
-            matched_price_model="No match found",
-            price=0,
-            provider="N/A",
-            organization=organization
-        )
-        return None, debug_info
-
-    def _save_results(
-        self, synthesized_data: List[ModelData], matching_debug: List[MatchingDebugInfo], timestamp: str
-    ):
-        """Save synthesized data and debug information"""
-        # Generate JavaScript file
-        js_content = self._generate_js_content(
-            synthesized_data, timestamp, self.min_elo, self.exclude_free
-        )
-
-        # Save files
-        with open(self.data_dir / "synthesized_data.js", "w", encoding="utf-8") as f:
-            f.write(js_content)
-
-        with open(
-            self.data_dir / "price_matching_debug.json", "w", encoding="utf-8"
-        ) as f:
-            debug_data = [
-                {
-                    "rank_model": debug.rank_model,
-                    "matched_price_model": debug.matched_price_model,
-                    "price": debug.price,
-                    "provider": debug.provider,
-                    "organization": debug.organization,
-                }
-                for debug in matching_debug
-            ]
-            json.dump(debug_data, f, indent=2, ensure_ascii=False)
-
-        logger.info("  ↳ Created debug and synthesized data files")
-
-    def _generate_js_content(
-        self,
-        synthesized_data: List[ModelData],
-        timestamp: str,
-        min_elo: int,
-        exclude_free: bool,
-    ) -> str:
-        """Generate JavaScript file content"""
-
-        # Pretty-print JSON for readability
-        records = []
-        for item in synthesized_data:
-            records.append(
-                {
-                    "model": item.model,
-                    "elo": item.elo,
-                    "input_price": item.input_price,
-                    "output_price": item.output_price,
-                    "cheapest_provider": item.cheapest_provider,
-                    "votes": item.votes,
-                    "organization": item.organization
-                }
+        def preference(price_model: str) -> tuple:
+            price_key = self.price_keys[price_model]
+            return (
+                not (key.snapshots and price_key.snapshots == key.snapshots),
+                price_model != exact,
+                price_key.sizes != key.sizes,
+                bool(price_key.snapshots),
+                self.price_lookup[price_model].input_price,
             )
 
-        js_array = ",\n  ".join([json.dumps(record) for record in records])
-        js_content = f"""export const data = [\n  {js_array}\n];
-
-export const dataLastUpdated = "{timestamp}";
-export const minElo = {min_elo};
-export const excludeFree = {'true' if exclude_free else 'false'};
-"""
-        return js_content
+        return self.price_lookup[min(candidates, key=preference)]
 
 
-def main():
-    """Main function to run the data synthesis"""
-    try:
-        synthesizer = DataSynthesizer(min_elo=1000, exclude_free=True)
-        data = synthesizer.generate()
+def load_price_lookup(price_data: List[dict]) -> Dict[str, PriceInfo]:
+    """Index prices by lowercased model name, keeping the cheaper input price when two authors list one name."""
+    lookup: Dict[str, PriceInfo] = {}
+    for provider in price_data:
+        for model in provider["models"]:
+            key = model["name"].lower()
+            if key not in lookup or model["inputPrice"] < lookup[key].input_price:
+                lookup[key] = PriceInfo(model["inputPrice"], model["outputPrice"], provider["provider"], model["name"])
+    return lookup
 
-        print(f"  ✅ Successfully synthesized data for {len(data)} models, saved to data/synthesized_data.js")
 
-    except Exception as e:
-        logger.error(f"❌ Data synthesis failed: {e}")
-        return 1
+def synthesize(rank_models: List[dict], matcher: PriceMatcher) -> tuple[List[dict], List[dict]]:
+    """Join ranked models with their prices; return the site records and one matching record per ranked model."""
+    records, debug = [], []
+    for model in rank_models:
+        elo = int(model["Score"])
+        if elo < MIN_ELO:
+            continue
+        price = matcher.find_match(model["Model"])
+        debug.append({
+            "rank_model": model["Model"],
+            "matched_price_model": price.original_name if price else "No match found",
+            "price": price.input_price if price else 0,
+            "provider": price.provider if price else "N/A",
+            "organization": model["organization"],
+        })
+        if price:
+            records.append({
+                "model": model["Model"],
+                "elo": elo,
+                "input_price": price.input_price,
+                "output_price": price.output_price,
+                "votes": int(model["Votes"]),
+                "organization": model["organization"],
+            })
+    return records, debug
 
-    return 0
+
+def main() -> None:
+    rank_data = json.loads((DATA_DIR / "rank_data.json").read_text(encoding="utf-8"))
+    print(f"  Loaded {len(rank_data['models'])} models from ranking data (updated: {rank_data['last_updated']})")
+    price_lookup = load_price_lookup(json.loads((DATA_DIR / "price_data.json").read_text(encoding="utf-8")))
+    print(f"  Loaded {len(price_lookup)} models from pricing data (updated: {date.today().isoformat()})")
+
+    records, debug = synthesize(rank_data["models"], PriceMatcher(price_lookup))
+
+    js_array = ",\n  ".join(json.dumps(record) for record in records)
+    (DATA_DIR / "synthesized_data.js").write_text(
+        f"export const data = [\n  {js_array}\n];\n\n"
+        f'export const dataLastUpdated = "{rank_data["last_updated"]}";\n'
+        f"export const minElo = {MIN_ELO};\n",
+        encoding="utf-8",
+    )
+    (DATA_DIR / "price_matching_debug.json").write_text(json.dumps(debug, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"  Synthesized {len(records)} models, saved to data/synthesized_data.js")
 
 
 if __name__ == "__main__":
-    exit(main())
+    main()

@@ -1,9 +1,6 @@
-"""Generate price_data.json from OpenRouter model pricing.
+"""Convert an OpenRouter /models response into data/price_data.json, in USD per million tokens.
 
-OpenRouter prices are per token; price_data.json uses per million tokens.
-
-Usage:
-    python3 generate_openrouter_price_data.py openrouter_raw.json
+Usage: python3 generate_openrouter_price_data.py data/openrouter_raw.json
 """
 
 import json
@@ -44,9 +41,23 @@ PROVIDER_MAP: Dict[str, str] = {
 }
 
 
-def provider_display_name(slug: str) -> str:
-    """Convert an OpenRouter provider slug to the display name used by the app."""
-    return PROVIDER_MAP.get(slug, slug.replace("-", " ").title())
+ALIAS_PREFIX = "~"
+
+
+def author_labels(models: List[dict]) -> Dict[str, str]:
+    """Read OpenRouter's author label per id prefix from model names shaped "Author: Model"."""
+    labels: Dict[str, str] = {}
+    for model in models:
+        slug = model.get("id", "").split("/", 1)[0]
+        author, separator, _ = (model.get("name") or "").partition(": ")
+        if separator:
+            labels.setdefault(slug, author)
+    return labels
+
+
+def provider_display_name(slug: str, labels: Dict[str, str]) -> str:
+    """Convert an OpenRouter author slug to the display name used by the app."""
+    return PROVIDER_MAP.get(slug) or labels.get(slug) or slug.replace("-", " ").title()
 
 
 def extract_model_name(model_id: str) -> str:
@@ -54,22 +65,22 @@ def extract_model_name(model_id: str) -> str:
     return model_id.split("/", 1)[1] if "/" in model_id else model_id
 
 
-def load_openrouter(path: Path) -> List[dict]:
-    """Load the OpenRouter model list from a pre-downloaded JSON file."""
-    with open(path, "r", encoding="utf-8") as f:
-        body = json.load(f)
-    models = body.get("data", []) if isinstance(body, dict) else body
-    print(f"  ↳ Loaded {len(models)} models from {path.name}")
-    return models
+def total_models(price_data: List[dict]) -> int:
+    return sum(len(provider["models"]) for provider in price_data)
 
 
 def convert_openrouter(models: List[dict]) -> List[dict]:
-    """Convert OpenRouter models into the price_data.json provider schema."""
+    """Group priced models by author, keeping the cheaper input price when an author lists a name twice."""
     grouped: Dict[str, Dict[str, dict]] = {}
+    labels = author_labels(models)
     skipped = 0
 
     for model in models:
         model_id = model.get("id", "")
+        # "~author/family-latest" ids redirect to whichever model is newest, so their price fits no fixed version.
+        if model_id.startswith(ALIAS_PREFIX):
+            skipped += 1
+            continue
         pricing = model.get("pricing") or {}
         prompt_per_token = pricing.get("prompt")
         completion_per_token = pricing.get("completion")
@@ -90,7 +101,7 @@ def convert_openrouter(models: List[dict]) -> List[dict]:
             continue
 
         slug = model_id.split("/", 1)[0] if "/" in model_id else "unknown"
-        provider = provider_display_name(slug)
+        provider = provider_display_name(slug, labels)
         name = extract_model_name(model_id)
         entry = {
             "name": name,
@@ -105,41 +116,27 @@ def convert_openrouter(models: List[dict]) -> List[dict]:
             provider_models[key] = entry
 
     price_data = [
-        {
-            "provider": provider,
-            "uri": "https://openrouter.ai",
-            "models": list(models_by_name.values()),
-        }
+        {"provider": provider, "models": list(models_by_name.values())}
         for provider, models_by_name in sorted(grouped.items())
     ]
 
-    total = sum(len(provider["models"]) for provider in price_data)
-    print(f"  ↳ Converted {total} priced models across {len(price_data)} providers (skipped {skipped})")
+    print(f"  Converted {total_models(price_data)} priced models across {len(price_data)} providers (skipped {skipped})")
     return price_data
 
 
 def main() -> int:
-    data_dir = Path(__file__).resolve().parent.parent / "data"
-    output_file = data_dir / "price_data.json"
-    openrouter_file = Path(sys.argv[1]) if len(sys.argv) > 1 else data_dir / "openrouter_raw.json"
-
-    try:
-        models = load_openrouter(openrouter_file)
-    except Exception as e:
-        print(f"  ❌ Failed to load OpenRouter data: {e}")
-        return 1
+    openrouter_file = Path(sys.argv[1])
+    models = json.loads(openrouter_file.read_text(encoding="utf-8"))["data"]
+    print(f"  Loaded {len(models)} models from {openrouter_file.name}")
 
     price_data = convert_openrouter(models)
     if not price_data:
-        print("  ❌ OpenRouter response did not contain any usable priced models.")
+        print("OpenRouter response did not contain any usable priced models.")
         return 1
 
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(price_data, f, indent=2, ensure_ascii=False)
-        f.write("\n")
-
-    total_models = sum(len(provider.get("models", [])) for provider in price_data)
-    print(f"  ✅ price_data.json updated from OpenRouter: {len(price_data)} providers, {total_models} models")
+    output_file = Path(__file__).resolve().parent.parent / "data" / "price_data.json"
+    output_file.write_text(json.dumps(price_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"  Saved {total_models(price_data)} models from {len(price_data)} providers to data/price_data.json")
     return 0
 
 

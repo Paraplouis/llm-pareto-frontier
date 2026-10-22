@@ -1,5 +1,4 @@
 import json
-import sys
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -61,49 +60,42 @@ MODEL_ORGANIZATION_OVERRIDES = {
 }
 
 
-def _organization_display_name(value: Any, model_name: str = "") -> str:
-    """Convert dataset organization ids to display names used by the UI."""
-    key = str(value or "").strip().lower()
+def _organization_display_name(value: Any, model_name: str) -> str:
+    """Convert dataset organization ids such as inception-ai to the display names used by the UI."""
+    key = str(value or "").strip().lower().replace("-", " ")
     if key:
-        return ORGANIZATION_NAMES.get(key, key.replace("-", " ").title())
+        return ORGANIZATION_NAMES.get(key, key.title())
     return MODEL_ORGANIZATION_OVERRIDES.get(model_name.lower(), "N/A")
 
 
-def _fetch_rows_page(offset: int, length: int = PAGE_SIZE) -> Dict[str, Any]:
-    """Fetch one page from Hugging Face's dataset server."""
-    query = urlencode(
-        {
-            "dataset": DATASET_ID,
-            "config": CONFIG,
-            "split": SPLIT,
-            "offset": offset,
-            "length": length,
-        }
-    )
-    for attempt in range(1, FETCH_ATTEMPTS + 1):
+def _read_json(url: str) -> Dict[str, Any]:
+    with urlopen(url, timeout=30) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def _fetch_rows_page(offset: int) -> Dict[str, Any]:
+    """Fetch one page of rows, retrying server errors and timeouts before the last attempt."""
+    query = urlencode({"dataset": DATASET_ID, "config": CONFIG, "split": SPLIT, "offset": offset, "length": PAGE_SIZE})
+    url = f"{DATASET_ROWS_URL}?{query}"
+    for attempt in range(1, FETCH_ATTEMPTS):
         try:
-            with urlopen(f"{DATASET_ROWS_URL}?{query}", timeout=30) as response:
-                return json.loads(response.read().decode("utf-8"))
+            return _read_json(url)
         except (URLError, TimeoutError) as e:
-            if attempt == FETCH_ATTEMPTS or (isinstance(e, HTTPError) and e.code < 500):
+            if isinstance(e, HTTPError) and e.code < 500:
                 raise
-            print(f"  ↳ Retrying rows at offset {offset} after: {e} ({attempt}/{FETCH_ATTEMPTS})")
+            print(f"  Retrying rows at offset {offset} after: {e} ({attempt}/{FETCH_ATTEMPTS})")
             time.sleep(RETRY_DELAY_SECONDS)
+    return _read_json(url)
 
 
 def _convert_hf_row(row: Dict[str, Any]) -> Optional[Dict[str, str]]:
-    """Convert a Hugging Face leaderboard row into the repo's rank_data schema."""
-    if row.get("category") != CATEGORY:
-        return None
-
+    """Convert a leaderboard row into the rank_data schema, or None when its name or rating is unusable."""
     model_name = str(row.get("model_name") or "").strip()
-    rating = row.get("rating")
-    if not model_name or rating is None:
-        return None
-
     try:
-        score = str(int(round(float(rating))))
-    except (TypeError, ValueError):
+        score = str(round(float(row["rating"])))
+    except (KeyError, TypeError, ValueError):
+        return None
+    if not model_name:
         return None
 
     try:
@@ -119,13 +111,9 @@ def _convert_hf_row(row: Dict[str, Any]) -> Optional[Dict[str, str]]:
     }
 
 
-def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict[str, str]]], Optional[str]]:
-    """Download the current Text Arena (style-controlled) overall leaderboard from Hugging Face.
-
-    Returns:
-        Tuple of (records with keys [Model, Score, Votes, organization], date string YYYY-MM-DD).
-    """
-    print("  ↳ Fetching LM Arena text (style control) leaderboard from Hugging Face dataset server...")
+def fetch_latest_leaderboard() -> Tuple[List[Dict[str, str]], str]:
+    """Download the overall Text Arena (style control) leaderboard and its publication date."""
+    print("  Fetching LM Arena text (style control) leaderboard from Hugging Face dataset server")
 
     records: List[Dict[str, str]] = []
     publish_dates: List[str] = []
@@ -133,13 +121,9 @@ def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict[str, str]]], Optio
     total_rows: Optional[int] = None
     seen_overall = False
 
+    # Rows are grouped by category; the overall block ends at the first row of the next category.
     while total_rows is None or offset < total_rows:
-        try:
-            payload = _fetch_rows_page(offset)
-        except Exception as e:
-            print(f"  ❌ Failed to fetch leaderboard rows at offset {offset}: {e}")
-            return None, None
-
+        payload = _fetch_rows_page(offset)
         rows = payload.get("rows", [])
         total_rows = int(payload.get("num_rows_total") or 0)
         if not rows:
@@ -153,40 +137,29 @@ def fetch_latest_leaderboard_df() -> Tuple[Optional[List[Dict[str, str]]], Optio
                     stop_after_page = True
                     break
                 continue
-
             seen_overall = True
             converted = _convert_hf_row(row)
             if converted:
                 records.append(converted)
-                published = row.get("leaderboard_publish_date")
-                if published:
-                    publish_dates.append(str(published)[:10])
+                if row.get("leaderboard_publish_date"):
+                    publish_dates.append(str(row["leaderboard_publish_date"])[:10])
 
         if stop_after_page:
             break
-
         offset += len(rows)
 
-    if not records:
-        print("  ❌ No overall leaderboard rows found in Hugging Face dataset response.")
-        return None, None
+    if not records or not publish_dates:
+        raise ValueError("No dated overall leaderboard rows in the Hugging Face dataset response")
 
-    last_updated = max(publish_dates) if publish_dates else None
-    print(f"  ↳ Loaded {len(records)} overall leaderboard rows (updated: {last_updated})")
+    last_updated = max(publish_dates)
+    print(f"  Loaded {len(records)} overall leaderboard rows (updated: {last_updated})")
     return records, last_updated
 
 
 if __name__ == "__main__":
-    leaderboard_df, file_date = fetch_latest_leaderboard_df()
-    if leaderboard_df is not None and file_date is not None:
-        output_path = Path(__file__).parent.parent / "data" / "rank_data.json"
-        output_data = {"last_updated": file_date, "models": leaderboard_df}
-
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(output_data, f, indent=2, ensure_ascii=False)
-
-        print("  ✅ Successfully saved LM Arena data to data/rank_data.json")
-    else:
-        print("  ❌ Failed to extract data.")
-        print("\n❌ DATA REFRESH FAILED")
-        sys.exit(1)
+    models, last_updated = fetch_latest_leaderboard()
+    output_path = Path(__file__).resolve().parent.parent / "data" / "rank_data.json"
+    output_path.write_text(
+        json.dumps({"last_updated": last_updated, "models": models}, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    print("  Saved LM Arena data to data/rank_data.json")

@@ -24,16 +24,10 @@ def test_convert_hf_row_maps_overall_leaderboard_schema():
     }
 
 
-def test_convert_hf_row_ignores_non_overall_categories():
-    row = {
-        "model_name": "gpt-5.5",
-        "organization": "openai",
-        "rating": 1553.57,
-        "vote_count": 393.0,
-        "category": "chinese",
-    }
+def test_convert_hf_row_maps_hyphenated_organization_ids():
+    row = {"model_name": "mercury", "organization": "inception-ai", "rating": 1250.0, "category": "overall"}
 
-    assert extract_leaderboard._convert_hf_row(row) is None
+    assert extract_leaderboard._convert_hf_row(row)["organization"] == "Inception AI"
 
 
 def test_convert_hf_row_applies_model_organization_override():
@@ -113,7 +107,7 @@ def test_fetch_latest_leaderboard_stops_after_overall_category(monkeypatch):
 
     monkeypatch.setattr(extract_leaderboard, "_fetch_rows_page", lambda offset: pages[offset])
 
-    records, last_updated = extract_leaderboard.fetch_latest_leaderboard_df()
+    records, last_updated = extract_leaderboard.fetch_latest_leaderboard()
 
     assert records == [
         {"Model": "model-a", "Score": "1400", "Votes": "1200", "organization": "OpenAI"},
