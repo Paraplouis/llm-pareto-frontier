@@ -1,7 +1,9 @@
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import urlopen
 
@@ -12,6 +14,8 @@ CONFIG = "text_style_control"
 SPLIT = "latest"
 CATEGORY = "overall"
 PAGE_SIZE = 100
+FETCH_ATTEMPTS = 3
+RETRY_DELAY_SECONDS = 5
 
 ORGANIZATION_NAMES = {
     "": "N/A",
@@ -76,8 +80,15 @@ def _fetch_rows_page(offset: int, length: int = PAGE_SIZE) -> Dict[str, Any]:
             "length": length,
         }
     )
-    with urlopen(f"{DATASET_ROWS_URL}?{query}", timeout=30) as response:
-        return json.loads(response.read().decode("utf-8"))
+    for attempt in range(1, FETCH_ATTEMPTS + 1):
+        try:
+            with urlopen(f"{DATASET_ROWS_URL}?{query}", timeout=30) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except (URLError, TimeoutError) as e:
+            if attempt == FETCH_ATTEMPTS or (isinstance(e, HTTPError) and e.code < 500):
+                raise
+            print(f"  ↳ Retrying rows at offset {offset} after: {e} ({attempt}/{FETCH_ATTEMPTS})")
+            time.sleep(RETRY_DELAY_SECONDS)
 
 
 def _convert_hf_row(row: Dict[str, Any]) -> Optional[Dict[str, str]]:

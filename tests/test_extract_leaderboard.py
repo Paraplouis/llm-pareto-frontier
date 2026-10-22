@@ -1,3 +1,9 @@
+import io
+import json
+from urllib.error import HTTPError
+
+import pytest
+
 from utils import extract_leaderboard
 
 
@@ -114,3 +120,47 @@ def test_fetch_latest_leaderboard_stops_after_overall_category(monkeypatch):
         {"Model": "model-b", "Score": "1400", "Votes": "900", "organization": "Google"},
     ]
     assert last_updated == "2026-05-14"
+
+
+def _http_error(code):
+    return HTTPError(extract_leaderboard.DATASET_ROWS_URL, code, "error", None, None)
+
+
+def _stub_urlopen(monkeypatch, outcomes):
+    calls = []
+
+    def fake_urlopen(url, timeout):
+        calls.append(url)
+        outcome = outcomes.pop(0)
+        if isinstance(outcome, Exception):
+            raise outcome
+        return io.BytesIO(json.dumps(outcome).encode("utf-8"))
+
+    monkeypatch.setattr(extract_leaderboard, "urlopen", fake_urlopen)
+    monkeypatch.setattr(extract_leaderboard.time, "sleep", lambda seconds: None)
+    return calls
+
+
+def test_fetch_rows_page_retries_server_errors(monkeypatch):
+    payload = {"num_rows_total": 0, "rows": []}
+    calls = _stub_urlopen(monkeypatch, [_http_error(502), payload])
+
+    assert extract_leaderboard._fetch_rows_page(300) == payload
+    assert len(calls) == 2
+
+
+def test_fetch_rows_page_does_not_retry_client_errors(monkeypatch):
+    calls = _stub_urlopen(monkeypatch, [_http_error(404)])
+
+    with pytest.raises(HTTPError):
+        extract_leaderboard._fetch_rows_page(0)
+    assert len(calls) == 1
+
+
+def test_fetch_rows_page_gives_up_after_last_attempt(monkeypatch):
+    errors = [_http_error(502) for _ in range(extract_leaderboard.FETCH_ATTEMPTS)]
+    calls = _stub_urlopen(monkeypatch, errors)
+
+    with pytest.raises(HTTPError):
+        extract_leaderboard._fetch_rows_page(0)
+    assert len(calls) == extract_leaderboard.FETCH_ATTEMPTS
