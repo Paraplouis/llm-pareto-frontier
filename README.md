@@ -4,71 +4,65 @@
 # LLM Pareto frontier
 
 ![llm-pareto-frontier](/screenshot.png)
-> Screenshot of the Pareto frontier visualization on 27/05/2025
 
-## 📊 What is the Pareto Frontier?
+The chart plots each model's LM Arena ELO score against its OpenRouter API price. A model is on the Pareto frontier when no other model is both cheaper and better ranked; the stepped line shows the best score available at each price.
 
-The Pareto frontier shows models that are "Pareto optimal" - meaning no other model offers better performance at a lower price. These are the models you should consider when choosing an LLM based on performance and cost efficiency.
+Site: https://paraplouis.github.io/llm-pareto-frontier/
 
-Available at https://paraplouis.github.io/llm-pareto-frontier/
+## Data and updates
 
-## 🔄 Updates and Deployment
+- Rankings come from the official LM Arena Hugging Face dataset (text, style control); prices come from the OpenRouter models API.
+- A ranked model gets a price only from an OpenRouter entry naming the same model: family, tier, and version must agree, and sizes must agree when both names give one. Models no longer listed on OpenRouter are left out. `PRICE_MODEL_OVERRIDES` in `utils/generate_synthesized_data.py` lists the few names that need an explicit match.
+- GitHub Actions refreshes the data every day at 14:17 UTC, commits changed files in `data/` to `main`, and deploys the site in the same run. Pushes that change `data/**` also deploy.
 
-- GitHub Actions refreshes the data every day at 14:17 UTC. Rankings come from the official LM Arena Hugging Face dataset; pricing comes from OpenRouter.
-- When the generated outputs change, the workflow commits them to `main` and deploys the refreshed site in the same run. Pushes that change files under `data/**` also deploy automatically.
-- To refresh locally, run `./refresh.sh` and commit the updated files in `data/`. The workflow can also be started manually from the Actions tab.
+## Local use
 
-### 🛠️ Usage
+The refresh scripts need only `curl` and the Python standard library.
 
-The refresh scripts use `curl` and the Python standard library; no Python package install is required.
-
-To run the project locally, run:
 ```bash
-python -m http.server
+./refresh.sh             # fetch prices and rankings, regenerate data/
+python -m http.server    # serve the site at http://localhost:8000
 ```
-and open http://localhost:8000 in your browser.
 
-## 🏗️ Code structure
+Tests:
+
+```bash
+python -m pytest
+node --test tests/test_dataProcessor.mjs
+node tests/test_browser.mjs   # needs Puppeteer, Google Chrome, and the local server
+```
+
+## Code structure
 
 ```
-├── index.html                      # Main entry point
-├── styles.css                      # Application styles & responsive design
-├── refresh.sh                      # Refresh script used locally and by GitHub Actions
-├── screenshot.png                  # Project screenshot for documentation
-├── .github/
-│   └── workflows/
-│       └── daily-refresh.yml       # Daily data refresh and Pages deployment
+├── index.html, styles.css            # Page and styles
+├── fonts/                            # Newsreader and IBM Plex Mono (SIL Open Font License)
+├── js/
+│   ├── app.js                        # Filter state; re-renders on change
+│   ├── modules/
+│   │   ├── dataProcessor.js          # Price blending, Pareto frontier, search
+│   │   ├── chartRenderer.js          # D3 scatter plot and hover
+│   │   └── uiController.js           # Controls, frontier list, table, tooltip
+│   └── vendor/d3.v7.min.js
 ├── data/
-│   ├── synthesized_data.js         # Final LLM model data (auto-updated)
-│   ├── rank_data.json              # Raw ranking data from LM Arena
-│   └── price_data.json             # Raw pricing data
+│   ├── synthesized_data.js           # Ranked models with prices, read by the site
+│   └── price_data.json               # OpenRouter prices per author
 ├── utils/
-│   ├── extract_leaderboard.py      # Fetches LM Arena rankings from Hugging Face dataset server
-│   ├── generate_openrouter_price_data.py # Generates pricing data from OpenRouter
-│   └── generate_synthesized_data.py # Main data processing & synthesis utility
-└── js/
-    ├── app.js                      # Main application orchestrator
-    └── modules/
-        ├── dataProcessor.js        # Data filtering & Pareto frontier calculations
-        ├── chartRenderer.js        # D3.js chart rendering & interactions
-        └── uiController.js         # UI controls & user interface management
+│   ├── extract_leaderboard.py        # LM Arena rankings from Hugging Face
+│   ├── generate_openrouter_price_data.py
+│   └── generate_synthesized_data.py  # Joins rankings and prices
+├── refresh.sh
+└── tests/
 ```
 
-## 🤝 Contributing
+## Ideas
 
-Contributions are welcome! I'm interested in evolving this project in these directions:
+- Filter by parameter count or open-weight status.
+- Frontiers for other LM Arena categories.
+- Animate how the frontier moves over time.
 
-- **Enforce data reliability**: better OpenRouter matching and model name normalization
-- **Real price estimation**: implement formulas to estimate actual costs beyond static input pricing
-- **Filtering** by parameter count (total/active), open-source status, ...
-- **Multi-dimensional frontiers** across different performance metrics
-- **Historical animations** of frontier evolution over time
-- **Extended data integration** from all Chatbot Arena tabs to enable domain-specific frontiers and richer analysis
+## Acknowledgements
 
-## 🙏 Acknowledgements
-
-This project builds upon the work of several projects. Special thanks to:
-
-- The **LM Arena team** for creating and maintaining the [LM Arena Leaderboard](https://lmarena.ai/leaderboard/text/overall) and official [leaderboard dataset](https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset).
-- **OpenRouter** for publishing model pricing through its public models API.
-- **Winston Bosan** for the [original implementation](https://github.com/winston-bosan/llm-pareto-frontier) that inspired me to continue the project.
+- The LM Arena team for the [leaderboard](https://lmarena.ai/leaderboard/text/overall) and its [dataset](https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset).
+- OpenRouter for publishing model prices through its public models API.
+- Winston Bosan for the [original implementation](https://github.com/winston-bosan/llm-pareto-frontier).
