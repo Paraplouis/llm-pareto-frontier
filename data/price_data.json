@@ -59,8 +59,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.04,
-        "outputPrice": 1.35
+        "inputPrice": 0.2,
+        "outputPrice": 2.5
       },
       {
         "name": "qwen3.8-2.4t-a95b",
@@ -114,8 +114,8 @@
       },
       {
         "name": "qwen3.5-9b",
-        "inputPrice": 0.08,
-        "outputPrice": 0.13
+        "inputPrice": 0.17,
+        "outputPrice": 0.25
       },
       {
         "name": "qwen3.5-35b-a3b",
@@ -569,8 +569,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.4427,
-        "outputPrice": 0.8853
+        "inputPrice": 0.8143,
+        "outputPrice": 1.6286
       },
       {
         "name": "deepseek-v4-flash",
@@ -1149,8 +1149,8 @@
       },
       {
         "name": "mistral-small-3.2-24b-instruct",
-        "inputPrice": 0.0938,
-        "outputPrice": 0.25
+        "inputPrice": 0.075,
+        "outputPrice": 0.2
       },
       {
         "name": "mistral-medium-3",
@@ -1213,9 +1213,14 @@
     "provider": "MoonshotAI",
     "models": [
       {
+        "name": "kimi-k3.1-pro",
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
+      },
+      {
         "name": "kimi-k3",
         "inputPrice": 0.239,
-        "outputPrice": 11.936
+        "outputPrice": 10.8
       },
       {
         "name": "kimi-k3:batch",
@@ -2219,8 +2224,8 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.0052,
-        "outputPrice": 0.1985
+        "inputPrice": 0.15,
+        "outputPrice": 0.5
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2229,8 +2234,8 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.7,
-        "outputPrice": 2.2
+        "inputPrice": 0.079,
+        "outputPrice": 1.4
       },
       {
         "name": "glm-5.3:batch",
