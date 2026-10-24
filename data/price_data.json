@@ -544,8 +544,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
+        "inputPrice": 0.02,
+        "outputPrice": 1.0
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -569,8 +569,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.8143,
-        "outputPrice": 1.6286
+        "inputPrice": 0.2088,
+        "outputPrice": 0.4176
       },
       {
         "name": "deepseek-v4-flash",
@@ -729,8 +729,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.09,
-        "outputPrice": 0.3
+        "inputPrice": 0.0675,
+        "outputPrice": 0.225
       },
       {
         "name": "gemma-4-31b-it",
@@ -1029,8 +1029,8 @@
       },
       {
         "name": "minimax-m2.5",
-        "inputPrice": 0.27,
-        "outputPrice": 0.95
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "minimax-m2-her",
