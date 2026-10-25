@@ -206,10 +206,10 @@ export const data = [
   {"model": "Amazon Nova Micro 1.0", "elo": 1241, "input_price": 0.035, "output_price": 0.14, "votes": 19364, "organization": "Amazon"},
   {"model": "Mixtral 8x22B Instruct v0.1", "elo": 1230, "input_price": 2.0, "output_price": 6.0, "votes": 51416, "organization": "Mistral"},
   {"model": "Command R", "elo": 1227, "input_price": 0.15, "output_price": 0.6, "votes": 54036, "organization": "Cohere"},
-  {"model": "GPT-3.5 Turbo (0125)", "elo": 1226, "input_price": 0.5, "output_price": 1.5, "votes": 66207, "organization": "OpenAI"},
+  {"model": "GPT-3.5 Turbo (0125)", "elo": 1226, "input_price": 3.0, "output_price": 4.0, "votes": 66207, "organization": "OpenAI"},
   {"model": "Llama 3.1 8B Instruct", "elo": 1211, "input_price": 0.05, "output_price": 0.08, "votes": 49605, "organization": "Meta"},
-  {"model": "GPT-3.5 Turbo (1106)", "elo": 1204, "input_price": 0.5, "output_price": 1.5, "votes": 16619, "organization": "OpenAI"},
-  {"model": "Llama 3.2 3B Instruct", "elo": 1167, "input_price": 0.0509, "output_price": 0.335, "votes": 7936, "organization": "Meta"},
+  {"model": "GPT-3.5 Turbo (1106)", "elo": 1204, "input_price": 3.0, "output_price": 4.0, "votes": 16619, "organization": "OpenAI"},
+  {"model": "Llama 3.2 3B Instruct", "elo": 1167, "input_price": 0.05, "output_price": 0.33, "votes": 7936, "organization": "Meta"},
   {"model": "Llama 3.2 1B Instruct", "elo": 1111, "input_price": 0.027, "output_price": 0.201, "votes": 8045, "organization": "Meta"}
 ];
 

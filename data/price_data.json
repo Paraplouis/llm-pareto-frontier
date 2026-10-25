@@ -104,8 +104,8 @@
       },
       {
         "name": "qwen3.6-27b",
-        "inputPrice": 0.25,
-        "outputPrice": 2.0
+        "inputPrice": 0.32,
+        "outputPrice": 3.2
       },
       {
         "name": "qwen3.6-plus",
@@ -891,6 +891,11 @@
         "name": "lfm-2.5-24b-a2b",
         "inputPrice": 0.05,
         "outputPrice": 0.7
+      },
+      {
+        "name": "lfm-2.5-2.6b",
+        "inputPrice": 0.35,
+        "outputPrice": 0.5
       }
     ]
   },
@@ -984,8 +989,8 @@
       },
       {
         "name": "llama-3.2-3b-instruct",
-        "inputPrice": 0.0509,
-        "outputPrice": 0.335
+        "inputPrice": 0.05,
+        "outputPrice": 0.33
       },
       {
         "name": "llama-3.1-70b-instruct",
@@ -1843,24 +1848,9 @@
         "outputPrice": 2.0
       },
       {
-        "name": "gpt-3.5-turbo-instruct",
-        "inputPrice": 1.5,
-        "outputPrice": 2.0
-      },
-      {
         "name": "gpt-3.5-turbo-16k",
         "inputPrice": 3.0,
         "outputPrice": 4.0
-      },
-      {
-        "name": "gpt-3.5-turbo",
-        "inputPrice": 0.5,
-        "outputPrice": 1.5
-      },
-      {
-        "name": "gpt-3.5-turbo:batch",
-        "inputPrice": 0.25,
-        "outputPrice": 0.75
       },
       {
         "name": "gpt-4",
