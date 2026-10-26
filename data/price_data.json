@@ -129,8 +129,8 @@
       },
       {
         "name": "qwen3.5-122b-a10b",
-        "inputPrice": 0.4,
-        "outputPrice": 3.2
+        "inputPrice": 0.26,
+        "outputPrice": 2.08
       },
       {
         "name": "qwen3.5-flash-02-23",
@@ -194,7 +194,7 @@
       },
       {
         "name": "qwen3-30b-a3b-instruct-2507",
-        "inputPrice": 0.09,
+        "inputPrice": 0.1,
         "outputPrice": 0.3
       },
       {
@@ -450,16 +450,6 @@
     ]
   },
   {
-    "provider": "Arcee AI",
-    "models": [
-      {
-        "name": "trinity-large-thinking",
-        "inputPrice": 0.25,
-        "outputPrice": 0.8
-      }
-    ]
-  },
-  {
     "provider": "ByteDance",
     "models": [
       {
@@ -544,8 +534,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.02,
-        "outputPrice": 1.0
+        "inputPrice": 0.0477,
+        "outputPrice": 0.1908
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -569,8 +559,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.2088,
-        "outputPrice": 0.4176
+        "inputPrice": 0.7334,
+        "outputPrice": 1.4668
       },
       {
         "name": "deepseek-v4-flash",
@@ -729,8 +719,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.0675,
-        "outputPrice": 0.225
+        "inputPrice": 0.0765,
+        "outputPrice": 0.255
       },
       {
         "name": "gemma-4-31b-it",
@@ -1224,8 +1214,8 @@
       },
       {
         "name": "kimi-k3",
-        "inputPrice": 0.239,
-        "outputPrice": 10.8
+        "inputPrice": 0.179,
+        "outputPrice": 20.0
       },
       {
         "name": "kimi-k3:batch",
@@ -1352,6 +1342,16 @@
   {
     "provider": "OpenAI",
     "models": [
+      {
+        "name": "gpt-6.1-terra",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
+      {
+        "name": "gpt-6.1-terra:batch",
+        "inputPrice": 0.5,
+        "outputPrice": 2.5
+      },
       {
         "name": "gpt-6.1-sol-pro",
         "inputPrice": 2.0,
@@ -2224,7 +2224,7 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.079,
+        "inputPrice": 0.0699,
         "outputPrice": 1.4
       },
       {
