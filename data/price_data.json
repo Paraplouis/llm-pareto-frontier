@@ -59,8 +59,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.2,
-        "outputPrice": 2.5
+        "inputPrice": 0.039,
+        "outputPrice": 1.25
       },
       {
         "name": "qwen3.8-2.4t-a95b",
@@ -100,12 +100,12 @@
       {
         "name": "qwen3.6-35b-a3b",
         "inputPrice": 0.1,
-        "outputPrice": 0.95
+        "outputPrice": 0.9
       },
       {
         "name": "qwen3.6-27b",
-        "inputPrice": 0.32,
-        "outputPrice": 3.2
+        "inputPrice": 0.45,
+        "outputPrice": 2.7
       },
       {
         "name": "qwen3.6-plus",
@@ -176,11 +176,6 @@
         "name": "qwen3-coder-flash",
         "inputPrice": 0.195,
         "outputPrice": 0.975
-      },
-      {
-        "name": "qwen3-next-80b-a3b-thinking",
-        "inputPrice": 0.15,
-        "outputPrice": 1.2
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
@@ -559,13 +554,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.8771,
-        "outputPrice": 1.7543
+        "inputPrice": 0.889,
+        "outputPrice": 1.7779
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.0473,
-        "outputPrice": 0.0946
+        "inputPrice": 0.091,
+        "outputPrice": 0.182
       },
       {
         "name": "deepseek-v3.2",
@@ -1184,8 +1179,8 @@
       },
       {
         "name": "kimi-k3",
-        "inputPrice": 0.189,
-        "outputPrice": 11.5
+        "inputPrice": 0.192,
+        "outputPrice": 20.0
       },
       {
         "name": "kimi-k3:batch",
@@ -1693,11 +1688,6 @@
         "outputPrice": 80.0
       },
       {
-        "name": "o4-mini-high",
-        "inputPrice": 1.1,
-        "outputPrice": 4.4
-      },
-      {
         "name": "o3",
         "inputPrice": 2.0,
         "outputPrice": 8.0
@@ -1706,11 +1696,6 @@
         "name": "o3:batch",
         "inputPrice": 1.0,
         "outputPrice": 4.0
-      },
-      {
-        "name": "o4-mini",
-        "inputPrice": 1.1,
-        "outputPrice": 4.4
       },
       {
         "name": "o4-mini:batch",
@@ -1748,29 +1733,9 @@
         "outputPrice": 0.2
       },
       {
-        "name": "o1-pro",
-        "inputPrice": 150.0,
-        "outputPrice": 600.0
-      },
-      {
-        "name": "o3-mini-high",
-        "inputPrice": 1.1,
-        "outputPrice": 4.4
-      },
-      {
-        "name": "o3-mini",
-        "inputPrice": 1.1,
-        "outputPrice": 4.4
-      },
-      {
         "name": "o3-mini:batch",
         "inputPrice": 0.55,
         "outputPrice": 2.2
-      },
-      {
-        "name": "o1",
-        "inputPrice": 15.0,
-        "outputPrice": 60.0
       },
       {
         "name": "gpt-4o-2024-11-20",
@@ -1813,11 +1778,6 @@
         "outputPrice": 5.0
       },
       {
-        "name": "gpt-4-turbo",
-        "inputPrice": 10.0,
-        "outputPrice": 30.0
-      },
-      {
         "name": "gpt-4-turbo:batch",
         "inputPrice": 5.0,
         "outputPrice": 15.0
@@ -1836,6 +1796,16 @@
         "name": "gpt-4",
         "inputPrice": 30.0,
         "outputPrice": 60.0
+      }
+    ]
+  },
+  {
+    "provider": "Particle AI",
+    "models": [
+      {
+        "name": "particle-1",
+        "inputPrice": 0.25,
+        "outputPrice": 1.0
       }
     ]
   },
@@ -2199,8 +2169,8 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.15,
-        "outputPrice": 0.5
+        "inputPrice": 0.0259,
+        "outputPrice": 0.1042
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2219,13 +2189,13 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.0319,
+        "inputPrice": 0.0068,
         "outputPrice": 7.0
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 0.966,
-        "outputPrice": 3.036
+        "inputPrice": 1.4,
+        "outputPrice": 4.4
       },
       {
         "name": "glm-5v-turbo",
