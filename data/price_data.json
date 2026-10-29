@@ -529,8 +529,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.14,
-        "outputPrice": 0.42
+        "inputPrice": 0.045,
+        "outputPrice": 0.5
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -554,8 +554,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.889,
-        "outputPrice": 1.7779
+        "inputPrice": 1.6,
+        "outputPrice": 3.2
       },
       {
         "name": "deepseek-v4-flash",
@@ -825,7 +825,7 @@
       {
         "name": "granite-4.2-8b",
         "inputPrice": 0.06,
-        "outputPrice": 0.25
+        "outputPrice": 0.15
       }
     ]
   },
@@ -1049,8 +1049,8 @@
     "models": [
       {
         "name": "mistral-large-4-0",
-        "inputPrice": 1.36,
-        "outputPrice": 4.18
+        "inputPrice": 0.7,
+        "outputPrice": 2.1
       },
       {
         "name": "mistral-medium-3-5",
@@ -1179,8 +1179,8 @@
       },
       {
         "name": "kimi-k3",
-        "inputPrice": 0.192,
-        "outputPrice": 20.0
+        "inputPrice": 0.239,
+        "outputPrice": 10.8
       },
       {
         "name": "kimi-k3:batch",
@@ -2096,11 +2096,6 @@
         "name": "solar-pro4",
         "inputPrice": 0.15,
         "outputPrice": 0.6
-      },
-      {
-        "name": "solar-pro-3",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
       }
     ]
   },
@@ -2169,8 +2164,8 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.0259,
-        "outputPrice": 0.1042
+        "inputPrice": 0.15,
+        "outputPrice": 0.5
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2189,8 +2184,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.0068,
-        "outputPrice": 7.0
+        "inputPrice": 0.006,
+        "outputPrice": 8.0
       },
       {
         "name": "glm-5.1",
@@ -2229,8 +2224,8 @@
       },
       {
         "name": "glm-4.6",
-        "inputPrice": 0.55,
-        "outputPrice": 2.2
+        "inputPrice": 0.5,
+        "outputPrice": 2.0
       },
       {
         "name": "glm-4.5v",
