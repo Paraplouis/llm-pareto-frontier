@@ -154,7 +154,10 @@ def test_fetch_rows_page_does_not_retry_client_errors(monkeypatch):
 def test_fetch_rows_page_gives_up_after_last_attempt(monkeypatch):
     errors = [_http_error(502) for _ in range(extract_leaderboard.FETCH_ATTEMPTS)]
     calls = _stub_urlopen(monkeypatch, errors)
+    sleeps = []
+    monkeypatch.setattr(extract_leaderboard.time, "sleep", sleeps.append)
 
     with pytest.raises(HTTPError):
         extract_leaderboard._fetch_rows_page(0)
     assert len(calls) == extract_leaderboard.FETCH_ATTEMPTS
+    assert sleeps == list(extract_leaderboard.RETRY_DELAYS_SECONDS)

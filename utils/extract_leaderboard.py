@@ -13,8 +13,8 @@ CONFIG = "text_style_control"
 SPLIT = "latest"
 CATEGORY = "overall"
 PAGE_SIZE = 100
-FETCH_ATTEMPTS = 3
-RETRY_DELAY_SECONDS = 5
+RETRY_DELAYS_SECONDS = (10, 30, 90)
+FETCH_ATTEMPTS = len(RETRY_DELAYS_SECONDS) + 1
 
 ORGANIZATION_NAMES = {
     "": "N/A",
@@ -77,14 +77,14 @@ def _fetch_rows_page(offset: int) -> Dict[str, Any]:
     """Fetch one page of rows, retrying server errors and timeouts before the last attempt."""
     query = urlencode({"dataset": DATASET_ID, "config": CONFIG, "split": SPLIT, "offset": offset, "length": PAGE_SIZE})
     url = f"{DATASET_ROWS_URL}?{query}"
-    for attempt in range(1, FETCH_ATTEMPTS):
+    for attempt, delay in enumerate(RETRY_DELAYS_SECONDS, start=1):
         try:
             return _read_json(url)
         except (URLError, TimeoutError) as e:
             if isinstance(e, HTTPError) and e.code < 500:
                 raise
-            print(f"  Retrying rows at offset {offset} after: {e} ({attempt}/{FETCH_ATTEMPTS})")
-            time.sleep(RETRY_DELAY_SECONDS)
+            print(f"  Retrying rows at offset {offset} in {delay}s after: {e} ({attempt}/{FETCH_ATTEMPTS})")
+            time.sleep(delay)
     return _read_json(url)
 
 
