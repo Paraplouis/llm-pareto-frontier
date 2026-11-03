@@ -204,8 +204,8 @@
       },
       {
         "name": "qwen3-235b-a22b-2507",
-        "inputPrice": 0.09,
-        "outputPrice": 0.55
+        "inputPrice": 0.14,
+        "outputPrice": 0.8
       },
       {
         "name": "qwen3-30b-a3b",
@@ -714,8 +714,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.099,
-        "outputPrice": 0.297
+        "inputPrice": 0.087,
+        "outputPrice": 0.262
       },
       {
         "name": "gemma-4-31b-it",
@@ -999,8 +999,8 @@
     "models": [
       {
         "name": "minimax-m3.1-flash",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.075,
+        "outputPrice": 0.3
       },
       {
         "name": "minimax-m3",
@@ -1179,8 +1179,8 @@
       },
       {
         "name": "kimi-k3",
-        "inputPrice": 0.192,
-        "outputPrice": 15.0
+        "inputPrice": 0.276,
+        "outputPrice": 9.6
       },
       {
         "name": "kimi-k3:batch",
@@ -1654,8 +1654,8 @@
       },
       {
         "name": "gpt-oss-120b",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.025,
+        "outputPrice": 0.094
       },
       {
         "name": "gpt-oss-120b:batch",
@@ -1664,8 +1664,8 @@
       },
       {
         "name": "gpt-oss-20b",
-        "inputPrice": 0.03,
-        "outputPrice": 0.13
+        "inputPrice": 0.018,
+        "outputPrice": 0.09
       },
       {
         "name": "gpt-oss-20b:batch",
@@ -1964,8 +1964,8 @@
     "models": [
       {
         "name": "hy4-preview",
-        "inputPrice": 0.834,
-        "outputPrice": 2.501
+        "inputPrice": 0.7506,
+        "outputPrice": 2.2509
       },
       {
         "name": "hy-mt2-1.8b",
@@ -1984,8 +1984,8 @@
       },
       {
         "name": "hy3",
-        "inputPrice": 0.132,
-        "outputPrice": 0.528
+        "inputPrice": 0.0825,
+        "outputPrice": 0.33
       },
       {
         "name": "hy3-preview",
@@ -2145,7 +2145,7 @@
       {
         "name": "glm-5.3-flash",
         "inputPrice": 0.0313,
-        "outputPrice": 0.0846
+        "outputPrice": 0.0784
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2253,9 +2253,19 @@
         "outputPrice": 6.0
       },
       {
+        "name": "grok-4.7:batch",
+        "inputPrice": 1.6,
+        "outputPrice": 4.8
+      },
+      {
         "name": "grok-4.6",
         "inputPrice": 2.0,
         "outputPrice": 6.0
+      },
+      {
+        "name": "grok-4.6:batch",
+        "inputPrice": 1.6,
+        "outputPrice": 4.8
       },
       {
         "name": "grok-4.5",
