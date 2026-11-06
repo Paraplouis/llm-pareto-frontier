@@ -63,6 +63,11 @@
         "outputPrice": 1.875
       },
       {
+        "name": "qwen3.8-27b:batch",
+        "inputPrice": 0.16,
+        "outputPrice": 2.0
+      },
+      {
         "name": "qwen3.8-2.4t-a95b",
         "inputPrice": 2.0,
         "outputPrice": 6.0
@@ -529,8 +534,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.045,
-        "outputPrice": 0.5
+        "inputPrice": 0.051,
+        "outputPrice": 0.567
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -539,13 +544,13 @@
       },
       {
         "name": "deepseek-v4-flash-vision-exp",
-        "inputPrice": 0.2156,
-        "outputPrice": 0.6468
+        "inputPrice": 0.44,
+        "outputPrice": 1.32
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.103,
-        "outputPrice": 4.11
+        "inputPrice": 0.1165,
+        "outputPrice": 4.66
       },
       {
         "name": "deepseek-v4-flash-0731",
@@ -553,9 +558,14 @@
         "outputPrice": 0.3
       },
       {
+        "name": "deepseek-v4-flash-0731:batch",
+        "inputPrice": 0.048,
+        "outputPrice": 0.144
+      },
+      {
         "name": "deepseek-v4-pro",
-        "inputPrice": 1.6,
-        "outputPrice": 3.2
+        "inputPrice": 0.7602,
+        "outputPrice": 1.5204
       },
       {
         "name": "deepseek-v4-flash",
@@ -594,8 +604,8 @@
       },
       {
         "name": "deepseek-chat",
-        "inputPrice": 0.2574,
-        "outputPrice": 1.0287
+        "inputPrice": 0.32,
+        "outputPrice": 0.89
       }
     ]
   },
@@ -724,8 +734,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.0765,
-        "outputPrice": 0.255
+        "inputPrice": 0.0675,
+        "outputPrice": 0.225
       },
       {
         "name": "gemma-4-31b-it",
@@ -943,6 +953,11 @@
         "outputPrice": 1.2
       },
       {
+        "name": "muse-glimmer-30b:batch",
+        "inputPrice": 0.24,
+        "outputPrice": 0.96
+      },
+      {
         "name": "muse-spark-1.2",
         "inputPrice": 1.25,
         "outputPrice": 4.25
@@ -1016,6 +1031,11 @@
         "name": "minimax-m3",
         "inputPrice": 0.3,
         "outputPrice": 1.2
+      },
+      {
+        "name": "minimax-m3:batch",
+        "inputPrice": 0.224,
+        "outputPrice": 0.88
       },
       {
         "name": "minimax-m2.7",
@@ -1249,8 +1269,8 @@
       },
       {
         "name": "nemotron-3-super-120b-a12b",
-        "inputPrice": 0.3,
-        "outputPrice": 2.4
+        "inputPrice": 0.075,
+        "outputPrice": 0.4
       },
       {
         "name": "nemotron-3-nano-30b-a3b",
@@ -1644,8 +1664,8 @@
       },
       {
         "name": "gpt-oss-120b",
-        "inputPrice": 0.021,
-        "outputPrice": 0.077
+        "inputPrice": 0.02,
+        "outputPrice": 0.076
       },
       {
         "name": "gpt-oss-120b:batch",
@@ -1890,7 +1910,7 @@
     ]
   },
   {
-    "provider": "Ricursiveai",
+    "provider": "Ricursive",
     "models": [
       {
         "name": "ripple-65b-preview",
@@ -2031,6 +2051,11 @@
         "name": "inkling-small",
         "inputPrice": 0.45,
         "outputPrice": 1.2
+      },
+      {
+        "name": "inkling-small:batch",
+        "inputPrice": 0.36,
+        "outputPrice": 0.96
       },
       {
         "name": "inkling",
