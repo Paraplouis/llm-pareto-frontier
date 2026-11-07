@@ -549,8 +549,8 @@
       },
       {
         "name": "deepseek-v4-pro-0813",
-        "inputPrice": 0.1165,
-        "outputPrice": 4.66
+        "inputPrice": 0.111,
+        "outputPrice": 4.44
       },
       {
         "name": "deepseek-v4-flash-0731",
@@ -564,8 +564,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.7602,
-        "outputPrice": 1.5204
+        "inputPrice": 0.5862,
+        "outputPrice": 1.1724
       },
       {
         "name": "deepseek-v4-flash",
@@ -888,6 +888,11 @@
     "provider": "LiquidAI",
     "models": [
       {
+        "name": "lfm-3-1.7b",
+        "inputPrice": 0.08,
+        "outputPrice": 0.2
+      },
+      {
         "name": "lfm-2.5-24b-a2b",
         "inputPrice": 0.05,
         "outputPrice": 0.7
@@ -1044,8 +1049,8 @@
       },
       {
         "name": "minimax-m2.5",
-        "inputPrice": 0.27,
-        "outputPrice": 0.95
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "minimax-m1",
@@ -1664,8 +1669,8 @@
       },
       {
         "name": "gpt-oss-120b",
-        "inputPrice": 0.02,
-        "outputPrice": 0.076
+        "inputPrice": 0.019,
+        "outputPrice": 0.071
       },
       {
         "name": "gpt-oss-120b:batch",
@@ -2259,8 +2264,8 @@
     "models": [
       {
         "name": "ling-3.1-flash",
-        "inputPrice": 0.075,
-        "outputPrice": 0.225
+        "inputPrice": 0.045,
+        "outputPrice": 0.135
       },
       {
         "name": "ling-3.0-flash-vl",
