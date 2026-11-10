@@ -224,8 +224,8 @@
       },
       {
         "name": "qwen3-14b",
-        "inputPrice": 0.12,
-        "outputPrice": 0.24
+        "inputPrice": 0.1,
+        "outputPrice": 0.22
       },
       {
         "name": "qwen3-32b",
@@ -465,6 +465,21 @@
     ]
   },
   {
+    "provider": "Baidu",
+    "models": [
+      {
+        "name": "ernie-5.5-flash-preview",
+        "inputPrice": 0.28,
+        "outputPrice": 1.13
+      },
+      {
+        "name": "ernie-light-dt-1.0-intl",
+        "inputPrice": 1.13,
+        "outputPrice": 3.94
+      }
+    ]
+  },
+  {
     "provider": "ByteDance",
     "models": [
       {
@@ -554,8 +569,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.051,
-        "outputPrice": 0.567
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -584,8 +599,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.8719,
-        "outputPrice": 1.7438
+        "inputPrice": 0.8973,
+        "outputPrice": 1.7946
       },
       {
         "name": "deepseek-v4-flash",
@@ -652,6 +667,16 @@
   {
     "provider": "Google",
     "models": [
+      {
+        "name": "gemini-4-carbon",
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
+      },
+      {
+        "name": "gemini-4-carbon:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
       {
         "name": "gemini-omni-1.2-flash",
         "inputPrice": 1.5,
@@ -754,8 +779,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.0765,
-        "outputPrice": 0.255
+        "inputPrice": 0.08,
+        "outputPrice": 0.1
       },
       {
         "name": "gemma-4-31b-it",
@@ -840,7 +865,7 @@
       {
         "name": "gemma-3-27b-it",
         "inputPrice": 0.08,
-        "outputPrice": 0.35
+        "outputPrice": 0.45
       },
       {
         "name": "gemma-2-27b-it",
@@ -994,8 +1019,8 @@
       },
       {
         "name": "llama-3.3-70b-instruct",
-        "inputPrice": 0.59,
-        "outputPrice": 0.79
+        "inputPrice": 0.71,
+        "outputPrice": 0.71
       },
       {
         "name": "llama-3.2-1b-instruct",
@@ -1297,6 +1322,11 @@
   {
     "provider": "Nex AGI",
     "models": [
+      {
+        "name": "nex-n2.6",
+        "inputPrice": 0.12,
+        "outputPrice": 0.4
+      },
       {
         "name": "nex-n2.5-mini",
         "inputPrice": 0.025,
@@ -2189,12 +2219,12 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.15,
-        "outputPrice": 0.5
+        "inputPrice": 0.0399,
+        "outputPrice": 0.0784
       },
       {
         "name": "glm-5.3-flash:batch",
-        "inputPrice": 0.03,
+        "inputPrice": 0.042,
         "outputPrice": 0.061
       },
       {
@@ -2209,13 +2239,13 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.006,
+        "inputPrice": 0.007,
         "outputPrice": 6.8
       },
       {
         "name": "glm-5.2:batch",
-        "inputPrice": 0.623,
-        "outputPrice": 1.271
+        "inputPrice": 0.527,
+        "outputPrice": 1.075
       },
       {
         "name": "glm-5.1",
