@@ -248,11 +248,6 @@
         "outputPrice": 1.0
       },
       {
-        "name": "qwen-2.5-7b-instruct",
-        "inputPrice": 0.1,
-        "outputPrice": 0.2
-      },
-      {
         "name": "qwen-2.5-72b-instruct",
         "inputPrice": 0.36,
         "outputPrice": 0.4
@@ -468,11 +463,6 @@
     "provider": "Baidu",
     "models": [
       {
-        "name": "ernie-5.5-flash-preview",
-        "inputPrice": 0.28,
-        "outputPrice": 1.13
-      },
-      {
         "name": "ernie-light-dt-1.0-intl",
         "inputPrice": 1.13,
         "outputPrice": 3.94
@@ -498,11 +488,6 @@
         "outputPrice": 2.5
       },
       {
-        "name": "seed-2.0-code",
-        "inputPrice": 0.5,
-        "outputPrice": 3.0
-      },
-      {
         "name": "seed-2.0-lite",
         "inputPrice": 0.25,
         "outputPrice": 2.0
@@ -511,16 +496,6 @@
         "name": "seed-2.0-mini",
         "inputPrice": 0.1,
         "outputPrice": 0.4
-      },
-      {
-        "name": "seed-1.6-flash",
-        "inputPrice": 0.075,
-        "outputPrice": 0.3
-      },
-      {
-        "name": "seed-1.6",
-        "inputPrice": 0.25,
-        "outputPrice": 2.0
       }
     ]
   },
@@ -569,8 +544,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
+        "inputPrice": 0.051,
+        "outputPrice": 0.567
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -599,13 +574,13 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.8973,
-        "outputPrice": 1.7946
+        "inputPrice": 0.8771,
+        "outputPrice": 1.7543
       },
       {
         "name": "deepseek-v4-flash",
-        "inputPrice": 0.091,
-        "outputPrice": 0.182
+        "inputPrice": 0.09,
+        "outputPrice": 0.18
       },
       {
         "name": "deepseek-v3.2",
@@ -865,7 +840,7 @@
       {
         "name": "gemma-3-27b-it",
         "inputPrice": 0.08,
-        "outputPrice": 0.45
+        "outputPrice": 0.35
       },
       {
         "name": "gemma-2-27b-it",
@@ -910,6 +885,16 @@
     ]
   },
   {
+    "provider": "KT",
+    "models": [
+      {
+        "name": "midm-k-3.0-pro",
+        "inputPrice": 0.2,
+        "outputPrice": 0.8
+      }
+    ]
+  },
+  {
     "provider": "LiquidAI",
     "models": [
       {
@@ -934,8 +919,8 @@
     "models": [
       {
         "name": "weaver",
-        "inputPrice": 0.4,
-        "outputPrice": 0.75
+        "inputPrice": 0.3,
+        "outputPrice": 0.5
       }
     ]
   },
@@ -1079,8 +1064,8 @@
       },
       {
         "name": "minimax-m2.5",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
+        "inputPrice": 0.27,
+        "outputPrice": 1.08
       }
     ]
   },
@@ -1281,6 +1266,16 @@
         "name": "morph-v3-fast:batch",
         "inputPrice": 0.4,
         "outputPrice": 0.6
+      }
+    ]
+  },
+  {
+    "provider": "Motif Technologies",
+    "models": [
+      {
+        "name": "motif-3",
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       }
     ]
   },
@@ -2129,8 +2124,8 @@
     "models": [
       {
         "name": "remm-slerp-l2-13b",
-        "inputPrice": 0.35,
-        "outputPrice": 0.65
+        "inputPrice": 0.3,
+        "outputPrice": 0.5
       }
     ]
   },
@@ -2224,7 +2219,7 @@
       },
       {
         "name": "glm-5.3-flash:batch",
-        "inputPrice": 0.042,
+        "inputPrice": 0.047,
         "outputPrice": 0.061
       },
       {
@@ -2249,8 +2244,8 @@
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 1.4,
-        "outputPrice": 4.4
+        "inputPrice": 1.33,
+        "outputPrice": 4.18
       },
       {
         "name": "glm-5v-turbo",
