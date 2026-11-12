@@ -124,8 +124,8 @@
       },
       {
         "name": "qwen3.5-9b",
-        "inputPrice": 0.17,
-        "outputPrice": 0.25
+        "inputPrice": 0.124,
+        "outputPrice": 0.182
       },
       {
         "name": "qwen3.5-35b-a3b",
@@ -224,8 +224,8 @@
       },
       {
         "name": "qwen3-14b",
-        "inputPrice": 0.1,
-        "outputPrice": 0.22
+        "inputPrice": 0.12,
+        "outputPrice": 0.24
       },
       {
         "name": "qwen3-32b",
@@ -534,18 +534,18 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash-1017",
-        "inputPrice": 0.006,
-        "outputPrice": 0.5
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
       },
       {
         "name": "deepseek-v4.1-flash-1017:batch",
-        "inputPrice": 0.011,
-        "outputPrice": 0.2
+        "inputPrice": 0.05,
+        "outputPrice": 0.15
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.051,
-        "outputPrice": 0.567
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -574,8 +574,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.8771,
-        "outputPrice": 1.7543
+        "inputPrice": 0.889,
+        "outputPrice": 1.7779
       },
       {
         "name": "deepseek-v4-flash",
@@ -642,6 +642,16 @@
   {
     "provider": "Google",
     "models": [
+      {
+        "name": "gemini-4-hydrogen",
+        "inputPrice": 1.5,
+        "outputPrice": 7.5
+      },
+      {
+        "name": "gemini-4-hydrogen:batch",
+        "inputPrice": 0.75,
+        "outputPrice": 3.75
+      },
       {
         "name": "gemini-4-carbon",
         "inputPrice": 2.0,
@@ -754,8 +764,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.08,
-        "outputPrice": 0.1
+        "inputPrice": 0.09,
+        "outputPrice": 0.28
       },
       {
         "name": "gemma-4-31b-it",
@@ -865,7 +875,7 @@
       {
         "name": "granite-4.2-8b",
         "inputPrice": 0.06,
-        "outputPrice": 0.25
+        "outputPrice": 0.15
       }
     ]
   },
@@ -1199,8 +1209,13 @@
     "models": [
       {
         "name": "kimi-k3.1-pro",
-        "inputPrice": 2.0,
-        "outputPrice": 10.0
+        "inputPrice": 0.2375,
+        "outputPrice": 8.7856
+      },
+      {
+        "name": "kimi-k3.1-pro:batch",
+        "inputPrice": 0.7,
+        "outputPrice": 6.0
       },
       {
         "name": "kimi-k3",
@@ -1224,8 +1239,8 @@
       },
       {
         "name": "kimi-k2.5",
-        "inputPrice": 0.532,
-        "outputPrice": 3.325
+        "inputPrice": 0.5,
+        "outputPrice": 2.5
       },
       {
         "name": "kimi-k2-thinking",
@@ -1499,8 +1514,8 @@
       },
       {
         "name": "gpt-5.6-sol",
-        "inputPrice": 4.0,
-        "outputPrice": 20.0
+        "inputPrice": 4.4,
+        "outputPrice": 22.0
       },
       {
         "name": "gpt-5.6-sol:batch",
@@ -2116,6 +2131,11 @@
         "name": "pareto-26.9",
         "inputPrice": 2.5,
         "outputPrice": 7.5
+      },
+      {
+        "name": "pareto-26.10-preview",
+        "inputPrice": 0.8,
+        "outputPrice": 3.2
       }
     ]
   },
@@ -2219,8 +2239,8 @@
       },
       {
         "name": "glm-5.3-flash:batch",
-        "inputPrice": 0.047,
-        "outputPrice": 0.061
+        "inputPrice": 0.05,
+        "outputPrice": 0.18
       },
       {
         "name": "glm-5.3",
@@ -2239,13 +2259,13 @@
       },
       {
         "name": "glm-5.2:batch",
-        "inputPrice": 0.527,
-        "outputPrice": 1.075
+        "inputPrice": 0.322,
+        "outputPrice": 0.989
       },
       {
         "name": "glm-5.1",
-        "inputPrice": 1.33,
-        "outputPrice": 4.18
+        "inputPrice": 1.4,
+        "outputPrice": 4.4
       },
       {
         "name": "glm-5v-turbo",
@@ -2311,6 +2331,16 @@
         "name": "ling-3.0-flash-vl",
         "inputPrice": 0.06,
         "outputPrice": 0.18
+      },
+      {
+        "name": "ling-3.0-flash-sante",
+        "inputPrice": 0.042,
+        "outputPrice": 0.1232
+      },
+      {
+        "name": "ling-3.0-flash-fin",
+        "inputPrice": 0.042,
+        "outputPrice": 0.1232
       },
       {
         "name": "ling-3.0-tiny",
