@@ -124,8 +124,8 @@
       },
       {
         "name": "qwen3.5-9b",
-        "inputPrice": 0.124,
-        "outputPrice": 0.182
+        "inputPrice": 0.167,
+        "outputPrice": 0.245
       },
       {
         "name": "qwen3.5-35b-a3b",
@@ -534,8 +534,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash-1017",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.038,
+        "outputPrice": 0.5
       },
       {
         "name": "deepseek-v4.1-flash-1017:batch",
@@ -574,8 +574,8 @@
       },
       {
         "name": "deepseek-v4-pro",
-        "inputPrice": 0.889,
-        "outputPrice": 1.7779
+        "inputPrice": 0.9,
+        "outputPrice": 1.5
       },
       {
         "name": "deepseek-v4-flash",
@@ -614,8 +614,8 @@
       },
       {
         "name": "deepseek-chat",
-        "inputPrice": 0.32,
-        "outputPrice": 0.89
+        "inputPrice": 0.2574,
+        "outputPrice": 1.0287
       }
     ]
   },
@@ -764,8 +764,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.09,
-        "outputPrice": 0.28
+        "inputPrice": 0.0675,
+        "outputPrice": 0.225
       },
       {
         "name": "gemma-4-31b-it",
@@ -875,7 +875,7 @@
       {
         "name": "granite-4.2-8b",
         "inputPrice": 0.06,
-        "outputPrice": 0.15
+        "outputPrice": 0.25
       }
     ]
   },
@@ -916,11 +916,6 @@
         "name": "lfm-2.5-24b-a2b",
         "inputPrice": 0.05,
         "outputPrice": 0.7
-      },
-      {
-        "name": "lfm-2.5-2.6b",
-        "inputPrice": 0.35,
-        "outputPrice": 0.5
       }
     ]
   },
@@ -1075,7 +1070,7 @@
       {
         "name": "minimax-m2.5",
         "inputPrice": 0.27,
-        "outputPrice": 1.08
+        "outputPrice": 0.95
       }
     ]
   },
@@ -1209,8 +1204,8 @@
     "models": [
       {
         "name": "kimi-k3.1-pro",
-        "inputPrice": 0.2375,
-        "outputPrice": 8.7856
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
       },
       {
         "name": "kimi-k3.1-pro:batch",
@@ -1969,8 +1964,8 @@
     "models": [
       {
         "name": "ripple-65b-preview",
-        "inputPrice": 0.2,
-        "outputPrice": 0.6
+        "inputPrice": 0.1,
+        "outputPrice": 0.3
       }
     ]
   },
@@ -2103,6 +2098,11 @@
     "provider": "Thinking Machines",
     "models": [
       {
+        "name": "inkling-2-small",
+        "inputPrice": 0.3,
+        "outputPrice": 1.0
+      },
+      {
         "name": "inkling-small",
         "inputPrice": 0.45,
         "outputPrice": 1.2
@@ -2204,8 +2204,8 @@
       },
       {
         "name": "mimo-v2.5-pro",
-        "inputPrice": 0.48,
-        "outputPrice": 1.8
+        "inputPrice": 0.435,
+        "outputPrice": 0.87
       },
       {
         "name": "mimo-v2.5",
@@ -2244,8 +2244,8 @@
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.0699,
-        "outputPrice": 1.4
+        "inputPrice": 0.084,
+        "outputPrice": 3.6
       },
       {
         "name": "glm-5.3:batch",
@@ -2331,16 +2331,6 @@
         "name": "ling-3.0-flash-vl",
         "inputPrice": 0.06,
         "outputPrice": 0.18
-      },
-      {
-        "name": "ling-3.0-flash-sante",
-        "inputPrice": 0.042,
-        "outputPrice": 0.1232
-      },
-      {
-        "name": "ling-3.0-flash-fin",
-        "inputPrice": 0.042,
-        "outputPrice": 0.1232
       },
       {
         "name": "ling-3.0-tiny",
