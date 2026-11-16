@@ -38,6 +38,11 @@
     "provider": "Alibaba",
     "models": [
       {
+        "name": "qwen4-max",
+        "inputPrice": 1.425,
+        "outputPrice": 4.275
+      },
+      {
         "name": "qwen3.8-max-prime",
         "inputPrice": 4.0,
         "outputPrice": 12.0
@@ -124,8 +129,8 @@
       },
       {
         "name": "qwen3.5-9b",
-        "inputPrice": 0.043,
-        "outputPrice": 0.063
+        "inputPrice": 0.12,
+        "outputPrice": 0.177
       },
       {
         "name": "qwen3.5-35b-a3b",
@@ -154,8 +159,8 @@
       },
       {
         "name": "qwen3.5-397b-a17b",
-        "inputPrice": 0.6,
-        "outputPrice": 3.6
+        "inputPrice": 0.45,
+        "outputPrice": 3.0
       },
       {
         "name": "qwen3-coder-next",
@@ -529,18 +534,18 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash-1017",
-        "inputPrice": 0.02,
-        "outputPrice": 0.108
+        "inputPrice": 0.036,
+        "outputPrice": 0.5
       },
       {
         "name": "deepseek-v4.1-flash-1017:batch",
-        "inputPrice": 0.038,
-        "outputPrice": 0.336
+        "inputPrice": 0.036,
+        "outputPrice": 0.317
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.0507,
-        "outputPrice": 0.2028
+        "inputPrice": 0.14,
+        "outputPrice": 0.42
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -559,8 +564,8 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.0434,
-        "outputPrice": 0.3
+        "inputPrice": 0.06,
+        "outputPrice": 0.18
       },
       {
         "name": "deepseek-v4-flash-0731:batch",
@@ -759,8 +764,8 @@
       },
       {
         "name": "gemma-4-26b-a4b-it",
-        "inputPrice": 0.0675,
-        "outputPrice": 0.225
+        "inputPrice": 0.0765,
+        "outputPrice": 0.255
       },
       {
         "name": "gemma-4-31b-it",
@@ -969,8 +974,8 @@
       },
       {
         "name": "muse-glimmer-30b",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
+        "inputPrice": 0.35,
+        "outputPrice": 1.5
       },
       {
         "name": "muse-glimmer-30b:batch",
@@ -1064,8 +1069,8 @@
       },
       {
         "name": "minimax-m2.5",
-        "inputPrice": 0.27,
-        "outputPrice": 0.95
+        "inputPrice": 0.295,
+        "outputPrice": 1.2
       }
     ]
   },
@@ -1199,13 +1204,13 @@
     "models": [
       {
         "name": "kimi-k3.1-pro",
-        "inputPrice": 2.0,
-        "outputPrice": 10.0
+        "inputPrice": 0.2403,
+        "outputPrice": 8.4023
       },
       {
         "name": "kimi-k3.1-pro:batch",
-        "inputPrice": 0.7,
-        "outputPrice": 6.0
+        "inputPrice": 0.354,
+        "outputPrice": 5.31
       },
       {
         "name": "kimi-k3",
@@ -1219,7 +1224,7 @@
       },
       {
         "name": "kimi-k2.7-code",
-        "inputPrice": 0.7125,
+        "inputPrice": 0.6,
         "outputPrice": 3.5
       },
       {
@@ -1504,8 +1509,8 @@
       },
       {
         "name": "gpt-5.6-sol",
-        "inputPrice": 4.4,
-        "outputPrice": 22.0
+        "inputPrice": 4.0,
+        "outputPrice": 20.0
       },
       {
         "name": "gpt-5.6-sol:batch",
@@ -1719,8 +1724,8 @@
       },
       {
         "name": "gpt-oss-20b",
-        "inputPrice": 0.03,
-        "outputPrice": 0.13
+        "inputPrice": 0.075,
+        "outputPrice": 0.3
       },
       {
         "name": "gpt-oss-20b:batch",
@@ -2023,6 +2028,11 @@
     "provider": "Tencent",
     "models": [
       {
+        "name": "hy4-flash",
+        "inputPrice": 0.035,
+        "outputPrice": 0.1405
+      },
+      {
         "name": "hy4",
         "inputPrice": 0.417,
         "outputPrice": 1.2505
@@ -2209,8 +2219,8 @@
       },
       {
         "name": "glm-5.3-prime",
-        "inputPrice": 2.8,
-        "outputPrice": 8.8
+        "inputPrice": 1.68,
+        "outputPrice": 5.28
       },
       {
         "name": "glm-5.3-flashx",
@@ -2224,13 +2234,13 @@
       },
       {
         "name": "glm-5.3-flash:batch",
-        "inputPrice": 0.05,
-        "outputPrice": 0.18
+        "inputPrice": 0.03,
+        "outputPrice": 0.087
       },
       {
         "name": "glm-5.3",
-        "inputPrice": 0.084,
-        "outputPrice": 3.6
+        "inputPrice": 0.0699,
+        "outputPrice": 1.4
       },
       {
         "name": "glm-5.3:batch",
@@ -2241,6 +2251,11 @@
         "name": "glm-5.2",
         "inputPrice": 0.007,
         "outputPrice": 6.8
+      },
+      {
+        "name": "glm-5.2:batch",
+        "inputPrice": 0.322,
+        "outputPrice": 0.989
       },
       {
         "name": "glm-5.1",
@@ -2294,8 +2309,8 @@
       },
       {
         "name": "glm-4.5-air",
-        "inputPrice": 0.2,
-        "outputPrice": 1.1
+        "inputPrice": 0.13,
+        "outputPrice": 0.85
       }
     ]
   },
