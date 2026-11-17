@@ -129,8 +129,8 @@
       },
       {
         "name": "qwen3.5-9b",
-        "inputPrice": 0.12,
-        "outputPrice": 0.177
+        "inputPrice": 0.121,
+        "outputPrice": 0.178
       },
       {
         "name": "qwen3.5-35b-a3b",
@@ -540,12 +540,12 @@
       {
         "name": "deepseek-v4.1-flash-1017:batch",
         "inputPrice": 0.036,
-        "outputPrice": 0.317
+        "outputPrice": 0.15
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.14,
-        "outputPrice": 0.42
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -1129,8 +1129,8 @@
       },
       {
         "name": "mistral-medium-3.1",
-        "inputPrice": 0.4,
-        "outputPrice": 2.0
+        "inputPrice": 0.44,
+        "outputPrice": 2.2
       },
       {
         "name": "codestral-2508",
@@ -1139,13 +1139,13 @@
       },
       {
         "name": "mistral-small-3.2-24b-instruct",
-        "inputPrice": 0.1,
-        "outputPrice": 0.3
+        "inputPrice": 0.075,
+        "outputPrice": 0.2
       },
       {
         "name": "mistral-medium-3",
-        "inputPrice": 0.4,
-        "outputPrice": 2.0
+        "inputPrice": 0.44,
+        "outputPrice": 2.2
       },
       {
         "name": "mistral-small-3.1-24b-instruct",
@@ -1209,8 +1209,8 @@
       },
       {
         "name": "kimi-k3.1-pro:batch",
-        "inputPrice": 0.354,
-        "outputPrice": 5.31
+        "inputPrice": 0.372,
+        "outputPrice": 5.583
       },
       {
         "name": "kimi-k3",
@@ -1224,8 +1224,8 @@
       },
       {
         "name": "kimi-k2.7-code",
-        "inputPrice": 0.6,
-        "outputPrice": 3.5
+        "inputPrice": 0.7,
+        "outputPrice": 3.75
       },
       {
         "name": "kimi-k2.6",
@@ -1309,8 +1309,8 @@
       },
       {
         "name": "nemotron-3-ultra-550b-a55b",
-        "inputPrice": 0.6,
-        "outputPrice": 2.4
+        "inputPrice": 0.5,
+        "outputPrice": 2.2
       },
       {
         "name": "nemotron-3-super-120b-a12b",
@@ -1357,6 +1357,26 @@
   {
     "provider": "OpenAI",
     "models": [
+      {
+        "name": "gpt-6.2-astra-pro",
+        "inputPrice": 8.0,
+        "outputPrice": 40.0
+      },
+      {
+        "name": "gpt-6.2-astra",
+        "inputPrice": 8.0,
+        "outputPrice": 40.0
+      },
+      {
+        "name": "gpt-6.2-sol-pro",
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-6.2-sol",
+        "inputPrice": 2.0,
+        "outputPrice": 10.0
+      },
       {
         "name": "gpt-6.1-terra-pro",
         "inputPrice": 1.0,
@@ -1724,8 +1744,8 @@
       },
       {
         "name": "gpt-oss-20b",
-        "inputPrice": 0.075,
-        "outputPrice": 0.3
+        "inputPrice": 0.018,
+        "outputPrice": 0.09
       },
       {
         "name": "gpt-oss-20b:batch",
@@ -2234,8 +2254,8 @@
       },
       {
         "name": "glm-5.3-flash:batch",
-        "inputPrice": 0.03,
-        "outputPrice": 0.087
+        "inputPrice": 0.024,
+        "outputPrice": 0.069
       },
       {
         "name": "glm-5.3",
@@ -2244,8 +2264,8 @@
       },
       {
         "name": "glm-5.3:batch",
-        "inputPrice": 0.45,
-        "outputPrice": 2.0
+        "inputPrice": 0.281,
+        "outputPrice": 1.25
       },
       {
         "name": "glm-5.2",
