@@ -69,8 +69,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.15,
-        "outputPrice": 1.875
+        "inputPrice": 0.06,
+        "outputPrice": 2.2
       },
       {
         "name": "qwen3.8-27b:batch",
@@ -129,8 +129,8 @@
       },
       {
         "name": "qwen3.5-9b",
-        "inputPrice": 0.121,
-        "outputPrice": 0.178
+        "inputPrice": 0.17,
+        "outputPrice": 0.25
       },
       {
         "name": "qwen3.5-35b-a3b",
@@ -139,8 +139,8 @@
       },
       {
         "name": "qwen3.5-27b",
-        "inputPrice": 0.26,
-        "outputPrice": 2.6
+        "inputPrice": 0.3,
+        "outputPrice": 2.4
       },
       {
         "name": "qwen3.5-122b-a10b",
@@ -189,7 +189,7 @@
       },
       {
         "name": "qwen3-next-80b-a3b-instruct",
-        "inputPrice": 0.09,
+        "inputPrice": 0.1,
         "outputPrice": 1.1
       },
       {
@@ -534,8 +534,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash-1017",
-        "inputPrice": 0.036,
-        "outputPrice": 0.5
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
       },
       {
         "name": "deepseek-v4.1-flash-1017:batch",
@@ -544,8 +544,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
+        "inputPrice": 0.0507,
+        "outputPrice": 0.2028
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -604,8 +604,8 @@
       },
       {
         "name": "deepseek-r1-0528",
-        "inputPrice": 0.5,
-        "outputPrice": 2.15
+        "inputPrice": 0.571,
+        "outputPrice": 2.286
       },
       {
         "name": "deepseek-chat-v3-0324",
@@ -642,6 +642,16 @@
   {
     "provider": "Google",
     "models": [
+      {
+        "name": "gemini-4-neon",
+        "inputPrice": 3.0,
+        "outputPrice": 15.0
+      },
+      {
+        "name": "gemini-4-neon:batch",
+        "inputPrice": 1.5,
+        "outputPrice": 7.5
+      },
       {
         "name": "gemini-4-hydrogen",
         "inputPrice": 1.5,
@@ -850,7 +860,7 @@
       {
         "name": "gemma-3-27b-it",
         "inputPrice": 0.08,
-        "outputPrice": 0.35
+        "outputPrice": 0.45
       },
       {
         "name": "gemma-2-27b-it",
@@ -1224,8 +1234,8 @@
       },
       {
         "name": "kimi-k2.7-code",
-        "inputPrice": 0.7,
-        "outputPrice": 3.75
+        "inputPrice": 0.6,
+        "outputPrice": 3.5
       },
       {
         "name": "kimi-k2.6",
@@ -1363,9 +1373,19 @@
         "outputPrice": 40.0
       },
       {
+        "name": "gpt-6.2-astra-pro:batch",
+        "inputPrice": 4.0,
+        "outputPrice": 20.0
+      },
+      {
         "name": "gpt-6.2-astra",
         "inputPrice": 8.0,
         "outputPrice": 40.0
+      },
+      {
+        "name": "gpt-6.2-astra:batch",
+        "inputPrice": 4.0,
+        "outputPrice": 20.0
       },
       {
         "name": "gpt-6.2-sol-pro",
@@ -1373,9 +1393,19 @@
         "outputPrice": 10.0
       },
       {
+        "name": "gpt-6.2-sol-pro:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
+      },
+      {
         "name": "gpt-6.2-sol",
         "inputPrice": 2.0,
         "outputPrice": 10.0
+      },
+      {
+        "name": "gpt-6.2-sol:batch",
+        "inputPrice": 1.0,
+        "outputPrice": 5.0
       },
       {
         "name": "gpt-6.1-terra-pro",
@@ -2219,8 +2249,8 @@
       },
       {
         "name": "mimo-v2.5-pro",
-        "inputPrice": 0.435,
-        "outputPrice": 0.87
+        "inputPrice": 0.48,
+        "outputPrice": 1.8
       },
       {
         "name": "mimo-v2.5",
@@ -2249,8 +2279,8 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.0399,
-        "outputPrice": 0.0784
+        "inputPrice": 0.15,
+        "outputPrice": 0.5
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2269,8 +2299,8 @@
       },
       {
         "name": "glm-5.2",
-        "inputPrice": 0.007,
-        "outputPrice": 6.8
+        "inputPrice": 0.62,
+        "outputPrice": 2.42
       },
       {
         "name": "glm-5.2:batch",
