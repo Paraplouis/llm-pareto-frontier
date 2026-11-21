@@ -194,8 +194,8 @@
       },
       {
         "name": "qwen3-coder-30b-a3b-instruct",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.07,
+        "outputPrice": 0.28
       },
       {
         "name": "qwen3-30b-a3b-instruct-2507",
@@ -534,8 +534,8 @@
     "models": [
       {
         "name": "deepseek-v4.1-flash-1017",
-        "inputPrice": 0.036,
-        "outputPrice": 0.5
+        "inputPrice": 0.15,
+        "outputPrice": 0.6
       },
       {
         "name": "deepseek-v4.1-flash-1017:batch",
@@ -544,8 +544,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
+        "inputPrice": 0.0498,
+        "outputPrice": 0.1992
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -940,16 +940,6 @@
     ]
   },
   {
-    "provider": "Meituan",
-    "models": [
-      {
-        "name": "longcat-2.0",
-        "inputPrice": 0.3,
-        "outputPrice": 1.2
-      }
-    ]
-  },
-  {
     "provider": "Meta",
     "models": [
       {
@@ -1074,8 +1064,8 @@
       },
       {
         "name": "minimax-m2.5",
-        "inputPrice": 0.295,
-        "outputPrice": 1.2
+        "inputPrice": 0.27,
+        "outputPrice": 0.95
       }
     ]
   },
@@ -1305,7 +1295,7 @@
       {
         "name": "nemotron-3.5-super-vl",
         "inputPrice": 0.15,
-        "outputPrice": 0.5
+        "outputPrice": 0.47
       },
       {
         "name": "nemotron-3.5-lightning",
@@ -1970,6 +1960,16 @@
     ]
   },
   {
+    "provider": "RadixArk",
+    "models": [
+      {
+        "name": "daisyrose-27b",
+        "inputPrice": 0.15,
+        "outputPrice": 1.875
+      }
+    ]
+  },
+  {
     "provider": "Reflection",
     "models": [
       {
@@ -2137,6 +2137,11 @@
   {
     "provider": "Thinking Machines",
     "models": [
+      {
+        "name": "inkling-2-mini",
+        "inputPrice": 0.075,
+        "outputPrice": 0.3
+      },
       {
         "name": "inkling-2-small",
         "inputPrice": 0.3,
