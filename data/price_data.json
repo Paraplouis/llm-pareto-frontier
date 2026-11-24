@@ -69,8 +69,8 @@
       },
       {
         "name": "qwen3.8-27b",
-        "inputPrice": 0.035,
-        "outputPrice": 1.5
+        "inputPrice": 0.06,
+        "outputPrice": 1.96
       },
       {
         "name": "qwen3.8-27b:batch",
@@ -114,8 +114,8 @@
       },
       {
         "name": "qwen3.6-35b-a3b",
-        "inputPrice": 0.05,
-        "outputPrice": 0.7
+        "inputPrice": 0.1,
+        "outputPrice": 0.89
       },
       {
         "name": "qwen3.6-27b",
@@ -544,8 +544,8 @@
       },
       {
         "name": "deepseek-v4.1-flash",
-        "inputPrice": 0.0498,
-        "outputPrice": 0.1992
+        "inputPrice": 0.0507,
+        "outputPrice": 0.2028
       },
       {
         "name": "deepseek-v4.1-flash:batch",
@@ -554,8 +554,8 @@
       },
       {
         "name": "deepseek-v4-flash-vision-exp",
-        "inputPrice": 0.2156,
-        "outputPrice": 0.6468
+        "inputPrice": 0.44,
+        "outputPrice": 1.32
       },
       {
         "name": "deepseek-v4-pro-0813",
@@ -564,7 +564,7 @@
       },
       {
         "name": "deepseek-v4-flash-0731",
-        "inputPrice": 0.0434,
+        "inputPrice": 0.0456,
         "outputPrice": 0.3
       },
       {
@@ -1044,8 +1044,8 @@
     "models": [
       {
         "name": "minimax-m3.1-flash",
-        "inputPrice": 0.15,
-        "outputPrice": 0.6
+        "inputPrice": 0.075,
+        "outputPrice": 0.3
       },
       {
         "name": "minimax-m3",
@@ -1064,8 +1064,8 @@
       },
       {
         "name": "minimax-m2.5",
-        "inputPrice": 0.27,
-        "outputPrice": 0.95
+        "inputPrice": 0.3,
+        "outputPrice": 1.2
       }
     ]
   },
@@ -1128,11 +1128,6 @@
         "outputPrice": 0.3
       },
       {
-        "name": "mistral-medium-3.1",
-        "inputPrice": 0.44,
-        "outputPrice": 2.2
-      },
-      {
         "name": "codestral-2508",
         "inputPrice": 0.3,
         "outputPrice": 0.9
@@ -1141,11 +1136,6 @@
         "name": "mistral-small-3.2-24b-instruct",
         "inputPrice": 0.075,
         "outputPrice": 0.2
-      },
-      {
-        "name": "mistral-medium-3",
-        "inputPrice": 0.44,
-        "outputPrice": 2.2
       },
       {
         "name": "mistral-small-3.1-24b-instruct",
@@ -1236,21 +1226,6 @@
         "name": "kimi-k2.5",
         "inputPrice": 0.5,
         "outputPrice": 2.5
-      },
-      {
-        "name": "kimi-k2-thinking",
-        "inputPrice": 0.6,
-        "outputPrice": 2.5
-      },
-      {
-        "name": "kimi-k2-0905",
-        "inputPrice": 0.6,
-        "outputPrice": 2.5
-      },
-      {
-        "name": "kimi-k2",
-        "inputPrice": 0.57,
-        "outputPrice": 2.3
       }
     ]
   },
@@ -2089,8 +2064,8 @@
       },
       {
         "name": "hy4-preview",
-        "inputPrice": 0.834,
-        "outputPrice": 2.501
+        "inputPrice": 0.7506,
+        "outputPrice": 2.2509
       },
       {
         "name": "hy-mt2-1.8b",
@@ -2109,8 +2084,8 @@
       },
       {
         "name": "hy3",
-        "inputPrice": 0.14,
-        "outputPrice": 0.58
+        "inputPrice": 0.0825,
+        "outputPrice": 0.33
       }
     ]
   },
@@ -2233,6 +2208,11 @@
     "provider": "Xiaomi",
     "models": [
       {
+        "name": "mimo-v2.6-flash-mopd",
+        "inputPrice": 0.15,
+        "outputPrice": 0.42
+      },
+      {
         "name": "mimo-v2.6-pro-ultraspeed",
         "inputPrice": 4.35,
         "outputPrice": 8.7
@@ -2246,11 +2226,6 @@
         "name": "mimo-v2.6-pro",
         "inputPrice": 0.435,
         "outputPrice": 0.87
-      },
-      {
-        "name": "mimo-v2.5",
-        "inputPrice": 0.4,
-        "outputPrice": 2.0
       }
     ]
   },
@@ -2274,8 +2249,8 @@
       },
       {
         "name": "glm-5.3-flash",
-        "inputPrice": 0.0356,
-        "outputPrice": 0.0815
+        "inputPrice": 0.15,
+        "outputPrice": 0.5
       },
       {
         "name": "glm-5.3-flash:batch",
@@ -2364,8 +2339,8 @@
     "models": [
       {
         "name": "ling-3.1-flash",
-        "inputPrice": 0.06,
-        "outputPrice": 0.18
+        "inputPrice": 0.075,
+        "outputPrice": 0.225
       },
       {
         "name": "ling-3.0-flash-vl",
